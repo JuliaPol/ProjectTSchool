@@ -2,8 +2,8 @@ package com.tsystems.ecare;
 
 import com.tsystems.ecare.config.AppConfig;
 import com.tsystems.ecare.config.DatabaseConfig;
-import com.tsystems.ecare.dao.UserDao;
-import com.tsystems.ecare.entities.User;
+import com.tsystems.ecare.dao.impl.ContractDaoImpl;
+import com.tsystems.ecare.entities.OptionEntity;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {
@@ -14,10 +14,9 @@ public class Main {
         context.register(DatabaseConfig.class);
         context.refresh();
 
-        UserDao userDao = context.getBean(UserDao.class);
-        for (User user : userDao.getAll()) {
-            System.out.println(user.getFirstName() + " " + user.getLastName());
+        ContractDaoImpl bean = context.getBean(ContractDaoImpl.class);
+        for (OptionEntity option : bean.getAllOption(1L)) {
+            System.out.println(option.getName() + " " + option.getCost());
         }
-
     }
 }
