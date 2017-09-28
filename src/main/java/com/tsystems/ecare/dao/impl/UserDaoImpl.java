@@ -1,18 +1,18 @@
 package com.tsystems.ecare.dao.impl;
 
-import com.tsystems.ecare.dao.CustomerDao;
-import com.tsystems.ecare.entities.CustomerEntity;
+import com.tsystems.ecare.dao.UserDao;
+import com.tsystems.ecare.entities.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Repository
-public class CustomerDaoImpl extends JpaDaoImpl<CustomerEntity> implements CustomerDao{
+public class UserDaoImpl  {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Override
+//    @Override
     public EntityManager getEntityManager() {
         return entityManager;
     }

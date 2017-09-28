@@ -6,7 +6,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @ComponentScan(basePackages = {
-        "com.tsystems.ecare.dao"
+        "com.tsystems.ecare.dao",
+        "com.tsystems.ecare.service",
+        "com.tsystems.ecare.validator"
 })
 @EnableJpaRepositories
 public class AppConfig {

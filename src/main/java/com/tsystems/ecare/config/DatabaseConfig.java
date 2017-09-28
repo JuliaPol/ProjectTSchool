@@ -8,6 +8,9 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,17 +52,17 @@ public class DatabaseConfig {
         return transactionManager;
     }
 
-//    @Bean
-//    public MethodValidationPostProcessor methodValidationPostProcessor() {
-//
-//        MethodValidationPostProcessor processor =
-//                new MethodValidationPostProcessor();
-//        processor.setValidator((javax.validation.Validator) validator());
-//        return processor;
-//    }
+    @Bean
+    public MethodValidationPostProcessor methodValidationPostProcessor() {
 
-//    @Bean
-//    public Validator validator() {
-//        return new LocalValidatorFactoryBean();
-//    }
+        MethodValidationPostProcessor processor =
+                new MethodValidationPostProcessor();
+        processor.setValidator((javax.validation.Validator) validator());
+        return processor;
+    }
+
+    @Bean
+    public Validator validator() {
+        return new LocalValidatorFactoryBean();
+    }
 }

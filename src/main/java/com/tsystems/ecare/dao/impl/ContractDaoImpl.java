@@ -1,8 +1,8 @@
 package com.tsystems.ecare.dao.impl;
 
 import com.tsystems.ecare.dao.ContractDao;
-import com.tsystems.ecare.entities.ContractEntity;
-import com.tsystems.ecare.entities.OptionEntity;
+import com.tsystems.ecare.entities.Contract;
+import com.tsystems.ecare.entities.Option;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -11,17 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class ContractDaoImpl extends JpaDaoImpl<ContractEntity> implements ContractDao{
+public class ContractDaoImpl extends JpaDaoImpl<Contract> implements ContractDao{
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<OptionEntity> getAllOption(Long id) {
-        List<OptionEntity> options = new ArrayList<>();
-        List<OptionEntity> options1 = entityManager.createNamedQuery("findAllOptionsByRate")
+    public List<Option> getAllOption(Long id) {
+        List<Option> options = new ArrayList<>();
+        List<Option> options1 = entityManager.createNamedQuery("findAllOptionsByRate")
                 .setParameter("id", id)
                 .getResultList();
         options.addAll(options1);
-        List<OptionEntity> options2 = entityManager.createNamedQuery("findAllOptionsByContract")
+        List<Option> options2 = entityManager.createNamedQuery("findAllOptionsByContract")
                 .setParameter("id", id)
                 .getResultList();
         options.addAll(options2);

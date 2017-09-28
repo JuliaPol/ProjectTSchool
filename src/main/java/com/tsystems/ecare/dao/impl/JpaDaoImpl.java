@@ -13,7 +13,6 @@ public abstract class JpaDaoImpl<T> implements JpaDao<T> {
     public JpaDaoImpl() {
         this.persistentClass = (Class<T>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];
-
     }
 
     @Override

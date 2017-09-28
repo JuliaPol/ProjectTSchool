@@ -15,11 +15,11 @@ import java.util.List;
 @Table(name = "contract")
 @NamedQueries({
         @NamedQuery(name = "findAllOptionsByRate" ,
-                    query = "select c.rate.optionList from ContractEntity c where c.id = :id"),
+                    query = "select c.rate.optionList from Contract c where c.id = :id"),
         @NamedQuery(name = "findAllOptionsByContract" ,
-                query = "select c.optionList from ContractEntity c where c.id = :id")
+                query = "select c.optionList from Contract c where c.id = :id")
 })
-public class ContractEntity {
+public class Contract {
     @Id @GeneratedValue
     private Long id;
 
@@ -28,7 +28,7 @@ public class ContractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rate_id", nullable = false)
-    private RateEntity rate;
+    private Rate rate;
 
     @ManyToMany
     @JoinTable(
@@ -36,7 +36,7 @@ public class ContractEntity {
             joinColumns = @JoinColumn(name = "contract_id"),
             inverseJoinColumns = @JoinColumn(name = "option_id")
     )
-    private List<OptionEntity> optionList;
+    private List<Option> optionList;
 
     @Enumerated(EnumType.STRING)
     @Column(name ="status")
@@ -44,5 +44,5 @@ public class ContractEntity {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    private CustomerEntity customer;
+    private User user;
 }

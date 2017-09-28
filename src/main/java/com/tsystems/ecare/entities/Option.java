@@ -11,8 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "rate")
-public class RateEntity {
+@Table(name = "`option`")
+public class Option {
     @Id @GeneratedValue
     private Long id;
 
@@ -22,17 +22,15 @@ public class RateEntity {
     @Column(name = "cost")
     private Integer cost;
 
+    @Column(name = "cost_of_connection")
+    private Integer costOfConnection;
+
     @Column(name = "description")
     private String description;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "rate_option",
-            joinColumns = @JoinColumn(name = "rate_id"),
-            inverseJoinColumns = @JoinColumn(name = "option_id")
-    )
-    private List<OptionEntity> optionList;
+    @ManyToMany(mappedBy = "optionList")
+    private List<Contract> contractList;
 
-    @OneToMany(mappedBy = "rate")
-    private List<ContractEntity> contractList;
+    @ManyToMany(mappedBy = "optionList")
+    private List<Rate> rateList;
 }
