@@ -10,11 +10,13 @@ import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
-public class ContractDaoImpl extends JpaDaoImpl<Contract> implements ContractDao{
+@Repository("contractDao")
+public class ContractDaoImpl extends JpaDaoImpl<Contract> implements ContractDao {
+
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Override
     public List<Option> getAllOption(Long id) {
         List<Option> options = new ArrayList<>();
         List<Option> options1 = entityManager.createNamedQuery("findAllOptionsByRate")

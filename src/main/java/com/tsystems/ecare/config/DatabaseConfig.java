@@ -3,15 +3,14 @@ package com.tsystems.ecare.config;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.validation.Validator;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 
+import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +19,26 @@ import static org.hibernate.cfg.AvailableSettings.*;
 @Configuration
 @EnableTransactionManagement
 public class DatabaseConfig {
+
+    private static final String HIBERNATE_DIALECT = "hibernate.dialect";
+    private static final String ECARE = "ecare";
+    private static final String JDBC_DRIVER_CLASS_NAME = "jdbc.driverClassName";
+    private static final String JDBC_URL = "jdbc.url";
+    private static final String JDBC_USER = "jdbc.user";
+    private static final String JDBC_PASS = "jdbc.pass";
+    private static final String HIBERNATE_DIALECT1 = "hibernate.dialect";
+    private static final String HIBENATE_ENABLE_LAZY_LOAD_NO_TRANS = "hibernate.enable_lazy_load_no_trans";
+
+    @Bean(name = "ecare")
+    public DataSource dataSource() {
+        DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+        driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        driverManagerDataSource.setUsername("root");
+        driverManagerDataSource.setSchema("ecare");
+        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/ecare?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+        driverManagerDataSource.setPassword("123456gf");
+        return driverManagerDataSource;
+    }
 
     @Bean
     public PersistenceAnnotationBeanPostProcessor persistenceAnnotationBeanPostProcessor() {
@@ -30,17 +49,10 @@ public class DatabaseConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean entityManagerFactory =
                 new LocalContainerEntityManagerFactoryBean();
-
-        final Map<String, String> jpaProperties = new HashMap<String, String>();
-        jpaProperties.put(DRIVER, "com.mysql.jdbc.Driver");
-        jpaProperties.put(URL, "jdbc:mysql://localhost:3306/ecare?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
-        jpaProperties.put(USER, "root");
-        jpaProperties.put(PASS, "123456gf");
-        jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-        jpaProperties.put("hibernate.enable_lazy_load_no_trans", "true");
-        entityManagerFactory.setJpaPropertyMap(jpaProperties);
+        entityManagerFactory.setDataSource(dataSource());
+        //entityManagerFactory.setJpaPropertyMap(getProperties());
         entityManagerFactory.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-        entityManagerFactory.setPersistenceUnitName("ecare");
+        entityManagerFactory.setPersistenceUnitName(ECARE);
         entityManagerFactory.setPackagesToScan("com.tsystems.ecare.entities");
         return entityManagerFactory;
     }
@@ -51,18 +63,29 @@ public class DatabaseConfig {
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;
     }
+//
+//    @Bean
+//    public MethodValidationPostProcessor methodValidationPostProcessor() {
+//
+//        MethodValidationPostProcessor processor =
+//                new MethodValidationPostProcessor();
+//        processor.setValidator((javax.validation.Validator) validator());
+//        return processor;
+//    }
+//
+//    @Bean
+//    public Validator validator() {
+//        return new LocalValidatorFactoryBean();
+//    }
 
-    @Bean
-    public MethodValidationPostProcessor methodValidationPostProcessor() {
-
-        MethodValidationPostProcessor processor =
-                new MethodValidationPostProcessor();
-        processor.setValidator((javax.validation.Validator) validator());
-        return processor;
-    }
-
-    @Bean
-    public Validator validator() {
-        return new LocalValidatorFactoryBean();
+    private Map<String, String> getProperties() {
+        final Map<String, String> jpaProperties = new HashMap<String, String>();
+        jpaProperties.put(DRIVER, "com.mysql.jdbc.Driver");
+        jpaProperties.put(URL, "jdbc:mysql://localhost:3306/ecare?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+        jpaProperties.put(USER, "admin");
+        jpaProperties.put(PASS, "admin");
+        jpaProperties.put(HIBERNATE_DIALECT, "org.hibernate.dialect.MySQL5Dialect");
+        jpaProperties.put(HIBENATE_ENABLE_LAZY_LOAD_NO_TRANS, "true");
+        return jpaProperties;
     }
 }

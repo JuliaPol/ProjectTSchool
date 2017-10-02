@@ -1,18 +1,20 @@
 package com.tsystems.ecare.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "user")
+@NamedQueries({
+        @NamedQuery(name = "findByLogin" ,
+                query = "select u from User u where u.login=:login")
+})
 public class User {
     @Id
     @GeneratedValue
@@ -24,22 +26,16 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "email")// TODO: uniq
+    @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "username")// TODO: uniq
-    private String username;
-
-    @Column(name = "password")
-    private String password;
-
-    @Transient
-    private String confirmPassword;
+    @Column(name = "login", unique = true)
+    private String login;
 
     @Column(name = "birth_date")
     private Date birth_date;
 
-    @Column(name = "passport_number")// TODO: uniq
+    @Column(name = "passport_number", unique = true)
     private String passportNumber;
 
     @Column(name = "passport_issued_when")
@@ -55,11 +51,13 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Contract> contractList;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private List<Role> roleList;
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getName() + "{id=" + id + "}";
+    }
 }

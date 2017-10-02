@@ -1,4 +1,4 @@
-DROP TABLE address, contract, contract_option, `option`, rate_option, rate, user, role, user_role;
+DROP TABLE rule, address, contract, contract_option, `option`, rate_option, rate, user, role, user_role;
 
 CREATE TABLE address (
   id           SERIAL PRIMARY KEY,
@@ -13,7 +13,7 @@ CREATE TABLE address (
 
 CREATE TABLE user (
   id                      SERIAL PRIMARY KEY,
-  username                VARCHAR(255) UNIQUE NOT NULL,
+  login                   VARCHAR(255) UNIQUE NOT NULL,
   birth_date              DATE,
   passport_number         VARCHAR(255) UNIQUE,
   passport_issued_when    DATE,
@@ -27,19 +27,15 @@ CREATE TABLE user (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE role (
-  id                      SERIAL PRIMARY KEY,
-  name VARCHAR(100) NOT NULL
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
 
 CREATE TABLE `option` (
   id                 SERIAL PRIMARY KEY,
   name               VARCHAR(255),
   cost               INT UNSIGNED,
   cost_of_connection INT UNSIGNED,
-  description        VARCHAR(255)
+  description        VARCHAR(255),
+  rate_id            BIGINT REFERENCES rate (id),
+  contract_id        BIGINT REFERENCES contract (id)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -83,22 +79,30 @@ CREATE TABLE rate_option (
   DEFAULT CHARSET = utf8;
 
 CREATE TABLE user_role (
+  id SERIAL,
+  role_name VARCHAR(15),
   user_id BIGINT REFERENCES user (id),
-  role_id   BIGINT REFERENCES role (id),
-  PRIMARY KEY (user_id, role_id)
+  PRIMARY KEY (id)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-INSERT INTO user (username, passport_number, address_id, first_name, last_name,
+CREATE TABLE rule (
+  id SERIAL,
+  option_1 BIGINT,
+  option_2  BIGINT,
+  compatibility BOOLEAN NOT NULL,
+  PRIMARY KEY (option_1, option_2)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+INSERT INTO user (login, passport_number, address_id, first_name, last_name,
                   email, password) VALUES ('jpi287', '123456', 1, 'Julia',
                                            'Polushina', 'jpi287@mail.ru', '1234');
-INSERT INTO user (username, passport_number, address_id, first_name, last_name,
+INSERT INTO user (login, passport_number, address_id, first_name, last_name,
                   email, password) VALUES ('ivan_88', '654321', 2, 'Ivan',
                                            'Ivanov', 'ivan111@mail.ru', '4321');
-
-INSERT INTO role (name) VALUES ('customer');
-INSERT INTO role (name) VALUES ('employee');
 
 INSERT INTO address (street, city, country, zipcode, house_number)
 VALUES ('main street', 'Saint-Petersburg', 'Russia', '1111', 3);
@@ -126,5 +130,7 @@ INSERT INTO rate_option (rate_id, option_id) VALUES (2, 2);
 INSERT INTO contract_option (contract_id, option_id) VALUES (1, 4);
 INSERT INTO contract_option (contract_id, option_id) VALUES (2, 3);
 
-INSERT INTO user_role (user_id, role_id) VALUES (1, 1);
-INSERT INTO user_role (user_id, role_id) VALUES (2, 2);
+INSERT INTO user_role (user_id, role_name) VALUES (1, 'ROLE_CUSTOMER');
+INSERT INTO user_role (user_id, role_name) VALUES (2, 'ROLE_MANAGER');
+
+INSERT INTO rule (option_1, option_2, compatibility) VALUES (1, 2, TRUE);

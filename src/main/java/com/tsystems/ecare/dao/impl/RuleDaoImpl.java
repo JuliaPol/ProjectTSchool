@@ -1,18 +1,18 @@
 package com.tsystems.ecare.dao.impl;
 
-import com.tsystems.ecare.dao.RoleDao;
-import com.tsystems.ecare.entities.Role;
+import com.tsystems.ecare.dao.RuleDao;
+import com.tsystems.ecare.entities.Rule;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Repository
-public class RoleDaoImpl  {
+public class RuleDaoImpl extends JpaDaoImpl<Rule> implements RuleDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-//    @Override
+    @Override
     public EntityManager getEntityManager() {
         return entityManager;
     }

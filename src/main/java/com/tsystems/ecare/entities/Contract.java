@@ -1,16 +1,14 @@
 package com.tsystems.ecare.entities;
 
 import com.tsystems.ecare.entities.enums.ContractStatus;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "contract")
 @NamedQueries({
@@ -45,4 +43,14 @@ public class Contract {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private User user;
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getName() + "{id=" + id + "}";
+    }
 }

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@Repository
-public class UserDaoImpl  {
+@Repository("userDao")
+public class UserDaoImpl extends JpaDaoImpl<User> implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -17,4 +17,10 @@ public class UserDaoImpl  {
         return entityManager;
     }
 
+    @Override
+    public User findByLogin(String login) {
+        return entityManager.createNamedQuery("findByLogin", User.class)
+                .setParameter("login", login)
+                .getSingleResult();
+    }
 }
