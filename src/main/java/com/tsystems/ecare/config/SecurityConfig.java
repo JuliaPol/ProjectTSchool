@@ -1,5 +1,7 @@
 package com.tsystems.ecare.config;
 
+import com.tsystems.ecare.controller.main.MainController;
+import com.tsystems.ecare.exception.LoginFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -38,9 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/js/**", "/css/**", "/img/**", "/jsp/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginProcessingUrl("/login").successForwardUrl("/")
-                .permitAll().usernameParameter("username")
-                .passwordParameter("password")
+                .formLogin().loginPage("/login").successForwardUrl("/")
+                .failureUrl("/login?error=true").permitAll().usernameParameter("username")
+                .passwordParameter("password").loginProcessingUrl("/login")
                 .and()
                 .logout().logoutSuccessUrl("/login")
                 .and()

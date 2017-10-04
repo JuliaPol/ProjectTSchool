@@ -12,7 +12,7 @@ public class UserDaoImpl extends JpaDaoImpl<User> implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-//    @Override
+    @Override
     public EntityManager getEntityManager() {
         return entityManager;
     }

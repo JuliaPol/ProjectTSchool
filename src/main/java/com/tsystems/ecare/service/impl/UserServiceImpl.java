@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.text.SimpleDateFormat;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -30,6 +31,13 @@ public class UserServiceImpl implements UserService {
         UserDTO userDTO = new UserDTO();
         userDTO.setFirstName(user.getFirstName());
         userDTO.setLastName(user.getLastName());
+        userDTO.setLogin(user.getLogin());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setBirthDate(new SimpleDateFormat("yyyy-MM-dd").format(user.getBirth_date()));
+        userDTO.setPassportNumber(user.getPassportNumber());
+        userDTO.setPassportIssuedWhen(new SimpleDateFormat("yyyy-MM-dd").format(user.getPassportIssuedWhen()));
+        userDTO.setPassportIssuedByWhom(user.getPassportIssuedByWhom());
+        userDTO.setAddress(user.getAddress().toString());
         return userDTO;
     }
 }

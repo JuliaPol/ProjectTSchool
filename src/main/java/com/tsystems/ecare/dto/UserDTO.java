@@ -12,4 +12,11 @@ import lombok.NoArgsConstructor;
 public class UserDTO {
     private String firstName;
     private String lastName;
+    private String email;
+    private String login;
+    private String birthDate;
+    private String passportNumber;
+    private String passportIssuedWhen;
+    private String passportIssuedByWhom;
+    private String address;
 }

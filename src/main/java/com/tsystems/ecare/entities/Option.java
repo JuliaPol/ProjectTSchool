@@ -3,8 +3,10 @@ package com.tsystems.ecare.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -33,4 +35,18 @@ public class Option {
 
     @ManyToMany(mappedBy = "optionList")
     private List<Rate> rateList;
+
+    @ManyToOne
+    @JoinColumn(name="compatible_option")
+    private Option compatibleOption;
+
+    @OneToMany(mappedBy="compatibleOption",fetch = FetchType.EAGER)
+    private List<Option> compatibleOptionList = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name="incompatible_option")
+    private Option incompatibleOption;
+
+    @OneToMany(mappedBy="incompatibleOption",fetch = FetchType.EAGER)
+    private List<Option> incompatibleOptionList = new ArrayList<>();
 }

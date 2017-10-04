@@ -1,15 +1,20 @@
 package com.tsystems.ecare.config;
 
 import org.hibernate.jpa.HibernatePersistenceProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +23,11 @@ import static org.hibernate.cfg.AvailableSettings.*;
 
 @Configuration
 @EnableTransactionManagement
+@PropertySource("classpath:persistence-mysql.properties")
 public class DatabaseConfig {
+
+    @Resource
+    private Environment env;
 
     private static final String HIBERNATE_DIALECT = "hibernate.dialect";
     private static final String ECARE = "ecare";
@@ -52,7 +61,7 @@ public class DatabaseConfig {
         entityManagerFactory.setDataSource(dataSource());
         //entityManagerFactory.setJpaPropertyMap(getProperties());
         entityManagerFactory.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-        entityManagerFactory.setPersistenceUnitName(ECARE);
+        entityManagerFactory.setPersistenceUnitName("ecare");
         entityManagerFactory.setPackagesToScan("com.tsystems.ecare.entities");
         return entityManagerFactory;
     }

@@ -1,16 +1,13 @@
 package com.tsystems.ecare.entities;
 
 import com.tsystems.ecare.entities.enums.RateStatus;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "rate")
 public class Rate {

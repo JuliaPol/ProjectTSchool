@@ -1,14 +1,11 @@
 package com.tsystems.ecare.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "address")
 public class Address {
@@ -32,4 +29,15 @@ public class Address {
 
     @OneToOne(mappedBy = "address")
     private User user;
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", houseNumber='" + houseNumber + '\'' +
+                ", zipcode='" + zipcode  +
+                '}';
+    }
 }

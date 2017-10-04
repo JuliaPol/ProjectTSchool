@@ -65,7 +65,6 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebApplication
                 .addResourceLocations("/WEB-INF/fonts/");
         registry.addResourceHandler("/img/**")
                 .addResourceLocations("/WEB-INF/img/");
-
     }
     @Bean
     public RequestMappingHandlerMapping requestMappingHandlerMapping() {
