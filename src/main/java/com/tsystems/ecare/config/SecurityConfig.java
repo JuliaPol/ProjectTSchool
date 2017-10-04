@@ -29,7 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder authenticationMgr) throws Exception {
         authenticationMgr.jdbcAuthentication()
                 .usersByUsernameQuery("select login, password, 1 from user where login=?")
-                .authoritiesByUsernameQuery("select u.login, ur.role_name from user u, user_role ur where u.id = ur.user_id and u.login=?")
+                //.authoritiesByUsernameQuery("select u.login, ur.role_name from user u, user_role ur where u.id = ur.user_id and u.login=?")
+                .authoritiesByUsernameQuery("select u.login, r.role_name from user u, role r, user_role ur where u.id = ur.user_id and u.login=?")
                 .dataSource(ecare);
     }
 

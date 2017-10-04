@@ -1,5 +1,7 @@
 package com.tsystems.ecare.service.impl;
 
+import com.tsystems.ecare.dao.JpaDao;
+import com.tsystems.ecare.dao.RoleDao;
 import com.tsystems.ecare.dao.UserDao;
 import com.tsystems.ecare.dto.UserDTO;
 import com.tsystems.ecare.dto.converter.UserConverter;
@@ -10,9 +12,13 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<User> implements UserService {
+
+    @Autowired
+    private RoleDao roleDao;
 
     @Autowired
     private UserDao userDao;
@@ -28,5 +34,17 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserDTO findByLogin(String login) {
         return userConverter.from(userDao.findByLogin(login));
-}
+    }
+
+    @Override
+    @Transactional
+    public List<User> findAllUsersByRole(String role) {
+        return roleDao.getAllUsersByRole(role);
+    }
+
+
+    @Override
+    protected JpaDao<User> getDefaultDao() {
+        return userDao;
+    }
 }

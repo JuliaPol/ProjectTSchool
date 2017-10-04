@@ -2,6 +2,7 @@ package com.tsystems.ecare.config;
 
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -23,10 +24,9 @@ import static org.hibernate.cfg.AvailableSettings.*;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource("classpath:persistence-mysql.properties")
-public class DatabaseConfig {
+@PropertySource(value = { "classpath:persistence-mysql.properties" })
+public class DatabaseConfig implements EnvironmentAware{
 
-    @Resource
     private Environment env;
 
     private static final String HIBERNATE_DIALECT = "hibernate.dialect";
@@ -41,11 +41,11 @@ public class DatabaseConfig {
     @Bean(name = "ecare")
     public DataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-        driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        driverManagerDataSource.setUsername("root");
-        driverManagerDataSource.setSchema("ecare");
-        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/ecare?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
-        driverManagerDataSource.setPassword("123456gf");
+        driverManagerDataSource.setDriverClassName(env.getRequiredProperty(JDBC_DRIVER_CLASS_NAME));
+        driverManagerDataSource.setUsername(env.getRequiredProperty(JDBC_USER));
+        driverManagerDataSource.setSchema(ECARE);
+        driverManagerDataSource.setUrl(env.getRequiredProperty(JDBC_URL));
+        driverManagerDataSource.setPassword(env.getRequiredProperty(JDBC_PASS));
         return driverManagerDataSource;
     }
 
@@ -59,9 +59,8 @@ public class DatabaseConfig {
         final LocalContainerEntityManagerFactoryBean entityManagerFactory =
                 new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setDataSource(dataSource());
-        //entityManagerFactory.setJpaPropertyMap(getProperties());
         entityManagerFactory.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-        entityManagerFactory.setPersistenceUnitName("ecare");
+        entityManagerFactory.setPersistenceUnitName(ECARE);
         entityManagerFactory.setPackagesToScan("com.tsystems.ecare.entities");
         return entityManagerFactory;
     }
@@ -71,6 +70,11 @@ public class DatabaseConfig {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;
+    }
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.env = environment;
     }
 //
 //    @Bean

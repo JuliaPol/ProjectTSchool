@@ -51,6 +51,14 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Contract> contractList;
 
+    @ManyToMany
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<Role> roleList;
+
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;

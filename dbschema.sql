@@ -78,9 +78,17 @@ CREATE TABLE rate_option (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE user_role (
+CREATE TABLE role (
   id SERIAL,
   role_name VARCHAR(15),
+  PRIMARY KEY (id)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+CREATE TABLE user_role (
+  id SERIAL,
+  role_id BIGINT REFERENCES role (id),
   user_id BIGINT REFERENCES user (id),
   PRIMARY KEY (id)
 )

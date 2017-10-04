@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@Repository
+@Repository("rateDao")
 public class RateDaoImpl extends JpaDaoImpl<Rate> implements RateDao {
     @PersistenceContext
     private EntityManager entityManager;

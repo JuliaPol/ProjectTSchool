@@ -31,6 +31,10 @@ INSERT INTO rate_option (rate_id, option_id) VALUES (2, 2);
 INSERT INTO contract_option (contract_id, option_id) VALUES (1, 4);
 INSERT INTO contract_option (contract_id, option_id) VALUES (2, 3);
 
-INSERT INTO user_role (user_id, role_name) VALUES (1, 'ROLE_CUSTOMER');
-INSERT INTO user_role (user_id, role_name) VALUES (2, 'ROLE_MANAGER');
+INSERT INTO role (role_name) VALUES ('ROLE_CUSTOMER');
+INSERT INTO role (role_name) VALUES ('ROLE_MANAGER');
+
+INSERT INTO user_role (user_id, role_id) VALUES (1, 1);
+INSERT INTO user_role (user_id, role_id) VALUES (2, 2);
+INSERT INTO user_role (user_id, role_id) VALUES (2, 1);
 
