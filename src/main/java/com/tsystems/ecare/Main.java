@@ -22,9 +22,8 @@ public class Main {
         context.refresh();
 
 //        UserDaoImpl bean1 = context.getBean(UserDaoImpl.class);
-//        System.out.println(bean1.get(1L).getLastName());
-//        for (User user: bean1.getAll()) {
-//            System.out.println(user.getFirstName());
+//        for (Role r: bean1.findRoleById(2L)) {
+//            System.out.println(r.getRoleName());
 //        }
 //
 //        ContractDaoImpl bean = context.getBean(ContractDaoImpl.class);
@@ -38,9 +37,14 @@ public class Main {
 //                System.out.println(option.getCompatibleOption().getName());
 //        }
 
-        RoleDaoImpl roleDao = context.getBean(RoleDaoImpl.class);
-        for (User user : roleDao.getAllUsersByRole("ROLE_CUSTOMER")) {
-                System.out.println(user.getFirstName());
-        }
+//        RoleDaoImpl roleDao = context.getBean(RoleDaoImpl.class);
+//        List<User> list = roleDao.getAllUsersByRole("ROLE_CUSTOMER");
+//        for (User user : list) {
+//                System.out.println(user.getFirstName());
+//        }
+//        RoleDaoImpl roleDao = context.getBean(RoleDaoImpl.class);
+//        for (Role role : roleDao.getAll()) {
+//            System.out.println(role.getRoleName());
+//        }
     }
 }

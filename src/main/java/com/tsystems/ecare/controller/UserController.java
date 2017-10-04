@@ -1,6 +1,7 @@
 package com.tsystems.ecare.controller;
 
 import com.tsystems.ecare.dto.UserDTO;
+import com.tsystems.ecare.facade.UserFacade;
 import com.tsystems.ecare.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -18,11 +19,12 @@ import org.springframework.web.bind.annotation.*;
 @Secured({"ROLE_CUSTOMER", "ROLE_MANAGER"})
 public class UserController {
     @Autowired
-    private UserService userService;
+    private UserFacade userFacade;
 
     @RequestMapping(value = "/{login}", method = RequestMethod.GET)
     @ResponseBody
     public UserDTO getByUserLogin(@PathVariable("login") String login) {
-        return userService.findByLogin(login);
+
+        return userFacade.findByLogin(login);
     }
 }

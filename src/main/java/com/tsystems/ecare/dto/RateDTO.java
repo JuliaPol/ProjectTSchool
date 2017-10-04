@@ -5,17 +5,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class RateDTO extends IdDTO{
+    @NotNull
     private String name;
-    private String cost;
+
+    private Integer cost;
     private String description;
-    private String calls;
-    private String sms;
-    private String internet;
+    private Integer calls;
+    private Integer sms;
+    private Integer internet;
     private List<OptionDTO> optionDTOList;
 }

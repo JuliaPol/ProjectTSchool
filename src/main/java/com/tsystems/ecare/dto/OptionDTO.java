@@ -1,17 +1,24 @@
 package com.tsystems.ecare.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.tsystems.ecare.dto.deserializer.OptionDeserializer;
+import com.tsystems.ecare.dto.serializer.OptionSerializer;
+import lombok.*;
+
+import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonSerialize(using = OptionSerializer.class)
+@JsonDeserialize(using = OptionDeserializer.class)
 public class OptionDTO extends IdDTO{
+    @NotNull
     private String name;
-    private String cost;
-    private String costOfConnection;
+
+    private Integer cost;
+    private Integer costOfConnection;
     private String description;
     private OptionDTO compatibleOption;
     private OptionDTO incompatibleOption;

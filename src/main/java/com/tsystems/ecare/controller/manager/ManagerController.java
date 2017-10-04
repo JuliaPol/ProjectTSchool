@@ -14,16 +14,7 @@ import java.util.List;
 @Secured("ROLE_MANAGER")
 public class ManagerController {
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private UserFacade userFacade;
-
-    @RequestMapping(value = "/{login}", method = RequestMethod.GET)
-    @ResponseBody
-    public UserDTO getByUserLogin(@PathVariable("login") String login) {
-        return userService.findByLogin(login);
-    }
 
     @RequestMapping(value = "/allCustomers", method = RequestMethod.GET)
     @ResponseBody

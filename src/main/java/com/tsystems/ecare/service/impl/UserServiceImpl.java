@@ -32,8 +32,8 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService {
 
     @Override
     @Transactional
-    public UserDTO findByLogin(String login) {
-        return userConverter.from(userDao.findByLogin(login));
+    public User findByLogin(String login) {
+        return userDao.findByLogin(login);
     }
 
     @Override

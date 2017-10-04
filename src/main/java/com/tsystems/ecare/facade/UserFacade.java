@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface UserFacade extends Facade<UserDTO> {
     List<UserDTO> getAllUsersByRole(String role);
+    UserDTO findByLogin(String login);
 }

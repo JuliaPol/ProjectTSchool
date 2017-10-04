@@ -27,17 +27,14 @@ public class Rate {
     @Column(name = "description")
     private String description;
 
-    @Enumerated(EnumType.STRING)
     @Column(name ="calls")
-    private RateStatus calls;
+    private Integer calls;
 
-    @Enumerated(EnumType.STRING)
     @Column(name ="sms")
-    private RateStatus sms;
+    private Integer sms;
 
-    @Enumerated(EnumType.STRING)
     @Column(name ="internet")
-    private RateStatus internet;
+    private Integer internet;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

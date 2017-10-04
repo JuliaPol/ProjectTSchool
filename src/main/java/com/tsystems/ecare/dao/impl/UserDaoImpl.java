@@ -1,11 +1,13 @@
 package com.tsystems.ecare.dao.impl;
 
 import com.tsystems.ecare.dao.UserDao;
+import com.tsystems.ecare.entities.Role;
 import com.tsystems.ecare.entities.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository("userDao")
 public class UserDaoImpl extends JpaDaoImpl<User> implements UserDao {

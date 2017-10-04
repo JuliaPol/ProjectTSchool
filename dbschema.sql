@@ -1,4 +1,4 @@
-DROP TABLE address, contract, contract_option, `option`, rate_option, rate, user, user_role;
+DROP TABLE address, contract, contract_option, `option`, rate_option, rate, user, user_role, role;
 
 CREATE TABLE address (
   id           SERIAL PRIMARY KEY,
@@ -87,10 +87,9 @@ CREATE TABLE role (
   DEFAULT CHARSET = utf8;
 
 CREATE TABLE user_role (
-  id SERIAL,
   role_id BIGINT REFERENCES role (id),
   user_id BIGINT REFERENCES user (id),
-  PRIMARY KEY (id)
+  PRIMARY KEY (role_id, user_id)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;

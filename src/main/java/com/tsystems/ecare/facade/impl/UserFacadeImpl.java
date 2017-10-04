@@ -35,4 +35,9 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
     public List<UserDTO> getAllUsersByRole(String role) {
         return convertList(userService.findAllUsersByRole(role));
     }
+
+    @Override
+    public UserDTO findByLogin(String login) {
+        return userConverter.from(userService.findByLogin(login));
+    }
 }

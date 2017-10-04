@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserService extends Service<User> {
     void save(User user);
-    UserDTO findByLogin(String login);
+    User findByLogin(String login);
     List<User> findAllUsersByRole(String role);
 
 }

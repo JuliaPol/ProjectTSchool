@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "role")
 @NamedQueries({
         @NamedQuery(name = "findAllUsersByRole" ,
-                query = "select r.userList from Role r where r.roleName=:role")
+                query = "select r.userList from Role r where r.roleName = :role")
 })
 public class Role {
     @Id
@@ -22,6 +22,11 @@ public class Role {
     @Column(name = "role_name")
     private String roleName;
 
-    @ManyToMany(mappedBy = "roleList")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
     private List<User> userList;
 }
