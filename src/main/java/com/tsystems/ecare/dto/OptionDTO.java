@@ -6,10 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OptionDTO {
+public class OptionDTO extends IdDTO{
     private String name;
     private String cost;
     private String costOfConnection;

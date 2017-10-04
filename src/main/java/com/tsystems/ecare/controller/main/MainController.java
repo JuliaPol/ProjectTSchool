@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Objects;
 
 @Controller
-@Secured({"ROLE_EMPLOYEE","ROLE_CUSTOMER"})
+@Secured({"ROLE_MANAGER","ROLE_CUSTOMER"})
 public class MainController {
 
-    @RequestMapping(value = "/*")
+    @RequestMapping(value = "/")
     public String processGet() {
 
-        if (userInRole("ROLE_EMPLOYEE"))
+        if (userInRole("ROLE_MANAGER"))
             return "redirect:/employee";
         else if (userInRole("ROLE_CUSTOMER"))
             return "redirect:/customer";

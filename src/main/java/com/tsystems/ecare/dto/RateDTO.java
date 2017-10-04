@@ -8,10 +8,9 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RateDTO {
+public class RateDTO extends IdDTO{
     private String name;
     private String cost;
     private String description;

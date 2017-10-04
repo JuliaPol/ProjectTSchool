@@ -3,9 +3,9 @@ package com.tsystems.ecare.entities;
 import lombok.*;
 
 import javax.persistence.*;
-
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "address")
 public class Address {
@@ -25,7 +25,7 @@ public class Address {
     private String zipcode;
 
     @Column(name = "house_number")
-    private String houseNumber;
+    private Integer houseNumber;
 
     @OneToOne(mappedBy = "address")
     private User user;

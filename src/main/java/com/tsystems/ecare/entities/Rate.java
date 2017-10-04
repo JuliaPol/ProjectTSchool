@@ -10,6 +10,10 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "rate")
+@NamedQueries({
+        @NamedQuery(name = "findByName" ,
+                query = "select r from Rate r where r.name=:name")
+})
 public class Rate {
     @Id @GeneratedValue
     private Long id;

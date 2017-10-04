@@ -33,13 +33,13 @@ public class User {
     private String login;
 
     @Column(name = "birth_date")
-    private Date birth_date;
+    private Date birthDate;
 
     @Column(name = "passport_number", unique = true)
     private String passportNumber;
 
     @Column(name = "passport_issued_when")
-    private String passportIssuedWhen;
+    private Date passportIssuedWhen;
 
     @Column(name = "passport_issued_by_whom")
     private String passportIssuedByWhom;

@@ -14,10 +14,5 @@ public class CustomerController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/{login}", method = RequestMethod.GET)
-    @ResponseBody
-    public UserDTO getByUserLogin(@PathVariable("login") String login) {
-        return userService.findByLogin(login);
-    }
 
 }
