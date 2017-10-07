@@ -1,5 +1,7 @@
 package com.tsystems.ecare.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +13,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+//@JsonSerialize
+//@JsonDeserialize
 public class RateDTO extends IdDTO{
     @NotNull
     private String name;

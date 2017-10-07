@@ -1,5 +1,6 @@
 package com.tsystems.ecare.config;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +31,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebApplication
         WebApplicationContext context = getContext();
         servletContext.addListener(new ContextLoaderListener(context));
         servletContext.addFilter("springSecurityFilterChain", DelegatingFilterProxy.class)
-                .addMappingForUrlPatterns(null,false,"/*");
+                .addMappingForUrlPatterns(null, false, "/*");
         // Registering the dispatcher servlet mappings.
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(context));
         dispatcher.setLoadOnStartup(1);
@@ -66,9 +67,15 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebApplication
         registry.addResourceHandler("/img/**")
                 .addResourceLocations("/WEB-INF/img/");
     }
+
     @Bean
     public RequestMappingHandlerMapping requestMappingHandlerMapping() {
         return new RequestMappingHandlerMapping();
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 }
 

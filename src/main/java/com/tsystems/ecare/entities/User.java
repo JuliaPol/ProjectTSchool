@@ -51,8 +51,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Contract> contractList;
 
-    @ManyToMany(mappedBy = "userList")
-    private List<Role> roleList;
+    @ManyToOne
+    @JoinColumn(name="role_id")
+    private Role role;
 
     @Override
     public int hashCode() {

@@ -11,8 +11,8 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonSerialize(using = OptionSerializer.class)
-@JsonDeserialize(using = OptionDeserializer.class)
+//@JsonSerialize
+//@JsonDeserialize
 public class OptionDTO extends IdDTO{
     @NotNull
     private String name;

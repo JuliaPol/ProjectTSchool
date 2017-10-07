@@ -2,13 +2,18 @@ package com.tsystems.ecare.facade.impl;
 
 import com.tsystems.ecare.dto.IdDTO;
 import com.tsystems.ecare.dto.converter.Converter;
+import com.tsystems.ecare.entities.User;
 import com.tsystems.ecare.facade.Facade;
 import com.tsystems.ecare.service.Service;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class FacadeImpl<S, T extends IdDTO> implements Facade<T> {
+
     @Override
     public List<T> getAll() throws Exception {
         return convertList(getDefaultService().getAll());
@@ -35,13 +40,12 @@ public abstract class FacadeImpl<S, T extends IdDTO> implements Facade<T> {
     }
 
     protected List<T> convertList(List<S> entities) {
-        List<T> result = new ArrayList<>();
-        Converter<S, T> converter = getDefaultConverter();
-        for (S s : entities) {
-            result.add(converter.from(s));
-        }
-        return result;
+        return entities.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
+
+    protected abstract T convertToDto(S entity);
 
     protected abstract Converter<S, T> getDefaultConverter();
 

@@ -1,12 +1,12 @@
 INSERT INTO user (login, passport_number, address_id, first_name, last_name,
-                  email, password) VALUES ('jpi287', '123456', 1, 'Julia',
-                                           'Polushina', 'jpi287@mail.ru', '1234');
+                  email, password, role_id) VALUES ('jpi287', '123456', 1, 'Julia',
+                                           'Polushina', 'jpi287@mail.ru', '1234', 1);
 INSERT INTO user (login, passport_number, address_id, first_name, last_name,
-                  email, password) VALUES ('ivan_88', '654321', 2, 'Ivan',
-                                           'Ivanov', 'ivan111@mail.ru', '4321');
+                  email, password, role_id) VALUES ('ivan_88', '654321', 2, 'Ivan',
+                                           'Ivanov', 'ivan111@mail.ru', '4321', 2);
 INSERT INTO user (login, passport_number, address_id, first_name, last_name,
-                  email, password) VALUES ('sun123', '63663', 3, 'John',
-                                           'Lenon', 'lenon@gmail.com', '123');
+                  email, password, role_id) VALUES ('sun123', '63663', 3, 'John',
+                                           'Lenon', 'lenon@gmail.com', '123', 1);
 
 INSERT INTO address (street, city, country, zipcode, house_number)
 VALUES ('main street', 'Saint-Petersburg', 'Russia', '1111', 3);
@@ -39,8 +39,4 @@ INSERT INTO contract_option (contract_id, option_id) VALUES (2, 3);
 INSERT INTO role (role_name) VALUES ('ROLE_CUSTOMER');
 INSERT INTO role (role_name) VALUES ('ROLE_MANAGER');
 
-INSERT INTO user_role (user_id, role_id) VALUES (1, 1);
-INSERT INTO user_role (user_id, role_id) VALUES (2, 2);
-INSERT INTO user_role (user_id, role_id) VALUES (2, 1);
-INSERT INTO user_role (user_id, role_id) VALUES (3, 1);
 

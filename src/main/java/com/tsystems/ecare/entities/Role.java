@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "role")
 @NamedQueries({
-        @NamedQuery(name = "findAllUsersByRole" ,
+        @NamedQuery(name = "Role.findAllUsersByRole" ,
                 query = "select r.userList from Role r where r.roleName = :role")
 })
 public class Role {
@@ -22,11 +22,6 @@ public class Role {
     @Column(name = "role_name")
     private String roleName;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
+    @OneToMany(mappedBy = "role")
     private List<User> userList;
 }

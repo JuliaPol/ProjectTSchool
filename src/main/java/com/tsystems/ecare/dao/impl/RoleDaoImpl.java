@@ -19,7 +19,7 @@ public class RoleDaoImpl extends JpaDaoImpl<Role> implements RoleDao {
 
     @Override
     public List<User> getAllUsersByRole(String role) {
-        return entityManager.createNamedQuery("findAllUsersByRole")
+        return entityManager.createNamedQuery("Role.findAllUsersByRole")
                 .setParameter("role", role)
                 .getResultList();
     }

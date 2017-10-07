@@ -1,4 +1,4 @@
-DROP TABLE address, contract, contract_option, `option`, rate_option, rate, user, user_role, role;
+DROP TABLE address, contract, contract_option, `option`, rate_option, rate, user, role;
 
 CREATE TABLE address (
   id           SERIAL PRIMARY KEY,
@@ -22,20 +22,21 @@ CREATE TABLE user (
   first_name              VARCHAR(255),
   last_name               VARCHAR(255),
   email                   VARCHAR(255),
-  password                VARCHAR(255)        NOT NULL
+  password                VARCHAR(255)        NOT NULL,
+  role_id                 BIGINT REFERENCES role (id)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
 
 CREATE TABLE `option` (
-  id                 SERIAL PRIMARY KEY,
-  name               VARCHAR(255),
-  cost               INT UNSIGNED,
-  cost_of_connection INT UNSIGNED,
-  description        VARCHAR(255),
-  compatible_option  BIGINT REFERENCES `option` (id),
-  incompatible_option  BIGINT REFERENCES `option` (id)
+  id                  SERIAL PRIMARY KEY,
+  name                VARCHAR(255),
+  cost                INT UNSIGNED,
+  cost_of_connection  INT UNSIGNED,
+  description         VARCHAR(255),
+  compatible_option   BIGINT REFERENCES `option` (id),
+  incompatible_option BIGINT REFERENCES `option` (id)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -54,7 +55,7 @@ CREATE TABLE rate (
 
 CREATE TABLE contract (
   id          SERIAL PRIMARY KEY,
-  number      INT NOT NULL,
+  number      VARCHAR(20) NOT NULL,
   status      ENUM ('AVAILABLE', 'BLOCKED_BY_THE_CUSTOMER', 'BLOCKED_BY_AN_EMPLOYEE'),
   customer_id BIGINT REFERENCES user (id),
   rate_id     BIGINT REFERENCES rate (id)
@@ -79,18 +80,11 @@ CREATE TABLE rate_option (
   DEFAULT CHARSET = utf8;
 
 CREATE TABLE role (
-  id SERIAL,
+  id        SERIAL,
   role_name VARCHAR(15),
   PRIMARY KEY (id)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE user_role (
-  role_id BIGINT REFERENCES role (id),
-  user_id BIGINT REFERENCES user (id),
-  PRIMARY KEY (role_id, user_id)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
 

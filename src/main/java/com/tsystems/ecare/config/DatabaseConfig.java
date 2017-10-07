@@ -90,15 +90,4 @@ public class DatabaseConfig implements EnvironmentAware{
 //    public Validator validator() {
 //        return new LocalValidatorFactoryBean();
 //    }
-
-    private Map<String, String> getProperties() {
-        final Map<String, String> jpaProperties = new HashMap<String, String>();
-        jpaProperties.put(DRIVER, "com.mysql.jdbc.Driver");
-        jpaProperties.put(URL, "jdbc:mysql://localhost:3306/ecare?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
-        jpaProperties.put(USER, "admin");
-        jpaProperties.put(PASS, "admin");
-        jpaProperties.put(HIBERNATE_DIALECT, "org.hibernate.dialect.MySQL5Dialect");
-        jpaProperties.put(HIBENATE_ENABLE_LAZY_LOAD_NO_TRANS, "true");
-        return jpaProperties;
-    }
 }

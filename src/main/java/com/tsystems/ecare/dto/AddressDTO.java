@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonSerialize(using = AddressSerializer.class)
-@JsonDeserialize(using = AddressDeserializer.class)
+//@JsonSerialize
+//@JsonDeserialize
 public class AddressDTO extends IdDTO{
     private String country;
     private String city;
