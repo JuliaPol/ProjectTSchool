@@ -1,8 +1,6 @@
 package com.tsystems.ecare.facade.impl;
 
 import com.tsystems.ecare.dto.RateDTO;
-import com.tsystems.ecare.dto.converter.Converter;
-import com.tsystems.ecare.dto.converter.RateConverter;
 import com.tsystems.ecare.entities.Rate;
 import com.tsystems.ecare.facade.OptionFacade;
 import com.tsystems.ecare.facade.RateFacade;
@@ -12,11 +10,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component("rateFacade")
 public class RateFacadeImpl extends FacadeImpl<Rate, RateDTO> implements RateFacade {
 
-    @Autowired
-    private RateConverter rateConverter;
 
     @Autowired
     private RateService rateService;
@@ -25,20 +23,15 @@ public class RateFacadeImpl extends FacadeImpl<Rate, RateDTO> implements RateFac
     private ModelMapper modelMapper;
 
     @Autowired
-    private OptionFacadeImpl optionFacade;
+    private OptionFacade optionFacade;
 
     @Override
-    protected RateDTO convertToDto(Rate entity) {
+    public RateDTO convertToDto(Rate entity) {
         RateDTO rateDTO = modelMapper.map(entity, RateDTO.class);
         if (entity.getOptionList() != null) {
-            rateDTO.setOptionDTOList(optionFacade.convertList(entity.getOptionList()));
+            rateDTO.setOptionList(optionFacade.convertList(entity.getOptionList()));
         }
         return rateDTO;
-    }
-
-    @Override
-    protected Converter<Rate, RateDTO> getDefaultConverter() {
-        return rateConverter;
     }
 
     @Override
@@ -46,8 +39,24 @@ public class RateFacadeImpl extends FacadeImpl<Rate, RateDTO> implements RateFac
         return rateService;
     }
 
+
+    @Override
+    protected Rate convertToEntity(RateDTO dto) {
+        return null;
+    }
+
     @Override
     public RateDTO findByName(String name) {
         return convertToDto(rateService.findByName(name));
+    }
+
+    @Override
+    public List<RateDTO> findAllForCustomer(String number) {
+        return convertList(rateService.findAllForCustomer(number));
+    }
+
+    @Override
+    public RateDTO findForCustomerByNumber(String number) {
+        return convertToDto(rateService.findForCustomerByNumber(number));
     }
 }

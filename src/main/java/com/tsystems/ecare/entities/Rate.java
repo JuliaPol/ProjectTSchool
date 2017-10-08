@@ -1,7 +1,9 @@
 package com.tsystems.ecare.entities;
 
-import com.tsystems.ecare.entities.enums.RateStatus;
+
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,10 +13,19 @@ import java.util.List;
 @Entity
 @Table(name = "rate")
 @NamedQueries({
-        @NamedQuery(name = "findByName" ,
-                query = "select r from Rate r where r.name=:name")
+        @NamedQuery(name = Rate.RATE_FIND_BY_NAME,
+                query = "select r from Rate r where r.name=:name"),
+        @NamedQuery(name = Rate.RATE_FIND_ALL_FOR_CUSTOMER,
+                query = "select r from Rate r where r not in " +
+                        "(select c.rate from Contract c where c.number = :number)"),
+        @NamedQuery(name = Rate.RATE_FIND_FOR_CUSTOMER_BY_NUMBER,
+                query = "select c.rate from Contract c where c.number = :number"),
+
 })
 public class Rate {
+    public static final String RATE_FIND_BY_NAME = "Rate.findByName";
+    public static final String RATE_FIND_FOR_CUSTOMER_BY_NUMBER = "Rate.findForCustomerByNumber";
+    public static final String RATE_FIND_ALL_FOR_CUSTOMER = "Rate.findAllForCustomer";
     @Id @GeneratedValue
     private Long id;
 
@@ -36,7 +47,8 @@ public class Rate {
     @Column(name ="internet")
     private Integer internet;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany
     @JoinTable(
             name = "rate_option",
             joinColumns = @JoinColumn(name = "rate_id"),

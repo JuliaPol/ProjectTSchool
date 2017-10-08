@@ -14,7 +14,14 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "`option`")
+@NamedQueries({
+        @NamedQuery(name = Option.OPTION_FIND_ALL_OPTIONS_FOR_CUSTOMER,
+                query = "select o from Option o where o not in (select c.optionList from Contract c where c.number = :number)")
+})
 public class Option {
+
+    public static final String OPTION_FIND_ALL_OPTIONS_FOR_CUSTOMER = "Option.findAllOptionsForCustomer";
+
     @Id @GeneratedValue
     private Long id;
 
@@ -40,13 +47,13 @@ public class Option {
     @JoinColumn(name="compatible_option")
     private Option compatibleOption;
 
-    @OneToMany(mappedBy="compatibleOption",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="compatibleOption")
     private List<Option> compatibleOptionList = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name="incompatible_option")
     private Option incompatibleOption;
 
-    @OneToMany(mappedBy="incompatibleOption",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="incompatibleOption")
     private List<Option> incompatibleOptionList = new ArrayList<>();
 }

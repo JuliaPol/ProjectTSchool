@@ -1,6 +1,10 @@
 package com.tsystems.ecare.facade;
 
 import com.tsystems.ecare.dto.OptionDTO;
+import com.tsystems.ecare.entities.Option;
 
-public interface OptionFacade extends Facade<OptionDTO>{
+import java.util.List;
+
+public interface OptionFacade extends Facade<OptionDTO, Option> {
+    List<OptionDTO> getAllOptionsForCustomer(String number);
 }

@@ -28,7 +28,7 @@
                    placeholder="Password">
         </div>
         <div class="form-group ">
-            <input type="submit" id="signIN" class="btn btn-default sign-in" value="Sign in">
+            <input type="submit" id="signIN" class="btn btn-default button-one sign-in" value="Sign in">
         </div>
     </form>
 </div>

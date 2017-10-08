@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service("rateService")
 public class RateServiceImpl extends ServiceImpl<Rate> implements RateService {
@@ -19,6 +20,16 @@ public class RateServiceImpl extends ServiceImpl<Rate> implements RateService {
     @Transactional
     public Rate findByName(String name) {
         return rateDao.findByName(name);
+    }
+
+    @Override
+    public List<Rate> findAllForCustomer(String number) {
+        return rateDao.findAllForCustomer(number);
+    }
+
+    @Override
+    public Rate findForCustomerByNumber(String number) {
+        return rateDao.findForCustomerByNumber(number);
     }
 
     @Override

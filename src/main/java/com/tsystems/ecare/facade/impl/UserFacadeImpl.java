@@ -1,11 +1,11 @@
 package com.tsystems.ecare.facade.impl;
 
-import com.tsystems.ecare.dao.UserDao;
+import com.tsystems.ecare.dto.RateDTO;
 import com.tsystems.ecare.dto.UserDTO;
-import com.tsystems.ecare.dto.converter.Converter;
-import com.tsystems.ecare.dto.converter.UserConverter;
+import com.tsystems.ecare.entities.Rate;
 import com.tsystems.ecare.entities.User;
 import com.tsystems.ecare.facade.UserFacade;
+import com.tsystems.ecare.service.ContractService;
 import com.tsystems.ecare.service.Service;
 import com.tsystems.ecare.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -13,43 +13,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component("userFacade")
 public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFacade {
+
     @Autowired
-    private UserConverter userConverter;
+    private ModelMapper modelMapper;
 
     @Autowired
     private UserService userService;
 
     @Autowired
-    private ModelMapper modelMapper;
+    private ContractService contractService;
 
     @Override
-    protected Converter<User, UserDTO> getDefaultConverter() {
-        return userConverter;
+    public List<UserDTO> getAllUsersByRole(String role) {
+        return convertList(userService.findAllUsersByRole(role));
+    }
+
+    @Override
+    public UserDTO convertToDto(User entity) {
+        UserDTO userDTO = modelMapper.map(entity, UserDTO.class);
+        userDTO.dateConverter(entity.getBirthDate(), entity.getPassportIssuedWhen());
+        return userDTO;
+    }
+
+    @Override
+    protected User convertToEntity(UserDTO dto) {
+        return null;
+    }
+
+    @Override
+    public UserDTO findByLogin(String login) {
+        UserDTO userDTO = convertToDto(userService.findByLogin(login));
+        userDTO.setContactNumbers(contractService.findContactsByUserLogin(login));
+        return userDTO;
     }
 
     @Override
     protected Service<User> getDefaultService() {
         return userService;
-    }
-
-    @Override
-    public List<UserDTO> getAllUsersByRole(String role) {
-        List<User> userList = userService.findAllUsersByRole(role);
-        return convertList(userList);
-    }
-
-    @Override
-    public UserDTO findByLogin(String login) {
-        return convertToDto(userService.findByLogin(login));
-    }
-
-    protected UserDTO convertToDto(User user) {
-        UserDTO userDto = modelMapper.map(user, UserDTO.class);
-        userDto.dateConverter(user.getBirthDate(), user.getPassportIssuedWhen());
-        return userDto;
     }
 }

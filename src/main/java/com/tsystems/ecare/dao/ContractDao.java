@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ContractDao extends JpaDao<Contract> {
     List<Option> getAllOption(Long id);
+    List<String> findAllContactsByUserId(String login);
+    Contract getContractByNumber(String number);
 }

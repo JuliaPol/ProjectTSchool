@@ -1,9 +1,9 @@
-package com.tsystems.ecare.dao;
+package com.tsystems.ecare.service;
 
 import com.tsystems.ecare.entities.Option;
 
 import java.util.List;
 
-public interface OptionDao extends JpaDao<Option>{
+public interface OptionService  extends Service<Option>{
     List<Option> getAllOptionsForCustomer(String number);
 }

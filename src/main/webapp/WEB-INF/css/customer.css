@@ -1,83 +1,50 @@
-p {
-    color: #95989A;
+.logo {
+    position: relative;
+    height: 40px;
+    font-size: 20;
 }
-
-#labelH2 {
-    font-size: 25px;
-    text-align: center;
-    margin-top: 94px;
-    color: #95989A;
+#logo {
+    margin-left: 45px;
+    position: relative;
+    top: 7px;
+    color: #11AFAA;
 }
-.form {
-    width: 600px;
-    height: 350px;
-    background-color: #E4FFF6;
-    margin: 20 auto;
-    border: solid #95989A 1px;
+#selectContract {
+    top: 7px;
 }
-#formUP {
-    margin: 60px;
-}
-#passwordCol {
-        margin-top: 30px;
-}
-
-.UP {
-    margin-top: 40px;
-    margin-right: 150px;
-    margin-left: 150px;    
-}
-.sign-in {
-    margin-top: 20px;
-    width: -webkit-fill-available;
-    height: 60px;
+.head {
     background-color: #13BFB9;
+    font-size: 15px;
 }
-
-.input-UP {
-    height: 50px;
+#a1 {
+    color: white;
 }
-
-#forgotPass {
-    margin-left: 130px;
+#a2 {
+    color: white;
 }
-
-#signIN {
-    color: #FFFFFF;
-    font-size: larger;
-    text-align: center;
-    margin-top: 10px;
+#a3 {
+    color: white;
 }
-
-.sign-in:hover {
-  background-color: #11AFAA;
+.button-group {
+    margin-left: 40px;
+    width: 200px;
 }
-
-#miniForm {
-    height: 52px;
-    text-align: center;
+.button-one {
+    background-color: #E4FFF6;
+    border-color: #13BFB9;
     color: #95989A;
+    font-size: 16px;
 }
 
-#signUp {
-    margin-top: 15;
-}
-
-#signUP {
-    margin-top: 10px;
-}
-
-#signUpForm {
-    height: 400px;
-}
-
-#signUpFH {
-    margin-top: 10px;
+.button-one1 {
+    margin: 10px;
+    height: 140px;
+    font-weight: bolder;
 }
 
 .button-one.focus, .button-one:focus {
     color: #fff;
-    background-color: #13BFB9;
+    background-color: #E4FFF6;
     border-color: #13BFB9;
     outline: 0;
 }
@@ -111,11 +78,28 @@ p {
 }
 
 .button-one.disabled.focus, .button-one.disabled:focus, .button-one.disabled:hover, .button-one[disabled].focus, .button-one[disabled]:focus, .button-one[disabled]:hover, fieldset[disabled] .button-one.focus, fieldset[disabled] .button-one:focus, fieldset[disabled] .button-one:hover {
-    background-color: #13BFB9;
+    background-color: #E4FFF6;
     border-color: #13BFB9
 }
 
 .button-one .badge {
-    color: #13BFB9;
+    color: #E4FFF6;
     background-color: #fff
+}
+.back {
+    /*    background-color: #E4FFF6;*/
+    margin-top: 10px;
+    margin-right: 50px;
+    height: 458px;
+}
+.back1 {
+    background-color: white;
+    height: 340px;
+}
+.buttonAct {
+    margin-left: 20px;
+    height: 40px;
+}
+#pag {
+    margin-right: 20px;
 }

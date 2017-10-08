@@ -5,6 +5,7 @@ import com.tsystems.ecare.dto.UserDTO;
 import com.tsystems.ecare.facade.RateFacade;
 import com.tsystems.ecare.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,12 +16,21 @@ public class RateController {
     @Autowired
     private RateFacade rateFacade;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @Secured("ROLE_CUSTOMER")
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public RateDTO findByName(@PathVariable("id") Long id) throws Exception{
-        return rateFacade.get(id);
+    public List<RateDTO> findAllForCustomer(@RequestParam("number") String number) throws Exception{
+        return rateFacade.findAllForCustomer(number);
     }
 
+    @Secured("ROLE_CUSTOMER")
+    @RequestMapping(value = "/active", method = RequestMethod.GET)
+    @ResponseBody
+    public RateDTO findForCustomerByNumber(@RequestParam("number") String number) throws Exception{
+        return rateFacade.findForCustomerByNumber(number);
+    }
+
+    @Secured("ROLE_MANAGER")
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     @ResponseBody
     public List<RateDTO> getAllTariffs() throws Exception {

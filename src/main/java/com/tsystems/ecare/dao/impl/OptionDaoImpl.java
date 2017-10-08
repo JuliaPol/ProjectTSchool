@@ -10,9 +10,14 @@ import java.util.List;
 
 @Repository("optionDao")
 public class OptionDaoImpl extends JpaDaoImpl<Option> implements OptionDao {
+
     @PersistenceContext
     private EntityManager entityManager;
 
+    public List<Option> getAllOptionsForCustomer(String number) {
+        return entityManager.createNamedQuery(Option.OPTION_FIND_ALL_OPTIONS_FOR_CUSTOMER, Option.class)
+                .setParameter("number", number).getResultList();
+    }
     @Override
     public EntityManager getEntityManager() {
         return entityManager;
