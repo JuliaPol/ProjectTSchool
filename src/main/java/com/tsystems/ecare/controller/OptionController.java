@@ -21,4 +21,9 @@ public class OptionController {
     public List<OptionDTO> getAllOptions(@RequestParam("number") String number) {
         return optionFacade.getAllOptionsForCustomer(number);
     }
+
+    @RequestMapping( method = RequestMethod.GET)
+    public List<OptionDTO> getAllAvailableOptions(@RequestParam("number") String number) {
+        return optionFacade.getAllAvailableOptionsForCustomer(number);
+    }
 }

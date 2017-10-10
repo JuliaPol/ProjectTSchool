@@ -36,6 +36,13 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
     public List<OptionDTO> getAllOptionsForCustomer(String number) {
         return convertList(optionService.getAllOptionsForCustomer(number));
     }
+
+    @Override
+    public List<OptionDTO> getAllAvailableOptionsForCustomer(String number) {
+        List<Option> optionList = optionService.getAllAvailableOptionsForCustomer(number);
+        return convertList(optionList);
+    }
+
     @Override
     protected Option convertToEntity(OptionDTO dto) {
         return null;

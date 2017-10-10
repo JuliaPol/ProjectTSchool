@@ -18,6 +18,14 @@ public class OptionDaoImpl extends JpaDaoImpl<Option> implements OptionDao {
         return entityManager.createNamedQuery(Option.OPTION_FIND_ALL_OPTIONS_FOR_CUSTOMER)
                 .setParameter("number", number).getResultList();
     }
+
+    @Override
+    public List<Option> findAllOptionsInRateForCustomer(String number) {
+        return entityManager.createNamedQuery(Option.OPTION_FIND_ALL_OPTIONS_IN_RATE_FOR_CUSTOMER)
+                .setParameter("number", number)
+                .getResultList();
+    }
+
     @Override
     public EntityManager getEntityManager() {
         return entityManager;

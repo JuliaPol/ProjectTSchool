@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface OptionDao extends JpaDao<Option>{
     List<Option> getAllOptionsForCustomer(String number);
+    List<Option> findAllOptionsInRateForCustomer(String number);
 }

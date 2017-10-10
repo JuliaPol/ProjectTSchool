@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface OptionService  extends Service<Option>{
     List<Option> getAllOptionsForCustomer(String number);
+    List<Option> getAllAvailableOptionsForCustomer(String number);
 }
