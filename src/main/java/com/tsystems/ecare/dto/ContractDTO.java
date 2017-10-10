@@ -12,5 +12,6 @@ import java.util.List;
 public class ContractDTO  extends IdDTO {
     private RateDTO rate;
     private String number;
+    private String status;
     private List<OptionDTO> optionList;
 }

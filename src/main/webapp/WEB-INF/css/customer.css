@@ -1,7 +1,7 @@
 .logo {
     position: relative;
     height: 40px;
-    font-size: 20;
+    font-size: 20px;
 }
 #logo {
     margin-left: 45px;
@@ -96,10 +96,19 @@
     background-color: white;
     height: 340px;
 }
-.buttonAct {
+.button-act {
     margin-left: 20px;
     height: 40px;
 }
 #pag {
     margin-right: 20px;
+}
+.textTariff {
+    margin-top: 10px;
+}
+#deactivateTariff {
+    margin-left: 80px;
+}
+#optionTariffPanel{
+    display: none;
 }

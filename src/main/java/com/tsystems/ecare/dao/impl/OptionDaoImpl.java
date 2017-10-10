@@ -15,7 +15,7 @@ public class OptionDaoImpl extends JpaDaoImpl<Option> implements OptionDao {
     private EntityManager entityManager;
 
     public List<Option> getAllOptionsForCustomer(String number) {
-        return entityManager.createNamedQuery(Option.OPTION_FIND_ALL_OPTIONS_FOR_CUSTOMER, Option.class)
+        return entityManager.createNamedQuery(Option.OPTION_FIND_ALL_OPTIONS_FOR_CUSTOMER)
                 .setParameter("number", number).getResultList();
     }
     @Override

@@ -16,7 +16,7 @@ import java.util.List;
 @Table(name = "`option`")
 @NamedQueries({
         @NamedQuery(name = Option.OPTION_FIND_ALL_OPTIONS_FOR_CUSTOMER,
-                query = "select o from Option o where o not in (select c.optionList from Contract c where c.number = :number)")
+                query = "select c.optionList from Contract c where c.number = :number")
 })
 public class Option {
 

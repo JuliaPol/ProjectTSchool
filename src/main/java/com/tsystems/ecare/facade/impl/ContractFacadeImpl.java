@@ -36,6 +36,7 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
     @Override
    public ContractDTO convertToDto(Contract entity) {
         ContractDTO contractDTO = modelMapper.map(entity, ContractDTO.class);
+        contractDTO.setStatus(entity.getStatus().toString());
         if (entity.getOptionList() != null) {
             contractDTO.setOptionList(optionFacade.convertList(entity.getOptionList()));
         }

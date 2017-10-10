@@ -44,35 +44,45 @@
 <div class="row">
     <div class="btn-group-vertical button-group col-md-4">
         <div class="btn-group">
-            <input type="submit" id="contactButton" class="btn btn-info button-one button-one1" value="My contract">
+            <input type="submit" id="contactButton" class="active btn btn-info button-one button-one1" value="My contract">
         </div>
         <div class="btn-group">
-            <input type="submit" id="tariffsButton" class="active btn btn-info button-one button-one1" value="Tariffs">
+            <input type="submit" id="tariffsButton" class="btn btn-info button-one button-one1" value="Tariffs">
         </div>
         <div class="btn-group">
             <input type="submit" id="optionsButton" class="btn btn-info button-one button-one1" value="Options">
         </div>
     </div>
     <div class="panel panel-default back col-md-9">
-        <div class="panel-body">
+        <div class="panel-body" id="contractPanel">
+            <div class="row">
+                <div class="col-md-2">Your number:</div>
+                <div class="col-md-2" id="yourNumber"></div>
+                <input type="submit" id="statusButton" class="col-md-2 btn btn-info button-one button-act" value="">
+            </div>
+            <div class="row">
+                <div class="col-md-2">Status:</div>
+                <div class="col-md-2" id="numberStatus"></div>
+            </div>
+        </div>
+        <div class="panel-body" id="optionTariffPanel">
             <ul class="nav nav-tabs">
                 <li class="active" id="myLi"><a id="myHref" href="#">My</a></li>
                 <li id="allLi"><a id="allHref" href="#">All</a></li>
             </ul>
             <div class="panel-body back1" id="tariff">
             </div>
-            <div class="text-center">
-                <ul class="pagination" id="pag">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                </ul>
-            </div>
-
+            <%--<div class="text-center">--%>
+                <%--<ul class="pagination" id="pag">--%>
+                    <%--<li><a href="#">&laquo;</a></li>--%>
+                    <%--<li><a href="#">1</a></li>--%>
+                    <%--<li><a href="#">2</a></li>--%>
+                       <%--<li><a href="#">3</a></li>--%>
+            <%--<li><a href="#">4</a></li>--%>
+            <%--<li><a href="#">5</a></li>--%>
+            <%--<li><a href="#">&raquo;</a></li>--%>
+            <%--</ul>--%>
+            <%--</div>--%>
         </div>
     </div>
 </div>
