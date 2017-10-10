@@ -23,12 +23,12 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
     @Override
     public OptionDTO convertToDto(Option entity) {
         OptionDTO optionDTO = modelMapper.map(entity, OptionDTO.class);
-//        if (entity.getCompatibleOption() != null) {
-//            optionDTO.setCompatibleOption(convertToDto(entity.getCompatibleOption()));
-//        }
-//        if (entity.getIncompatibleOption() != null) {
-//            optionDTO.setIncompatibleOption(convertToDto(entity.getIncompatibleOption()));
-//        }
+        if (entity.getIncompatibleOption() != null) {
+            optionDTO.setIncompatibleOption(entity.getIncompatibleOption().getName());
+        }
+        if (entity.getCompatibleOption() != null) {
+            optionDTO.setCompatibleOption(entity.getCompatibleOption().getName());
+        }
         return optionDTO;
     }
 
@@ -39,8 +39,7 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
 
     @Override
     public List<OptionDTO> getAllAvailableOptionsForCustomer(String number) {
-        List<Option> optionList = optionService.getAllAvailableOptionsForCustomer(number);
-        return convertList(optionList);
+        return convertList(optionService.getAllAvailableOptionsForCustomer(number));
     }
 
     @Override

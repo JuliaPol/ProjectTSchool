@@ -23,16 +23,23 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
 
     @Override
     public List<Option> getAllAvailableOptionsForCustomer(String number) {
-        List<Option> listOptionsInRate = optionDao.findAllOptionsInRateForCustomer(number);
-        List<Option> listOptionsInContract = optionDao.getAllOptionsForCustomer(number);
+        List<Option> listOptionsInRateAndContract = getAllOptionsInRateAndContract(number);
         List<Option> allOptions = optionDao.getAll();
         List<Option> newOptions = new ArrayList<>();
         for (Option option : allOptions) {
-            if (!listOptionsInRate.contains(option)&&!listOptionsInContract.contains(option)) {
+            if (!listOptionsInRateAndContract.contains(option)) {
                 newOptions.add(option);
             }
         }
         return newOptions;
+    }
+
+    @Override
+    public List<Option> getAllOptionsInRateAndContract(String number) {
+        List<Option> listOptionsInRateAndContract = new ArrayList<>();
+        listOptionsInRateAndContract.addAll(optionDao.findAllOptionsInRateForCustomer(number));
+        listOptionsInRateAndContract.addAll(optionDao.getAllOptionsForCustomer(number));
+        return listOptionsInRateAndContract;
     }
 
     @Override

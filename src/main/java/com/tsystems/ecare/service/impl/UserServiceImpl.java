@@ -6,6 +6,7 @@ import com.tsystems.ecare.dao.UserDao;
 import com.tsystems.ecare.entities.User;
 import com.tsystems.ecare.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -13,6 +14,9 @@ import java.util.List;
 
 @Service("userService")
 public class UserServiceImpl extends ServiceImpl<User> implements UserService {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private RoleDao roleDao;
@@ -41,4 +45,6 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService {
     protected JpaDao<User> getDefaultDao() {
         return userDao;
     }
+
+
 }

@@ -49,22 +49,22 @@ function refreshContract() {
 }
 
 numberSelected.change(function () {
-    checkStatus();
     if (tariff.hasClass('active')) {
         if ($('#myLi').hasClass('active')) {
             refreshItem("/tariffs/active?number=");
         } else {
-            refreshList("/tariffs/?number=");
+            refreshList("/tariffs/?number=","Activate");
         }
     } else if (option.hasClass('active')) {
         if ($('#myLi').hasClass('active')) {
-            refreshList("/options/active?number=");
+            refreshList("/options/active?number=","Deactivate");
         } else {
-            refreshList("/options/?number=");
+            refreshList("/options/?number=","Activate");
         }
     } else {
         refreshContract();
     }
+    checkStatus();
 });
 
 function tabsActive(n) {
@@ -84,7 +84,7 @@ option.click(function () {
     contact.removeClass('active');
     option.addClass('active');
     tabsActive(1);
-    refreshList("/options/active?number=");
+    refreshList("/options/active?number=","Deactivate");
     checkStatus();
 });
 
@@ -108,15 +108,28 @@ tariff.click(function () {
     checkStatus();
 });
 
-var dataResult;
-
-function addItemWithName(name) {
+function addItemWithName(name, status) {
     var List = $("#tariff");
     $("<div class=\"row\">").appendTo(List);
     $("<div class=\"well well-sm col-md-9\"></div>").text(name).appendTo(List);
     $(" <input type=\"submit\" class=\"btn btn-info button-one button-act col-md-2\" " +
-        "value=\"Deactivate\">" +
-        "</div>").appendTo(List);
+        "value=\"\">").val(status).appendTo(List);
+    $("</div>").appendTo(List);
+}
+
+function addItemForOptions(name) {
+    var List = $("#tariff");
+    $("<div class=\"row\">").appendTo(List);
+    $("<div class=\"well well-sm col-md-3\"></div>").text(name.name).appendTo(List);
+    if (name.compatibleOption != null) {
+        $("<div class=\" col-md-3\"></div>").text("This option must be connected with the option: "+ name.compatibleOption).appendTo(List);
+    }
+    if (name.incompatibleOption != null) {
+        $("<div class=\" col-md-3\"></div>").text("This option can not be connected with the option: "+ name.incompatibleOption).appendTo(List);
+    }
+    $(" <input type=\"submit\" class=\"btn btn-info button-one button-act col-md-2\" " +
+        "value=\"Activate\">").appendTo(List);
+    $("</div>").appendTo(List);
 }
 
 function addItem(tariff) {
@@ -149,7 +162,7 @@ function addItem(tariff) {
     $("</ul>").appendTo(List);
 }
 
-function refreshList(url) {
+function refreshList(url, statusButton) {
     var number = $('#numberSelect option:selected').text();
     var dataUrl = "http://localhost:8080" + url + number;
     var list = $("#tariff");
@@ -157,10 +170,13 @@ function refreshList(url) {
     $.ajax({
         url: dataUrl
     }).done(function (result) {
-        dataResult = result;
         for (var i = 0; i < result.length; i++) {
             var tariff = result[i];
-            addItemWithName(tariff.name);
+            if(url === "/options/?number=") {
+                addItemForOptions(tariff);
+            } else {
+                addItemWithName(tariff.name, statusButton);
+            }
         }
     })
 }
@@ -173,7 +189,6 @@ function refreshItem(url) {
     $.ajax({
         url: dataUrl
     }).done(function (result) {
-        dataResult = result;
         addItem(result);
     })
 }
@@ -181,9 +196,9 @@ function refreshItem(url) {
 allHref.click(function () {
     tabsActive(0);
     if (tariff.hasClass('active')) {
-        refreshList("/tariffs/?number=");
+        refreshList("/tariffs/?number=","Activate");
     } else {
-        refreshList("/options/?number=");
+        refreshList("/options/?number=","Activate");
     }
     checkStatus();
 });
@@ -193,7 +208,7 @@ myHref.click(function () {
     if (tariff.hasClass('active')) {
         refreshItem("/tariffs/active?number=");
     } else {
-        refreshList("/options/active?number=");
+        refreshList("/options/active?number=","Deactivate");
     }
     checkStatus();
 });
