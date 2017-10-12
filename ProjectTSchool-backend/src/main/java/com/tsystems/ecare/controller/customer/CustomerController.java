@@ -5,7 +5,6 @@ import com.tsystems.ecare.facade.UserFacade;
 import com.tsystems.ecare.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 

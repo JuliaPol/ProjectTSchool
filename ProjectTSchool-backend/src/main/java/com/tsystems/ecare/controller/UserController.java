@@ -24,7 +24,6 @@ public class UserController {
     @RequestMapping(value = "/{login}", method = RequestMethod.GET)
     @ResponseBody
     public UserDTO getByUserLogin(@PathVariable("login") String login) {
-
         return userFacade.findByLogin(login);
     }
 }

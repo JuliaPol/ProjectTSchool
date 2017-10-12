@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/contract")
-@Secured("ROLE_CUSTOMER")
 public class ContractController {
 
     @Autowired

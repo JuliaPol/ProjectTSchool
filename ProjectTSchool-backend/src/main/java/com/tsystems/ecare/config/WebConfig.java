@@ -11,11 +11,12 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-import org.springframework.web.servlet.view.ResourceBundleViewResolver;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -43,12 +44,13 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebApplication
         return context;
     }
 
-    @Bean(name = "viewResolver")
+    @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/views/");
+        viewResolver.setPrefix("/WEB-INF/static/");
         viewResolver.setSuffix(".jsp");
+        viewResolver.setSuffix(".html");
 
         return viewResolver;
     }
@@ -57,8 +59,8 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebApplication
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/WEB-INF/**")
                 .addResourceLocations("/WEB-INF/");
-        registry.addResourceHandler("/js/**")
-                .addResourceLocations("/WEB-INF/js/");
+        registry.addResourceHandler("/static/**")
+                .addResourceLocations("/WEB-INF/static/");
         registry.addResourceHandler("/css/**")
                 .addResourceLocations("/WEB-INF/css/");
         registry.addResourceHandler("/fonts/**")

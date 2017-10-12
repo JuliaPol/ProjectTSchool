@@ -2,18 +2,15 @@ package com.tsystems.ecare;
 
 import com.tsystems.ecare.config.AppConfig;
 import com.tsystems.ecare.config.DatabaseConfig;
-import com.tsystems.ecare.dao.RateDao;
 import com.tsystems.ecare.dao.impl.ContractDaoImpl;
 import com.tsystems.ecare.dao.impl.OptionDaoImpl;
 import com.tsystems.ecare.dao.impl.RoleDaoImpl;
 import com.tsystems.ecare.dao.impl.UserDaoImpl;
 import com.tsystems.ecare.entities.Option;
-import com.tsystems.ecare.entities.Rate;
 import com.tsystems.ecare.entities.Role;
 import com.tsystems.ecare.entities.User;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -24,15 +21,10 @@ public class Main {
         context.register(DatabaseConfig.class);
         context.refresh();
 
-//        RateDao bean1 = context.getBean(RateDao.class);
-//        Option option = new Option();
-//        option.setName("new option");
-//        List<Option> list = new ArrayList<>();
-//        list.add(option);
-//        Rate rate = new Rate();
-//        rate.setName("new tariff");
-//        rate.setOptionList(list);
-//        bean1.insert(rate);
+//        UserDaoImpl bean1 = context.getBean(UserDaoImpl.class);
+//        for (Role r: bean1.findRoleById(2L)) {
+//            System.out.println(r.getRoleName());
+//        }
 //
 //        ContractDaoImpl bean = context.getBean(ContractDaoImpl.class);
 //        for (Option option : bean.getAllOption(1L)) {
