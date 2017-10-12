@@ -51,6 +51,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Contract> contractList;
 
+    @Column(name = "password", nullable = false)
+    private String password;
+
     @ManyToOne
     @JoinColumn(name="role_id")
     private Role role;

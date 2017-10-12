@@ -3,6 +3,7 @@ package com.tsystems.ecare.service.impl;
 import com.tsystems.ecare.dao.ContractDao;
 import com.tsystems.ecare.dao.JpaDao;
 import com.tsystems.ecare.entities.Contract;
+import com.tsystems.ecare.entities.User;
 import com.tsystems.ecare.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,11 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
     @Override
     public Contract getContractByNumber(String number) {
         return contractDao.getContractByNumber(number);
+    }
+
+    @Override
+    public User findUserByNumber(String number) {
+        return contractDao.findUserByNumber(number);
     }
 
     @Override

@@ -43,6 +43,19 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
     }
 
     @Override
+    public List<Option> getAllIncompatibleOptions(String number) {
+        List<Option> allOptions = getAllOptionsInRateAndContract(number);
+        List<Option> allAvailableOptions = getAllAvailableOptionsForCustomer(number);
+
+        return null;
+    }
+
+    @Override
+    public Option findOptionByName(String name) {
+        return optionDao.findOptionByName(name);
+    }
+
+    @Override
     protected JpaDao<Option> getDefaultDao() {
         return optionDao;
     }

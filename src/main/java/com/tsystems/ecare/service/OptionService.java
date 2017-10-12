@@ -8,4 +8,6 @@ public interface OptionService  extends Service<Option>{
     List<Option> getAllOptionsForCustomer(String number);
     List<Option> getAllAvailableOptionsForCustomer(String number);
     List<Option> getAllOptionsInRateAndContract(String number);
+    List<Option> getAllIncompatibleOptions(String number);
+    Option findOptionByName (String name);
 }

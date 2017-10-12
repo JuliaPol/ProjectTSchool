@@ -4,8 +4,10 @@ import com.tsystems.ecare.controller.main.MainController;
 import com.tsystems.ecare.exception.LoginFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
+@Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @Import(DatabaseConfig.class)
@@ -26,12 +29,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private DataSource ecare;
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder authenticationMgr) throws Exception {
-        authenticationMgr.jdbcAuthentication()
-                .usersByUsernameQuery("select login, password, 1 from user where login=?")
-                .authoritiesByUsernameQuery("select u.login, r.role_name from user u, role r where r.id = u.role_id and u.login=?")
-                //.authoritiesByUsernameQuery("select u.login, r.role_name from user u, role r, user_role ur where u.id = ur.user_id and u.login=?")
-                .dataSource(ecare);
+    private UserDetailsService userDetailService;
+
+    @Autowired
+    public void configureGlobalAuthentication(AuthenticationManagerBuilder authenticationMgr) throws Exception {
+//        authenticationMgr.jdbcAuthentication()
+//                .usersByUsernameQuery("select login, password, 1 from user where login=?")
+//                .authoritiesByUsernameQuery("select u.login, r.role_name from user u, role r where r.id = u.role_id and u.login=?")
+//                //.authoritiesByUsernameQuery("select u.login, r.role_name from user u, role r, user_role ur where u.id = ur.user_id and u.login=?")
+//                .dataSource(ecare);
+        authenticationMgr.authenticationProvider(authProvider());
     }
 
     @Override
@@ -50,20 +57,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable();
     }
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+//    @Bean
+//    @Override
+//    public AuthenticationManager authenticationManagerBean() throws Exception {
+//        return super.authenticationManagerBean();
+//    }
 
-    @Bean
-    @Override
-    public UserDetailsService userDetailsServiceBean() throws Exception {
-        return super.userDetailsServiceBean();
-    }
+//    @Bean
+//    @Override
+//    public UserDetailsService userDetailsServiceBean() throws Exception {
+//        return super.userDetailsServiceBean();
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
     }
 }

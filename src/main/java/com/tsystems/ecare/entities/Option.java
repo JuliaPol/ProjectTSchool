@@ -19,11 +19,14 @@ import java.util.List;
                 query = "select c.optionList from Contract c where c.number = :number"),
         @NamedQuery(name = Option.OPTION_FIND_ALL_OPTIONS_IN_RATE_FOR_CUSTOMER,
                 query = "select c.rate.optionList from Contract c where c.number = :number"),
+        @NamedQuery(name = Option.OPTION_FIND_OPTION_BY_NAME,
+                query = "select o from Option o where o.name = :name"),
 })
 public class Option {
 
     public static final String OPTION_FIND_ALL_OPTIONS_FOR_CUSTOMER = "Option.findAllOptionsForCustomer";
     public static final String OPTION_FIND_ALL_OPTIONS_IN_RATE_FOR_CUSTOMER = "Option.findAllOptionsInRateForCustomer";
+    public static final String OPTION_FIND_OPTION_BY_NAME = "Option.findAllOptionByName";
 
     @Id @GeneratedValue
     private Long id;

@@ -11,7 +11,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         "com.tsystems.ecare.dao",
         "com.tsystems.ecare.service",
         "com.tsystems.ecare.validator",
-        "com.tsystems.ecare.dto.converter",
         "com.tsystems.ecare.facade"
 })
 @EnableJpaRepositories

@@ -27,6 +27,13 @@ public class OptionDaoImpl extends JpaDaoImpl<Option> implements OptionDao {
     }
 
     @Override
+    public Option findOptionByName(String name) {
+        return entityManager.createNamedQuery(Option.OPTION_FIND_OPTION_BY_NAME, Option.class)
+                .setParameter("name", name)
+                .getSingleResult();
+    }
+
+    @Override
     public EntityManager getEntityManager() {
         return entityManager;
     }

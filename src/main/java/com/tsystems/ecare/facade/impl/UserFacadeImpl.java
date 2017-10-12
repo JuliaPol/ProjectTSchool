@@ -39,7 +39,7 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
     }
 
     @Override
-    protected User convertToEntity(UserDTO dto) {
+    public User convertToEntity(UserDTO dto) {
         return null;
     }
 

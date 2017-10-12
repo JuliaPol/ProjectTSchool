@@ -1,7 +1,9 @@
 package com.tsystems.ecare.entities;
 
 import com.tsystems.ecare.entities.enums.ContractStatus;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -9,6 +11,8 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "contract")
 @NamedQueries({
@@ -17,13 +21,16 @@ import java.util.List;
         @NamedQuery(name = Contract.CONTRACT_FIND_ALL_CONTACTS_BY_USER_ID,
                 query = "select c.number from Contract c where c.user.login = :login"),
         @NamedQuery(name = Contract.CONTRACT_FIND_CONTRACT_BY_NUMBER,
-                query = "select c from Contract c where c.number = :number")
+                query = "select c from Contract c where c.number = :number"),
+        @NamedQuery(name = Contract.CONTRACT_FIND_USER_BY_NUMBER,
+                query = "select c.user from Contract c where c.number = :number"),
 })
 public class Contract {
 
     public static final String CONTRACT_FIND_ALL_CONTACTS_BY_USER_ID = "ContractController.findAllContactsByUserId";
     public static final String CONTRACT_FIND_ALL_OPTIONS_BY_RATE = "ContractController.findAllOptionsByRate";
     public static final String CONTRACT_FIND_CONTRACT_BY_NUMBER = "Contract.findContractByNumber";
+    public static final String CONTRACT_FIND_USER_BY_NUMBER = "Contract.findUserByNumber";
 
     @Id @GeneratedValue
     private Long id;

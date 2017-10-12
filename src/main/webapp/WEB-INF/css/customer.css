@@ -110,5 +110,6 @@
     margin-left: 80px;
 }
 #optionTariffPanel{
-    display: none;
+    /*display: none;*/
+    visibility: hidden;
 }

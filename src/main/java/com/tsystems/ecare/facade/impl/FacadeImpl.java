@@ -40,7 +40,13 @@ public abstract class FacadeImpl<S, T extends IdDTO> implements Facade<T, S> {
                 .collect(Collectors.toList());
     }
 
-    protected abstract S convertToEntity(T dto);
+    public List<S> convertToEntitiesList(List<T> dtos) {
+        return dtos.stream()
+                .map(this::convertToEntity)
+                .collect(Collectors.toList());
+    }
+
+    public abstract S convertToEntity(T dto);
 
     protected abstract Service<S> getDefaultService();
 }

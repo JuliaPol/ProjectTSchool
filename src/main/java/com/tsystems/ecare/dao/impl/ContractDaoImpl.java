@@ -3,6 +3,7 @@ package com.tsystems.ecare.dao.impl;
 import com.tsystems.ecare.dao.ContractDao;
 import com.tsystems.ecare.entities.Contract;
 import com.tsystems.ecare.entities.Option;
+import com.tsystems.ecare.entities.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -41,6 +42,13 @@ public class ContractDaoImpl extends JpaDaoImpl<Contract> implements ContractDao
     public Contract getContractByNumber(String number) {
         return entityManager.createNamedQuery(Contract.CONTRACT_FIND_CONTRACT_BY_NUMBER, Contract.class)
                 .setParameter("number", number).getSingleResult();
+    }
+
+    @Override
+    public User findUserByNumber(String number) {
+        return entityManager.createNamedQuery(Contract.CONTRACT_FIND_USER_BY_NUMBER, User.class)
+                .setParameter("number", number)
+                .getSingleResult();
     }
 
     @Override

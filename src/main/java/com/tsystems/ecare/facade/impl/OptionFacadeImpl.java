@@ -43,8 +43,17 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
     }
 
     @Override
-    protected Option convertToEntity(OptionDTO dto) {
-        return null;
+    public Option convertToEntity(OptionDTO dto) {
+        Option option = modelMapper.map(dto, Option.class);
+        if (dto.getCompatibleOption() != null) {
+            Option compatibleOption =optionService.findOptionByName(dto.getCompatibleOption());
+            option.setCompatibleOption(compatibleOption);
+        }
+        if (dto.getIncompatibleOption() != null) {
+            Option incompatibleOption =optionService.findOptionByName(dto.getCompatibleOption());
+            option.setCompatibleOption(incompatibleOption);
+        }
+        return option;
     }
 
     @Override

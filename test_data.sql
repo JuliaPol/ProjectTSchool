@@ -1,12 +1,15 @@
 INSERT INTO user (login, passport_number, address_id, first_name, last_name,
                   email, password, role_id) VALUES ('jpi287', '123456', 1, 'Julia',
-                                           'Polushina', 'jpi287@mail.ru', '1234', 1);
+                                           'Polushina', 'jpi287@mail.ru', '$2a$04$Bc845c8WU6L2aFCyQ/sHkuCc5BMCL6pQyDnfrNXVOV4V8OUQs7d8O', 1);
+-- password:1234
 INSERT INTO user (login, passport_number, address_id, first_name, last_name,
                   email, password, role_id) VALUES ('ivan_88', '654321', 2, 'Ivan',
-                                           'Ivanov', 'ivan111@mail.ru', '4321', 2);
+                                           'Ivanov', 'ivan111@mail.ru', '$2a$04$2oCF0iLWQOdhEwufBwVtl.zZ5x7YTA/gIpcCNsDAizhiDWut8Sn5.', 2);
+-- password:4321
 INSERT INTO user (login, passport_number, address_id, first_name, last_name,
                   email, password, role_id) VALUES ('sun123', '63663', 3, 'John',
-                                           'Lenon', 'lenon@gmail.com', '123', 1);
+                                           'Lenon', 'lenon@gmail.com', '$2a$04$Dgy04povDN7eLKQ19q10O.r5.qbqo5OlpR7epP5pktsrCck5hOPXK', 1);
+-- password:123
 
 INSERT INTO address (street, city, country, zipcode, house_number)
 VALUES ('main street', 'Saint-Petersburg', 'Russia', '1111', 3);
