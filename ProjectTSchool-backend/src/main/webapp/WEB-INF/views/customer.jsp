@@ -37,6 +37,7 @@
                         </c:forEach>
                     </select>
                 </li>
+                <li><img id="basketImg" src="../img/bask1.png"></li>
             </ul>
         </div>
     </div>

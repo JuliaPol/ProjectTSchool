@@ -78,8 +78,8 @@ function tabsActive(n) {
 }
 
 option.click(function () {
-    $('#optionTariffPanel').css("display", "block");
     $('#contractPanel').css("display", "none");
+    $('#optionTariffPanel').css("display", "block");
     tariff.removeClass('active');
     contact.removeClass('active');
     option.addClass('active');
@@ -98,8 +98,8 @@ contact.click(function () {
 });
 
 tariff.click(function () {
-    $('#optionTariffPanel').css("display", "block");
     $('#contractPanel').css("display", "none");
+    $('#optionTariffPanel').css("display", "block");
     tariff.addClass('active');
     contact.removeClass('active');
     option.removeClass('active');

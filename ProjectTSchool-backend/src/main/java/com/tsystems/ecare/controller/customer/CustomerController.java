@@ -20,7 +20,7 @@ public class CustomerController {
 
     @RequestMapping
     public ModelAndView getUser(Principal principal) {
-        return new ModelAndView("/customer", "customerInfo", userFacade.findByLogin(principal.getName()));
+        return new ModelAndView("/customer.jsp", "customerInfo", userFacade.findByLogin(principal.getName()));
     }
 
 }

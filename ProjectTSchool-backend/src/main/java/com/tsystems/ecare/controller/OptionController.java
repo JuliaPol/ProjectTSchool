@@ -17,7 +17,12 @@ public class OptionController {
     @Autowired
     private OptionFacade optionFacade;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping( method = RequestMethod.GET)
+    public List<OptionDTO> getAllAvailableOptions(@RequestParam("number") String number) {
+        return optionFacade.getAllAvailableOptionsForCustomer(number);
+    }
+
+    @RequestMapping(value = "/active", method = RequestMethod.GET)
     public List<OptionDTO> getAllOptions(@RequestParam("number") String number) {
         return optionFacade.getAllOptionsForCustomer(number);
     }

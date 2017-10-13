@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 @Configuration
@@ -45,11 +46,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/static/**").permitAll()
+                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").successForwardUrl("/")
-                .failureUrl("/login?error=true").permitAll().loginProcessingUrl("/login")
+                .failureUrl("/login-error").permitAll().usernameParameter("username")
+                .passwordParameter("password").loginProcessingUrl("/check")
+                .failureHandler((request, response, authException)
+                        -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
                 .and()
                 .logout().logoutSuccessUrl("/login")
                 .and()

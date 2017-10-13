@@ -16,7 +16,7 @@
 </c:if>
 <h2 id="labelH2"> Sign in to <a>Satellite</a></h2>
 <div class="form">
-    <form action="/login" class="form-horizontal UP" role="form" method="POST">
+    <form action="/check" class="form-horizontal UP" role="form" method="POST">
         <div class="form-group ">
             <label for="inputEmail"><p>Username</p></label>
             <input type="text" name="username" class="form-control input-UP" id="inputEmail" placeholder="Username">

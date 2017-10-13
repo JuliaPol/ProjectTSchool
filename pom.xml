@@ -44,7 +44,7 @@
                     </execution>
                 </executions>
             </plugin>
-           
+
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.0.1</version>
@@ -79,6 +79,82 @@
                             <resources>
                                 <resource>
                                     <directory>./ProjectTSchool-backend/target/classes</directory>
+                                    <includes>
+                                        <include>**/*.*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-resources-backend-views</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/${project.artifactId}-${project.version}/WEB-INF/static
+                            </outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>./ProjectTSchool-backend/target/views</directory>
+                                    <includes>
+                                        <include>**/*.*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-resources-backend-css</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/${project.artifactId}-${project.version}/WEB-INF/css
+                            </outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>./ProjectTSchool-backend/target/css</directory>
+                                    <includes>
+                                        <include>**/*.*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-resources-backend-js</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/${project.artifactId}-${project.version}/WEB-INF/js
+                            </outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>./ProjectTSchool-backend/target/js</directory>
+                                    <includes>
+                                        <include>**/*.*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-resources-backend-img</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/${project.artifactId}-${project.version}/WEB-INF/img
+                            </outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>./ProjectTSchool-backend/target/img</directory>
                                     <includes>
                                         <include>**/*.*</include>
                                     </includes>
