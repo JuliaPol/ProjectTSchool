@@ -1,0 +1,10 @@
+.back {
+    margin-left: 50px;
+}
+
+.delete-button {
+    background-image: url(../img/del.png);
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+}

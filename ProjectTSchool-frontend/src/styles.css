@@ -1,1 +1,140 @@
 /* You can add global styles to this file, and also import other style files */
+.logo {
+  position: relative;
+  height: 40px;
+  font-size: 20;
+}
+#logo {
+  margin-left: 45px;
+  position: relative;
+  top: 7px;
+  color: #11AFAA;
+}
+#selectContract {
+  top: 7px;
+}
+.head {
+  background-color: #13BFB9;
+  font-size: 15px;
+}
+#a1 {
+  color: white;
+}
+#a2 {
+  color: white;
+}
+#a3 {
+  color: white;
+}
+.button-group {
+  margin-left: 40px;
+  width: 200px;
+}
+.button-one {
+  background-color: #E4FFF6;
+  border-color: #13BFB9;
+  color: #95989A;
+  font-size: 16px;
+}
+
+.button-one1 {
+  margin: 10px;
+  height: 140px;
+  font-weight: bolder;
+}
+
+.button-one.focus, .button-one:focus {
+  color: #fff;
+  background-color: #E4FFF6;
+  border-color: #13BFB9;
+  outline: 0;
+}
+
+.button-one:hover {
+  color: #fff;
+  background-color: #13BFB9;
+  border-color: #13BFB9
+}
+
+.button-one:active {
+  color: #fff;
+  background-color: #13BFB9;
+  border-color: #13BFB9
+}
+
+.button-one.active, button-one:active, .open > .dropdown-toggle.button-one {
+  color: #fff;
+  background-color: #13BFB9;
+  border-color: #13BFB9
+}
+
+.button-one.active.focus, .button-one.active:focus, .button-one.active:hover, .button-one:active.focus, .button-one:active:focus, .button-one:active:hover, .open > .dropdown-toggle.button-one.focus, .open > .dropdown-toggle.button-one:focus, .open > .dropdown-toggle.btn-info:hover {
+  color: #fff;
+  background-color: #13BFB9;
+  border-color: #13BFB9
+}
+
+.button-one.active, .button-one:active, .open > .dropdown-toggle.button-one {
+  background-image: none
+}
+
+.button-one.disabled.focus, .button-one.disabled:focus, .button-one.disabled:hover, .button-one[disabled].focus, .button-one[disabled]:focus, .button-one[disabled]:hover, fieldset[disabled] .button-one.focus, fieldset[disabled] .button-one:focus, fieldset[disabled] .button-one:hover {
+  background-color: #E4FFF6;
+  border-color: #13BFB9
+}
+
+.button-one .badge {
+  color: #E4FFF6;
+  background-color: #fff
+}
+.back {
+  /*    background-color: #E4FFF6;*/
+  margin-top: 10px;
+  margin-right: 50px;
+  height: 458px;
+}
+.back1 {
+  background-color: white;
+  height: 340px;
+}
+.buttonAct {
+  margin-left: 20px;
+  height: 40px;
+}
+.panel-number {
+  margin-left: 40;
+  margin-right: 40;
+  height: 40px;
+}
+
+.button-number {
+  margin: -8px;
+  margin-left: 80px;
+}
+
+.client-href {
+  margin-top: 8px;
+  margin-left: 35px;
+}
+
+#a3 {
+  margin-right: 70px;
+}
+
+.search-inp {
+  margin-left: 485px;
+
+}
+
+.big-panel {
+  margin-top: 15px;
+}
+
+.add-contract-and-search {
+  margin-top: 15px;
+  margin-left: 30px;
+}
+
+.search {
+  margin-left: 300px;
+}
