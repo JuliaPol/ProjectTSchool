@@ -13,10 +13,6 @@
             </button>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="#" id="a1">Tariffs</a></li>
-                <li><a href="#" id="a2">Options</a></li>
-            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" id="a3">${customerInfo.getFirstName()} ${customerInfo.getLastName()}</a></li>
                 <li id="selectContract">
@@ -26,7 +22,8 @@
                         </c:forEach>
                     </select>
                 </li>
-                <li><img id="basketImg" src="../img/bask1.png"></li>
+                <li><a id="hatHref" href="/basket"><img id="basketImg" src="../img/bask1.png"></a></li>
+                <li><p id="countProd"></p></li>
             </ul>
         </div>
     </div>

@@ -5,8 +5,12 @@ var allHref = $('#allHref');
 var myHref = $('#myHref');
 var numberSelected = $('#numberSelect');
 var statusNumb = $('#statusButton');
+var count = 0;
 
 refreshContract();
+var number = $('#numberSelect option:selected').text();
+$("#hatHref").attr("href","http://localhost:8080/basket?number=" + number);
+add("/getCount?number="+number);
 
 
 function checkStatus() {
@@ -65,6 +69,8 @@ numberSelected.change(function () {
         refreshContract();
     }
     checkStatus();
+    var number = $('#numberSelect option:selected').text();
+    $("#hatHref").attr("href","http://localhost:8080/basket?number=" + number);
 });
 
 function tabsActive(n) {
@@ -108,12 +114,14 @@ tariff.click(function () {
     checkStatus();
 });
 
+
+
 function addItemWithName(name, status) {
     var List = $("#tariff");
     $("<div class=\"row\">").appendTo(List);
-    $("<div class=\"well well-sm col-md-9\"></div>").text(name).appendTo(List);
-    $(" <input type=\"submit\" class=\"btn btn-info button-one button-act col-md-2\" " +
-        "value=\"\">").val(status).appendTo(List);
+    $("<div class=\"well well-sm col-md-9\"></div>").text(name.name).appendTo(List);
+    $("<input onclick='addTariff("+name.id+")' type=\"submit\" class=\"btn btn-info button-one button-act col-md-2\" " +
+        "value=''>").val(status).appendTo(List);
     $("</div>").appendTo(List);
 }
 
@@ -127,8 +135,8 @@ function addItemForOptions(name) {
     if (name.incompatibleOption != null) {
         $("<div class=\" col-md-3\"></div>").text("This option can not be connected with the option: "+ name.incompatibleOption).appendTo(List);
     }
-    $(" <input type=\"submit\" class=\"btn btn-info button-one button-act col-md-2\" " +
-        "value=\"Activate\">").appendTo(List);
+    $("<input onclick='addOption("+name.id+")' type=\"submit\" class=\"btn btn-info button-one button-act col-md-2\" " +
+        "value=\"Add\">").appendTo(List);
     $("</div>").appendTo(List);
 }
 
@@ -139,7 +147,7 @@ function addItem(tariff) {
     $("<div class=\"well well-sm col-md-3\"></div>").text(tariff.name).appendTo(List);
     $("<div class=\"col-md-1 textTariff\"></div>").text("Cost:").appendTo(List);
     $("<div class=\"well well-sm col-md-2\"></div>").text(tariff.cost).appendTo(List);
-    $(" <input type=\"submit\" class=\"btn btn-info button-one button-act col-md-2\" id=\"deactivateTariff\" " +
+    $("<input type=\"submit\" class=\"btn btn-info button-one button-act col-md-2\" id=\"deactivateTariff\" " +
         "value=\"Deactivate\">" +
         "</div>").appendTo(List);
     $("<div class=\"row\">").appendTo(List);
@@ -162,6 +170,27 @@ function addItem(tariff) {
     $("</ul>").appendTo(List);
 }
 
+function addTariff(id) {
+    var number = $('#numberSelect option:selected').text();
+    add("/addTariff?number="+number+"&tariff="+id);
+}
+
+function add(url) {
+    var dataUrl = "http://localhost:8080/basket"+url;
+    $.ajax({
+        url: dataUrl
+    }).done(function (result) {
+        count = result;
+        if (count !== 0) {
+            $('#countProd').text(count);
+        }
+    });
+}
+function addOption(id) {
+    var number = $('#numberSelect option:selected').text();
+    add("/addOption?number="+number+"&option="+id);
+}
+
 function refreshList(url, statusButton) {
     var number = $('#numberSelect option:selected').text();
     var dataUrl = "http://localhost:8080" + url + number;
@@ -175,7 +204,7 @@ function refreshList(url, statusButton) {
             if(url === "/options/?number=") {
                 addItemForOptions(tariff);
             } else {
-                addItemWithName(tariff.name, statusButton);
+                addItemWithName(tariff, statusButton);
             }
         }
     })

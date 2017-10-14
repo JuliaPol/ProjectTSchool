@@ -19,15 +19,17 @@
             <li><a href="#">Options</a></li>
         </ul>
         <div class="panel-body back1">
-            <div class="row">
-                <div class="well well-sm col-md-3">
-                    <div class="row">
-                        <p class="col-md-10">Option1</p>
-                        <input type="submit" class="btn btn-danger delete-button col-md-3" value="">
+            <c:forEach var="prod" items="${basket.getOptions()}" >
+                <div class="row">
+                    <div class="well well-sm col-md-3">
+                        <div class="row">
+                            <p class="col-md-10">${prod}</p>
+                            <input type="submit" class="btn btn-danger delete-button col-md-3" value="">
+                        </div>
+                        <p>Cost</p>
                     </div>
-                    <p>Cost</p>
                 </div>
-            </div>
+            </c:forEach>
             <div class="row">
                 <div class="well well-sm col-md-3">
                     <div class="row">

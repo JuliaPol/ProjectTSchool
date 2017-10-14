@@ -1,8 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~font-awesome/css/font-awesome.css";
 .logo {
   position: relative;
   height: 40px;
-  font-size: 20;
+  font-size: 20px;
 }
 #logo {
   margin-left: 45px;
@@ -102,8 +104,8 @@
   height: 40px;
 }
 .panel-number {
-  margin-left: 40;
-  margin-right: 40;
+  margin-left: 40px;
+  margin-right: 40px;
   height: 40px;
 }
 

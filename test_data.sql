@@ -19,7 +19,7 @@ INSERT INTO address (street, city, country, zipcode, house_number)
 VALUES ('street2', 'Saint-Petersburg', 'Russia', '11131', 6);
 
 INSERT INTO contract (number, status, customer_id, rate_id) VALUES ('88005353', 'AVAILABLE', 1, 1);
-INSERT INTO contract (number, status, customer_id, rate_id) VALUES ('88005354', 'AVAILABLE', 1, 2);
+INSERT INTO contract (number, status, customer_id, rate_id) VALUES ('88005354', 'BLOCKED_BY_AN_EMPLOYEE', 1, 2);
 
 INSERT INTO rate (name, cost, calls, sms, internet, description)
 VALUES ('good tariff', 300, 1000 , 1000, 1000 , 'very good');
