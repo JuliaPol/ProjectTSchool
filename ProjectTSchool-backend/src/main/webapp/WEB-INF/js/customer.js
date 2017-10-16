@@ -9,8 +9,8 @@ var count = 0;
 
 refreshContract();
 var number = $('#numberSelect option:selected').text();
-$("#hatHref").attr("href","http://localhost:8080/basket?number=" + number);
-add("/getCount?number="+number);
+$("#hatHref").attr("href", "http://localhost:8080/basket?number=" + number);
+add("/getCount?number=" + number);
 
 
 function checkStatus() {
@@ -57,21 +57,21 @@ numberSelected.change(function () {
         if ($('#myLi').hasClass('active')) {
             refreshItem("/tariffs/active?number=");
         } else {
-            refreshList("/tariffs/?number=","Activate");
+            refreshList("/tariffs/?number=", "Activate");
         }
     } else if (option.hasClass('active')) {
         if ($('#myLi').hasClass('active')) {
-            refreshList("/options/active?number=","Deactivate");
+            refreshList("/options/active?number=", "Deactivate");
         } else {
-            refreshList("/options/?number=","Activate");
+            refreshList("/options/?number=", "Activate");
         }
     } else {
         refreshContract();
     }
     checkStatus();
     var number = $('#numberSelect option:selected').text();
-    $("#hatHref").attr("href","http://localhost:8080/basket?number=" + number);
-    add("/getCount?number="+number);
+    $("#hatHref").attr("href", "http://localhost:8080/basket?number=" + number);
+    add("/getCount?number=" + number);
 });
 
 function tabsActive(n) {
@@ -91,7 +91,7 @@ option.click(function () {
     contact.removeClass('active');
     option.addClass('active');
     tabsActive(1);
-    refreshList("/options/active?number=","Deactivate");
+    refreshList("/options/active?number=", "Deactivate");
     checkStatus();
 });
 
@@ -117,8 +117,8 @@ tariff.click(function () {
 
 statusNumb.click(function () {
     var number = $('#numberSelect option:selected').text();
-    var dataUrl = "http://localhost:8080/contract/customer/"+number;
-    $.post( dataUrl ).done( function() {
+    var dataUrl = "http://localhost:8080/contract/customer/" + number;
+    $.post(dataUrl).done(function () {
         refreshContract();
     });
 });
@@ -127,7 +127,7 @@ function addItemWithName(name, status) {
     var List = $("#tariff");
     $("<div class=\"row\">").appendTo(List);
     $("<div class=\"well well-sm col-md-9\"></div>").text(name.name).appendTo(List);
-    $("<input onclick='addTariff("+name.id+")' type=\"submit\" class=\"btn btn-info button-one button-act col-md-2\" " +
+    $("<input onclick='addTariff(" + name.id + ")' type=\"submit\" class=\"btn btn-info button-one button-act col-md-2\" " +
         "value=''>").val(status).appendTo(List);
     $("</div>").appendTo(List);
 }
@@ -137,53 +137,82 @@ function addItemForOptions(name) {
     $("<div class=\"row\">").appendTo(List);
     $("<div class=\"well well-sm col-md-3\"></div>").text(name.name).appendTo(List);
     if (name.compatibleOption != null) {
-        $("<div class=\" col-md-3\"></div>").text("This option must be connected with the option: "+ name.compatibleOption).appendTo(List);
+        $("<div class=\" col-md-3\"></div>").text("This option must be connected with the option: " + name.compatibleOption).appendTo(List);
     }
     if (name.incompatibleOption != null) {
-        $("<div class=\" col-md-3\"></div>").text("This option can not be connected with the option: "+ name.incompatibleOption).appendTo(List);
+        $("<div class=\" col-md-3\"></div>").text("This option can not be connected with the option: " + name.incompatibleOption).appendTo(List);
     }
-    $("<input onclick='addOption("+name.id+")' type=\"submit\" class=\"btn btn-info button-one button-act col-md-2\" " +
+    $("<input onclick='addOption(" + name.id + ")' type=\"submit\" class=\"btn btn-info button-one button-act col-md-2\" " +
         "value=\"Add\">").appendTo(List);
     $("</div>").appendTo(List);
 }
 
+function addItemForActiveOptions(name) {
+    var List = $("#tariff");
+    if (tariff === "") {
+        $("<div class=\"row\">").appendTo(List);
+        $("<div class=\"col-md-2 textTariff\"></div>").text("You don't have options").appendTo(List);
+        $("</div>").appendTo(List);
+    } else {
+        $("<div class=\"row\">").appendTo(List);
+        $("<div class=\"well well-sm col-md-3\"></div>").text(name.name).appendTo(List);
+        $("<input onclick='deleteOption(" + name.id + ")' type=\"submit\" class=\"btn btn-info button-one button-act col-md-2\" " +
+            "value=\"Delete\">").appendTo(List);
+        $("</div>").appendTo(List);
+    }
+}
+
 function addItem(tariff) {
     var List = $("#tariff");
-    $("<div class=\"row\">").appendTo(List);
-    $("<div class=\"col-md-2 textTariff\"></div>").text("Your tariff:").appendTo(List);
-    $("<div class=\"well well-sm col-md-3\"></div>").text(tariff.name).appendTo(List);
-    $("<div class=\"col-md-1 textTariff\"></div>").text("Cost:").appendTo(List);
-    $("<div class=\"well well-sm col-md-2\"></div>").text(tariff.cost).appendTo(List);
-    $("<input type=\"submit\" class=\"btn btn-info button-one button-act col-md-2\" id=\"deactivateTariff\" " +
-        "value=\"Deactivate\">" +
-        "</div>").appendTo(List);
-    $("<div class=\"row\">").appendTo(List);
-    $("<div class=\"col-md-1 textTariff\"></div>").text("SMS:").appendTo(List);
-    $("<div class=\"well well-sm col-md-1\"></div>").text(tariff.sms).appendTo(List);
-    $("<div class=\"col-md-2 textTariff\"></div>").text("Mobile Internet:").appendTo(List);
-    $("<div class=\"well well-sm col-md-1\"></div>").text(tariff.internet).appendTo(List);
-    $("<div class=\"col-md-3\"></div>").text("Number of minutes for outgoing calls:").appendTo(List);
-    $("<div class=\"well well-sm col-md-1\"></div>").text(tariff.calls).appendTo(List);
-    $("</div>").appendTo(List);
-    $("<div class=\"row\">").appendTo(List);
-    $("<div class=\"well well-sm\"></div>").text(tariff.description).appendTo(List);
-    $("</div>").appendTo(List);
-    $("<ul class=\"list-group scroll-bar\">").appendTo(List);
-    var options = tariff.optionList;
-    for (var i = 0; i < options.length; i++) {
-        var option = options[i];
-        $("<li class=\"list-group-item\"></li>").text(option.name).appendTo(List);
+    if (tariff === "") {
+        $("<div class=\"row\">").appendTo(List);
+        $("<div class=\"well well-sm col-md-4 textTariff\"></div>").text("You don't have a tariff").appendTo(List);
+        $("</div>").appendTo(List);
+    } else {
+        $("<div class=\"row\">").appendTo(List);
+        $("<div class=\"col-md-2 textTariff\"></div>").text("Your tariff:").appendTo(List);
+        $("<div class=\"well well-sm col-md-3\"></div>").text(tariff.name).appendTo(List);
+        $("<div class=\"col-md-1 textTariff\"></div>").text("Cost:").appendTo(List);
+        $("<div class=\"well well-sm col-md-2\"></div>").text(tariff.cost).appendTo(List);
+        $("<input type=\"submit\" onclick='deactivateTariff()' class=\"btn btn-info button-one button-act col-md-2\" id=\"deactivateTariff\" " +
+            "value=\"Deactivate\">" +
+            "</div>").appendTo(List);
+        $("<div class=\"row\">").appendTo(List);
+        $("<div class=\"col-md-1 textTariff\"></div>").text("SMS:").appendTo(List);
+        $("<div class=\"well well-sm col-md-1\"></div>").text(tariff.sms).appendTo(List);
+        $("<div class=\"col-md-2 textTariff\"></div>").text("Mobile Internet:").appendTo(List);
+        $("<div class=\"well well-sm col-md-1\"></div>").text(tariff.internet).appendTo(List);
+        $("<div class=\"col-md-3\"></div>").text("Number of minutes for outgoing calls:").appendTo(List);
+        $("<div class=\"well well-sm col-md-1\"></div>").text(tariff.calls).appendTo(List);
+        $("</div>").appendTo(List);
+        $("<div class=\"row\">").appendTo(List);
+        $("<div class=\"well well-sm\"></div>").text(tariff.description).appendTo(List);
+        $("</div>").appendTo(List);
+        $("<ul class=\"list-group scroll-bar\">").appendTo(List);
+        var options = tariff.optionList;
+        for (var i = 0; i < options.length; i++) {
+            var option = options[i];
+            $("<li class=\"list-group-item\"></li>").text(option.name).appendTo(List);
+        }
+        $("</ul>").appendTo(List);
     }
-    $("</ul>").appendTo(List);
 }
 
 function addTariff(id) {
     var number = $('#numberSelect option:selected').text();
-    add("/add?number="+number+"&tariff="+id+"&option="+"");
+    add("/add?number=" + number + "&tariff=" + id + "&option=" + "");
+}
+
+function deleteOption(id) {
+    var number = $('#numberSelect option:selected').text();
+    var dataUrl = "http://localhost:8080/contract/delete/option/" + number + "?option=" + id;
+    $.post(dataUrl).done(function () {
+        option.click();
+    });
 }
 
 function add(url) {
-    var dataUrl = "http://localhost:8080/basket"+url;
+    var dataUrl = "http://localhost:8080/basket" + url;
     $.ajax({
         url: dataUrl
     }).done(function (result) {
@@ -193,9 +222,10 @@ function add(url) {
         }
     });
 }
+
 function addOption(id) {
     var number = $('#numberSelect option:selected').text();
-    add("/add?number="+number+"&option="+id+"&tariff="+"");
+    add("/add?number=" + number + "&option=" + id + "&tariff=" + "");
 }
 
 function refreshList(url, statusButton) {
@@ -206,10 +236,15 @@ function refreshList(url, statusButton) {
     $.ajax({
         url: dataUrl
     }).done(function (result) {
+        if (result === "" && url === "/options/active?number=") {
+            addItemForActiveOptions("");
+        }
         for (var i = 0; i < result.length; i++) {
             var tariff = result[i];
-            if(url === "/options/?number=") {
+            if (url === "/options?number=") {
                 addItemForOptions(tariff);
+            } else if (url === "/options/active?number=") {
+                addItemForActiveOptions(tariff);
             } else {
                 addItemWithName(tariff, statusButton);
             }
@@ -232,9 +267,9 @@ function refreshItem(url) {
 allHref.click(function () {
     tabsActive(0);
     if (tariff.hasClass('active')) {
-        refreshList("/tariffs/?number=","Activate");
+        refreshList("/tariffs?number=", "Activate");
     } else {
-        refreshList("/options/?number=","Activate");
+        refreshList("/options?number=", "Activate");
     }
     checkStatus();
 });
@@ -244,7 +279,19 @@ myHref.click(function () {
     if (tariff.hasClass('active')) {
         refreshItem("/tariffs/active?number=");
     } else {
-        refreshList("/options/active?number=","Deactivate");
+        refreshList("/options/active?number=", "Deactivate");
     }
     checkStatus();
+});
+
+function deactivateTariff() {
+    var number = $('#numberSelect option:selected').text();
+    var dataUrl = "http://localhost:8080/contract/delete/rate/" + number;
+    $.post(dataUrl).done(function () {
+        tariff.click();
+    });
+}
+
+$('#signOut').click(function () {
+    window.location.href = "/login";
 });

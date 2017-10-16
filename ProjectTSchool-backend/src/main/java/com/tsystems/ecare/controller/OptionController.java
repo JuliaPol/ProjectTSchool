@@ -1,6 +1,5 @@
 package com.tsystems.ecare.controller;
 
-import com.tsystems.ecare.dao.impl.OptionDaoImpl;
 import com.tsystems.ecare.dto.OptionDTO;
 import com.tsystems.ecare.entities.Option;
 import com.tsystems.ecare.facade.OptionFacade;

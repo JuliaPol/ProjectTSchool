@@ -39,7 +39,7 @@ public class Contract {
     private String number;
 
     @ManyToOne
-    @JoinColumn(name = "rate_id", nullable = false)
+    @JoinColumn(name = "rate_id")
     private Rate rate;
 
     @ManyToMany(fetch = FetchType.EAGER)

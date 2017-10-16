@@ -11,4 +11,8 @@ public interface ContractService  extends Service<Contract> {
     User findUserByNumber(String number);
     void changeContractStatusByEmployee(String number);
     void changeContractStatusByCustomer(String number);
+    void deleteRate(String number);
+    void deleteOption(String number, Long optionId) throws Exception;
+    void addRateInContract(String number, Long rateId) throws Exception;
+    void addOptionsInContract(String number, List<Long> optionIds) throws Exception;
 }

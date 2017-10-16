@@ -37,7 +37,9 @@
                     </div>
                 </div>
             </c:forEach>
-            <input type="submit" class="btn btn-info button-one button-act col-md-2 button-number" value="Save">
+            <form id="saveBasket" action="/contract/add/" class="form-horizontal UP" method="POST">
+                <input type="submit" class="btn btn-info button-one button-act col-md-2 button-number" value="Save">
+            </form>
         </div>
     </div>
 </div>

@@ -1,7 +1,8 @@
 package com.tsystems.ecare.controller;
 
-import com.tsystems.ecare.dto.ContractDTO;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/index")

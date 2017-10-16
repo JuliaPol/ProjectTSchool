@@ -27,11 +27,15 @@ public class RateFacadeImpl extends FacadeImpl<Rate, RateDTO> implements RateFac
 
     @Override
     public RateDTO convertToDto(Rate entity) {
-        RateDTO rateDTO = modelMapper.map(entity, RateDTO.class);
-        if (entity.getOptionList() != null) {
-            rateDTO.setOptionList(optionFacade.convertList(entity.getOptionList()));
+        if (entity == null) {
+            return null;
+        } else {
+            RateDTO rateDTO = modelMapper.map(entity, RateDTO.class);
+            if (entity.getOptionList() != null) {
+                rateDTO.setOptionList(optionFacade.convertList(entity.getOptionList()));
+            }
+            return rateDTO;
         }
-        return rateDTO;
     }
 
     @Override

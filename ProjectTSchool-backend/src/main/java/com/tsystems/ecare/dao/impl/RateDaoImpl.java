@@ -27,9 +27,13 @@ public class RateDaoImpl extends JpaDaoImpl<Rate> implements RateDao {
 
     @Override
     public Rate findForCustomerByNumber(String number) {
-        return entityManager.createNamedQuery(Rate.RATE_FIND_FOR_CUSTOMER_BY_NUMBER, Rate.class)
+        List<Rate> resultList = entityManager.createNamedQuery(Rate.RATE_FIND_FOR_CUSTOMER_BY_NUMBER, Rate.class)
                 .setParameter("number", number)
-                .getSingleResult();
+                .getResultList();
+        if (resultList == null || resultList.isEmpty()) {
+            return null;
+        }
+        return resultList.get(0);
     }
 
     @Override
