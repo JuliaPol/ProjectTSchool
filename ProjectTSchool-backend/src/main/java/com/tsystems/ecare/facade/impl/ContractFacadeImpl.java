@@ -49,6 +49,11 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
     }
 
     @Override
+    public void changeContractStatusByCustomer(String number) {
+        contractService.changeContractStatusByCustomer(number);
+    }
+
+    @Override
    public ContractDTO convertToDto(Contract entity) {
         ContractDTO contractDTO = modelMapper.map(entity, ContractDTO.class);
         contractDTO.setStatus(entity.getStatus().toString());

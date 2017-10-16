@@ -21,7 +21,7 @@ public class BasketForm {
 
     public Integer getCountOfProduct() {
         int rateCount = 0;
-        if(!rate.isEmpty()) {
+        if(rate!= null) {
             rateCount = 1;
         }
         if (!options.isEmpty()) {

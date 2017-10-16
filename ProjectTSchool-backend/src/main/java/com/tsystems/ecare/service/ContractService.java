@@ -10,4 +10,5 @@ public interface ContractService  extends Service<Contract> {
     Contract getContractByNumber(String number);
     User findUserByNumber(String number);
     void changeContractStatusByEmployee(String number);
+    void changeContractStatusByCustomer(String number);
 }

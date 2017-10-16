@@ -25,11 +25,13 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
     }
 
     @Override
+    @Transactional
     public Contract getContractByNumber(String number) {
         return contractDao.getContractByNumber(number);
     }
 
     @Override
+    @Transactional
     public User findUserByNumber(String number) {
         return contractDao.findUserByNumber(number);
     }
@@ -41,6 +43,17 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
         if (contract.getStatus().equals(ContractStatus.AVAILABLE)) {
             contract.setStatus(ContractStatus.BLOCKED_BY_AN_EMPLOYEE);
         } else {
+            contract.setStatus(ContractStatus.AVAILABLE);
+        }
+    }
+
+    @Override
+    @Transactional
+    public void changeContractStatusByCustomer(String number) {
+        Contract contract = getContractByNumber(number);
+        if (contract.getStatus().equals(ContractStatus.AVAILABLE)) {
+            contract.setStatus(ContractStatus.BLOCKED_BY_THE_CUSTOMER);
+        } else if (contract.getStatus().equals(ContractStatus.BLOCKED_BY_THE_CUSTOMER)){
             contract.setStatus(ContractStatus.AVAILABLE);
         }
     }

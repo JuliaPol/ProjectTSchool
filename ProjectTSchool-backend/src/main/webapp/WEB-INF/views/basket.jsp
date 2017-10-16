@@ -22,7 +22,7 @@
                         <input type="submit" onclick="deleteTariff(${basket.getRateId()})"
                                class="btn btn-danger delete-button col-md-3" value="">
                     </div>
-                    <p>basket.getRateCost()</p>
+                    <p>${basket.getRateCost()}</p>
                 </div>
             </div>
             <c:forEach var="prod" items="${basket.getOptionList()}">
@@ -43,6 +43,6 @@
 </div>
 <script type="application/javascript"
         src="../js/jquery-3.2.1.min.js"></script>
-<script type="application/javascript" src="../js/customer.js"></script>
+<script type="application/javascript" src="../js/basket.js"></script>
 </body>
 </html>

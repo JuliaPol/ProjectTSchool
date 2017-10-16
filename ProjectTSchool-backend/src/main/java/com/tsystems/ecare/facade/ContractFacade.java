@@ -8,4 +8,5 @@ public interface ContractFacade extends Facade<ContractDTO, Contract>{
     ContractDTO getContractByNumber(String number);
     UserDTO findUserByNumber(String number);
     void changeContractStatusByEmployee(String number);
+    void changeContractStatusByCustomer(String number);
 }

@@ -58,6 +58,6 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
 
     @Override
     protected Service<Option> getDefaultService() {
-        return null;
+        return optionService;
     }
 }

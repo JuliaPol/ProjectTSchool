@@ -115,7 +115,13 @@ tariff.click(function () {
     checkStatus();
 });
 
-
+statusNumb.click(function () {
+    var number = $('#numberSelect option:selected').text();
+    var dataUrl = "http://localhost:8080/contract/customer/"+number;
+    $.post( dataUrl ).done( function() {
+        refreshContract();
+    });
+});
 
 function addItemWithName(name, status) {
     var List = $("#tariff");
@@ -242,19 +248,3 @@ myHref.click(function () {
     }
     checkStatus();
 });
-
-function deleteTariff(id) {
-    var number = $('#numberSelect option:selected').text();
-    var dataUrl = "/delete?number=" + number + "&tariff=" + id+"&option="+"";
-    add(dataUrl);
-    location.reload();
-
-}
-
-function deleteOption(id) {
-    var number = $('#numberSelect option:selected').text();
-    var dataUrl = "/delete?number=" + number + "&option=" + id+"&tariff="+"";
-    add(dataUrl);
-    location.reload();
-
-}

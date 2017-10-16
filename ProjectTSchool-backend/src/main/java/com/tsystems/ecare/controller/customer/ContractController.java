@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/contract")
+@Secured("ROLE_CUSTOMER")
 public class ContractController {
 
     @Autowired
@@ -20,5 +21,11 @@ public class ContractController {
     @ResponseBody
     public ContractDTO getContractByNumber(@PathVariable("number") String number) {
         return contractFacade.getContractByNumber(number);
+    }
+
+    @RequestMapping(value = "/customer/{number}", method = RequestMethod.POST)
+    @ResponseBody
+    public void getContractForCustomer(@PathVariable("number") String number) {
+        contractFacade.changeContractStatusByCustomer(number);
     }
 }

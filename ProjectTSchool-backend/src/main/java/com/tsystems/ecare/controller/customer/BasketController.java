@@ -26,7 +26,7 @@ public class BasketController {
         modelAndView.setViewName("/basket.jsp");
         BasketForm basketForm = (BasketForm) request.getAttribute(number);
         BasketDTO basketDTO;
-        if (basketForm != null) {//!!!!!!!!!!!!!!!!!!!!
+        if (basketForm != null) {
             basketDTO = basketFacade.getBasket(principal.getName(), basketForm.getRate(), basketForm.getOptions());
         } else {
             basketDTO = basketFacade.getBasket(principal.getName(), null, null);
@@ -69,6 +69,6 @@ public class BasketController {
     @RequestMapping(value = "/getCount")
     public String addOption(HttpSession httpSession, @RequestParam("number") String number) {
         BasketForm basket = (BasketForm) httpSession.getAttribute(number);
-        return basket.getCountOfProduct() == null ? "" :basket.getCountOfProduct().toString();
+        return basket == null ? "" : basket.getCountOfProduct().toString();
     }
 }
