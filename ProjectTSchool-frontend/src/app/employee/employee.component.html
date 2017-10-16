@@ -9,21 +9,20 @@
       </button>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="#" id="a1">Tariffs</a></li>
-        <li><a href="#" id="a2">Options</a></li>
-      </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" id="a3">Пупкин Василий</a></li>
+        <li id="a3">{{user?.firstName}} {{user?.lastName}}</li>
       </ul>
     </div>
   </div>
 </nav>
+<body>
 <div class="row">
-  <h1>Number: {{user.number}}</h1>
-  <h4>Rate: {{user.rate.cost}} , {{user.rate.name}}</h4>
-  <h2>Options:</h2>
-  <div *ngFor="let option of user.optionList">
-    <p>{{option.description}}</p>
+  <div class="btn-group-vertical button-group col-md-4">
+    <div class="btn-group" *ngFor="let button of buttons">
+      <input type="submit" id="contactButton" class="btn btn-info button-one button-one1"
+             ngClass="{'active': button.isActive}" value="{{button.name}}">
+    </div>
   </div>
+  <router-outlet></router-outlet>
 </div>
+</body>

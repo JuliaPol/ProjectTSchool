@@ -19,6 +19,7 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import static org.hibernate.cfg.AvailableSettings.*;
 
@@ -35,17 +36,19 @@ public class DatabaseConfig implements EnvironmentAware{
     private static final String JDBC_URL = "jdbc.url";
     private static final String JDBC_USER = "jdbc.user";
     private static final String JDBC_PASS = "jdbc.pass";
-    private static final String HIBERNATE_DIALECT1 = "hibernate.dialect";
     private static final String HIBENATE_ENABLE_LAZY_LOAD_NO_TRANS = "hibernate.enable_lazy_load_no_trans";
 
     @Bean(name = "ecare")
     public DataSource dataSource() {
+        Properties properties = new Properties();
+        properties.setProperty(HIBENATE_ENABLE_LAZY_LOAD_NO_TRANS, "true");
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName(env.getRequiredProperty(JDBC_DRIVER_CLASS_NAME));
         driverManagerDataSource.setUsername(env.getRequiredProperty(JDBC_USER));
         driverManagerDataSource.setSchema(ECARE);
         driverManagerDataSource.setUrl(env.getRequiredProperty(JDBC_URL));
         driverManagerDataSource.setPassword(env.getRequiredProperty(JDBC_PASS));
+        driverManagerDataSource.setConnectionProperties(properties);
         return driverManagerDataSource;
     }
 

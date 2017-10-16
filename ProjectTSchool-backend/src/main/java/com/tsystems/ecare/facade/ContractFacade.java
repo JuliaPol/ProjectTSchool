@@ -7,4 +7,5 @@ import com.tsystems.ecare.entities.Contract;
 public interface ContractFacade extends Facade<ContractDTO, Contract>{
     ContractDTO getContractByNumber(String number);
     UserDTO findUserByNumber(String number);
+    void changeContractStatusByEmployee(String number);
 }

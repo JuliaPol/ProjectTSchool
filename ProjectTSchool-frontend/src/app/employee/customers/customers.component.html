@@ -1,0 +1,34 @@
+<div class="panel panel-default back col-md-9">
+  <div class="row add-contract-and-search">
+    <input type="submit" class="btn btn-info button-one button-act col-md-2" value="Add user">
+    <div class="input-group col-md-6 search-inp">
+      <input type="text" class="form-control" placeholder="Search...">
+      <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go!</button>
+          </span>
+    </div><!-- /input-group -->
+  </div>
+  <div class="panel-group big-panel" id="accordion">
+    <!-- 1 панель -->
+    <div *ngFor="let customer of customers">
+      <div class="panel panel-default">
+        <!-- Заголовок 1 панели -->
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <div class="row">
+              <p data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="col-md-9 client-href">
+                {{customer.firstName}} {{customer.lastName}}</p>
+              <input type="submit" class="btn btn-info button-one button-act col-md-2" value="Add contract"
+                     (click)="addContract()">
+              <button (click)="onToggle(customer)"></button>
+            </div>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse" [style.display]="customer.selected===true?'block':'none'">
+          <contract-list [contractList]="customer.contractList"></contract-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,21 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {Http} from "@angular/http";
 import "rxjs/add/operator/map";
-
-export interface IUser {
-  number: string,
-  rate: IRate,
-  optionList: IOption[],
-}
-
-export interface IRate {
-  name: string,
-  cost: number,
-}
-
-export interface IOption {
-  description: string,
-}
+import {AppService} from "../app.service";
+import {IUser} from "../interfaces/user";
 
 @Component({
   moduleId: module.id,
@@ -23,22 +9,29 @@ export interface IOption {
   templateUrl: './employee.component.html'
 })
 export class EmployeeComponent implements OnInit {
-
   user: IUser = null;
+  buttons = [
+    {
+      name: 'Customers',
+      isActive: true
+    },
+    {
+      name: 'Tariffs',
+      isActive: false,
+    },
+    {
+      name: 'Options',
+      isActive: false,
+    }
+  ];
 
-  constructor(private http: Http) {
+  constructor(private appService: AppService) {
 
   }
 
   ngOnInit() {
-    this.get();
-  }
-
-  get() {
-    return this.http.get('http://localhost:8080/contract/88005353')
-      .map(res => res.json())
-      .subscribe(data =>
-      this.user = data as IUser
+    this.appService.getCurrentUser().then(data =>
+      this.user = data.json() as IUser
     )
   }
 }

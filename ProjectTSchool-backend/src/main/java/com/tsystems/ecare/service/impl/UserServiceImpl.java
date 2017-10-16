@@ -36,8 +36,8 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService {
 
     @Override
     @Transactional
-    public List<User> findAllUsersByRole(String role) {
-        return roleDao.getAllUsersByRole(role);
+    public List<User> getAllCustomers() {
+        return roleDao.getAllCustomers();
     }
 
 

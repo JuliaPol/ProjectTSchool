@@ -9,4 +9,5 @@ public interface ContractService  extends Service<Contract> {
     List<String> findContactsByUserLogin(String login);
     Contract getContractByNumber(String number);
     User findUserByNumber(String number);
+    void changeContractStatusByEmployee(String number);
 }

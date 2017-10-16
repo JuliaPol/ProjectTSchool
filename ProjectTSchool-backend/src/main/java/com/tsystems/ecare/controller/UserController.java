@@ -8,6 +8,8 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 /**
  * Controller for {@link com.tsystems.ecare.entities.User}'s pages.
  *
@@ -21,9 +23,9 @@ public class UserController {
     @Autowired
     private UserFacade userFacade;
 
-    @RequestMapping(value = "/{login}", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public UserDTO getByUserLogin(@PathVariable("login") String login) {
-        return userFacade.findByLogin(login);
+    public UserDTO getCurrentUser(Principal principal) {
+        return userFacade.findByLogin(principal.getName());
     }
 }

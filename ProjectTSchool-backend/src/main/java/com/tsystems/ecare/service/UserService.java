@@ -8,6 +8,5 @@ import java.util.List;
 public interface UserService extends Service<User> {
     void save(User user);
     User findByLogin(String login);
-    List<User> findAllUsersByRole(String role);
-
+    List<User> getAllCustomers();
 }

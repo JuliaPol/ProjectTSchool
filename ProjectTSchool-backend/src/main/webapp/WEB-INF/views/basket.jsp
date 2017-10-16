@@ -14,34 +14,35 @@
 <%@include file="hat.jsp" %>
 <div class="panel panel-default back">
     <div class="panel-body" id="contractPanel">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#">Tariffs</a></li>
-            <li><a href="#">Options</a></li>
-        </ul>
         <div class="panel-body back1">
-            <c:forEach var="prod" items="${basket.getOptions()}" >
-                <div class="row">
-                    <div class="well well-sm col-md-3">
-                        <div class="row">
-                            <p class="col-md-10">${prod}</p>
-                            <input type="submit" class="btn btn-danger delete-button col-md-3" value="">
-                        </div>
-                        <p>Cost</p>
-                    </div>
-                </div>
-            </c:forEach>
             <div class="row">
                 <div class="well well-sm col-md-3">
                     <div class="row">
-                        <p class="col-md-10">Option1</p>
-                        <input type="submit" class="btn btn-danger delete-button col-md-3" value="">
+                        <p class="col-md-10">${basket.getRateName()}</p>
+                        <input type="submit" onclick="deleteTariff(${basket.getRateId()})"
+                               class="btn btn-danger delete-button col-md-3" value="">
                     </div>
-                    <p>Cost</p>
+                    <p>basket.getRateCost()</p>
                 </div>
             </div>
+            <c:forEach var="prod" items="${basket.getOptionList()}">
+                <div class="row">
+                    <div class="well well-sm col-md-3">
+                        <div class="row">
+                            <p class="col-md-10">${prod.getName()}</p>
+                            <input type="submit" onclick="deleteOption(${prod.getId()})"
+                                   class="btn btn-danger delete-button col-md-3" value="">
+                        </div>
+                        <p>${prod.getCost()}</p>
+                    </div>
+                </div>
+            </c:forEach>
             <input type="submit" class="btn btn-info button-one button-act col-md-2 button-number" value="Save">
         </div>
     </div>
 </div>
+<script type="application/javascript"
+        src="../js/jquery-3.2.1.min.js"></script>
+<script type="application/javascript" src="../js/customer.js"></script>
 </body>
 </html>

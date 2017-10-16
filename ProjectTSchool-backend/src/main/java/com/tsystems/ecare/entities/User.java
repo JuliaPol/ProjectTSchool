@@ -2,6 +2,8 @@ package com.tsystems.ecare.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -48,6 +50,7 @@ public class User {
     @JoinColumn(name = "address_id")
     private Address address;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "user")
     private List<Contract> contractList;
 

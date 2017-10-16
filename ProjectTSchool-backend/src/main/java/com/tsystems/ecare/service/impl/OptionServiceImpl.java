@@ -4,11 +4,14 @@ import com.tsystems.ecare.dao.JpaDao;
 import com.tsystems.ecare.dao.OptionDao;
 import com.tsystems.ecare.entities.Option;
 import com.tsystems.ecare.service.OptionService;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service("optionService")
 public class OptionServiceImpl extends ServiceImpl<Option> implements OptionService {
@@ -53,6 +56,13 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
     @Override
     public Option findOptionByName(String name) {
         return optionDao.findOptionByName(name);
+    }
+
+    @Override
+    @Transactional
+    public Set<Option> getBy(Long id) {
+        Option option = optionDao.get(id);
+        return option.getCompatibleOptionList();
     }
 
     @Override

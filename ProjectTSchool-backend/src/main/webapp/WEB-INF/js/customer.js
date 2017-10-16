@@ -71,6 +71,7 @@ numberSelected.change(function () {
     checkStatus();
     var number = $('#numberSelect option:selected').text();
     $("#hatHref").attr("href","http://localhost:8080/basket?number=" + number);
+    add("/getCount?number="+number);
 });
 
 function tabsActive(n) {
@@ -172,7 +173,7 @@ function addItem(tariff) {
 
 function addTariff(id) {
     var number = $('#numberSelect option:selected').text();
-    add("/addTariff?number="+number+"&tariff="+id);
+    add("/add?number="+number+"&tariff="+id+"&option="+"");
 }
 
 function add(url) {
@@ -188,7 +189,7 @@ function add(url) {
 }
 function addOption(id) {
     var number = $('#numberSelect option:selected').text();
-    add("/addOption?number="+number+"&option="+id);
+    add("/add?number="+number+"&option="+id+"&tariff="+"");
 }
 
 function refreshList(url, statusButton) {
@@ -241,3 +242,19 @@ myHref.click(function () {
     }
     checkStatus();
 });
+
+function deleteTariff(id) {
+    var number = $('#numberSelect option:selected').text();
+    var dataUrl = "/delete?number=" + number + "&tariff=" + id+"&option="+"";
+    add(dataUrl);
+    location.reload();
+
+}
+
+function deleteOption(id) {
+    var number = $('#numberSelect option:selected').text();
+    var dataUrl = "/delete?number=" + number + "&option=" + id+"&tariff="+"";
+    add(dataUrl);
+    location.reload();
+
+}

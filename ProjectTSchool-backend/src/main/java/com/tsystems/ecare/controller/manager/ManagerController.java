@@ -15,18 +15,10 @@ import java.util.List;
 @RequestMapping("/employee")
 @Secured("ROLE_MANAGER")
 public class ManagerController {
-    @Autowired
-    private UserFacade userFacade;
+
 
     @Autowired
     private ContractFacade contractFacade;
-
-
-    @RequestMapping(value = "/allCustomers", method = RequestMethod.GET)
-    @ResponseBody
-    public List<UserDTO> getAllCustomers() {
-        return userFacade.getAllUsersByRole("ROLE_CUSTOMER");
-    }
 
     @RequestMapping(value = "/allContracts", method = RequestMethod.GET)
     @ResponseBody

@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -14,7 +16,7 @@ public class BasketForm {
 
     private String number;
     private String rate;
-    private List<String> options = new ArrayList<>();
+    private Set<String> options = new HashSet<>();
     private Integer countOfProduct;
 
     public Integer getCountOfProduct() {

@@ -11,9 +11,22 @@ import java.util.List;
 @AllArgsConstructor
 public class BasketDTO extends IdDTO {
 
-    private String firstName;
+    private UserDTO user;
 
-    private String lastName;
+    private Long rateId;
 
-    private List<String> contactNumbers;
+    private String rateName;
+
+    private Integer rateCalls;
+
+    private Integer rateSms;
+
+    private Integer rateInternet;
+
+    private Integer rateCost;
+
+    private String rateDescription;
+
+    private List<OptionDTO> optionList;
+
 }

@@ -6,5 +6,5 @@ import com.tsystems.ecare.entities.User;
 import java.util.List;
 
 public interface RoleDao extends JpaDao<Role>{
-    List<User> getAllUsersByRole(String role);
+    List<User> getAllCustomers();
 }

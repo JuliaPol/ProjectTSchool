@@ -3,6 +3,7 @@ package com.tsystems.ecare.dao.impl;
 import com.tsystems.ecare.dao.JpaDao;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 

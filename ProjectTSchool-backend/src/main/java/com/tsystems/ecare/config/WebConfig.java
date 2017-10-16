@@ -14,11 +14,10 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
+import javax.servlet.ServletRegistration;;
 
 @Configuration
 @EnableWebMvc
@@ -86,5 +85,6 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebApplication
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
+
 }
 

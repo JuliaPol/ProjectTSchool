@@ -4,6 +4,7 @@ import com.tsystems.ecare.dao.ContractDao;
 import com.tsystems.ecare.dao.JpaDao;
 import com.tsystems.ecare.entities.Contract;
 import com.tsystems.ecare.entities.User;
+import com.tsystems.ecare.entities.enums.ContractStatus;
 import com.tsystems.ecare.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,17 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
     @Override
     public User findUserByNumber(String number) {
         return contractDao.findUserByNumber(number);
+    }
+
+    @Override
+    @Transactional
+    public void changeContractStatusByEmployee(String number) {
+        Contract contract = getContractByNumber(number);
+        if (contract.getStatus().equals(ContractStatus.AVAILABLE)) {
+            contract.setStatus(ContractStatus.BLOCKED_BY_AN_EMPLOYEE);
+        } else {
+            contract.setStatus(ContractStatus.AVAILABLE);
+        }
     }
 
     @Override

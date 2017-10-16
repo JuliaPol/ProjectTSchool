@@ -3,6 +3,7 @@ package com.tsystems.ecare.service;
 import com.tsystems.ecare.entities.Option;
 
 import java.util.List;
+import java.util.Set;
 
 public interface OptionService  extends Service<Option>{
     List<Option> getAllOptionsForCustomer(String number);
@@ -10,4 +11,5 @@ public interface OptionService  extends Service<Option>{
     List<Option> getAllOptionsInRateAndContract(String number);
     List<Option> getAllIncompatibleOptions(String number);
     Option findOptionByName(String name);
+    Set<Option> getBy(Long id);
 }
