@@ -9,24 +9,27 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/customer.css" rel="stylesheet">
     <link href="../css/basket.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/sweetalert.min.css">
 </head>
 <body>
 <%@include file="hat.jsp" %>
 <div class="panel panel-default back">
     <div class="panel-body" id="contractPanel">
         <div class="panel-body back1">
-            <div class="row">
-                <div class="well well-sm col-md-3">
-                    <div class="row">
-                        <p class="col-md-10">${basket.getRateName()}</p>
-                        <input type="submit" onclick="deleteTariff(${basket.getRateId()})"
-                               class="btn btn-danger delete-button col-md-3" value="">
+            <c:if test="${not empty basket.getRateId()}">
+                <div id="newTariff" class="row">
+                    <div class="well well-sm col-md-3">
+                        <div class="row">
+                            <p class="col-md-10">${basket.getRateName()}</p>
+                            <input type="submit" onclick="deleteTariff(${basket.getRateId()})"
+                                   class="btn btn-danger delete-button col-md-3" value="">
+                        </div>
+                        <p>${basket.getRateCost()}</p>
                     </div>
-                    <p>${basket.getRateCost()}</p>
                 </div>
-            </div>
+            </c:if>
             <c:forEach var="prod" items="${basket.getOptionList()}">
-                <div class="row">
+                <div class="row newOptions">
                     <div class="well well-sm col-md-3">
                         <div class="row">
                             <p class="col-md-10">${prod.getName()}</p>
@@ -37,14 +40,37 @@
                     </div>
                 </div>
             </c:forEach>
-            <form id="saveBasket" action="/contract/add/" class="form-horizontal UP" method="POST">
-                <input type="submit" class="btn btn-info button-one button-act col-md-2 button-number" value="Save">
-            </form>
+            <c:if test="${((empty basket.getOptionList()) || (basket.getOptionList().size() == 0)) && (empty basket.getRateId())}">
+                <div class="row">
+                    <div class="well well-sm col-md-5">
+                        <p>Your basket is empty.</p>
+                    </div>
+                </div>
+            </c:if>
+            <c:if test="${(basket.getOptionList().size() > 0) || (not empty basket.getRateId())}">
+                <input id="saveBasket" type="submit" class="btn btn-info button-one button-act col-md-2 button-number"
+                       value="Save">
+            </c:if>
         </div>
     </div>
 </div>
 <script type="application/javascript"
-        src="../js/jquery-3.2.1.min.js"></script>
+        src="../js/jquery-3.2.1.min.js">
+</script>
+<!-- sweetalert2 -->
+<script type="application/javascript" src="../js/sweetalert.min.js"></script>
+<script type="application/javascript" src="../js/zone.js"></script>
+<script type="application/javascript" src="../js/Reflect.js"></script>
+<script type="application/javascript" src="../js/system.js"></script>
+<script type="application/javascript" src="../js/typescript.js"></script>
+<%--WARNING!!!!!--%>
+<%--<link rel="stylesheet" href="https://npmcdn.com/sweetalert2@6.10.3/dist/sweetalert2.min.css">--%>
+<%--<script src="https://npmcdn.com/sweetalert2@6.10.3/dist/sweetalert2.min.js"></script>--%>
+
+<%--<script src="https://npmcdn.com/zone.js@0.8.18/dist/zone.js"></script>--%>
+<%--<script src="https://npmcdn.com/reflect-metadata@0.1.3/Reflect.js"></script>--%>
+<%--<script src="https://npmcdn.com/systemjs@0.20.19/dist/system.js"></script>--%>
+<%--<script src="https://unpkg.com/typescript@2.6.0-rc/lib/typescript.js"></script>--%>
 <script type="application/javascript" src="../js/basket.js"></script>
 </body>
 </html>

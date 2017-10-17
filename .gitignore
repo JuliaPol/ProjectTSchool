@@ -68,3 +68,9 @@ fabric.properties
 hs_err_pid*
 
 .idea
+/ProjectTSchool-backend/src/main/webapp/WEB-INF/js/sweetalert.min.js
+/ProjectTSchool-backend/src/main/webapp/WEB-INF/js/zone.js
+/ProjectTSchool-backend/src/main/webapp/WEB-INF/js/Reflect.js
+/ProjectTSchool-backend/src/main/webapp/WEB-INF/css/sweetalert.min.css
+/ProjectTSchool-backend/src/main/webapp/WEB-INF/js/system.js
+/ProjectTSchool-backend/src/main/webapp/WEB-INF/js/typescript.js

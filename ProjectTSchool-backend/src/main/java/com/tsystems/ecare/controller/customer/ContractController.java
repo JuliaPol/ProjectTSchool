@@ -7,6 +7,7 @@ import com.tsystems.ecare.form.BasketForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -50,6 +51,8 @@ public class ContractController {
         BasketForm basket = (BasketForm) httpSession.getAttribute(number);
         if (basket != null) {
             contractFacade.addRateOrOptionsInContract(basket);
+            basket.setRate(null);
+            basket.getOptions().clear();
         }
     }
 }

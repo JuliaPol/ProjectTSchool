@@ -21,10 +21,13 @@ function checkStatus() {
     }).done(function (result) {
             if (result.status === 'AVAILABLE') {
                 $('.button-act').removeClass('disabled');
+                $('.button-act').prop("disabled", false);
             } else if (result.status === 'BLOCKED_BY_THE_CUSTOMER') {
+                $('.button-act').prop("disabled", true);
                 $('.button-act').addClass('disabled');
                 statusNumb.removeClass('disabled');
             } else {
+                $('.button-act').prop("disabled", true);
                 $('.button-act').addClass('disabled');
             }
         }
@@ -41,13 +44,16 @@ function refreshContract() {
         $('#numberStatus').text(result.status);
         if (result.status === 'AVAILABLE') {
             statusNumb.removeClass('disabled');
+            statusNumb.prop("disabled", false);
             statusNumb.val('Block');
         } else if (result.status === 'BLOCKED_BY_THE_CUSTOMER') {
             statusNumb.removeClass('disabled');
+            statusNumb.prop("disabled", false);
             statusNumb.val('Unblock');
         } else {
             statusNumb.val('Unblock');
             statusNumb.addClass('disabled');
+            statusNumb.prop("disabled", true);
         }
     })
 }
@@ -149,9 +155,9 @@ function addItemForOptions(name) {
 
 function addItemForActiveOptions(name) {
     var List = $("#tariff");
-    if (tariff === "") {
+    if (name === "") {
         $("<div class=\"row\">").appendTo(List);
-        $("<div class=\"col-md-2 textTariff\"></div>").text("You don't have options").appendTo(List);
+        $("<div class=\"well well-sm col-md-4 textTariff\"></div>").text("You don't have options").appendTo(List);
         $("</div>").appendTo(List);
     } else {
         $("<div class=\"row\">").appendTo(List);
@@ -236,7 +242,7 @@ function refreshList(url, statusButton) {
     $.ajax({
         url: dataUrl
     }).done(function (result) {
-        if (result === "" && url === "/options/active?number=") {
+        if (result == false && url === "/options/active?number=") {
             addItemForActiveOptions("");
         }
         for (var i = 0; i < result.length; i++) {
