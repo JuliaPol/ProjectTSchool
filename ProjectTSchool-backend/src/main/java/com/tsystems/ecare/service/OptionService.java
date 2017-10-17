@@ -9,7 +9,10 @@ public interface OptionService  extends Service<Option>{
     List<Option> getAllOptionsForCustomer(String number);
     List<Option> getAllAvailableOptionsForCustomer(String number);
     List<Option> getAllOptionsInRateAndContract(String number);
-    List<Option> getAllIncompatibleOptions(String number);
+    List<Option> getAllIncompatibleOptions(String number, List<Option> availableOptions);
     Option findOptionByName(String name);
     Set<Option> getBy(Long id);
+    List<Option> checkCompatibleOptions(List<Option> optionsInContract, List<Option> availableOption);
+    List<Option> checkIncompatibleOptions(List<Option> optionsInContract, List<Option> availableOption);
+    List<Option> getAllFreeOptions(String number);
 }

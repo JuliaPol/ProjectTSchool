@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service("optionService")
 public class OptionServiceImpl extends ServiceImpl<Option> implements OptionService {
@@ -27,14 +28,9 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
     @Override
     public List<Option> getAllAvailableOptionsForCustomer(String number) {
         List<Option> listOptionsInRateAndContract = getAllOptionsInRateAndContract(number);
-        List<Option> allOptions = optionDao.getAll();
-        List<Option> newOptions = new ArrayList<>();
-        for (Option option : allOptions) {
-            if (!listOptionsInRateAndContract.contains(option)) {
-                newOptions.add(option);
-            }
-        }
-        return newOptions;
+        List<Option> freeOptions = getAllFreeOptions(number);
+        List<Option> availableOptions = checkCompatibleOptions(listOptionsInRateAndContract, freeOptions);
+        return checkIncompatibleOptions(listOptionsInRateAndContract, availableOptions);
     }
 
     @Override
@@ -46,11 +42,10 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
     }
 
     @Override
-    public List<Option> getAllIncompatibleOptions(String number) {
-        List<Option> allOptions = getAllOptionsInRateAndContract(number);
-        List<Option> allAvailableOptions = getAllAvailableOptionsForCustomer(number);
-
-        return null;
+    public List<Option> getAllIncompatibleOptions(String number, List<Option> availableOptions) {
+        List<Option> allOptions = getAllFreeOptions(number);
+        return allOptions.stream()
+                .filter(op -> !availableOptions.contains(op)).collect(Collectors.toList());
     }
 
     @Override
@@ -63,6 +58,28 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
     public Set<Option> getBy(Long id) {
         Option option = optionDao.get(id);
         return option.getCompatibleOptionList();
+    }
+
+    @Override
+    public List<Option> checkCompatibleOptions(List<Option> optionsInContract, List<Option> availableOptions) {
+       return availableOptions.stream()
+                .filter(option -> optionsInContract.contains(option.getCompatibleOption()) || option.getCompatibleOption() == null)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Option> checkIncompatibleOptions(List<Option> optionsInContract, List<Option> availableOption) {
+        return availableOption.stream()
+                .filter(option -> !optionsInContract.contains(option.getIncompatibleOption()) || option.getIncompatibleOption() == null)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Option> getAllFreeOptions(String number) {
+        List<Option> listOptionsInRateAndContract = getAllOptionsInRateAndContract(number);
+        List<Option> allOptions = optionDao.getAll();
+        return allOptions.stream()
+                .filter(op -> !listOptionsInRateAndContract.contains(op)).collect(Collectors.toList());
     }
 
     @Override

@@ -87,17 +87,21 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
     @Transactional
     public void addRateInContract(String number, Long rateId) throws Exception {
         Contract contract = getContractByNumber(number);
-        Rate rate = rateService.get(rateId);
-        contract.setRate(rate);
+        if (contract.getStatus().equals(ContractStatus.AVAILABLE)) {
+            Rate rate = rateService.get(rateId);
+            contract.setRate(rate);
+        }
     }
 
     @Override
     @Transactional
     public void addOptionsInContract(String number, List<Long> optionIds) throws Exception {
         Contract contract = getContractByNumber(number);
-        for (Long id : optionIds) {
-            Option option = optionService.get(id);
-            contract.getOptionList().add(option);
+        if (contract.getStatus().equals(ContractStatus.AVAILABLE)) {
+            for (Long id : optionIds) {
+                Option option = optionService.get(id);
+                contract.getOptionList().add(option);
+            }
         }
     }
 

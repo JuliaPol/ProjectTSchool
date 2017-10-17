@@ -23,9 +23,14 @@ public class OptionController {
     @Autowired
     private OptionService optionService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/available", method = RequestMethod.GET)
     public List<OptionDTO> getAllAvailableOptions(@RequestParam("number") String number) {
         return optionFacade.getAllAvailableOptionsForCustomer(number);
+    }
+
+    @RequestMapping(value = "/unavailable", method = RequestMethod.GET)
+    public List<OptionDTO> getAllIncompatibleOptions(@RequestParam("number") String number) {
+        return optionFacade.getAllIncompatibleOptionsForCustomer(number);
     }
 
     @RequestMapping(value = "/compatible", method = RequestMethod.GET)

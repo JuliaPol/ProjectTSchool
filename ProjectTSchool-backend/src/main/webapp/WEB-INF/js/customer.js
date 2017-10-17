@@ -98,7 +98,6 @@ option.click(function () {
     option.addClass('active');
     tabsActive(1);
     refreshList("/options/active?number=", "Deactivate");
-    checkStatus();
 });
 
 contact.click(function () {
@@ -118,7 +117,6 @@ tariff.click(function () {
     option.removeClass('active');
     tabsActive(1);
     refreshItem("/tariffs/active?number=");
-    checkStatus();
 });
 
 statusNumb.click(function () {
@@ -255,6 +253,7 @@ function refreshList(url, statusButton) {
                 addItemWithName(tariff, statusButton);
             }
         }
+        checkStatus();
     })
 }
 
@@ -267,6 +266,7 @@ function refreshItem(url) {
         url: dataUrl
     }).done(function (result) {
         addItem(result);
+        checkStatus();
     })
 }
 
@@ -275,9 +275,9 @@ allHref.click(function () {
     if (tariff.hasClass('active')) {
         refreshList("/tariffs?number=", "Activate");
     } else {
-        refreshList("/options?number=", "Activate");
+        refreshList("/options/available?number=", "Activate");
+        refreshList("/options/unavailable?number=", ":)");
     }
-    checkStatus();
 });
 
 myHref.click(function () {
@@ -287,7 +287,6 @@ myHref.click(function () {
     } else {
         refreshList("/options/active?number=", "Deactivate");
     }
-    checkStatus();
 });
 
 function deactivateTariff() {

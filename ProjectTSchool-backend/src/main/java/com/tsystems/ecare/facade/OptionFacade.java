@@ -8,4 +8,5 @@ import java.util.List;
 public interface OptionFacade extends Facade<OptionDTO, Option> {
     List<OptionDTO> getAllOptionsForCustomer(String number);
     List<OptionDTO> getAllAvailableOptionsForCustomer(String number);
+    List<OptionDTO> getAllIncompatibleOptionsForCustomer(String number);
 }

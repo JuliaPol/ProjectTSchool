@@ -22,7 +22,7 @@
                         </c:forEach>
                     </select>
                 </li>
-                <li><input id="signOut" type="submit" class="btn btn-info button-one button-act col-md-2 button-number" value="Sign out"></li>
+                <li><input id="signOut" type="submit" class="btn btn-info button-one col-md-2 button-number" value="Sign out"></li>
                 <li><a id="hatHref" href="/basket"><img id="basketImg" src="../img/bask1.png"></a></li>
                 <li><p id="countProd"></p></li>
             </ul>
