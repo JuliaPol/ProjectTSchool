@@ -10,4 +10,5 @@ public interface OptionFacade extends Facade<OptionDTO, Option> {
     List<OptionDTO> getAllAvailableOptionsForCustomer(String number);
     List<OptionDTO> getAllIncompatibleOptionsForCustomer(String number);
     List<OptionDTO> getBy(Long id);
+    boolean checkNewOptions(List<OptionDTO> optionList);
 }

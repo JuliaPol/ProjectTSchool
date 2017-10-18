@@ -16,7 +16,7 @@ public class OptionDTO extends IdDTO {
     private Integer cost;
     private Integer costOfConnection;
     private String description;
-    private List<OptionDTO> compatibleOptions;
-    private List<OptionDTO> incompatibleOptions;
+    private List<String> compatibleOptions;
+    private List<String> incompatibleOptions;
 
 }

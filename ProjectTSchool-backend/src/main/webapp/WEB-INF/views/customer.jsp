@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-md-2">Your number:</div>
                 <div class="col-md-2" id="yourNumber"></div>
-                <input type="submit" id="statusButton" class="col-md-2 btn btn-info button-one button-act" value="">
+                <input type="submit" id="statusButton" class="col-md-2 btn btn-info button-one" value="">
             </div>
             <div class="row">
                 <div class="col-md-2">Status:</div>

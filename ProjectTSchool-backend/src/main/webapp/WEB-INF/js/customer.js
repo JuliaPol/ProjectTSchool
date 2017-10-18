@@ -55,6 +55,7 @@ function refreshContract() {
             statusNumb.addClass('disabled');
             statusNumb.prop("disabled", true);
         }
+        checkStatus();
     })
 }
 
@@ -74,7 +75,6 @@ numberSelected.change(function () {
     } else {
         refreshContract();
     }
-    checkStatus();
     var number = $('#numberSelect option:selected').text();
     $("#hatHref").attr("href", "http://localhost:8080/basket?number=" + number);
     add("/getCount?number=" + number);
@@ -140,12 +140,19 @@ function addItemForOptions(name, status) {
     var List = $("#tariff");
     $("<div class=\"row\">").appendTo(List);
     $("<div class=\"well well-sm col-md-3\"></div>").text(name.name).appendTo(List);
+    $("<div class=\"well well-sm col-md-2\"></div>").text(name.cost).appendTo(List);
     if (status === "un") {
-        if (name.compatibleOption != null) {
-            $("<div class=\" col-md-3\"></div>").text("This option must be connected with the option: " + name.compatibleOption).appendTo(List);
+        if (name.compatibleOptions.length > 0) {
+            $("<p></p>").text("This option must be connected with the options: ").appendTo(List);
+            for (var i = 0; i < name.compatibleOptions.length; i++) {
+                $("<p></p>").text(name.compatibleOptions[i]).appendTo(List);
+            }
         }
-        if (name.incompatibleOption != null) {
-            $("<div class=\" col-md-3\"></div>").text("This option can not be connected with the option: " + name.incompatibleOption).appendTo(List);
+        if (name.incompatibleOptions.length > 0) {
+            $("<p></p>").text("This option can not be connected with the options: ").appendTo(List);
+            for (var i = 0; i < name.incompatibleOptions.length; i++) {
+                $("<p></p>").text(name.incompatibleOptions[i]).appendTo(List);
+            }
         }
     } else {
         $("<input onclick='addOption(" + name.id + ")' type=\"submit\" class=\"btn btn-info button-one button-act col-md-2\" " +
@@ -252,7 +259,7 @@ function refreshList(url, statusButton) {
                 addItemForOptions(tariff, "un");
             } else if (url === "/options/active?number=") {
                 addItemForActiveOptions(tariff);
-            } else if (url === "/options/available?number="){
+            } else if (url === "/options/available?number=") {
                 addItemForOptions(tariff, "av");
             } else {
                 addItemWithName(tariff, statusButton);

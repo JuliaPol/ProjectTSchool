@@ -52,6 +52,11 @@ public class BasketFacadeImpl extends FacadeImpl<User, BasketDTO> implements Bas
                 optionDTOList.add(optionFacade.get(Long.parseLong(id)));
             }
         }
+        if(optionFacade.checkNewOptions(optionDTOList)) {
+            basketDTO.setWarning("Options are incompatible!");
+        } else {
+            basketDTO.setWarning("");
+        }
         basketDTO.setOptionList(optionDTOList);
         return basketDTO;
     }

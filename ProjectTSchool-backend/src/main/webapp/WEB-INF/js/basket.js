@@ -5,6 +5,14 @@ var number = url.searchParams.get("number");
 
 $("#hatHref").attr("href", "http://localhost:8080/basket?number=" + number);
 
+if ($('#warning').text() !== "") {
+    $("#saveBasket").prop("disabled", true);
+    $("#saveBasket").addClass('disabled');
+} else {
+    $("#saveBasket").prop("disabled", false);
+    $("#saveBasket").removeClass('disabled');
+}
+
 $("#saveBasket").click(function () {
     var number = $('#numberSelect option:selected').text();
     var dataUrl = "http://localhost:8080/contract/add/" + number;
@@ -67,3 +75,10 @@ function add(url) {
     });
 }
 
+$('#signOut').click(function () {
+    window.location.href = "/login";
+});
+
+$('#back').click(function () {
+    window.location.href = "/customer";
+});

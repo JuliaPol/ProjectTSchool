@@ -15,4 +15,6 @@ public interface OptionService  extends Service<Option>{
     List<Option> checkCompatibleOptions(List<Option> optionsInContract, List<Option> availableOption);
     List<Option> checkIncompatibleOptions(List<Option> optionsInContract, List<Option> availableOption);
     List<Option> getAllFreeOptions(String number);
+    boolean checkNewOptions(List<Option> optionList);
+
 }

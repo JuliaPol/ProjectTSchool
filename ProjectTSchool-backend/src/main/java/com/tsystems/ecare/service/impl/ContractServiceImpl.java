@@ -63,7 +63,7 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
         Contract contract = getContractByNumber(number);
         if (contract.getStatus().equals(ContractStatus.AVAILABLE)) {
             contract.setStatus(ContractStatus.BLOCKED_BY_THE_CUSTOMER);
-        } else if (contract.getStatus().equals(ContractStatus.BLOCKED_BY_THE_CUSTOMER)){
+        } else if (contract.getStatus().equals(ContractStatus.BLOCKED_BY_THE_CUSTOMER)) {
             contract.setStatus(ContractStatus.AVAILABLE);
         }
     }
@@ -73,6 +73,7 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
     public void deleteRate(String number) {
         Contract contract = getContractByNumber(number);
         contract.setRate(null);
+        contract.getOptionList().clear();
     }
 
     @Override
@@ -90,6 +91,7 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
         if (contract.getStatus().equals(ContractStatus.AVAILABLE)) {
             Rate rate = rateService.get(rateId);
             contract.setRate(rate);
+            contract.getOptionList().clear();
         }
     }
 
@@ -97,7 +99,7 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
     @Transactional
     public void addOptionsInContract(String number, List<Long> optionIds) throws Exception {
         Contract contract = getContractByNumber(number);
-        if (contract.getStatus().equals(ContractStatus.AVAILABLE)) {
+        if (contract.getStatus().equals(ContractStatus.AVAILABLE) && contract.getRate() != null) {
             for (Long id : optionIds) {
                 Option option = optionService.get(id);
                 contract.getOptionList().add(option);
@@ -109,7 +111,9 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
     @Transactional
     public void addOptionInContract(String number, Long optionId) throws Exception {
         Contract contract = getContractByNumber(number);
-        contract.getOptionList().add(optionService.get(optionId));
+        if (contract.getStatus().equals(ContractStatus.AVAILABLE) && contract.getRate() != null) {
+            contract.getOptionList().add(optionService.get(optionId));
+        }
     }
 
     @Override

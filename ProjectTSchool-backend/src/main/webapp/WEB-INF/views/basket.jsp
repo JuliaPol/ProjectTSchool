@@ -14,10 +14,14 @@
 <body>
 <%@include file="hat.jsp" %>
 <div class="panel panel-default back">
+    <input id="back" type="submit" class="btn btn-info button-one col-md-2 button-number"
+           value="Back">
     <div class="panel-body" id="contractPanel">
         <div class="panel-body back1">
+            <div id="warning">${basket.getWarning()}</div>
+            <div class="row">
             <c:if test="${not empty basket.getRateId()}">
-                <div id="newTariff" class="row">
+                <div id="newTariff" >
                     <div class="well well-sm col-md-3">
                         <div class="row">
                             <p class="col-md-10">${basket.getRateName()}</p>
@@ -29,7 +33,7 @@
                 </div>
             </c:if>
             <c:forEach var="prod" items="${basket.getOptionList()}">
-                <div class="row newOptions">
+                <div class="newOptions">
                     <div class="well well-sm col-md-3">
                         <div class="row">
                             <p class="col-md-10">${prod.getName()}</p>
@@ -40,6 +44,7 @@
                     </div>
                 </div>
             </c:forEach>
+            </div>
             <c:if test="${((empty basket.getOptionList()) || (basket.getOptionList().size() == 0)) && (empty basket.getRateId())}">
                 <div class="row">
                     <div class="well well-sm col-md-5">

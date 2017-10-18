@@ -29,4 +29,6 @@ public class BasketDTO extends IdDTO {
 
     private List<OptionDTO> optionList;
 
+    private String warning;
+
 }
