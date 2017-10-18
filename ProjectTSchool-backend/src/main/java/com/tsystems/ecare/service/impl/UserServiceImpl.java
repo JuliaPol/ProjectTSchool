@@ -40,7 +40,6 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService {
         return roleDao.getAllCustomers();
     }
 
-
     @Override
     protected JpaDao<User> getDefaultDao() {
         return userDao;

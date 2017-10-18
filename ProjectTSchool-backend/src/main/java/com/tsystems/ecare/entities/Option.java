@@ -1,20 +1,15 @@
 package com.tsystems.ecare.entities;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.hibernate.annotations.CollectionType;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -58,23 +53,40 @@ public class Option {
     @ManyToMany(mappedBy = "optionList")
     private List<Rate> rateList;
 
-
-    @ManyToOne(cascade={CascadeType.ALL}, fetch = FetchType.EAGER)
-    @JoinColumn(name="compatible_option")
     @JsonIgnore
-    public Option compatibleOption;
-
-
-    @OneToMany(mappedBy="compatibleOption", fetch = FetchType.EAGER)
-    public Set<Option> compatibleOptionList = new HashSet<>();
-
-    @ManyToOne(cascade={CascadeType.ALL})
-    @JoinColumn(name="incompatible_option")
-    private Option incompatibleOption;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany
+    @JoinTable(name="incompatible_options",
+            joinColumns=@JoinColumn(name="first_id"),
+            inverseJoinColumns=@JoinColumn(name="second_id")
+    )
+    private List<Option> incOptions;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy="incompatibleOption")
-    private List<Option> incompatibleOptionList = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(name="incompatible_options",
+            joinColumns=@JoinColumn(name="second_id"),
+            inverseJoinColumns=@JoinColumn(name="first_id")
+    )
+    private List<Option> incOptionsOf;
+
+    @JsonIgnore
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany
+    @JoinTable(name="compatible_options",
+            joinColumns=@JoinColumn(name="first_id"),
+            inverseJoinColumns=@JoinColumn(name="second_id")
+    )
+    private List<Option> compOptions;
+
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany
+    @JoinTable(name="compatible_options",
+            joinColumns=@JoinColumn(name="second_id"),
+            inverseJoinColumns=@JoinColumn(name="first_id")
+    )
+    private List<Option> compOptionsOf;
 
     @Override
     public boolean equals(Object o) {

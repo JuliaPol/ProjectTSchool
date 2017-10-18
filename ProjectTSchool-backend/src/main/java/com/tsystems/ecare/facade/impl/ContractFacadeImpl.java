@@ -1,6 +1,7 @@
 package com.tsystems.ecare.facade.impl;
 
 import com.tsystems.ecare.dto.ContractDTO;
+import com.tsystems.ecare.dto.CustomerDTO;
 import com.tsystems.ecare.dto.OptionDTO;
 import com.tsystems.ecare.dto.UserDTO;
 import com.tsystems.ecare.entities.Contract;
@@ -87,6 +88,20 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
                 contractService.addOptionsInContract(basket.getNumber(), options);
             }
         }
+    }
+
+    @Override
+    public List<CustomerDTO> searchByNumber(String likeName, int limit) {
+        return contractService.searchByNumber(likeName, limit).stream()
+                .map(userFacade::convertToCustomerDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CustomerDTO> searchByName(String likeName, int limit) {
+        return contractService.searchByName(likeName , limit).stream()
+                .map(userFacade::convertToCustomerDto)
+                .collect(Collectors.toList());
     }
 
     @Override

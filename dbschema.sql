@@ -34,9 +34,7 @@ CREATE TABLE `option` (
   name                VARCHAR(255),
   cost                INT UNSIGNED,
   cost_of_connection  INT UNSIGNED,
-  description         VARCHAR(255),
-  compatible_option   BIGINT REFERENCES `option` (id),
-  incompatible_option BIGINT REFERENCES `option` (id)
+  description         VARCHAR(255)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -83,6 +81,22 @@ CREATE TABLE role (
   id        SERIAL,
   role_name VARCHAR(15),
   PRIMARY KEY (id)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+CREATE TABLE incompatible_options (
+  first_id BIGINT REFERENCES `option` (id),
+  second_id   BIGINT REFERENCES `option` (id),
+  PRIMARY KEY (first_id, second_id)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+CREATE TABLE compatible_options (
+first_id BIGINT REFERENCES `option` (id),
+second_id   BIGINT REFERENCES `option` (id),
+PRIMARY KEY (first_id, second_id)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;

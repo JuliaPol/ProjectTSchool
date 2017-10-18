@@ -55,22 +55,22 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
 
     @Override
     @Transactional
-    public Set<Option> getBy(Long id) {
+    public List<Option> getBy(Long id) {
         Option option = optionDao.get(id);
-        return option.getCompatibleOptionList();
+        return option.getCompOptions();
     }
 
     @Override
     public List<Option> checkCompatibleOptions(List<Option> optionsInContract, List<Option> availableOptions) {
        return availableOptions.stream()
-                .filter(option -> optionsInContract.contains(option.getCompatibleOption()) || option.getCompatibleOption() == null)
+                .filter(option -> optionsInContract.containsAll(option.getCompOptions()) || option.getCompOptions() == null)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Option> checkIncompatibleOptions(List<Option> optionsInContract, List<Option> availableOption) {
         return availableOption.stream()
-                .filter(option -> !optionsInContract.contains(option.getIncompatibleOption()) || option.getIncompatibleOption() == null)
+                .filter(option -> !optionsInContract.containsAll(option.getIncOptions()) || option.getIncOptions()== null)
                 .collect(Collectors.toList());
     }
 

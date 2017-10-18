@@ -14,10 +14,12 @@ import java.util.List;
 @Entity
 @Table(name = "user")
 @NamedQueries({
-        @NamedQuery(name = "findByLogin" ,
+        @NamedQuery(name = User.USER_FIND_BY_LOGIN ,
                 query = "select u from User u where u.login=:login")
 })
 public class User {
+
+    public static final String USER_FIND_BY_LOGIN = "User.findByLogin";
     @Id
     @GeneratedValue
     private Long id;

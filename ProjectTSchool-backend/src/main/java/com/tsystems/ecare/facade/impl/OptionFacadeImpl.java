@@ -23,11 +23,11 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
     @Override
     public OptionDTO convertToDto(Option entity) {
         OptionDTO optionDTO = modelMapper.map(entity, OptionDTO.class);
-        if (entity.getIncompatibleOption() != null) {
-            optionDTO.setIncompatibleOption(entity.getIncompatibleOption().getName());
+        if (entity.getCompOptions() != null) {
+            optionDTO.setCompatibleOptions(convertList(entity.getCompOptions()));
         }
-        if (entity.getCompatibleOption() != null) {
-            optionDTO.setCompatibleOption(entity.getCompatibleOption().getName());
+        if (entity.getIncOptions() != null) {
+            optionDTO.setIncompatibleOptions(convertList(entity.getIncOptions()));
         }
         return optionDTO;
     }
@@ -49,15 +49,18 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
     }
 
     @Override
+    public List<OptionDTO> getBy(Long id) {
+        return convertList(optionService.getBy(id));
+    }
+
+    @Override
     public Option convertToEntity(OptionDTO dto) {
         Option option = modelMapper.map(dto, Option.class);
-        if (dto.getCompatibleOption() != null) {
-            Option compatibleOption =optionService.findOptionByName(dto.getCompatibleOption());
-            option.setCompatibleOption(compatibleOption);
+        if (dto.getCompatibleOptions() != null) {
+            option.setCompOptions(convertToEntitiesList(dto.getCompatibleOptions()));
         }
-        if (dto.getIncompatibleOption() != null) {
-            Option incompatibleOption =optionService.findOptionByName(dto.getCompatibleOption());
-            option.setCompatibleOption(incompatibleOption);
+        if (dto.getIncompatibleOptions() != null) {
+            option.setIncOptions(convertToEntitiesList(dto.getIncompatibleOptions()));
         }
         return option;
     }

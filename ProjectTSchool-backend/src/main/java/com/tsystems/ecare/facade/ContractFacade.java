@@ -1,9 +1,12 @@
 package com.tsystems.ecare.facade;
 
 import com.tsystems.ecare.dto.ContractDTO;
+import com.tsystems.ecare.dto.CustomerDTO;
 import com.tsystems.ecare.dto.UserDTO;
 import com.tsystems.ecare.entities.Contract;
 import com.tsystems.ecare.form.BasketForm;
+
+import java.util.List;
 
 public interface ContractFacade extends Facade<ContractDTO, Contract> {
     ContractDTO getContractByNumber(String number);
@@ -19,4 +22,9 @@ public interface ContractFacade extends Facade<ContractDTO, Contract> {
     void deleteOption(String number, Long optionId) throws Exception;
 
     void addRateOrOptionsInContract(BasketForm basket) throws Exception;
+
+    List<CustomerDTO> searchByNumber(String likeName, int limit);
+
+    List<CustomerDTO> searchByName(String likeName , int limit);
+
 }

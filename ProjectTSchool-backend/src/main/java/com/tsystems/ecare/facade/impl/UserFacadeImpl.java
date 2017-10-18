@@ -47,7 +47,8 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
         return userDTO;
     }
 
-    private CustomerDTO convertToCustomerDto(User entity) {
+    @Override
+    public CustomerDTO convertToCustomerDto(User entity) {
         CustomerDTO customerDTO = modelMapper.map(entity, CustomerDTO.class);
         return customerDTO;
     }

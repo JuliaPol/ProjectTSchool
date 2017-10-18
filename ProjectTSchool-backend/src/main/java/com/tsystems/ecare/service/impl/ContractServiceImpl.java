@@ -106,6 +106,25 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
     }
 
     @Override
+    @Transactional
+    public void addOptionInContract(String number, Long optionId) throws Exception {
+        Contract contract = getContractByNumber(number);
+        contract.getOptionList().add(optionService.get(optionId));
+    }
+
+    @Override
+    @Transactional
+    public List<User> searchByNumber(String likeNumber, int limit) {
+        return contractDao.searchByNumber(likeNumber, limit);
+    }
+
+    @Override
+    @Transactional
+    public List<User> searchByName(String likeName, int limit) {
+        return contractDao.searchByName(likeName, limit);
+    }
+
+    @Override
     protected JpaDao<Contract> getDefaultDao() {
         return contractDao;
     }

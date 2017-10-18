@@ -20,9 +20,6 @@ public class OptionController {
     @Autowired
     private OptionFacade optionFacade;
 
-    @Autowired
-    private OptionService optionService;
-
     @RequestMapping(value = "/available", method = RequestMethod.GET)
     public List<OptionDTO> getAllAvailableOptions(@RequestParam("number") String number) {
         return optionFacade.getAllAvailableOptionsForCustomer(number);
@@ -34,8 +31,8 @@ public class OptionController {
     }
 
     @RequestMapping(value = "/compatible", method = RequestMethod.GET)
-    public Set<Option> getAllAvailableOptions() {
-        return optionService.getBy(3L);
+    public List<OptionDTO> getAllAvailableOptions() {
+        return optionFacade.getBy(3L);
     }
 
     @RequestMapping(value = "/active", method = RequestMethod.GET)

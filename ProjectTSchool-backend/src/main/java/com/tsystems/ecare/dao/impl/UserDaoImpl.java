@@ -21,8 +21,9 @@ public class UserDaoImpl extends JpaDaoImpl<User> implements UserDao {
 
     @Override
     public User findByLogin(String login) {
-        return entityManager.createNamedQuery("findByLogin", User.class)
+        return entityManager.createNamedQuery(User.USER_FIND_BY_LOGIN, User.class)
                 .setParameter("login", login)
                 .getSingleResult();
     }
+
 }

@@ -3,6 +3,8 @@ package com.tsystems.ecare.dto;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -14,7 +16,7 @@ public class OptionDTO extends IdDTO {
     private Integer cost;
     private Integer costOfConnection;
     private String description;
-    private String compatibleOption;
-    private String incompatibleOption;
+    private List<OptionDTO> compatibleOptions;
+    private List<OptionDTO> incompatibleOptions;
 
 }

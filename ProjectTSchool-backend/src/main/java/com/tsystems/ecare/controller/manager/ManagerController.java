@@ -16,7 +16,6 @@ import java.util.List;
 @Secured("ROLE_MANAGER")
 public class ManagerController {
 
-
     @Autowired
     private ContractFacade contractFacade;
 
@@ -31,4 +30,5 @@ public class ManagerController {
     public UserDTO getCustomerByNumber(@RequestParam("number") String number){
         return contractFacade.findUserByNumber(number);
     }
+
 }

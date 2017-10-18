@@ -15,4 +15,7 @@ public interface ContractService  extends Service<Contract> {
     void deleteOption(String number, Long optionId) throws Exception;
     void addRateInContract(String number, Long rateId) throws Exception;
     void addOptionsInContract(String number, List<Long> optionIds) throws Exception;
+    void addOptionInContract(String number, Long optionId) throws Exception;
+    List<User> searchByNumber(String likeNumber, int limit);
+    List<User> searchByName(String likeName, int limit);
 }

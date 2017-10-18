@@ -24,13 +24,19 @@ import java.util.List;
                 query = "select c from Contract c where c.number = :number"),
         @NamedQuery(name = Contract.CONTRACT_FIND_USER_BY_NUMBER,
                 query = "select c.user from Contract c where c.number = :number"),
+        @NamedQuery(name = Contract.CONTRACT_SEARCH_BY_NUMBER,
+                query = "select c.user from Contract c where c.number like :number"),
+        @NamedQuery(name = Contract.CONTRACT_SEARCH_BY_NAME,
+                query = "select c.user from Contract c where c.user.lastName like :name"),
 })
 public class Contract {
 
-    public static final String CONTRACT_FIND_ALL_CONTACTS_BY_USER_ID = "ContractController.findAllContactsByUserId";
-    public static final String CONTRACT_FIND_ALL_OPTIONS_BY_RATE = "ContractController.findAllOptionsByRate";
+    public static final String CONTRACT_FIND_ALL_CONTACTS_BY_USER_ID = "Contract.findAllContactsByUserId";
+    public static final String CONTRACT_FIND_ALL_OPTIONS_BY_RATE = "Contract.findAllOptionsByRate";
     public static final String CONTRACT_FIND_CONTRACT_BY_NUMBER = "Contract.findContractByNumber";
     public static final String CONTRACT_FIND_USER_BY_NUMBER = "Contract.findUserByNumber";
+    public static final String CONTRACT_SEARCH_BY_NUMBER = "Contract.searchByNumber";
+    public static final String CONTRACT_SEARCH_BY_NAME = "Contract.searchByName";
 
     @Id @GeneratedValue
     private Long id;
@@ -39,7 +45,7 @@ public class Contract {
     private String number;
 
     @ManyToOne
-    @JoinColumn(name = "rate_id")
+    @JoinColumn(name = "rate_id", nullable = false)
     private Rate rate;
 
     @ManyToMany(fetch = FetchType.EAGER)
