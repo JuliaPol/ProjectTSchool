@@ -31,6 +31,10 @@ export class AppService {
     return this.http.post('http://localhost:8080/tariff/create', rate).toPromise();
   }
 
+  createUser(user) {
+    return this.http.post('http://localhost:8080/customers/create', user).toPromise();
+  }
+
   editOption(option) {
     return this.http.post('http://localhost:8080/options/edit?optionId='+ option.id, option).toPromise();
   }

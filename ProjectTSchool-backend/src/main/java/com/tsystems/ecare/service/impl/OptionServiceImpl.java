@@ -160,6 +160,16 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
     }
 
     @Override
+    public List<Option> getOptionsForRules(Long optionId) {
+        Option option = optionDao.get(optionId);
+        List<Option> optionList= optionDao.getAll();
+        List<Option> checkedOption = option.getCompOptionsOf().stream()
+                    .filter(o->!optionList.contains(o)).collect(Collectors.toList());
+        checkedOption.remove(option);
+        return checkedOption;
+    }
+
+    @Override
     protected JpaDao<Option> getDefaultDao() {
         return optionDao;
     }

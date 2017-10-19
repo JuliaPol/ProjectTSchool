@@ -1,6 +1,6 @@
 <div class="panel panel-default back col-md-9">
   <div class="row add-contract-and-search">
-    <input type="submit" class="btn btn-info button-one button-act col-md-2" value="Add tariff">
+    <input type="submit" class="btn btn-info button-one button-act col-md-2" value="Add tariff" (click)="openTab('/employee/tariff-form')">
     <div class="input-group col-md-6 search-inp">
       <input type="text" class="form-control" placeholder="Search...">
       <span class="input-group-btn">
@@ -9,13 +9,13 @@
     </div><!-- /input-group -->
   </div>
   <div class="optionPanel scrollbar-cyan bordered-cyan card example-1 square">
-    <div *ngFor="let option of options">
+    <div *ngFor="let rate of rates">
       <div class="row">
         <div class="well well-sm col-md-11 panel-number">
           <p class="col-md-9">
-            {{option.name}}
+            {{rate.name}}
           </p>
-          <button class="btn btn-info button-one button-act col-md-2 button-number">
+          <button class="btn btn-info button-one button-act col-md-2 button-number" (click)="openTab('/employee/tariff-info')">
             Change
           </button>
         </div>

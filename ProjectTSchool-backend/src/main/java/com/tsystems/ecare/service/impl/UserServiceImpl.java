@@ -25,10 +25,6 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService {
     private UserDao userDao;
 
     @Override
-    public void save(User user) {
-    }
-
-    @Override
     @Transactional
     public User findByLogin(String login) {
         return userDao.findByLogin(login);
@@ -38,6 +34,14 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService {
     @Transactional
     public List<User> getAllCustomers() {
         return roleDao.getAllCustomers();
+    }
+
+    @Override
+    @Transactional
+    public void saveCustomer(User user) {
+        user.setLogin(user.getEmail());
+        user.setPassword(passwordEncoder.encode(user.getLastName()));
+        userDao.insert(user);
     }
 
     @Override

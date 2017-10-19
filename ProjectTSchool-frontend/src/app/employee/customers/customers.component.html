@@ -1,6 +1,6 @@
 <div class="panel panel-default back col-md-9">
   <div class="row add-contract-and-search">
-    <input type="submit" class="btn btn-info button-one button-act col-md-2" value="Add user">
+    <input type="submit" class="btn btn-info button-one button-act col-md-2" value="Add user" (click)="openTab('/employee/customer-form')">
     <div class="input-group col-md-6 search-inp">
       <input type="text" class="form-control" placeholder="Search...">
       <span class="input-group-btn">
@@ -8,7 +8,7 @@
           </span>
     </div><!-- /input-group -->
   </div>
-  <div class="panel-group big-panel" id="accordion">
+  <div class="panel-group big-panel scrollbar-cyan bordered-cyan card example-1 square" id="accordion">
     <!-- 1 панель -->
     <div *ngFor="let customer of customers">
       <div class="panel panel-default">
@@ -20,7 +20,7 @@
               <p data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="col-md-9 client-href">
                 {{customer.firstName}} {{customer.lastName}}</p>
               <input type="submit" class="btn btn-info button-one button-act col-md-2" value="Add contract"
-                     (click)="addContract()">
+                     (click)="openTab('/employee/contract-form')">
             </div>
           </h4>
         </div>

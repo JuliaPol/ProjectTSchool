@@ -48,7 +48,7 @@ public class User {
     @Column(name = "passport_issued_by_whom")
     private String passportIssuedByWhom;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 

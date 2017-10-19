@@ -28,4 +28,6 @@ public interface OptionService extends Service<Option> {
 
     void addIncompatible(Long current, List<String> incomp, boolean isCompatible);
 
+    List<Option> getOptionsForRules(Long optionId);
+
 }

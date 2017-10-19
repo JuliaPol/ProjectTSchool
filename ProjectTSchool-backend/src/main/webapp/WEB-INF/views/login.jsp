@@ -23,7 +23,7 @@
         </div>
         <div class="form-group ">
             <label for="inputPassword"><p>Password</p></label>
-            <label for="inputPassword" id="forgotPass"><a>Forgot password?</a></label>
+            <%--<label for="inputPassword" id="forgotPass"><a>Forgot password?</a></label>--%>
             <input type="password" name="password" class="form-control input-UP" id="inputPassword"
                    placeholder="Password">
         </div>
@@ -32,9 +32,9 @@
         </div>
     </form>
 </div>
-<div class="form" id="miniForm">
-    <label id="signUp">New to Satellite?<a> Create an account.</a></label>
-</div>
+<%--<div class="form" id="miniForm">--%>
+    <%--<label id="signUp">New to Satellite?<a> Create an account.</a></label>--%>
+<%--</div>--%>
 
 </body>
 </html>

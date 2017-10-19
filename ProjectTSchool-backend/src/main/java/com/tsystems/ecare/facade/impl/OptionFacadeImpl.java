@@ -43,6 +43,13 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
                     .collect(Collectors.toList());
             optionDTO.setIncompatibleOptions(incOptionsString);
         }
+        List<Option> compOptionsOf = entity.getCompOptionsOf();
+        if (compOptionsOf != null) {
+            List<String> compOptionsOfString = compOptionsOf.stream()
+                    .map(Option::getName)
+                    .collect(Collectors.toList());
+            optionDTO.setCompatibleOptionsOf(compOptionsOfString);
+        }
         return optionDTO;
     }
 
@@ -94,6 +101,13 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
         }
         if (dto.getIncompatibleOptions() != null) {
             List<Option> optionList = dto.getIncompatibleOptions()
+                    .stream()
+                    .map(o->optionService.findOptionByName(o))
+                    .collect(Collectors.toList());
+            option.setIncOptions(optionList);
+        }
+        if (dto.getCompatibleOptionsOf() != null) {
+            List<Option> optionList = dto.getCompatibleOptionsOf()
                     .stream()
                     .map(o->optionService.findOptionByName(o))
                     .collect(Collectors.toList());

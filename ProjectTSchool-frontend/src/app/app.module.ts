@@ -18,6 +18,11 @@ import {OptionsRulesComponent} from "./employee/options/options-rules/options-ru
 import {OptionFormComponent} from "./employee/options/option-form/option-form.component";
 import {OptionInfoComponent} from "./employee/options/option-info/option-info.component";
 import {TariffFormComponent} from "./employee/tariffs/tariff-form/tariff-form.component";
+import {CustomerFormComponent} from "./employee/customers/customer-form/customer-form.component";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatDatepickerModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatNativeDateModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -32,7 +37,8 @@ import {TariffFormComponent} from "./employee/tariffs/tariff-form/tariff-form.co
     OptionsRulesComponent,
     OptionFormComponent,
     OptionInfoComponent,
-    TariffFormComponent
+    TariffFormComponent,
+    CustomerFormComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +46,11 @@ import {TariffFormComponent} from "./employee/tariffs/tariff-form/tariff-form.co
     HttpModule,
     RouterModule,
     AppRoutingModule,
+    // BrowserAnimationsModule,
+    // MatDatepickerModule,
+    // MatButtonModule,
+    // MatCheckboxModule,
+    // MatNativeDateModule,
   ],
   providers: [AppService],
   bootstrap: [AppComponent]

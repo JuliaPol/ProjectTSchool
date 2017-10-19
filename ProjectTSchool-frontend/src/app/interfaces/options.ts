@@ -6,4 +6,5 @@ export interface IOption {
   name: string,
   compatibleOptions: string[],
   incompatibleOptions: string[],
+  compatibleOptionsOf: string[]
 }

@@ -18,5 +18,6 @@ public class OptionDTO extends IdDTO {
     private String description;
     private List<String> compatibleOptions;
     private List<String> incompatibleOptions;
+    private List<String> compatibleOptionsOf;
 
 }

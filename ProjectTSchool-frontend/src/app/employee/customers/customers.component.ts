@@ -29,7 +29,8 @@ export class CustomersComponent implements OnInit {
     customer.selected = !customer.selected;
   }
 
-  addContract() {
-    this.router.navigate(['/employee/contract-form']);
+
+  openTab(link: string) {
+    this.router.navigate([link]);
   }
 }

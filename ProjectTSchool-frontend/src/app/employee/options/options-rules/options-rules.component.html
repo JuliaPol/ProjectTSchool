@@ -18,17 +18,15 @@
       <button class="form-control btn btn-info button-one" (click)="addToPurposeList()">Add</button>
     </div>
   </div>
-  <div *ngFor="let option of purposeList">
     <div class="row" id="purpList">
-      <div class="col-md-4">
-        <p>{{option.name}}</p>
-      </div>
-      <div class="col-md-1">
-        <input type="checkbox" [checked]="option.selected"
-               (change)="option.selected = !option.selected">
-      </div>
+      <ul class="list-group scroll-bar" id="listSelectedOptions">
+          <li class="list-group-item col-md-3" *ngFor="let option of purposeList" >
+            <input id={{option.name}} type="checkbox" [checked]="option.selected"
+                   (change)="option.selected = !option.selected">
+            <label for={{option.name}}> {{option.name}} </label>
+          </li>
+      </ul>
     </div>
-  </div>
   <div class="row" id="addRule">
     <div class="col-md-8">
       <select class="form-control" [(ngModel)]="selectedRule" (change)="optionSelected(null)">

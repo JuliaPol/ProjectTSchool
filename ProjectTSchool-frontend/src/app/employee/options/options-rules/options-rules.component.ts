@@ -55,23 +55,30 @@ export class OptionsRulesComponent implements OnInit {
     if (this.selectedOption && this.selectedRule) {
       if (this.selectedOption.compatibleOptions !== null) {
         this.selectedOption.compatibleOptions.forEach((optName) => {
-          this.filterOptionsForSelection(optName);
+          this.filterOptionsForSelection(optName, false);
+        });
+      }
+      if (this.selectedOption.compatibleOptionsOf !== null) {
+        this.selectedOption.compatibleOptionsOf.forEach((optName) => {
+          this.filterOptionsForSelection(optName, true);
         });
       }
     } else {
       if (this.selectedOption.incompatibleOptions !== null) {
         this.selectedOption.incompatibleOptions.forEach((optName) => {
-          this.filterOptionsForSelection(optName);
+          this.filterOptionsForSelection(optName, false);
         });
       }
     }
   }
 
-  private filterOptionsForSelection(name: string) {
+  private filterOptionsForSelection(name: string, deletedOpt: boolean) {
     this.optionsForSelection
       .splice(this.myIndexOf(this.optionsForSelection
-          .filter(value => value.name === name).pop()), 1);
-    this.purposeList.push({name: name, selected: true});
+        .filter(value => value.name === name).pop()), 1);
+    if (!deletedOpt) {
+      this.purposeList.push({name: name, selected: true});
+    }
   }
 
   purposeOptionSelected(id: any) {
