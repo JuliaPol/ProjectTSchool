@@ -40,7 +40,7 @@
                 <li class="active" id="myLi"><a id="myHref" href="#">My</a></li>
                 <li id="allLi"><a id="allHref" href="#">All</a></li>
             </ul>
-            <div class="panel-body back1" id="tariff">
+            <div class="panel-body back1 optionPanel scrollbar-cyan bordered-cyan card example-1 square" id="tariff">
             </div>
             <%--<div class="text-center">--%>
                 <%--<ul class="pagination" id="pag">--%>

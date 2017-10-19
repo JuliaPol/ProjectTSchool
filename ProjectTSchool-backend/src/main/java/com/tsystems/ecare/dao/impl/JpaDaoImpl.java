@@ -3,7 +3,6 @@ package com.tsystems.ecare.dao.impl;
 import com.tsystems.ecare.dao.JpaDao;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
@@ -39,6 +38,11 @@ public abstract class JpaDaoImpl<T> implements JpaDao<T> {
     @Override
     public T get(Long id) {
         return getEntityManager().find(persistentClass, id);
+    }
+
+    @Override
+    public void refresh(T entity) {
+        getEntityManager().refresh(entity);
     }
 
     public abstract EntityManager getEntityManager();

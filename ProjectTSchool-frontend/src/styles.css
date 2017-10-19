@@ -7,32 +7,42 @@
   height: 40px;
   font-size: 20px;
 }
+
 #logo {
   margin-left: 45px;
   position: relative;
   top: 7px;
   color: #11AFAA;
 }
+
 #selectContract {
   top: 7px;
 }
+
 .head {
   background-color: #13BFB9;
   font-size: 15px;
 }
+
 #a1 {
   color: white;
 }
+
 #a2 {
   color: white;
 }
+
 #a3 {
   color: white;
+  margin-right: 70px;
+  margin-top: 13px;
 }
+
 .button-group {
   margin-left: 40px;
   width: 200px;
 }
+
 .button-one {
   background-color: #E4FFF6;
   border-color: #13BFB9;
@@ -90,20 +100,24 @@
   color: #E4FFF6;
   background-color: #fff
 }
+
 .back {
   /*    background-color: #E4FFF6;*/
   margin-top: 10px;
   margin-right: 50px;
   height: 458px;
 }
+
 .back1 {
   background-color: white;
   height: 340px;
 }
+
 .buttonAct {
   margin-left: 20px;
   height: 40px;
 }
+
 .panel-number {
   margin-left: 40px;
   margin-right: 40px;
@@ -118,10 +132,6 @@
 .client-href {
   margin-top: 8px;
   margin-left: 35px;
-}
-
-#a3 {
-  margin-right: 70px;
 }
 
 .search-inp {
@@ -141,3 +151,65 @@
 .search {
   margin-left: 300px;
 }
+
+.optionPanel {
+  margin-top: 15px;
+}
+
+#purpList {
+  margin-top: 10px;
+}
+
+#addRule {
+  margin-top: 20px;
+}
+
+.addOption {
+  margin: 20px;
+}
+
+.scrollbar-cyan::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #F5F5F5;
+  border-radius: 10px;
+}
+
+.scrollbar-cyan::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5;
+}
+
+.scrollbar-cyan::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #13BFB9;
+}
+
+.bordered-cyan::-webkit-scrollbar-track {
+  -webkit-box-shadow: none;
+  border: 1px solid #13BFB9;
+}
+
+.bordered-cyan::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: none;
+}
+
+.square::-webkit-scrollbar-track {
+  border-radius: 0 !important;
+}
+
+.square::-webkit-scrollbar-thumb {
+  border-radius: 0 !important;
+}
+
+.thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.example-1 {
+  position: relative;
+  overflow-y: auto;
+  height: 380px;
+  overflow-x: hidden;
+}
+

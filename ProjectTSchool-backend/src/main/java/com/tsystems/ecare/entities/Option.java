@@ -30,7 +30,7 @@ public class Option {
     public static final String OPTION_FIND_ALL_OPTIONS_IN_RATE_FOR_CUSTOMER = "Option.findAllOptionsInRateForCustomer";
     public static final String OPTION_FIND_OPTION_BY_NAME = "Option.findAllOptionByName";
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")

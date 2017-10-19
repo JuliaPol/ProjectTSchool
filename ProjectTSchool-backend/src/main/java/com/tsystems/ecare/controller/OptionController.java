@@ -5,10 +5,7 @@ import com.tsystems.ecare.entities.Option;
 import com.tsystems.ecare.facade.OptionFacade;
 import com.tsystems.ecare.service.OptionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
@@ -19,6 +16,29 @@ public class OptionController {
 
     @Autowired
     private OptionFacade optionFacade;
+
+
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public List<OptionDTO> getAll() throws Exception {
+        return optionFacade.getAll();
+    }
+
+    @RequestMapping(value = "/addRule", method = RequestMethod.POST)
+    public void addRule(@RequestParam("optionId") Long current,
+                                @RequestParam("isCompatible") boolean isCompatible,
+                                @RequestBody List<String> incompOptions) throws Exception {
+        optionFacade.addIncompatible(current, incompOptions, isCompatible);
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public void create(@RequestBody OptionDTO optionDTO) throws Exception {
+        optionFacade.create(optionDTO);
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public void edit(@RequestParam("optionId") String optionId, @RequestBody OptionDTO optionDTO) throws Exception {
+        optionFacade.edit(optionId, optionDTO);
+    }
 
     @RequestMapping(value = "/available", method = RequestMethod.GET)
     public List<OptionDTO> getAllAvailableOptions(@RequestParam("number") String number) {

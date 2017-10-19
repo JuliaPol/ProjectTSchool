@@ -8,4 +8,5 @@ public interface JpaDao<T> {
     void update(T entity);
     void insert(T entity);
     T get(Long id);
+    void refresh(T entity);
 }

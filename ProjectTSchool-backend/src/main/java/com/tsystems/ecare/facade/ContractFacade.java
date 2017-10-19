@@ -25,6 +25,6 @@ public interface ContractFacade extends Facade<ContractDTO, Contract> {
 
     List<CustomerDTO> searchByNumber(String likeName, int limit);
 
-    List<CustomerDTO> searchByName(String likeName , int limit);
+    List<CustomerDTO> searchByName(String likeName, int limit);
 
 }

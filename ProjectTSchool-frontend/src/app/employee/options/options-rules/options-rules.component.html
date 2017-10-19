@@ -1,0 +1,43 @@
+<div class="panel panel-default back col-md-9">
+  <a class="btn btn-info button-one" [routerLink]="['../options']">Back</a>
+  <h3>Select options</h3>
+  <div class="row">
+    <div class="col-md-4">
+      <select class="form-control col-md-4" #selectOpt (change)="optionSelected(selectOpt.value)">
+        <option value="">Select option</option>
+        <option *ngFor="let option of options" [value]="option.id">{{option.name}}</option>
+      </select>
+    </div>
+    <div class="col-md-4" >
+      <select class="form-control col-md-4" #selectPurp (change)="purposeOptionSelected(selectPurp.value)">
+        <option value="">Select option</option>
+        <option *ngFor="let option of optionsForSelection" [value]="option.id">{{option.name}}</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <button class="form-control btn btn-info button-one" (click)="addToPurposeList()">Add</button>
+    </div>
+  </div>
+  <div *ngFor="let option of purposeList">
+    <div class="row" id="purpList">
+      <div class="col-md-4">
+        <p>{{option.name}}</p>
+      </div>
+      <div class="col-md-1">
+        <input type="checkbox" [checked]="option.selected"
+               (change)="option.selected = !option.selected">
+      </div>
+    </div>
+  </div>
+  <div class="row" id="addRule">
+    <div class="col-md-8">
+      <select class="form-control" [(ngModel)]="selectedRule" (change)="optionSelected(null)">
+        <option [ngValue]="false">Incompatible</option>
+        <option [ngValue]="true">Compatible</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <button class="form-control btn btn-info button-one" (click)="addRule()">Add rule</button>
+    </div>
+  </div>
+</div>

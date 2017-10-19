@@ -1,0 +1,38 @@
+<div class="panel panel-default back col-md-9">
+  <a class="btn btn-info button-one" [routerLink]="['../options']">Back</a>
+  <div>
+    <h3>
+      Create option
+    </h3>
+  </div>
+  <form (ngSubmit)="onSubmit(); todoForm.reset()" #todoForm="ngForm">
+    <div class="row addOption">
+      <div class="col-md-8">
+        <input type="text" class="form-control" name="name" [(ngModel)]="option.name" placeholder="Name" #name="ngModel"
+               required>
+      </div>
+    </div>
+    <div class="row addOption">
+      <div class="col-md-8">
+        <input type="text" class="form-control" name="description" [(ngModel)]="option.description"
+               placeholder="Description" #description="ngModel" required>
+      </div>
+    </div>
+    <div class="row addOption">
+      <div class="col-md-4">
+        <input type="text" class="form-control" name="cost" [(ngModel)]="option.cost"
+               placeholder="Cost" #cost="ngModel" required>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" name="costOfConnection" [(ngModel)]="option.costOfConnection"
+               placeholder="Cost of connection" #costOfConnection="ngModel" required>
+      </div>
+    </div>
+    <div class="row addOption">
+      <div class="col-md-8">
+        <button type="submit" class="btn btn-info button-one col-md-2" [disabled]="todoForm.form.invalid">Add</button>
+      </div>
+    </div>
+  </form>
+  {{result}}
+</div>

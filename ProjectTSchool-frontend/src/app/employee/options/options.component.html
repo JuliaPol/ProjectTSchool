@@ -1,0 +1,29 @@
+<div class="panel panel-default back col-md-9">
+  <div class="row add-contract-and-search">
+    <input type="submit" class="btn btn-info button-one col-md-2"
+           value="Add option" (click)="openTab('/employee/option-form')">
+    <input type="submit" class="btn btn-info button-one col-md-2"
+           value="Add rules" (click)="openTab('/employee/options-rules')">
+    <div class="input-group col-md-6 search-inp">
+      <input type="text" class="form-control" placeholder="Search...">
+      <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go!</button>
+          </span>
+    </div><!-- /input-group -->
+  </div>
+  <!-- 1 панель -->
+  <div class="optionPanel scrollbar-cyan bordered-cyan card example-1 square">
+    <div *ngFor="let option of options">
+      <div class="row">
+        <div class="well well-sm col-md-11 panel-number">
+          <p class="col-md-9">
+            {{option.name}}
+          </p>
+          <button class="btn btn-info button-one button-act col-md-2 button-number" (click)="openTab('/employee/option-info')">
+            Change
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

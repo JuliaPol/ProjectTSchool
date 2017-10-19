@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import "rxjs/add/operator/map";
 import {AppService} from "../app.service";
 import {IUser} from "../interfaces/user";
+import {Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -13,19 +14,22 @@ export class EmployeeComponent implements OnInit {
   buttons = [
     {
       name: 'Customers',
-      isActive: true
+      isActive: true,
+      path: '/employee/customers',
     },
     {
       name: 'Tariffs',
       isActive: false,
+      path: '/employee/tariffs',
     },
     {
       name: 'Options',
       isActive: false,
+      path: '/employee/options',
     }
   ];
 
-  constructor(private appService: AppService) {
+  constructor(private appService: AppService, private router: Router) {
 
   }
 
@@ -33,5 +37,9 @@ export class EmployeeComponent implements OnInit {
     this.appService.getCurrentUser().then(data =>
       this.user = data.json() as IUser
     )
+  }
+
+  openTab(link: string) {
+    this.router.navigate([link]);
   }
 }

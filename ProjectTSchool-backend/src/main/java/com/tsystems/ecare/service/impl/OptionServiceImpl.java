@@ -22,7 +22,7 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
     @Autowired
     private OptionDao optionDao;
 
-    private static Logger log = Logger.getLogger(OptionServiceImpl.class.getName());
+    private static Logger log = Logger.getLogger(OptionServiceImpl.class);
 
     @Override
     public List<Option> getAllOptionsForCustomer(String number) {
@@ -108,6 +108,55 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
             }
         }
         return false;
+    }
+
+    @Transactional
+    @Override
+    public void addIncompatible(Long current, List<String> incomp, boolean isCompatible) {
+        Option currentOption = optionDao.get(current);
+        if (!isCompatible) {
+
+            for (Option option : currentOption.getIncOptions()) {
+                option.getIncOptions().remove(currentOption);
+                option.getIncOptionsOf().remove(currentOption);
+                optionDao.update(option);
+            }
+            for (Option option : currentOption.getIncOptionsOf()) {
+                option.getIncOptions().remove(currentOption);
+                option.getIncOptionsOf().remove(currentOption);
+                optionDao.update(option);
+            }
+            currentOption.setIncOptions(new ArrayList<>());
+            currentOption.setIncOptionsOf(new ArrayList<>());
+            for (String name : incomp) {
+                Option inc = optionDao.findOptionByName(name);
+                currentOption.getIncOptions().add(inc);
+                optionDao.update(currentOption);
+                inc.getIncOptions().add(currentOption);
+                optionDao.update(inc);
+            }
+        } else {
+
+            for (Option option : currentOption.getCompOptions()) {
+                option.getCompOptions().remove(currentOption);
+                option.getCompOptionsOf().remove(currentOption);
+                optionDao.update(option);
+            }
+            for (Option option : currentOption.getCompOptionsOf()) {
+                option.getCompOptions().remove(currentOption);
+                option.getCompOptionsOf().remove(currentOption);
+                optionDao.update(option);
+            }
+            currentOption.setCompOptions(new ArrayList<>());
+            currentOption.setCompOptionsOf(new ArrayList<>());
+            for (String name : incomp) {
+                Option inc = optionDao.findOptionByName(name);
+                currentOption.getCompOptions().add(inc);
+                optionDao.update(currentOption);
+                inc.getCompOptions().add(currentOption);
+                optionDao.update(inc);
+            }
+        }
     }
 
     @Override

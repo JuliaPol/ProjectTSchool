@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +35,7 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
                     .collect(Collectors.toList());
             optionDTO.setCompatibleOptions(compOptionsString);
         }
+
         List<Option> incOptions = entity.getIncOptions();
         if (incOptions != null) {
             List<String> incOptionsString = incOptions.stream()
@@ -98,6 +100,30 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
             option.setIncOptions(optionList);
         }
         return option;
+    }
+
+    @Override
+    public void create(OptionDTO optionDTO) {
+        try {
+            optionService.insert(convertToEntity(optionDTO));
+        } catch (Exception e) {
+            log.error("Can't create:", e);
+        }
+    }
+
+    @Override
+    public void edit(String optionId, OptionDTO optionDTO) {
+        try {
+            Option option = optionService.get(Long.parseLong(optionId));
+            optionService.update(convertToEntity(optionDTO));
+        } catch (Exception e) {
+            log.error("Can't edit option:", e);
+        }
+    }
+
+    @Override
+    public void addIncompatible(Long current, List<String> incomp, boolean isCompatible) {
+        optionService.addIncompatible(current, incomp, isCompatible);
     }
 
     @Override

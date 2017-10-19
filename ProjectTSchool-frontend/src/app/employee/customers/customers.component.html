@@ -16,11 +16,11 @@
         <div class="panel-heading">
           <h4 class="panel-title">
             <div class="row">
+              <button (click)="onToggle(customer)"></button>
               <p data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="col-md-9 client-href">
                 {{customer.firstName}} {{customer.lastName}}</p>
               <input type="submit" class="btn btn-info button-one button-act col-md-2" value="Add contract"
                      (click)="addContract()">
-              <button (click)="onToggle(customer)"></button>
             </div>
           </h4>
         </div>

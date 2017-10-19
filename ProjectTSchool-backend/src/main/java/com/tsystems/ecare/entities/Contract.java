@@ -38,7 +38,7 @@ public class Contract {
     public static final String CONTRACT_SEARCH_BY_NUMBER = "Contract.searchByNumber";
     public static final String CONTRACT_SEARCH_BY_NAME = "Contract.searchByName";
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "number")

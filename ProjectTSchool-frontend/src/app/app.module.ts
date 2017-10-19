@@ -12,6 +12,12 @@ import {AppService} from "./app.service";
 import {ContractListComponent} from "./employee/contract-list/contract-list.component";
 import {ContractFormComponent} from "./employee/contract-form/contract-form.component";
 import {CustomersComponent} from "./employee/customers/customers.component";
+import {OptionsComponent} from "./employee/options/options.component";
+import {TariffsComponent} from "./employee/tariffs/tariffs.component";
+import {OptionsRulesComponent} from "./employee/options/options-rules/options-rules.component";
+import {OptionFormComponent} from "./employee/options/option-form/option-form.component";
+import {OptionInfoComponent} from "./employee/options/option-info/option-info.component";
+import {TariffFormComponent} from "./employee/tariffs/tariff-form/tariff-form.component";
 
 @NgModule({
   declarations: [
@@ -21,6 +27,12 @@ import {CustomersComponent} from "./employee/customers/customers.component";
     ContractListComponent,
     ContractFormComponent,
     CustomersComponent,
+    OptionsComponent,
+    TariffsComponent,
+    OptionsRulesComponent,
+    OptionFormComponent,
+    OptionInfoComponent,
+    TariffFormComponent
   ],
   imports: [
     BrowserModule,

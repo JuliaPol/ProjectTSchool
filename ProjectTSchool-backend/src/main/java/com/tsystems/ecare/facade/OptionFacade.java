@@ -11,4 +11,7 @@ public interface OptionFacade extends Facade<OptionDTO, Option> {
     List<OptionDTO> getAllIncompatibleOptionsForCustomer(String number);
     List<OptionDTO> getBy(Long id);
     boolean checkNewOptions(List<OptionDTO> optionList);
+    void addIncompatible(Long current, List<String> incomp, boolean isCompatible);
+    void create(OptionDTO optionDTO);
+    void edit(String optionId, OptionDTO optionDTO);
 }
