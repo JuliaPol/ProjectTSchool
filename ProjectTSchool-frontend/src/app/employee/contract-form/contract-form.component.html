@@ -1,8 +1,27 @@
 <div class="panel panel-default back col-md-9">
   <a class="btn btn-info button-one" [routerLink]="['../customers']">Back</a>
   <h3>Create contract</h3>
-  <select class="form-control col-md-4" #selectTariff>
-    <option value="">Select tariff</option>
-    <option *ngFor="let rate of rates" [value]="rate.id">{{rate.name}}</option>
-  </select>
+  <form (ngSubmit)="onSubmit(); todoForm.reset()" #todoForm="ngForm">
+    <div class="row addOption">
+      <div class="col-md-5">
+        <p>Select tariff</p>
+        <select class="form-control col-md-4" #selectTariff>
+          <option *ngFor="let rate of rates" [value]="rate.id">{{rate.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row addOption">
+      <div class="col-md-5">
+        <p>Select number</p>
+        <select class="form-control col-md-4" #selectNumber>
+          <option *ngFor="let number of numbers" [value]="number">{{number}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row addOption">
+      <div class="col-md-8">
+        <button type="submit" class="btn btn-info button-one col-md-2" [disabled]="todoForm.form.invalid">Add</button>
+      </div>
+    </div>
+  </form>
 </div>

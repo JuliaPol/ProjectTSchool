@@ -16,6 +16,7 @@ export class CustomerFormComponent {
   }
 
   onSubmit() {
+    console.log(this.customer.address.street);
     this.appService.createUser(this.customer).then(() => this.result = 'Added');
   }
 }

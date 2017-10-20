@@ -288,9 +288,15 @@ label:hover:before {
 }
 
 .dateField {
-  margin-top: -20px;
+  margin-top: -25px;
 }
 
 label {
   font-weight: 100;
+}
+#signOut {
+  margin-top: 5px;
+  margin-left: 10px;
+  width: 100px;
+  color: #95989A;
 }

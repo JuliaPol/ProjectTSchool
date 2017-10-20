@@ -11,6 +11,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li id="a3">{{user?.firstName}} {{user?.lastName}}</li>
+        <li><input id="signOut" type="submit" class="btn btn-info button-one col-md-2 button-number" value="Sign out" (click)="signOut('/logout')"></li>
       </ul>
     </div>
   </div>

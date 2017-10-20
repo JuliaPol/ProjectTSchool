@@ -34,4 +34,10 @@ public class ContractEmployeeController {
     public void addOptionForCustomer(@PathVariable("number") String number, @RequestParam("rate") String  rate) throws Exception {
         contractService.addRateInContract(number,Long.parseLong(rate));
     }
+
+    @RequestMapping(value = "create", method = RequestMethod.POST)
+    @ResponseBody
+    public void createContract(@RequestBody String number, @RequestParam("rate") String  rateId) throws Exception {
+//        contractService.createContract(number,Long.parseLong(rate));
+    }
 }

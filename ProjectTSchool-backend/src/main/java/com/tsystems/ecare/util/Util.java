@@ -22,7 +22,7 @@ public class Util {
 
     private boolean userInRole(String role) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getAuthorities().stream().filter(ga ->
-                Objects.equals(ga.getAuthority(), role)).findAny().isPresent();
+        return authentication.getAuthorities().stream().anyMatch(ga ->
+                Objects.equals(ga.getAuthority(), role));
     }
 }

@@ -46,4 +46,8 @@ export class EmployeeComponent implements OnInit {
     }
     button.isActive = true;
   }
+
+  signOut(link: string) {
+    window.location.href = link;
+  }
 }

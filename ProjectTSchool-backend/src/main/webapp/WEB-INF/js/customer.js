@@ -70,7 +70,8 @@ numberSelected.change(function () {
         if ($('#myLi').hasClass('active')) {
             refreshList("/options/active?number=", "Deactivate");
         } else {
-            refreshList("/options/?number=", "Activate");
+            refreshList("/options/available?number=", "Activate");
+            refreshList("/options/unavailable?number=", "unavailable");
         }
     } else {
         refreshContract();
