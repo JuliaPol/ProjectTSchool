@@ -15,6 +15,6 @@ export class TariffFormComponent {
   result: string = '';
 
   onSubmit() {
-    this.appService.createRate(this.rate).then(() => this.result = 'Added');
+    this.appService.createTariff(this.rate).then(() => this.result = 'Added');
   }
 }

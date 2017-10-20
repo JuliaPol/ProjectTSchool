@@ -20,7 +20,7 @@
   <div class="btn-group-vertical button-group col-md-4">
     <div class="btn-group" *ngFor="let button of buttons">
       <input type="submit" id="contactButton" class="btn btn-info button-one button-one1"
-             ngClass="{'active': button.isActive}" value="{{button.name}}" (click)="openTab(button.path)">
+             [ngClass]="{'active': button.isActive}" value="{{button.name}}" (click)="openTab(button)">
     </div>
   </div>
   <router-outlet></router-outlet>

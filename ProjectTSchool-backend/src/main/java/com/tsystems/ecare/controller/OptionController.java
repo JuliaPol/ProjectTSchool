@@ -23,6 +23,11 @@ public class OptionController {
         return optionFacade.getAll();
     }
 
+    @RequestMapping(method = RequestMethod.GET)
+    public OptionDTO getById(@RequestParam("id") Long id) throws Exception {
+        return optionFacade.get(id);
+    }
+
     @RequestMapping(value = "/addRule", method = RequestMethod.POST)
     public void addRule(@RequestParam("optionId") Long current,
                                 @RequestParam("isCompatible") boolean isCompatible,
@@ -36,8 +41,13 @@ public class OptionController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public void edit(@RequestParam("optionId") String optionId, @RequestBody OptionDTO optionDTO) throws Exception {
-        optionFacade.edit(optionId, optionDTO);
+    public void edit(@RequestBody OptionDTO optionDTO) throws Exception {
+        optionFacade.edit(optionDTO);
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public void delete(@RequestParam("id") Long id) throws Exception {
+        optionFacade.deleteOption(id);
     }
 
     @RequestMapping(value = "/available", method = RequestMethod.GET)

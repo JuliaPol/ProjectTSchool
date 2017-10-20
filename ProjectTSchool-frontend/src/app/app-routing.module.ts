@@ -11,6 +11,7 @@ import {OptionFormComponent} from "./employee/options/option-form/option-form.co
 import {OptionInfoComponent} from "./employee/options/option-info/option-info.component";
 import {TariffFormComponent} from "./employee/tariffs/tariff-form/tariff-form.component";
 import {CustomerFormComponent} from "./employee/customers/customer-form/customer-form.component";
+import {TariffInfoComponent} from "./employee/tariffs/tariff-info/tariff-info.component";
 
 const appRoutes: Routes =[
   {path: '', redirectTo: 'employee', pathMatch: 'full'},
@@ -22,6 +23,7 @@ const appRoutes: Routes =[
       {path: 'options', component: OptionsComponent},
       {path: 'tariffs', component: TariffsComponent},
       {path: 'tariff-form', component: TariffFormComponent},
+      {path: 'tariff-info', component: TariffInfoComponent},
       {path: 'options-rules', component: OptionsRulesComponent},
       {path: 'option-form', component: OptionFormComponent},
       {path: 'option-info', component: OptionInfoComponent},

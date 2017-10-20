@@ -9,8 +9,8 @@
       </select>
     </div>
     <div class="col-md-4" >
-      <select class="form-control col-md-4" #selectPurp (change)="purposeOptionSelected(selectPurp.value)">
-        <option value="">Select option</option>
+      <select class="form-control col-md-4" [(ngModel)]="selectPurpose" #selectPurp (change)="purposeOptionSelected(selectPurp.value)">
+        <option [value]="0">Select option</option>
         <option *ngFor="let option of optionsForSelection" [value]="option.id">{{option.name}}</option>
       </select>
     </div>

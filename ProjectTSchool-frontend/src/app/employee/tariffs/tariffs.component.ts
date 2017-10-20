@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {AppService} from "../../app.service";
 import {Router} from "@angular/router";
 import {ITariff} from "../../interfaces/tariff";
+import {TariffSharedService} from "./tariff-shared.service";
 
 @Component({
   moduleId: module.id,
@@ -12,7 +13,9 @@ export class TariffsComponent implements OnInit {
 
   rates: ITariff = null;
 
-  constructor(private appService: AppService, private router: Router) {
+  constructor(private sharedService: TariffSharedService,
+    private appService: AppService,
+              private router: Router) {
 
   }
 
@@ -29,4 +32,8 @@ export class TariffsComponent implements OnInit {
     this.router.navigate([link]);
   }
 
+  change(id: number, link: string) {
+    this.sharedService.saveData(id);
+    this.openTab(link);
+  }
 }

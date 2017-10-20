@@ -1,4 +1,8 @@
 <div class="panel panel-default back col-md-9">
   <a class="btn btn-info button-one" [routerLink]="['../customers']">Back</a>
   <h3>Create contract</h3>
+  <select class="form-control col-md-4" #selectTariff>
+    <option value="">Select tariff</option>
+    <option *ngFor="let rate of rates" [value]="rate.id">{{rate.name}}</option>
+  </select>
 </div>

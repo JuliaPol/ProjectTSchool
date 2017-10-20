@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {AppService} from "../../app.service";
 import {IOption} from "../../interfaces/options";
 import {Router} from "@angular/router";
+import {OptionsSharedService} from "./options-shared.service";
 
 @Component({
   moduleId: module.id,
@@ -11,7 +12,9 @@ import {Router} from "@angular/router";
 export class OptionsComponent implements OnInit {
   options: IOption = null;
 
-  constructor(private appService: AppService, private router: Router) {
+  constructor(private appService: AppService,
+              private router: Router,
+              private sharedService: OptionsSharedService) {
 
   }
 
@@ -22,6 +25,11 @@ export class OptionsComponent implements OnInit {
   init() {
     this.appService.getAllOptions().then(data =>
     this.options = data.json() as IOption);
+  }
+
+  change(id: number, link: string) {
+    this.sharedService.saveData(id);
+    this.openTab(link);
   }
 
   openTab(link: string) {

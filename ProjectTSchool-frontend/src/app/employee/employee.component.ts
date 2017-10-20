@@ -39,7 +39,11 @@ export class EmployeeComponent implements OnInit {
     )
   }
 
-  openTab(link: string) {
-    this.router.navigate([link]);
+  openTab(button) {
+    this.router.navigate([button.path]);
+    for (let butt of this.buttons) {
+      butt.isActive = false;
+    }
+    button.isActive = true;
   }
 }

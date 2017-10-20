@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import {ITariff} from "../../interfaces/tariff";
 
 @Component({
   moduleId: module.id,
@@ -6,6 +7,5 @@ import {Component} from "@angular/core";
   templateUrl: './contract-form.component.html'
 })
 export class ContractFormComponent {
-
 
 }

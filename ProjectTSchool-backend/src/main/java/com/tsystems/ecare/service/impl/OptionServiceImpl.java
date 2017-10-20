@@ -116,16 +116,7 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
         Option currentOption = optionDao.get(current);
         if (!isCompatible) {
 
-            for (Option option : currentOption.getIncOptions()) {
-                option.getIncOptions().remove(currentOption);
-                option.getIncOptionsOf().remove(currentOption);
-                optionDao.update(option);
-            }
-            for (Option option : currentOption.getIncOptionsOf()) {
-                option.getIncOptions().remove(currentOption);
-                option.getIncOptionsOf().remove(currentOption);
-                optionDao.update(option);
-            }
+            cleanIncompatibleReferences(currentOption);
             currentOption.setIncOptions(new ArrayList<>());
             currentOption.setIncOptionsOf(new ArrayList<>());
             for (String name : incomp) {
@@ -136,26 +127,33 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
                 optionDao.update(inc);
             }
         } else {
-
-            for (Option option : currentOption.getCompOptions()) {
-                option.getCompOptions().remove(currentOption);
-                option.getCompOptionsOf().remove(currentOption);
-                optionDao.update(option);
-            }
-            for (Option option : currentOption.getCompOptionsOf()) {
-                option.getCompOptions().remove(currentOption);
-                option.getCompOptionsOf().remove(currentOption);
-                optionDao.update(option);
-            }
+            cleanCompatibleReferences(currentOption);
             currentOption.setCompOptions(new ArrayList<>());
-            currentOption.setCompOptionsOf(new ArrayList<>());
             for (String name : incomp) {
                 Option inc = optionDao.findOptionByName(name);
                 currentOption.getCompOptions().add(inc);
                 optionDao.update(currentOption);
-                inc.getCompOptions().add(currentOption);
-                optionDao.update(inc);
             }
+        }
+    }
+
+    private void cleanCompatibleReferences(Option currentOption) {
+        for (Option option : currentOption.getCompOptions()) {
+            option.getCompOptionsOf().remove(currentOption);
+            optionDao.update(option);
+        }
+    }
+
+    private void cleanIncompatibleReferences(Option currentOption) {
+        for (Option option : currentOption.getIncOptions()) {
+            option.getIncOptions().remove(currentOption);
+            option.getIncOptionsOf().remove(currentOption);
+            optionDao.update(option);
+        }
+        for (Option option : currentOption.getIncOptionsOf()) {
+            option.getIncOptions().remove(currentOption);
+            option.getIncOptionsOf().remove(currentOption);
+            optionDao.update(option);
         }
     }
 
@@ -167,6 +165,15 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
                     .filter(o->!optionList.contains(o)).collect(Collectors.toList());
         checkedOption.remove(option);
         return checkedOption;
+    }
+
+    @Override
+    @Transactional
+    public void deleteOption(Long id) {
+        Option option = optionDao.get(id);
+        cleanCompatibleReferences(option);
+        cleanIncompatibleReferences(option);
+        optionDao.delete(option);
     }
 
     @Override

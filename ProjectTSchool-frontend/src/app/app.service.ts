@@ -18,6 +18,11 @@ export class AppService {
       .toPromise();
   }
 
+  getOptionById(id: number): Promise<Response> {
+    return this.http.get('http://localhost:8080/options?id=' + id)
+      .toPromise();
+  }
+
   addRule(current: number, optionList: string[], isCoppatible: boolean) {
     return this.http.post('http://localhost:8080/options/addRule?optionId='
       + current + '&isCompatible=' + isCoppatible, optionList).toPromise();
@@ -27,7 +32,20 @@ export class AppService {
     return this.http.post('http://localhost:8080/options/create', option).toPromise();
   }
 
-  createRate(rate) {
+  deleteOption(id) {
+    return this.http.post('http://localhost:8080/options/delete?id=' + id, {}).toPromise();
+  }
+
+  deleteTariff(id) {
+    return this.http.post('http://localhost:8080/tariffs/delete?id=' + id, {}).toPromise();
+  }
+
+  getTariffById(id: number): Promise<Response> {
+    return this.http.get('http://localhost:8080/tariffs/' + id)
+      .toPromise();
+  }
+
+  createTariff(rate) {
     return this.http.post('http://localhost:8080/tariff/create', rate).toPromise();
   }
 
@@ -35,8 +53,12 @@ export class AppService {
     return this.http.post('http://localhost:8080/customers/create', user).toPromise();
   }
 
+  editTariff(option) {
+    return this.http.post('http://localhost:8080/tariffs/edit', option).toPromise();
+  }
+
   editOption(option) {
-    return this.http.post('http://localhost:8080/options/edit?optionId='+ option.id, option).toPromise();
+    return this.http.post('http://localhost:8080/options/edit', option).toPromise();
   }
 
   getAllTariffs(): Promise<Response> {

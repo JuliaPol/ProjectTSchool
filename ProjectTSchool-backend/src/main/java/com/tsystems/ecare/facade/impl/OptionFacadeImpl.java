@@ -111,7 +111,7 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
                     .stream()
                     .map(o->optionService.findOptionByName(o))
                     .collect(Collectors.toList());
-            option.setIncOptions(optionList);
+            option.setCompOptionsOf(optionList);
         }
         return option;
     }
@@ -124,11 +124,14 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
             log.error("Can't create:", e);
         }
     }
+    @Override
+    public void deleteOption(Long id) {
+        optionService.deleteOption(id);
+    }
 
     @Override
-    public void edit(String optionId, OptionDTO optionDTO) {
+    public void edit(OptionDTO optionDTO) {
         try {
-            Option option = optionService.get(Long.parseLong(optionId));
             optionService.update(convertToEntity(optionDTO));
         } catch (Exception e) {
             log.error("Can't edit option:", e);

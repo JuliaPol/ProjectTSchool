@@ -2,10 +2,11 @@ import {IOption} from "../../../interfaces/options";
 import {Component, OnInit} from "@angular/core";
 import {AppService} from "../../../app.service";
 
-interface IItem {
+export interface IItem {
   name: string,
   selected: boolean,
 }
+
 @Component({
   moduleId: module.id,
   selector: 'options-rules',
@@ -18,6 +19,7 @@ export class OptionsRulesComponent implements OnInit {
   purposeOption: IOption;
   purposeList: IItem[] = [];
   selectedRule: boolean = true;
+  selectPurpose: number = 0;
 
   constructor(private appService: AppService) {
 
@@ -43,9 +45,12 @@ export class OptionsRulesComponent implements OnInit {
     let option: IOption = this.options.filter(value => value.id === parseInt(id)).pop();
     if (id) {
       this.selectedOption = option;
+    } else {
+      this.purposeOption = null;
+      this.selectPurpose = 0;
     }
     if (this.selectedOption) {
-      this.optionsForSelection.splice(this.myIndexOf(option), 1);
+      this.optionsForSelection.splice(this.myIndexOf(this.selectedOption), 1);
     }
     if (this.purposeOption) {
       this.optionsForSelection
@@ -55,38 +60,41 @@ export class OptionsRulesComponent implements OnInit {
     if (this.selectedOption && this.selectedRule) {
       if (this.selectedOption.compatibleOptions !== null) {
         this.selectedOption.compatibleOptions.forEach((optName) => {
-          this.filterOptionsForSelection(optName, false);
+          this.filterOptionsForSelection(optName);
+          this.purposeList.push({name: optName, selected: true});
         });
-      }
-      if (this.selectedOption.compatibleOptionsOf !== null) {
+        this.selectedOption.incompatibleOptions.forEach((optName) => {
+          this.filterOptionsForSelection(optName);
+        });
         this.selectedOption.compatibleOptionsOf.forEach((optName) => {
-          this.filterOptionsForSelection(optName, true);
+          this.filterOptionsForSelection(optName);
         });
       }
     } else {
       if (this.selectedOption.incompatibleOptions !== null) {
         this.selectedOption.incompatibleOptions.forEach((optName) => {
-          this.filterOptionsForSelection(optName, false);
+          this.filterOptionsForSelection(optName);
+          this.purposeList.push({name: optName, selected: true});
+        });
+        this.selectedOption.compatibleOptions.forEach((optName) => {
+          this.filterOptionsForSelection(optName);
         });
       }
     }
   }
 
-  private filterOptionsForSelection(name: string, deletedOpt: boolean) {
+  private filterOptionsForSelection(name: string) {
     this.optionsForSelection
       .splice(this.myIndexOf(this.optionsForSelection
         .filter(value => value.name === name).pop()), 1);
-    if (!deletedOpt) {
-      this.purposeList.push({name: name, selected: true});
-    }
   }
 
   purposeOptionSelected(id: any) {
-   let option: IOption = this.optionsForSelection
+    let option: IOption = this.optionsForSelection
       .filter(value => value.id === parseInt(id)).pop();
-   if (option) {
-     this.purposeOption = option;
-   }
+    if (option) {
+      this.purposeOption = option;
+    }
   }
 
   addToPurposeList() {
@@ -95,6 +103,7 @@ export class OptionsRulesComponent implements OnInit {
       this.optionsForSelection
         .splice(this.myIndexOf(this.purposeOption), 1);
       this.purposeOption = null;
+      this.selectPurpose = 0;
     }
   }
 

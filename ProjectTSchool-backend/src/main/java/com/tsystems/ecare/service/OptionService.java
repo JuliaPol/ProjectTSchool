@@ -30,4 +30,6 @@ public interface OptionService extends Service<Option> {
 
     List<Option> getOptionsForRules(Long optionId);
 
+    void deleteOption(Long id);
+
 }

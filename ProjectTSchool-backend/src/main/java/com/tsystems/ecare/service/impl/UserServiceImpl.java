@@ -41,6 +41,7 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService {
     public void saveCustomer(User user) {
         user.setLogin(user.getEmail());
         user.setPassword(passwordEncoder.encode(user.getLastName()));
+        user.setRole(roleDao.get(1L));
         userDao.insert(user);
     }
 

@@ -36,4 +36,11 @@ public class RateController {
     public List<RateDTO> getAllTariffs() throws Exception {
         return rateFacade.getAll();
     }
+
+    @Secured("ROLE_MANAGER")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public RateDTO getTariffById(@PathVariable("id") Long id) throws Exception {
+        return rateFacade.get(id);
+    }
 }

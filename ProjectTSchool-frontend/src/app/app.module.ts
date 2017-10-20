@@ -19,10 +19,10 @@ import {OptionFormComponent} from "./employee/options/option-form/option-form.co
 import {OptionInfoComponent} from "./employee/options/option-info/option-info.component";
 import {TariffFormComponent} from "./employee/tariffs/tariff-form/tariff-form.component";
 import {CustomerFormComponent} from "./employee/customers/customer-form/customer-form.component";
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatDatepickerModule} from '@angular/material';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
-import {MatNativeDateModule} from '@angular/material';
+import {OptionsSharedService} from "./employee/options/options-shared.service";
+import {TariffInfoComponent} from "./employee/tariffs/tariff-info/tariff-info.component";
+import {TariffSharedService} from "./employee/tariffs/tariff-shared.service";
+import {OptionListComponent} from "./employee/tariffs/option-list/option-list.component";
 
 @NgModule({
   declarations: [
@@ -38,7 +38,9 @@ import {MatNativeDateModule} from '@angular/material';
     OptionFormComponent,
     OptionInfoComponent,
     TariffFormComponent,
-    CustomerFormComponent
+    CustomerFormComponent,
+    TariffInfoComponent,
+    OptionListComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,13 +48,12 @@ import {MatNativeDateModule} from '@angular/material';
     HttpModule,
     RouterModule,
     AppRoutingModule,
-    // BrowserAnimationsModule,
-    // MatDatepickerModule,
-    // MatButtonModule,
-    // MatCheckboxModule,
-    // MatNativeDateModule,
   ],
-  providers: [AppService],
+  providers: [
+    AppService,
+    OptionsSharedService,
+    TariffSharedService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

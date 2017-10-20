@@ -4,7 +4,7 @@
       <a class="btn btn-info button-one" [routerLink]="['../options']">Back</a>
     </div>
     <div class="col-md-2">
-      <button type="submit" class="btn btn-info button-one">Delete</button>
+      <button type="submit" class="btn btn-info button-one" (click)="delete()">Delete</button>
     </div>
   </div>
   <form (ngSubmit)="onSubmit(); todoForm.reset()" #todoForm="ngForm">
@@ -37,22 +37,16 @@
       <div class="col-lg-6">
         <p>This option must be connected with the options:</p>
         <ul class="list-group scroll-bar">
-          <li class="list-group-item">
-            Option1
-          </li>
-          <li class="list-group-item">
-            Option2
+          <li class="list-group-item" *ngFor="let option of option.compatibleOptions">
+            {{option}}
           </li>
         </ul>
       </div>
       <div class="col-lg-6">
         <p>This option can not be connected with the options:</p>
         <ul class="list-group scroll-bar">
-          <li class="list-group-item">
-            Option1
-          </li>
-          <li class="list-group-item">
-            Option2
+          <li class="list-group-item" *ngFor="let option of option.incompatibleOptions">
+            {{option}}
           </li>
         </ul>
       </div>
