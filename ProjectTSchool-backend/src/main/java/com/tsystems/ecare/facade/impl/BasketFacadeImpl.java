@@ -9,7 +9,6 @@ import com.tsystems.ecare.facade.OptionFacade;
 import com.tsystems.ecare.facade.RateFacade;
 import com.tsystems.ecare.facade.UserFacade;
 import com.tsystems.ecare.service.Service;
-import com.tsystems.ecare.service.impl.OptionServiceImpl;
 import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +72,6 @@ public class BasketFacadeImpl extends FacadeImpl<User, BasketDTO> implements Bas
         basketDTO.setOptionList(optionDTOList);
         return basketDTO;
     }
-
 
     @Override
     public BasketDTO convertToDto(User entity) {

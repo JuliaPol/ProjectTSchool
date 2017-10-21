@@ -19,6 +19,7 @@ import java.util.List;
 @Service("userService")
 public class UserServiceImpl extends ServiceImpl<User> implements UserService {
 
+
     @Autowired
     private RoleDao roleDao;
 
@@ -43,7 +44,6 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService {
     @Transactional
     public void saveCustomer(User user) {
         userDao.insert(user);
-        log.info("Created a customer");
     }
 
     @Override

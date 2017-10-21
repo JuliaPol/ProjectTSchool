@@ -1,7 +1,7 @@
 import {Component, Input} from "@angular/core";
 import {IContract} from "../../interfaces/customers";
-import {AppService} from "../../app.service";
-import {CustomersComponent} from "../customers/customers.component";
+import {ContractSharedService} from "./contract-shared.service";
+import {Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -11,22 +11,13 @@ import {CustomersComponent} from "../customers/customers.component";
 export class ContractListComponent {
   @Input() contractList: IContract[];
 
-  constructor(private appService: AppService,
-              private customersComponent: CustomersComponent) {
+  constructor(private sharedService: ContractSharedService,
+              private router: Router) {
 
   }
 
-  getButtonName(item: IContract) {
-    if (!item) return;
-    if (item.status === 'AVAILABLE') {
-      return 'Deactivate';
-    } else {
-      return 'Activate';
-    }
-  }
-
-  updateStatus(number) {
-    this.appService.updateContractStatus(number)
-      .then(() => this.customersComponent.init());
+  changeContract(contract: IContract) {
+    this.sharedService.saveData(contract.id);
+    this.router.navigate(['/employee/contract-info']);
   }
 }

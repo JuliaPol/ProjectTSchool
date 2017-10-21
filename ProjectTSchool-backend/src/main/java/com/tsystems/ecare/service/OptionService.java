@@ -12,10 +12,6 @@ import java.util.Set;
 
 public interface OptionService extends Service<Option> {
 
-    /**
-     * Method finds all orders in database.
-     * @return list of found orders.
-     */
     List<Option> getAllOptionsForCustomer(String number);
 
     List<Option> getAllAvailableOptionsForCustomer(String number);
@@ -37,6 +33,8 @@ public interface OptionService extends Service<Option> {
     boolean checkNewOptions(List<Option> optionList);
 
     void addIncompatible(Long current, List<String> incomp, boolean isCompatible);
+
+    List<Option> getOptionsForRules(Long optionId);
 
     void deleteOption(Long id);
 

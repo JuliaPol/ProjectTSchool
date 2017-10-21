@@ -1,0 +1,18 @@
+<div class="panel panel-default back col-md-9">
+  <a class="btn btn-info button-one" [routerLink]="['../customers']">Back</a>
+  <h3>Edit contract</h3>
+  <form #todoForm="ngForm">
+    <div class="row addOption" *ngIf="contract?.optionList && contract?.rate.optionList">
+    <option-list [optionList]="contract?.optionList"
+                 [rateOptions]="contract?.rate.optionList"></option-list>
+    </div>
+    <div class="row addOption" >
+      <div class="col-md-8">
+        <button type="submit" class="btn btn-info button-one col-md-2" (click)="onSubmit(); todoForm.reset()"
+                [disabled]="todoForm.form.invalid">Save
+        </button>
+      </div>
+    </div>
+  </form>
+  {{result}}
+</div>

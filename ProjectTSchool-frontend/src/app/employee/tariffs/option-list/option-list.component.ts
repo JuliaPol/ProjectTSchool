@@ -25,6 +25,7 @@ interface IWarnings {
 })
 export class OptionListComponent implements OnInit {
   @Input() optionList: IOption[];
+  @Input() rateOptions: IOption[];
   purposeList: IOptionItem[] = [];
   options: IOption[];
   anotherOptions: IOption[] = [];
@@ -42,17 +43,33 @@ export class OptionListComponent implements OnInit {
 
   init() {
     this.sharedService.clean();
-    this.optionList.forEach((item) => {
+    if (this.optionList.length !== 0) {
+      this.optionList.forEach((item) => {
+        this.purposeList.push(this.createOptionItem(item));
+      });
+    }
 
-      this.purposeList.push(this.createOptionItem(item));
-    });
     this.appService.getAllOptions().then(data =>
       this.options = data.json() as IOption[]).then(() => {
       this.anotherOptions = this.options.slice();
-      this.purposeList.forEach((item) => {
-        this.clean(item);
-      });
+      if (this.optionList.length !== 0) {
+        this.purposeList.forEach((item) => {
+          this.clean(item);
+        });
+      }
+      if (this.rateOptions && this.rateOptions.length !== 0 ) {
+        this.rateOptions.forEach((item) => {
+          this.clean(item);
+        });
+      }
       this.cleanIncomp();
+      if (this.rateOptions && this.rateOptions.length !== 0) {
+        this.rateOptions.forEach((item) => {
+          item.incompatibleOptions.forEach((i) => {
+            this.cleanByName(i);
+          })
+        })
+      }
       this.sharedService.saveData(this.convert());
     });
   }
@@ -62,12 +79,22 @@ export class OptionListComponent implements OnInit {
       .splice(this.myIndexOf(this.anotherOptions
         .filter(value => value.name === item.name).pop()), 1);
   }
+
+  private cleanByName(item) {
+    this.anotherOptions
+      .splice(this.myIndexOfAnotherOtionsName(this.anotherOptions
+        .filter(value => value.name === item).pop()), 1);
+  }
+
   private cleanIncomp() {
-    this.purposeList.forEach((item) => {
-      item.incompatibleOptions.forEach((i) => {
-        this.clean(i);
-      })
-    });
+    if (this.purposeList.length !== 0) {
+      this.purposeList.forEach((item) => {
+        item.incompatibleOptions.forEach((i) => {
+          this.cleanByName(i);
+        })
+      });
+    }
+
   }
 
   private createOptionItem(item) {
@@ -135,10 +162,13 @@ export class OptionListComponent implements OnInit {
 
   convert() {
     this.purposeListEntity = [];
-    this.purposeList.forEach((item) => {
-      this.purposeListEntity.push(this.convertToEntity(item))
-    });
-    return this.purposeListEntity;
+    if (this.purposeList.length !== 0) {
+      this.purposeList.filter((item) => item.selected)
+        .forEach((item) => {
+        this.purposeListEntity.push(this.convertToEntity(item))
+      });
+      return this.purposeListEntity;
+    }
   }
 
   convertToEntity(item) {
@@ -174,6 +204,18 @@ export class OptionListComponent implements OnInit {
     }
     for (let i = 0; i < this.anotherOptions.length; i++) {
       if (this.anotherOptions[i].id === o.id) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  private myIndexOfAnotherOtionsName(o) {
+    if (!o) {
+      return;
+    }
+    for (let i = 0; i < this.anotherOptions.length; i++) {
+      if (this.anotherOptions[i].name === o.name) {
         return i;
       }
     }

@@ -1,0 +1,44 @@
+<div class="panel panel-default back col-md-9">
+  <a class="btn btn-info button-one" [routerLink]="['../customers']">Back</a>
+  <a class="btn btn-info button-one" [routerLink]="['/employee/contract-options']">Change options</a>
+  <h3>Edit contract</h3>
+  <form #todoForm="ngForm">
+    <div class="row addOption">
+      <p>{{contract.rate.name}}</p>
+      <div class="col-md-5">
+        <p>Select new tariff</p>
+        <select class="form-control col-md-4" #selectRate (change)="rateSelected(selectRate.value)">
+          <option value="">Select option</option>
+          <option *ngFor="let rate of rates" [value]="rate.id">{{rate.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row addOption">
+      <div class="col-lg-6">
+        <p>Rate options:</p>
+        <ul class="list-group scroll-bar">
+          <li class="list-group-item" *ngFor="let option of selectedTariff?.optionList">
+            {{option.name}}
+          </li>
+        </ul>
+      </div>
+      <p>{{contract.status}}</p>
+      <div class="col-lg-6">
+        <p>Select new status:</p>
+          <select class="form-control col-md-4" #selectStatus (change)="statusSelected(selectStatus.value)">
+            <option value="">Select status</option>
+            <option [value]="'AVAILABLE'">Available</option>
+            <option [value]="'BLOCKED_BY_AN_EMPLOYEE'">Deactivated</option>
+          </select>
+      </div>
+    </div>
+    <div class="row addOption">
+      <div class="col-md-8">
+        <button type="submit" class="btn btn-info button-one col-md-2" (click)="onSubmit(); todoForm.reset()"
+                [disabled]="todoForm.form.invalid">Add
+        </button>
+      </div>
+    </div>
+  </form>
+  {{result}}
+</div>

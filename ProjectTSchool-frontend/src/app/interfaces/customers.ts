@@ -1,4 +1,5 @@
 import {ITariff} from "./tariff";
+import {IOption} from "./options";
 
 export interface ICustomer {
   id: number,
@@ -15,9 +16,11 @@ export interface ICustomer {
 }
 
 export interface IContract {
+  id: number,
   number: string,
   rate: ITariff,
   status: string,
+  optionList: IOption[],
 }
 
 export interface IAddress {

@@ -15,7 +15,7 @@ export class ContractFormComponent implements OnInit {
   customers: ICustomer[] = [];
   numbers: any[] = [];
   result: string = '';
-  selectedTariff: ITariff;
+  selectedTariff: number;
   customerId: number;
   contract: IContract;
   selectedNumber: string;
@@ -32,23 +32,43 @@ export class ContractFormComponent implements OnInit {
     this.customerId = this.sharedService.getData();
     this.appService.getAllTariffs().then(data => {
       this.rates = data.json() as ITariff[];
-      this.selectedTariff = this.rates[0];
     });
     this.appService.getCustomersList().then(data => {
       this.customers = data.json() as ICustomer[];
     });
-    this.numbers.push(new Date().getTime() - 1);
-    this.numbers.push(new Date().getTime());
-    this.numbers.push(new Date().getTime() + 1);
+    this.numbers.push((new Date().getTime() - 1).toString());
+    this.numbers.push((new Date().getTime()).toString());
+    this.numbers.push((new Date().getTime() + 1).toString());
   }
 
   onSubmit() {
     this.contract = {
-      rate: this.selectedTariff,
+      id: null,
+      rate: this.rates[this.myIndexOf(this.rates.filter((item) => item.id === this.selectedTariff).pop())],
       status: 'AVAILABLE',
       number: this.selectedNumber,
+      optionList: [],
     };
     this.appService.createContract(this.customerId, this.contract).then(() =>
     this.result = 'Added');
+  }
+
+  rateSelected(id) {
+      this.selectedTariff = parseInt(id);
+  }
+  numberSelected(number) {
+    this.selectedNumber = number;
+  }
+
+  private myIndexOf(o) {
+    if (!o) {
+      return;
+    }
+    for (let i = 0; i < this.rates.length; i++) {
+      if (this.rates[i].id === o.id) {
+        return i;
+      }
+    }
+    return -1;
   }
 }

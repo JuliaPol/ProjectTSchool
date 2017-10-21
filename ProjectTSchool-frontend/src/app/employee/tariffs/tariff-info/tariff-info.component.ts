@@ -4,8 +4,6 @@ import {AppService} from "../../../app.service";
 import {TariffSharedService} from "../tariff-shared.service";
 import {ITariff} from "../../../interfaces/tariff";
 import {OptionListSharedService} from "../option-list/option-list-shared.service";
-import {IOptionItem} from "../option-list/option-list.component";
-import {IOption} from "../../../interfaces/options";
 
 @Component({
   moduleId: module.id,
@@ -35,18 +33,16 @@ export class TariffInfoComponent implements OnInit {
   }
 
   onSubmit() {
-
     this.tariff.optionList = this.sharedServiceOptions.getData();
     this.appService.editTariff(this.tariff).then(() => {
         this.init();
         this.result = 'Changed';
         this.sharedServiceOptions.clean();
       });
-
   }
 
   delete() {
-    this.appService.deleteTariff(this.tariffId)
+    this.appService.deleteTariff(this.tariff.id)
       .then(() => this.router.navigate(['/employee/tariffs']));
   }
 }

@@ -1,14 +1,11 @@
 package com.tsystems.ecare.controller;
 
 import com.tsystems.ecare.dto.OptionDTO;
-import com.tsystems.ecare.entities.Option;
 import com.tsystems.ecare.facade.OptionFacade;
-import com.tsystems.ecare.service.OptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/options")

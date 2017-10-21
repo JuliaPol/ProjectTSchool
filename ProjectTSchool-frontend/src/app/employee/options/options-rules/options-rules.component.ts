@@ -111,7 +111,7 @@ export class OptionsRulesComponent implements OnInit {
     let list: string[] = [];
     this.purposeList.filter((item) => item.selected)
       .forEach((item) => list.push(item.name));
-    if (list.length !== 0 && this.selectedOption) {
+    if (this.selectedOption) {
       this.appService.addRule(this.selectedOption.id, list, this.selectedRule)
         .then(() => this.init());
     }

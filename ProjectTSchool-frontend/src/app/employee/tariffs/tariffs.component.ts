@@ -14,7 +14,7 @@ export class TariffsComponent implements OnInit {
   rates: ITariff = null;
 
   constructor(private sharedService: TariffSharedService,
-    private appService: AppService,
+              private appService: AppService,
               private router: Router) {
 
   }

@@ -27,6 +27,10 @@ import {OptionListComponent} from "./employee/tariffs/option-list/option-list.co
 import {OptionListSharedService} from "./employee/tariffs/option-list/option-list-shared.service";
 import {CustomerSharedService} from "./employee/customers/customer-shared.service";
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import {CustomerContractNumberFiler} from "./employee/customers/customer-contract-number.component";
+import {ContractInfoComponent} from "./employee/contract-list/contarct-info/contract-info.component";
+import {ContractSharedService} from "./employee/contract-list/contract-shared.service";
+import {ContractOptionsComponent} from "./employee/contract-list/contract-options/contract-options.component";
 
 @NgModule({
   declarations: [
@@ -46,6 +50,9 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     CustomerFormComponent,
     TariffInfoComponent,
     OptionListComponent,
+    CustomerContractNumberFiler,
+    ContractInfoComponent,
+    ContractOptionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +67,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     TariffSharedService,
     OptionListSharedService,
     CustomerSharedService,
+    ContractSharedService,
     {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]

@@ -28,6 +28,8 @@ import java.util.List;
                 query = "select c.user from Contract c where c.number like :number"),
         @NamedQuery(name = Contract.CONTRACT_SEARCH_BY_NAME,
                 query = "select c.user from Contract c where c.user.lastName like :name"),
+        @NamedQuery(name = Contract.CONTRACT_UPDATE_WITH_DELETED_RATE,
+                query = "update Contract c set c.rate = null where c.rate.id = :id"),
 })
 public class Contract {
 
@@ -37,6 +39,7 @@ public class Contract {
     public static final String CONTRACT_FIND_USER_BY_NUMBER = "Contract.findUserByNumber";
     public static final String CONTRACT_SEARCH_BY_NUMBER = "Contract.searchByNumber";
     public static final String CONTRACT_SEARCH_BY_NAME = "Contract.searchByName";
+    public static final String CONTRACT_UPDATE_WITH_DELETED_RATE = "Contract.updateWithDeletedRate";
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

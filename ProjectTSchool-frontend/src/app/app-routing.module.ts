@@ -12,6 +12,8 @@ import {OptionInfoComponent} from "./employee/options/option-info/option-info.co
 import {TariffFormComponent} from "./employee/tariffs/tariff-form/tariff-form.component";
 import {CustomerFormComponent} from "./employee/customers/customer-form/customer-form.component";
 import {TariffInfoComponent} from "./employee/tariffs/tariff-info/tariff-info.component";
+import {ContractInfoComponent} from "./employee/contract-list/contarct-info/contract-info.component";
+import {ContractOptionsComponent} from "./employee/contract-list/contract-options/contract-options.component";
 
 const appRoutes: Routes =[
   {path: '', redirectTo: 'employee', pathMatch: 'full'},
@@ -27,7 +29,9 @@ const appRoutes: Routes =[
       {path: 'options-rules', component: OptionsRulesComponent},
       {path: 'option-form', component: OptionFormComponent},
       {path: 'option-info', component: OptionInfoComponent},
-      {path: 'customer-form', component: CustomerFormComponent}
+      {path: 'customer-form', component: CustomerFormComponent},
+      {path: 'contract-info', component: ContractInfoComponent},
+      {path: 'contract-options', component: ContractOptionsComponent},
     ]},
   { path: 'login-error', component: LoginErrorComponent},
 ];

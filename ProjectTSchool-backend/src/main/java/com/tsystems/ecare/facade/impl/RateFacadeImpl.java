@@ -1,8 +1,6 @@
 package com.tsystems.ecare.facade.impl;
 
-import com.tsystems.ecare.dto.OptionDTO;
 import com.tsystems.ecare.dto.RateDTO;
-import com.tsystems.ecare.entities.Option;
 import com.tsystems.ecare.entities.Rate;
 import com.tsystems.ecare.facade.OptionFacade;
 import com.tsystems.ecare.facade.RateFacade;
@@ -75,6 +73,11 @@ public class RateFacadeImpl extends FacadeImpl<Rate, RateDTO> implements RateFac
     @Override
     public void editRate(RateDTO rateDTO) {
         rateService.editRate(convertToEntity(rateDTO));
+    }
+
+    @Override
+    public void deleteRate(Long id) {
+        rateService.deleteRate(id);
     }
 
     @Override

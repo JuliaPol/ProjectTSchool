@@ -68,6 +68,13 @@ public class ContractDaoImpl extends JpaDaoImpl<Contract> implements ContractDao
     }
 
     @Override
+    public void updateContractWithDeletedRate(Long id) {
+        entityManager.createNamedQuery(Contract.CONTRACT_UPDATE_WITH_DELETED_RATE)
+                .setParameter("id", id)
+                .executeUpdate();
+    }
+
+    @Override
     public EntityManager getEntityManager() {
         return entityManager;
     }

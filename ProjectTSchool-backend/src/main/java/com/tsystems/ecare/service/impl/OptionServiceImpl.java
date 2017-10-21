@@ -1,23 +1,26 @@
 package com.tsystems.ecare.service.impl;
 
+import com.tsystems.ecare.dao.ContractDao;
 import com.tsystems.ecare.dao.JpaDao;
 import com.tsystems.ecare.dao.OptionDao;
 import com.tsystems.ecare.dao.RateDao;
+import com.tsystems.ecare.dto.OptionDTO;
+import com.tsystems.ecare.entities.Contract;
 import com.tsystems.ecare.entities.Option;
 import com.tsystems.ecare.entities.Rate;
+import com.tsystems.ecare.facade.impl.OptionFacadeImpl;
 import com.tsystems.ecare.service.OptionService;
 import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * Implementation of {@link OptionService} interface.
- */
 @Service("optionService")
 public class OptionServiceImpl extends ServiceImpl<Option> implements OptionService {
 
@@ -26,6 +29,9 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
 
     @Autowired
     private RateDao rateDao;
+
+    @Autowired
+    private ContractDao contractDao;
 
     private static Logger log = Logger.getLogger(OptionServiceImpl.class);
 
@@ -218,6 +224,17 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
         }
     }
 
+
+    @Override
+    public List<Option> getOptionsForRules(Long optionId) {
+        Option option = optionDao.get(optionId);
+        List<Option> optionList= optionDao.getAll();
+        List<Option> checkedOption = option.getCompOptionsOf().stream()
+                .filter(o->!optionList.contains(o)).collect(Collectors.toList());
+        checkedOption.remove(option);
+        return checkedOption;
+    }
+
     /**
      * The method deletes an option.
      * @param id option
@@ -228,6 +245,15 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
         Option option = optionDao.get(id);
         cleanCompatibleReferences(option);
         cleanIncompatibleReferences(option);
+        for (Rate rate : option.getRateList()) {
+            rate.getOptionList().remove(option);
+            rateDao.update(rate);
+        }
+
+        for (Contract contract : option.getContractList()) {
+            contract.getOptionList().remove(option);
+            contractDao.update(contract);
+        }
         optionDao.delete(option);
         log.info("Option deleted");
     }

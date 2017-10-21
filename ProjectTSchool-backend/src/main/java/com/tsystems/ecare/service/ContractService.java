@@ -35,4 +35,6 @@ public interface ContractService extends Service<Contract> {
     List<User> searchByName(String likeName, int limit);
 
     void create(Long id, Contract contract);
+
+    void updateContract(Contract contract);
 }

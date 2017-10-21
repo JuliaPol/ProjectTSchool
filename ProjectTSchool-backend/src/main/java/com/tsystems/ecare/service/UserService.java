@@ -1,7 +1,6 @@
 package com.tsystems.ecare.service;
 
 import com.tsystems.ecare.dto.UserDTO;
-import com.tsystems.ecare.entities.Contract;
 import com.tsystems.ecare.entities.User;
 
 import java.util.List;

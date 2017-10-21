@@ -3,6 +3,7 @@ import {Component, OnInit} from "@angular/core";
 import {AppService} from "../../app.service";
 import {Router} from "@angular/router";
 import {CustomerSharedService} from "./customer-shared.service";
+import {CustomerContractNumberFiler} from "./customer-contract-number.component";
 
 @Component({
   moduleId: module.id,
@@ -11,6 +12,7 @@ import {CustomerSharedService} from "./customer-shared.service";
 })
 export class CustomersComponent implements OnInit {
   customers: ICustomer[] = [];
+  contratNumber: number;
 
   constructor(private appService: AppService,
               private router: Router,

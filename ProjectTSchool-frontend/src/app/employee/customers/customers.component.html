@@ -3,21 +3,21 @@
     <input type="submit" class="btn btn-info button-one button-act col-md-2"
            value="Add user" [routerLink]="['/employee/customer-form']">
     <div class="input-group col-md-6 search-inp">
-      <input type="text" class="form-control" placeholder="Search...">
-      <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Go!</button>
-          </span>
+      <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="contratNumber">
+      <!--<span class="input-group-btn">-->
+            <!--<button class="btn btn-default" type="button">Go!</button>-->
+          <!--</span>-->
     </div><!-- /input-group -->
   </div>
   <div class="panel-group big-panel scrollbar-cyan bordered-cyan card example-1 square" id="accordion">
     <!-- 1 панель -->
-    <div *ngFor="let customer of customers">
+    <div *ngFor="let customer of customers | customerContractNumberFiler:contratNumber">
       <div class="panel panel-default">
         <!-- Заголовок 1 панели -->
         <div class="panel-heading">
           <h4 class="panel-title">
             <div class="row">
-              <button (click)="onToggle(customer)"></button>
+              <button (click)="onToggle(customer)">v</button>
               <p data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="col-md-9 client-href">
                 {{customer.firstName}} {{customer.lastName}}</p>
               <input type="submit" class="btn btn-info button-one button-act col-md-2" value="Add contract"

@@ -13,4 +13,5 @@ public interface ContractDao extends JpaDao<Contract> {
     User findUserByNumber(String number);
     List<User> searchByNumber(String likeNumber, int limit);
     List<User> searchByName(String name, int limit);
+    void updateContractWithDeletedRate(Long id);
 }

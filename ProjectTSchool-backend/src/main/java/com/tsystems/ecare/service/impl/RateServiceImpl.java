@@ -1,5 +1,6 @@
 package com.tsystems.ecare.service.impl;
 
+import com.tsystems.ecare.dao.ContractDao;
 import com.tsystems.ecare.dao.JpaDao;
 import com.tsystems.ecare.dao.OptionDao;
 import com.tsystems.ecare.dao.RateDao;
@@ -8,7 +9,6 @@ import com.tsystems.ecare.dto.RateDTO;
 import com.tsystems.ecare.entities.Option;
 import com.tsystems.ecare.entities.Rate;
 import com.tsystems.ecare.service.RateService;
-import com.tsystems.ecare.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +24,12 @@ public class RateServiceImpl extends ServiceImpl<Rate> implements RateService {
 
     @Autowired
     private RateDao rateDao;
+
+    @Autowired
+    private OptionDao optionDao;
+
+    @Autowired
+    private ContractDao contractDao;
 
     @Override
     @Transactional
@@ -45,6 +51,18 @@ public class RateServiceImpl extends ServiceImpl<Rate> implements RateService {
     @Transactional
     public void editRate(Rate rate) {
         rateDao.update(rate);
+    }
+
+    @Override
+    @Transactional
+    public void deleteRate(Long id) {
+        Rate rate = rateDao.get(id);
+//        for (Option option : rate.getOptionList()) {
+//            option.getRateList().remove(rate);
+//        }
+//        rate.set
+        contractDao.updateContractWithDeletedRate(id);
+        rateDao.delete(rate);
     }
 
     @Override

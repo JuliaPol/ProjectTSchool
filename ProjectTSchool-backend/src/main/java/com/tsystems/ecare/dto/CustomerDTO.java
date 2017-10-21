@@ -12,5 +12,5 @@ public class CustomerDTO {
     private Long id;
     private String firstName;
     private String lastName;
-    private List<ContractPreviewDTO> contractList;
+    private List<ContractDTO> contractList;
 }

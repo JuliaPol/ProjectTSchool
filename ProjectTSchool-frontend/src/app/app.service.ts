@@ -23,6 +23,21 @@ export class AppService {
       .toPromise();
   }
 
+  getContractById(id: number): Promise<Response> {
+    return this.http.get('http://localhost:8080/contract?id=' + id)
+      .toPromise();
+  }
+
+  updateContract(contract): Promise<Response> {
+    return this.http.post('http://localhost:8080/contract/update', contract)
+      .toPromise();
+  }
+
+  updateContractOptions(id, options): Promise<Response> {
+    return this.http.post('http://localhost:8080/contract/update/options/' + id, options)
+      .toPromise();
+  }
+
   addRule(current: number, optionList: string[], isCoppatible: boolean) {
     return this.http.post('http://localhost:8080/options/addRule?optionId='
       + current + '&isCompatible=' + isCoppatible, optionList).toPromise();
@@ -36,8 +51,8 @@ export class AppService {
     return this.http.post('http://localhost:8080/options/delete?id=' + id, {}).toPromise();
   }
 
-  deleteTariff(id) {
-    return this.http.post('http://localhost:8080/tariffs/delete?id=' + id, {}).toPromise();
+  deleteTariff(tariff) {
+    return this.http.post('http://localhost:8080/tariffs/delete/' + tariff, {}).toPromise();
   }
 
   getTariffById(id: number): Promise<Response> {
@@ -60,8 +75,6 @@ export class AppService {
   editTariff(rate) {
     let headers = new Headers();
     headers.set('content-type', 'application/json');
-
-    // let headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({
       headers: headers
     });
@@ -80,9 +93,5 @@ export class AppService {
   getCustomersList(): Promise<Response> {
     return this.http.get('http://localhost:8080/customers/allCustomers')
       .toPromise();
-  }
-
-  updateContractStatus(number: string) {
-    return this.http.post('http://localhost:8080/contract/' + number, {}).toPromise();
   }
 }

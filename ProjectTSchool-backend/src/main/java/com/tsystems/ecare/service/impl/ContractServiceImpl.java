@@ -12,12 +12,12 @@ import com.tsystems.ecare.entities.enums.ContractStatus;
 import com.tsystems.ecare.service.ContractService;
 import com.tsystems.ecare.service.OptionService;
 import com.tsystems.ecare.service.RateService;
-import com.tsystems.ecare.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,6 +39,8 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private RateDao rateDao;
 
     private static Logger log = Logger.getLogger(ContractServiceImpl.class);
 
@@ -167,10 +169,26 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
     @Transactional
     public void create(Long id, Contract contract) {
         User user = userDao.get(id);
+        if (user.getContractList() == null ) {
+            user.setContractList(new ArrayList<>());
+        }
+        user.getContractList().add(contract);
         contract.setUser(user);
-        userDao.insert(user);
+        Rate rate = contract.getRate();
+        if (rate.getContractList() == null ) {
+            rate.setContractList(new ArrayList<>());
+        }
+        rate.getContractList().add(contract);
+        rateDao.update(rate);
+        userDao.update(user);
         contractDao.insert(contract);
         log.info("Added a new contract");
+    }
+
+    @Override
+    @Transactional
+    public void updateContract(Contract contract) {
+        contractDao.update(contract);
     }
 
     @Override
