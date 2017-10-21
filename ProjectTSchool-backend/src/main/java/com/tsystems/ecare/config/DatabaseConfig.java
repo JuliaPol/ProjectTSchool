@@ -31,14 +31,14 @@ public class DatabaseConfig implements EnvironmentAware{
     private Environment env;
 
     private static final String HIBERNATE_DIALECT = "hibernate.dialect";
-    private static final String ECARE = "ecare";
+    private static final String ECARE = "database.name";
     private static final String JDBC_DRIVER_CLASS_NAME = "jdbc.driverClassName";
     private static final String JDBC_URL = "jdbc.url";
     private static final String JDBC_USER = "jdbc.user";
     private static final String JDBC_PASS = "jdbc.pass";
     private static final String HIBENATE_ENABLE_LAZY_LOAD_NO_TRANS = "hibernate.enable_lazy_load_no_trans";
 
-    @Bean(name = "ecare")
+    @Bean(name = ECARE)
     public DataSource dataSource() {
         Properties properties = new Properties();
         properties.setProperty(HIBENATE_ENABLE_LAZY_LOAD_NO_TRANS, "true");

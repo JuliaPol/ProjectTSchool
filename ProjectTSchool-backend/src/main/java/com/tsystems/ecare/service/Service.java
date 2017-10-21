@@ -2,6 +2,12 @@ package com.tsystems.ecare.service;
 
 import java.util.List;
 
+
+/**
+ * Service for CRUD  functions
+ * @param <T>
+ */
+
 public interface Service<T> {
     List<T> getAll() throws Exception;
     void delete(T entity) throws Exception;

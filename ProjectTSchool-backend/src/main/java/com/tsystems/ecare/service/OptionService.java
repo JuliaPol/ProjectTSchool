@@ -1,11 +1,21 @@
 package com.tsystems.ecare.service;
 
+import com.tsystems.ecare.dto.OptionDTO;
 import com.tsystems.ecare.entities.Option;
 
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Service for {@link Option}
+ */
+
 public interface OptionService extends Service<Option> {
+
+    /**
+     * Method finds all orders in database.
+     * @return list of found orders.
+     */
     List<Option> getAllOptionsForCustomer(String number);
 
     List<Option> getAllAvailableOptionsForCustomer(String number);
@@ -28,8 +38,7 @@ public interface OptionService extends Service<Option> {
 
     void addIncompatible(Long current, List<String> incomp, boolean isCompatible);
 
-    List<Option> getOptionsForRules(Long optionId);
-
     void deleteOption(Long id);
 
+    void editRateOptions(Long id, Option option);
 }

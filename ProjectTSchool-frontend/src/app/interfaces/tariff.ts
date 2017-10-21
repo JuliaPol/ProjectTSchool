@@ -8,5 +8,5 @@ export interface ITariff {
   calls: number,
   sms: number,
   internet: number,
-  optionList: IOption[]
+  optionList: any[]
 }

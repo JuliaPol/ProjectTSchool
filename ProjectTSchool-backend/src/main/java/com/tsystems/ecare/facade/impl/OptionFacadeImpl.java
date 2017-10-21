@@ -25,6 +25,13 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
 
     private static Logger log = Logger.getLogger(OptionFacadeImpl.class.getName());
 
+    /**
+     * The method converts Option {@link Option}
+     * to DTO object {@link OptionDTO}.
+     *
+     * @param entity that will be converted
+     * @return converted OptionDTO
+     */
     @Override
     public OptionDTO convertToDto(Option entity) {
         OptionDTO optionDTO = modelMapper.map(entity, OptionDTO.class);
@@ -61,7 +68,7 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
     @Override
     public List<OptionDTO> getAllAvailableOptionsForCustomer(String number) {
         List<Option> optionList = optionService.getAllAvailableOptionsForCustomer(number);
-        log.info("Comp Option:");
+        log.info("Compatible options:");
         for (Option o : optionList) {
             log.info(o.getId() +"  " + o.getName());
         }
@@ -72,7 +79,7 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
     public List<OptionDTO> getAllIncompatibleOptionsForCustomer(String number) {
         List<Option> optionList = optionService.getAllIncompatibleOptions(number,
                 optionService.getAllAvailableOptionsForCustomer(number));
-        log.info("Incomp Option:");
+        log.info("Incompatible options:");
         for (Option o : optionList) {
             log.info(o.getId() +"  " + o.getName());
         }
@@ -117,11 +124,16 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
     }
 
     @Override
+    public void editRateOptions(Long id, OptionDTO optionDTOS) {
+        optionService.editRateOptions(id, convertToEntity(optionDTOS));
+    }
+
+    @Override
     public void create(OptionDTO optionDTO) {
         try {
             optionService.insert(convertToEntity(optionDTO));
         } catch (Exception e) {
-            log.error("Can't create:", e);
+            log.error("Couldn't create an option:", e);
         }
     }
     @Override
@@ -134,7 +146,7 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
         try {
             optionService.update(convertToEntity(optionDTO));
         } catch (Exception e) {
-            log.error("Can't edit option:", e);
+            log.error("Couldn't edit an option:", e);
         }
     }
 

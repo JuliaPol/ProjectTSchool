@@ -1,4 +1,7 @@
+import {ITariff} from "./tariff";
+
 export interface ICustomer {
+  id: number,
   firstName: string,
   lastName: string,
   contractList: IContract[],
@@ -13,6 +16,7 @@ export interface ICustomer {
 
 export interface IContract {
   number: string,
+  rate: ITariff,
   status: string,
 }
 

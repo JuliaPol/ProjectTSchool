@@ -45,5 +45,10 @@ public abstract class JpaDaoImpl<T> implements JpaDao<T> {
         getEntityManager().refresh(entity);
     }
 
+    @Override
+    public void flush() {
+        getEntityManager().flush();
+    }
+
     public abstract EntityManager getEntityManager();
 }

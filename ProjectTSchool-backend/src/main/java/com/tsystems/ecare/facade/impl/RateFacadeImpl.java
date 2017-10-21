@@ -1,6 +1,8 @@
 package com.tsystems.ecare.facade.impl;
 
+import com.tsystems.ecare.dto.OptionDTO;
 import com.tsystems.ecare.dto.RateDTO;
+import com.tsystems.ecare.entities.Option;
 import com.tsystems.ecare.entities.Rate;
 import com.tsystems.ecare.facade.OptionFacade;
 import com.tsystems.ecare.facade.RateFacade;
@@ -25,6 +27,13 @@ public class RateFacadeImpl extends FacadeImpl<Rate, RateDTO> implements RateFac
     @Autowired
     private OptionFacade optionFacade;
 
+    /**
+     * The method converts Tariff {@link Rate}
+     * to DTO object {@link RateDTO}.
+     *
+     * @param entity that will be converted
+     * @return converted RateDTO
+     */
     @Override
     public RateDTO convertToDto(Rate entity) {
         if (entity == null) {
@@ -61,6 +70,11 @@ public class RateFacadeImpl extends FacadeImpl<Rate, RateDTO> implements RateFac
     @Override
     public List<RateDTO> findAllForCustomer(String number) {
         return convertList(rateService.findAllForCustomer(number));
+    }
+
+    @Override
+    public void editRate(RateDTO rateDTO) {
+        rateService.editRate(convertToEntity(rateDTO));
     }
 
     @Override

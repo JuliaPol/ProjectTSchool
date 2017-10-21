@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -24,7 +25,7 @@ public class CustomersController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public void create(@RequestBody UserDTO userDTO) {
+    public void create(@RequestBody UserDTO userDTO) throws ParseException {
         userFacade.createCustomer(userDTO);
     }
 }

@@ -27,7 +27,7 @@ public class Address {
     @Column(name = "house_number")
     private Integer houseNumber;
 
-    @OneToOne(mappedBy = "address")
+    @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
     private User user;
 
     @Override

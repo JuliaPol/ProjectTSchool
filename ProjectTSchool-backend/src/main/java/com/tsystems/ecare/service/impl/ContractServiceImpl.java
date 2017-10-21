@@ -2,6 +2,8 @@ package com.tsystems.ecare.service.impl;
 
 import com.tsystems.ecare.dao.ContractDao;
 import com.tsystems.ecare.dao.JpaDao;
+import com.tsystems.ecare.dao.RateDao;
+import com.tsystems.ecare.dao.UserDao;
 import com.tsystems.ecare.entities.Contract;
 import com.tsystems.ecare.entities.Option;
 import com.tsystems.ecare.entities.Rate;
@@ -10,11 +12,17 @@ import com.tsystems.ecare.entities.enums.ContractStatus;
 import com.tsystems.ecare.service.ContractService;
 import com.tsystems.ecare.service.OptionService;
 import com.tsystems.ecare.service.RateService;
+import com.tsystems.ecare.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+
+/**
+ * Implementation of {@link ContractService} interface.
+ */
 
 @Service("contractService")
 public class ContractServiceImpl extends ServiceImpl<Contract> implements ContractService {
@@ -27,6 +35,12 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
 
     @Autowired
     private RateService rateService;
+
+    @Autowired
+    private UserDao userDao;
+
+
+    private static Logger log = Logger.getLogger(ContractServiceImpl.class);
 
     @Override
     @Transactional
@@ -55,6 +69,7 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
         } else {
             contract.setStatus(ContractStatus.AVAILABLE);
         }
+        log.info("Contract status changed by employee");
     }
 
     @Override
@@ -66,6 +81,7 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
         } else if (contract.getStatus().equals(ContractStatus.BLOCKED_BY_THE_CUSTOMER)) {
             contract.setStatus(ContractStatus.AVAILABLE);
         }
+        log.info("Contract status changed by customer");
     }
 
     @Override
@@ -78,41 +94,60 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
 
     @Override
     @Transactional
-    public void deleteOption(String number, Long optionId) throws Exception {
+    public void deleteOption(String number, Long optionId) {
         Contract contract = getContractByNumber(number);
-        Option option = optionService.get(optionId);
-        contract.getOptionList().remove(option);
-    }
-
-    @Override
-    @Transactional
-    public void addRateInContract(String number, Long rateId) throws Exception {
-        Contract contract = getContractByNumber(number);
-        if (contract.getStatus().equals(ContractStatus.AVAILABLE)) {
-            Rate rate = rateService.get(rateId);
-            contract.setRate(rate);
-            contract.getOptionList().clear();
+        Option option = null;
+        try {
+            option = optionService.get(optionId);
+            contract.getOptionList().remove(option);
+        } catch (Exception e) {
+            log.error("Couldn't remove an option from the contract", e);
         }
     }
 
     @Override
     @Transactional
-    public void addOptionsInContract(String number, List<Long> optionIds) throws Exception {
+    public void addRateInContract(String number, Long rateId) {
         Contract contract = getContractByNumber(number);
-        if (contract.getStatus().equals(ContractStatus.AVAILABLE) && contract.getRate() != null) {
-            for (Long id : optionIds) {
-                Option option = optionService.get(id);
-                contract.getOptionList().add(option);
+        if (contract.getStatus().equals(ContractStatus.AVAILABLE)) {
+            Rate rate = null;
+            try {
+                rate = rateService.get(rateId);
+                contract.setRate(rate);
+                contract.getOptionList().clear();
+            } catch (Exception e) {
+                log.error("Couldn't add a tariff", e);
             }
         }
     }
 
     @Override
     @Transactional
-    public void addOptionInContract(String number, Long optionId) throws Exception {
+    public void addOptionsInContract(String number, List<Long> optionIds) {
         Contract contract = getContractByNumber(number);
         if (contract.getStatus().equals(ContractStatus.AVAILABLE) && contract.getRate() != null) {
-            contract.getOptionList().add(optionService.get(optionId));
+            for (Long id : optionIds) {
+                Option option = null;
+                try {
+                    option = optionService.get(id);
+                    contract.getOptionList().add(option);
+                } catch (Exception e) {
+                    log.error("Couldn't add an option", e);
+                }
+            }
+        }
+    }
+
+    @Override
+    @Transactional
+    public void addOptionInContract(String number, Long optionId) {
+        Contract contract = getContractByNumber(number);
+        if (contract.getStatus().equals(ContractStatus.AVAILABLE) && contract.getRate() != null) {
+            try {
+                contract.getOptionList().add(optionService.get(optionId));
+            } catch (Exception e) {
+                log.error("Couldn't add an option", e);
+            }
         }
     }
 
@@ -126,6 +161,16 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
     @Transactional
     public List<User> searchByName(String likeName, int limit) {
         return contractDao.searchByName(likeName, limit);
+    }
+
+    @Override
+    @Transactional
+    public void create(Long id, Contract contract) {
+        User user = userDao.get(id);
+        contract.setUser(user);
+        userDao.insert(user);
+        contractDao.insert(contract);
+        log.info("Added a new contract");
     }
 
     @Override

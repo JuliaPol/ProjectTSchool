@@ -1,6 +1,7 @@
 <div class="panel panel-default back col-md-9">
   <div class="row add-contract-and-search">
-    <input type="submit" class="btn btn-info button-one button-act col-md-2" value="Add user" (click)="openTab('/employee/customer-form')">
+    <input type="submit" class="btn btn-info button-one button-act col-md-2"
+           value="Add user" [routerLink]="['/employee/customer-form']">
     <div class="input-group col-md-6 search-inp">
       <input type="text" class="form-control" placeholder="Search...">
       <span class="input-group-btn">
@@ -20,7 +21,7 @@
               <p data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="col-md-9 client-href">
                 {{customer.firstName}} {{customer.lastName}}</p>
               <input type="submit" class="btn btn-info button-one button-act col-md-2" value="Add contract"
-                     (click)="openTab('/employee/contract-form')">
+                     (click)="addContract(); addToSharedService(customer.id)">
             </div>
           </h4>
         </div>

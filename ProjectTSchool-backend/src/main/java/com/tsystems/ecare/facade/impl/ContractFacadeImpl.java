@@ -34,9 +34,6 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
     private ContractService contractService;
 
     @Autowired
-    private OptionService optionService;
-
-    @Autowired
     private OptionFacade optionFacade;
 
     @Autowired
@@ -55,28 +52,49 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
         return userFacade.convertToDto(contractService.findUserByNumber(number));
     }
 
+    /**
+     * The method changes contract status to "BLOCKED_BY_AN_EMPLOYEE" or "AVAILABLE"
+     * @param number
+     */
     @Override
     public void changeContractStatusByEmployee(String number) {
         contractService.changeContractStatusByEmployee(number);
     }
 
+    /**
+     * The method changes contract status to "BLOCKED_BY_THE_CUSTOMER" or "AVAILABLE"
+     * @param number
+     */
     @Override
     public void changeContractStatusByCustomer(String number) {
         contractService.changeContractStatusByCustomer(number);
     }
 
+    /**
+     * The method deletes Tariff in Contract.
+     * @param number
+     */
     @Override
     public void deleteRate(String number) {
         contractService.deleteRate(number);
     }
 
+    /**
+     * The method deletes Option in Contract.
+     * @param number
+     * @param optionId
+     */
     @Override
-    public void deleteOption(String number, Long optionId) throws Exception {
+    public void deleteOption(String number, Long optionId) {
         contractService.deleteOption(number, optionId);
     }
 
+    /**
+     * The method takes Tariff or Options from the basket and adds to Contract.
+     * @param basket
+     */
     @Override
-    public void addRateOrOptionsInContract(BasketForm basket) throws Exception {
+    public void addRateOrOptionsInContract(BasketForm basket) {
         if (basket.getRate()!= null) {
             contractService.addRateInContract(basket.getNumber(),
                     Long.parseLong(basket.getRate()));
@@ -104,6 +122,13 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
                 .collect(Collectors.toList());
     }
 
+    /**
+     * The method converts Contract {@link Contract}
+     * to DTO object {@link ContractDTO}.
+     *
+     * @param entity that will be converted
+     * @return converted ContractDTO
+     */
     @Override
     public ContractDTO convertToDto(Contract entity) {
         ContractDTO contractDTO = modelMapper.map(entity, ContractDTO.class);
@@ -119,7 +144,12 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
 
     @Override
     public Contract convertToEntity(ContractDTO dto) {
-        return null;
+        return modelMapper.map(dto, Contract.class);
+    }
+
+    @Override
+    public void create(Long id, ContractDTO contractDTO) {
+        contractService.create(id, convertToEntity(contractDTO));
     }
 
     @Override

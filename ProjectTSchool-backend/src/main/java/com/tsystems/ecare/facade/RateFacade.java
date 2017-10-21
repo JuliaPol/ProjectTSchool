@@ -9,4 +9,5 @@ public interface RateFacade extends Facade<RateDTO, Rate> {
     RateDTO findByName(String name);
     List<RateDTO> findAllForCustomer(String number);
     RateDTO findForCustomerByNumber(String number);
+    void editRate(RateDTO rateDTO);
 }

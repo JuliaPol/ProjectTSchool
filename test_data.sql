@@ -12,32 +12,39 @@ INSERT INTO user (login, passport_number, address_id, first_name, last_name,
 -- password:123
 
 INSERT INTO address (street, city, country, zipcode, house_number)
-VALUES ('main street', 'Saint-Petersburg', 'Russia', '1111', 3);
+VALUES ('Torzhkovskaya', 'Saint-Petersburg', 'Russia', '1111', 3);
 INSERT INTO address (street, city, country, zipcode, house_number)
-VALUES ('street', 'Saint-Petersburg', 'Russia', '1111', 4);
+VALUES ('Lenina', 'Saint-Petersburg', 'Russia', '1111', 4);
 INSERT INTO address (street, city, country, zipcode, house_number)
-VALUES ('street2', 'Saint-Petersburg', 'Russia', '11131', 6);
+VALUES ('Korablestroiteley', 'Saint-Petersburg', 'Russia', '11131', 6);
 
-INSERT INTO contract (number, status, customer_id, rate_id) VALUES ('88005353', 'AVAILABLE', 1, 1);
-INSERT INTO contract (number, status, customer_id, rate_id) VALUES ('88005354', 'BLOCKED_BY_AN_EMPLOYEE', 1, 2);
+INSERT INTO contract (number, status, customer_id, rate_id) VALUES ('1401401405123', 'AVAILABLE', 1, 1);
+INSERT INTO contract (number, status, customer_id, rate_id) VALUES ('1401401405124', 'BLOCKED_BY_AN_EMPLOYEE', 1, 2);
+INSERT INTO contract (number, status, customer_id, rate_id) VALUES ('1401401405125', 'AVAILABLE', 3, 3);
 
 INSERT INTO rate (name, cost, calls, sms, internet, description)
-VALUES ('good tariff', 300, 1000 , 1000, 1000 , 'very good');
+VALUES ('For ladies', 300, 1000 , 1000, 1000 , 'Simple, wonderful tariff');
 INSERT INTO rate (name, cost, calls, sms, internet, description)
-VALUES ('simple tariff', 100, 100, 100, 100, 'good');
+VALUES ('All in one', 300, 1000, 1000, 1000, 'All inclusive');
+INSERT INTO rate (name, cost, calls, sms, internet, description)
+VALUES ('Premium', 1500, 1000, 1000, 1000, 'The most expensive tariff');
 
-INSERT INTO `option` (name, cost, cost_of_connection, description) VALUES ('good option', 100, 100, 'very good');
-INSERT INTO `option` (name, cost, cost_of_connection, description) VALUES ('stupid option', 200, 100, 'bad');
-INSERT INTO `option` (name, cost, cost_of_connection, description) VALUES ('stupid option2', 200, 100, 'bad1');
-INSERT INTO `option` (name, cost, cost_of_connection, description) VALUES ('stupid option3', 200, 100, 'bad2');
+INSERT INTO `option` (name, cost, cost_of_connection, description) VALUES ('SMS', 100, 100, 'Include 200 SMS');
+INSERT INTO `option` (name, cost, cost_of_connection, description) VALUES ('Super calls', 200, 100, 'Include 200 minutes for outgoing calls:');
+INSERT INTO `option` (name, cost, cost_of_connection, description) VALUES ('Mobile Internet 3 Gb', 200, 100, 'Include 3 Gb');
+INSERT INTO `option` (name, cost, cost_of_connection, description) VALUES ('Space', 300, 10, 'Include 5 Gb, 200 SMS');
+INSERT INTO `option` (name, cost, cost_of_connection, description) VALUES ('Mega mobile Internet', 300, 10, 'Include 15 Gb');
 
 INSERT INTO rate_option (rate_id, option_id) VALUES (1, 1);
 INSERT INTO rate_option (rate_id, option_id) VALUES (1, 2);
 INSERT INTO rate_option (rate_id, option_id) VALUES (2, 1);
 INSERT INTO rate_option (rate_id, option_id) VALUES (2, 2);
+INSERT INTO rate_option (rate_id, option_id) VALUES (3, 1);
+INSERT INTO rate_option (rate_id, option_id) VALUES (3, 4);
 
 INSERT INTO contract_option (contract_id, option_id) VALUES (1, 4);
 INSERT INTO contract_option (contract_id, option_id) VALUES (2, 3);
+INSERT INTO contract_option (contract_id, option_id) VALUES (3, 2);
 
 INSERT INTO role (role_name) VALUES ('ROLE_CUSTOMER');
 INSERT INTO role (role_name) VALUES ('ROLE_MANAGER');
@@ -46,4 +53,5 @@ INSERT INTO compatible_options (first_id, second_id) VALUES (1 , 2);
 INSERT INTO compatible_options (first_id, second_id) VALUES (2 , 3);
 
 INSERT INTO incompatible_options (first_id, second_id) VALUES (3 , 4);
+INSERT INTO incompatible_options (first_id, second_id) VALUES (4 , 3);
 

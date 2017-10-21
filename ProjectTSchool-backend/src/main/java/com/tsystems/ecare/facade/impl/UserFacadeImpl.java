@@ -1,6 +1,6 @@
 package com.tsystems.ecare.facade.impl;
 
-import com.tsystems.ecare.dto.AddressDTO;
+import com.tsystems.ecare.dao.RoleDao;
 import com.tsystems.ecare.dto.CustomerDTO;
 import com.tsystems.ecare.dto.RateDTO;
 import com.tsystems.ecare.dto.UserDTO;
@@ -16,18 +16,24 @@ import com.tsystems.ecare.util.Util;
 import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component("userFacade")
 public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFacade {
 
-    private static Logger log = Logger.getLogger(OptionFacadeImpl.class.getName());
-
     @Autowired
     private Util util;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -38,6 +44,11 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
     @Autowired
     private ContractService contractService;
 
+    @Autowired
+    private RoleDao roleDao;
+
+    private static Logger log = Logger.getLogger(UserFacadeImpl.class.getName());
+
     @Override
     public List<CustomerDTO> getAllCustomers() {
         return userService.getAllCustomers().stream()
@@ -45,6 +56,13 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
                 .collect(Collectors.toList());
     }
 
+    /**
+     * The method converts User {@link User}
+     * to DTO object {@link UserDTO}.
+     *
+     * @param entity that will be converted
+     * @return converted UserDTO
+     */
     @Override
     public UserDTO convertToDto(User entity) {
         UserDTO userDTO = modelMapper.map(entity, UserDTO.class);
@@ -53,35 +71,46 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
     }
 
     @Override
+    public void createCustomer(UserDTO userDTO){
+        try {
+            userService.saveCustomer(convertToEntityWithException(userDTO));
+        } catch (ParseException e) {
+            log.error("Couldn't create a customer", e);
+        }
+    }
+
+    @Override
     public CustomerDTO convertToCustomerDto(User entity) {
         CustomerDTO customerDTO = modelMapper.map(entity, CustomerDTO.class);
         return customerDTO;
     }
 
-    @Override
-    public void createCustomer(UserDTO userDTO) {
-        userService.saveCustomer(convertToEntity(userDTO));
-    }
 
-    @Override
-    public User convertToEntity(UserDTO dto) {
-        User user = modelMapper.map(dto, User.class);
-        if (dto.getAddress() != null) {
-            user.setAddress(convertToAddressEntity(dto.getAddress()));
+    private User convertToEntityWithException(UserDTO dto) throws ParseException {
+        Address address = modelMapper.map(dto.getAddress(), Address.class);
+        User user = new User();
+        user.setAddress(address);
+        user.setEmail(dto.getEmail());
+        user.setLogin(dto.getEmail());
+        user.setFirstName(dto.getFirstName());
+        user.setLastName(dto.getLastName());
+        user.setPassportNumber(dto.getPassportNumber());
+        user.setPassportIssuedByWhom(dto.getPassportIssuedByWhom());
+        user.setPassword(passwordEncoder.encode(user.getLastName()));
+        user.setRole(roleDao.getByName("ROLE_CUSTOMER"));
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        if (dto.getBirthDate() != null) {
+            user.setBirthDate(formatter.parse(dto.getBirthDate()));
+        }
+        if (dto.getPassportIssuedWhen() != null) {
+            user.setPassportIssuedWhen(formatter.parse(dto.getPassportIssuedWhen()));
         }
         return user;
     }
 
-    private Address convertToAddressEntity(AddressDTO addressDTO) {
-        Address address = new Address();
-        if (addressDTO != null) {
-            address.setCountry(addressDTO.getCountry());
-            address.setCity(addressDTO.getCity());
-            address.setStreet(addressDTO.getStreet());
-            address.setZipcode(addressDTO.getZipcode());
-            address.setHouseNumber(Integer.parseInt(addressDTO.getHouseNumber()));
-        }
-        return address;
+    @Override
+    public User convertToEntity(UserDTO dto) {
+        return modelMapper.map(dto, User.class);
     }
 
     @Override

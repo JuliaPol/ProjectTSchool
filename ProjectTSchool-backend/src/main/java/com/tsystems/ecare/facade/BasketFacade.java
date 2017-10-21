@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Set;
 
 public interface BasketFacade extends Facade<BasketDTO, User>{
-    BasketDTO getBasket(String user, String rate, Set<String> optionList) throws Exception;
+    BasketDTO getBasket(String user, String rate, Set<String> optionList);
 }

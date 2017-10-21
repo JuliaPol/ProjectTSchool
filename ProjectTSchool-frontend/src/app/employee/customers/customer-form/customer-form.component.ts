@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {AppService} from "../../../app.service";
 import {Router} from "@angular/router";
+import {ICustomer} from "../../../interfaces/customers";
 
 @Component({
   moduleId: module.id,
@@ -9,6 +10,7 @@ import {Router} from "@angular/router";
 })
 export class CustomerFormComponent {
   customer: any = {};
+  address: any = {};
   result: string = '';
 
   constructor(private appService: AppService) {
@@ -16,7 +18,7 @@ export class CustomerFormComponent {
   }
 
   onSubmit() {
-    console.log(this.customer.address.street);
+    this.customer.address = this.address;
     this.appService.createUser(this.customer).then(() => this.result = 'Added');
   }
 }

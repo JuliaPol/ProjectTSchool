@@ -11,10 +11,10 @@ export class TariffFormComponent {
   constructor(private appService: AppService) {
   }
 
-  rate: any = {};
+  tariff: any = {};
   result: string = '';
 
   onSubmit() {
-    this.appService.createTariff(this.rate).then(() => this.result = 'Added');
+    this.appService.createTariff(this.tariff).then(() => this.result = 'Added');
   }
 }

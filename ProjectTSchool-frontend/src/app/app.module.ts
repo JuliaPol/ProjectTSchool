@@ -7,6 +7,7 @@ import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {EmployeeComponent} from "./employee/employee.component";
 import {LoginErrorComponent} from "./login-error/login-error.component";
+import {LoginComponent} from "./login/login.component"
 import {AppRoutingModule} from "./app-routing.module";
 import {AppService} from "./app.service";
 import {ContractListComponent} from "./employee/contract-list/contract-list.component";
@@ -23,11 +24,15 @@ import {OptionsSharedService} from "./employee/options/options-shared.service";
 import {TariffInfoComponent} from "./employee/tariffs/tariff-info/tariff-info.component";
 import {TariffSharedService} from "./employee/tariffs/tariff-shared.service";
 import {OptionListComponent} from "./employee/tariffs/option-list/option-list.component";
+import {OptionListSharedService} from "./employee/tariffs/option-list/option-list-shared.service";
+import {CustomerSharedService} from "./employee/customers/customer-shared.service";
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeComponent,
+    LoginComponent,
     LoginErrorComponent,
     ContractListComponent,
     ContractFormComponent,
@@ -53,6 +58,9 @@ import {OptionListComponent} from "./employee/tariffs/option-list/option-list.co
     AppService,
     OptionsSharedService,
     TariffSharedService,
+    OptionListSharedService,
+    CustomerSharedService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })

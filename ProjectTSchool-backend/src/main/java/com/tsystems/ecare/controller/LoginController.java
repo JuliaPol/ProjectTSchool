@@ -25,6 +25,7 @@ public class LoginController {
         return "index.html";
     }
 
+
     @Secured("ROLE_MANAGER")
     @RequestMapping(value = "/contract-form", method = RequestMethod.GET)
     public String contractForm() {

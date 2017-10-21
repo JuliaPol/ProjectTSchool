@@ -1,20 +1,26 @@
 import {Component, OnInit} from "@angular/core";
 import {ITariff} from "../../interfaces/tariff";
 import {AppService} from "../../app.service";
-import {Router} from "@angular/router";
+import {IContract, ICustomer} from "../../interfaces/customers";
+import {CustomerSharedService} from "../customers/customer-shared.service";
 
 @Component({
   moduleId: module.id,
   selector: 'contract-form',
   templateUrl: './contract-form.component.html'
 })
-export class ContractFormComponent implements OnInit{
+export class ContractFormComponent implements OnInit {
 
-  rates: ITariff = null;
+  rates: ITariff[] = [];
+  customers: ICustomer[] = [];
   numbers: any[] = [];
-  result: string ='';
+  result: string = '';
+  selectedTariff: ITariff;
+  customerId: number;
+  contract: IContract;
+  selectedNumber: string;
 
-  constructor(private appService: AppService) {
+  constructor(private appService: AppService, private sharedService: CustomerSharedService) {
 
   }
 
@@ -23,19 +29,26 @@ export class ContractFormComponent implements OnInit{
   }
 
   init() {
-    this.appService.getAllTariffs().then(data =>
-      this.rates = data.json() as ITariff);
-    this.numbers.push(new Date().getTime()-1);
+    this.customerId = this.sharedService.getData();
+    this.appService.getAllTariffs().then(data => {
+      this.rates = data.json() as ITariff[];
+      this.selectedTariff = this.rates[0];
+    });
+    this.appService.getCustomersList().then(data => {
+      this.customers = data.json() as ICustomer[];
+    });
+    this.numbers.push(new Date().getTime() - 1);
     this.numbers.push(new Date().getTime());
-    this.numbers.push(new Date().getTime()+1);
-  }
-
-  randomIntFromInterval(min,max)
-  {
-    return Math.floor(Math.random()*(max-min+1)+min);
+    this.numbers.push(new Date().getTime() + 1);
   }
 
   onSubmit() {
-    // this.appService.createContract(this.contract).then(() => this.result = 'Added');
+    this.contract = {
+      rate: this.selectedTariff,
+      status: 'AVAILABLE',
+      number: this.selectedNumber,
+    };
+    this.appService.createContract(this.customerId, this.contract).then(() =>
+    this.result = 'Added');
   }
 }

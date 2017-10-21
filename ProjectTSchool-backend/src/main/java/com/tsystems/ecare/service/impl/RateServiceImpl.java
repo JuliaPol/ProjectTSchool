@@ -1,15 +1,24 @@
 package com.tsystems.ecare.service.impl;
 
 import com.tsystems.ecare.dao.JpaDao;
+import com.tsystems.ecare.dao.OptionDao;
 import com.tsystems.ecare.dao.RateDao;
+import com.tsystems.ecare.dto.OptionDTO;
+import com.tsystems.ecare.dto.RateDTO;
+import com.tsystems.ecare.entities.Option;
 import com.tsystems.ecare.entities.Rate;
 import com.tsystems.ecare.service.RateService;
+import com.tsystems.ecare.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of {@link RateService} interface.
+ */
 @Service("rateService")
 public class RateServiceImpl extends ServiceImpl<Rate> implements RateService {
 
@@ -30,6 +39,12 @@ public class RateServiceImpl extends ServiceImpl<Rate> implements RateService {
     @Override
     public Rate findForCustomerByNumber(String number) {
         return rateDao.findForCustomerByNumber(number);
+    }
+
+    @Override
+    @Transactional
+    public void editRate(Rate rate) {
+        rateDao.update(rate);
     }
 
     @Override

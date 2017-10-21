@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface RoleDao extends JpaDao<Role>{
     List<User> getAllCustomers();
+    Role getByName(String name);
 }

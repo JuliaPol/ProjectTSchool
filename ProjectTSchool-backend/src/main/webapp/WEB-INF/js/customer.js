@@ -144,16 +144,18 @@ function addItemForOptions(name, status) {
     $("<div class=\"well well-sm col-md-2\"></div>").text(name.cost).appendTo(List);
     if (status === "un") {
         if (name.compatibleOptions.length > 0) {
-            $("<p></p>").text("This option must be connected with the options: ").appendTo(List);
+            var string = " ";
             for (var i = 0; i < name.compatibleOptions.length; i++) {
-                $("<p></p>").text(name.compatibleOptions[i]).appendTo(List);
+                string = string.concat(" " + name.compatibleOptions[i] + "; ");
             }
+            $("<p class='flex'></p>").text("This option must be connected with the options: " + string).appendTo(List);
         }
         if (name.incompatibleOptions.length > 0) {
-            $("<p></p>").text("This option can not be connected with the options: ").appendTo(List);
+            var string = " ";
             for (var i = 0; i < name.incompatibleOptions.length; i++) {
-                $("<p></p>").text(name.incompatibleOptions[i]).appendTo(List);
+                string = string.concat(" " + name.incompatibleOptions[i] + "; ");
             }
+            $("<p class='flex'></p>").text("This option can not be connected with the options: " +string).appendTo(List);
         }
     } else {
         $("<input onclick='addOption(" + name.id + ")' type=\"submit\" class=\"btn btn-info button-one button-act col-md-2\" " +

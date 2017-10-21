@@ -26,6 +26,7 @@ public class Rate {
     public static final String RATE_FIND_BY_NAME = "Rate.findByName";
     public static final String RATE_FIND_FOR_CUSTOMER_BY_NUMBER = "Rate.findForCustomerByNumber";
     public static final String RATE_FIND_ALL_FOR_CUSTOMER = "Rate.findAllForCustomer";
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

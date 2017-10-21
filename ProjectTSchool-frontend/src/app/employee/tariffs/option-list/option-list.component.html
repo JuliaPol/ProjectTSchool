@@ -1,7 +1,9 @@
 <div class="row addOption">
+  <div class="col-md-2" >
+    <p>Options:</p>
+  </div>
   <div class="col-md-4" >
     <select class="form-control col-md-4" [(ngModel)]="selectedOption">
-      <option value="">Select option</option>
       <option *ngFor="let option of anotherOptions" [ngValue]="option">{{option.name}}</option>
     </select>
   </div>
@@ -11,10 +13,13 @@
 </div>
 <div class="row" id="purpList">
   <ul class="list-group scroll-bar" id="listSelectedOptions">
-    <li class="list-group-item col-md-3" *ngFor="let option of purposeList" >
+    <li class="list-group-item col-md-3" *ngFor="let option of purposeList">
       <input id={{option.name}} type="checkbox" [checked]="option.selected"
-             (change)="option.selected = !option.selected">
+             (change)="option.selected = !option.selected; changeSelected()">
       <label for={{option.name}}> {{option.name}} </label>
     </li>
   </ul>
+  <div *ngFor="let warning of warnings">
+    <p>{{warning.description}}</p>
+  </div>
 </div>

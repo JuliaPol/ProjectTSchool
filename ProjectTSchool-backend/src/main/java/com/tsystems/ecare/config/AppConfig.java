@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages = {
         "com.tsystems.ecare.dao",
         "com.tsystems.ecare.service",
-        "com.tsystems.ecare.validator",
+        "com.tsystems.ecare.filter",
         "com.tsystems.ecare.facade",
         "com.tsystems.ecare.util"
 })

@@ -9,6 +9,8 @@ import com.tsystems.ecare.facade.OptionFacade;
 import com.tsystems.ecare.facade.RateFacade;
 import com.tsystems.ecare.facade.UserFacade;
 import com.tsystems.ecare.service.Service;
+import com.tsystems.ecare.service.impl.OptionServiceImpl;
+import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,13 +31,20 @@ public class BasketFacadeImpl extends FacadeImpl<User, BasketDTO> implements Bas
     @Autowired
     private OptionFacade optionFacade;
 
+    private static Logger log = Logger.getLogger(BasketFacadeImpl.class);
+
     @Override
-    public BasketDTO getBasket(String user, String rate, Set<String> optionList) throws Exception {
+    public BasketDTO getBasket(String user, String rate, Set<String> optionList){
         BasketDTO basketDTO = new BasketDTO();
         basketDTO.setUser(userFacade.findByLogin(user));
         RateDTO rateDto;
         if (rate != null) {
-            rateDto = rateFacade.get(Long.parseLong(rate));
+            try {
+                rateDto = rateFacade.get(Long.parseLong(rate));
+            } catch (Exception e) {
+                log.error("Tariff not found" , e);
+                rateDto = new RateDTO();
+            }
         } else {
             rateDto = new RateDTO();
         }
@@ -49,7 +58,11 @@ public class BasketFacadeImpl extends FacadeImpl<User, BasketDTO> implements Bas
         List<OptionDTO> optionDTOList = new ArrayList<>();
         if (optionList != null) {
             for (String id : optionList) {
-                optionDTOList.add(optionFacade.get(Long.parseLong(id)));
+                try {
+                    optionDTOList.add(optionFacade.get(Long.parseLong(id)));
+                } catch (Exception e) {
+                    log.error("Option not found" , e);
+                }
             }
         }
         if(optionFacade.checkNewOptions(optionDTOList)) {
@@ -60,6 +73,7 @@ public class BasketFacadeImpl extends FacadeImpl<User, BasketDTO> implements Bas
         basketDTO.setOptionList(optionDTOList);
         return basketDTO;
     }
+
 
     @Override
     public BasketDTO convertToDto(User entity) {

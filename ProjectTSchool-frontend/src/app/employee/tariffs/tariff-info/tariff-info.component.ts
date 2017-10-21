@@ -3,6 +3,9 @@ import {Router} from "@angular/router";
 import {AppService} from "../../../app.service";
 import {TariffSharedService} from "../tariff-shared.service";
 import {ITariff} from "../../../interfaces/tariff";
+import {OptionListSharedService} from "../option-list/option-list-shared.service";
+import {IOptionItem} from "../option-list/option-list.component";
+import {IOption} from "../../../interfaces/options";
 
 @Component({
   moduleId: module.id,
@@ -16,7 +19,8 @@ export class TariffInfoComponent implements OnInit {
 
   constructor(private router: Router,
               private appService: AppService,
-              private sharedService: TariffSharedService) {
+              private sharedService: TariffSharedService,
+              private sharedServiceOptions: OptionListSharedService) {
 
   }
 
@@ -31,10 +35,14 @@ export class TariffInfoComponent implements OnInit {
   }
 
   onSubmit() {
+
+    this.tariff.optionList = this.sharedServiceOptions.getData();
     this.appService.editTariff(this.tariff).then(() => {
-      this.init();
-      this.result = 'Changed';
-    });
+        this.init();
+        this.result = 'Changed';
+        this.sharedServiceOptions.clean();
+      });
+
   }
 
   delete() {

@@ -1,8 +1,13 @@
 package com.tsystems.ecare.service.impl;
 
+import com.tsystems.ecare.config.AppConfig;
 import com.tsystems.ecare.dao.OptionDao;
+import com.tsystems.ecare.dao.RateDao;
+import com.tsystems.ecare.dao.impl.OptionDaoImpl;
+import com.tsystems.ecare.dao.impl.RateDaoImpl;
 import com.tsystems.ecare.entities.Option;
 import com.tsystems.ecare.service.OptionService;
+import com.tsystems.ecare.service.impl.OptionServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,6 +28,27 @@ import static org.mockito.Mockito.mock;
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class)
 public class OptionServiceImplTest {
 
+    @Configuration
+    static class ContextConfiguration {
+
+        @Bean
+        public OptionService optionService() {
+            return new OptionServiceImpl();
+        }
+
+        @Bean
+        public OptionDao optionDao() {
+            OptionDao optionDao = mock(OptionDao.class);
+            return optionDao;
+        }
+
+        @Bean
+        public RateDao rateDao() {
+            RateDao rateDao = mock(RateDao.class);
+            return rateDao;
+        }
+    }
+
     private List<Option> optionsInContract;
     private List<Option> availableOptions;
     private Option option;
@@ -34,7 +60,10 @@ public class OptionServiceImplTest {
     private OptionDao optionDao;
 
     @Autowired
-    private OptionService optionService = new OptionServiceImpl();
+    private RateDao rateDao;
+
+    @Autowired
+    private OptionService optionService;
 
     @Before
     public void init() {
@@ -43,16 +72,17 @@ public class OptionServiceImplTest {
         option.setName("opt1");
 
         option1 = new Option();
-        option.setId(2L);
-        option.setName("opt2");
+        option1.setId(2L);
+        option1.setName("opt2");
 
         option2 = new Option();
-        option.setId(3L);
-        option.setName("opt3");
+        option2.setId(3L);
+        option2.setName("opt3");
 
         option3 = new Option();
-        option.setId(4L);
-        option.setName("opt4");
+        option3.setId(4L);
+        option3.setName("opt4");
+
         List<Option> optionList = new ArrayList<>();
         optionList.add(option);
         optionList.add(option2);
@@ -76,18 +106,16 @@ public class OptionServiceImplTest {
         Assert.assertTrue(checkIncompOptions.contains(option2));
     }
 
-    @Configuration
-    static class ContextConfiguration {
-
-        @Bean
-        public OptionService optionService() {
-            return new OptionServiceImpl();
-        }
-
-        @Bean
-        public OptionDao optionDao() {
-            OptionDao optionDao = mock(OptionDao.class);
-            return optionDao;
-        }
+    @Test
+    public void checkCompatibleOptionsTest() throws Exception {
+        List<Option> checkCompOptions = optionService.checkCompatibleOptions(optionsInContract, availableOptions);
+        Assert.assertTrue(!checkCompOptions.contains(option3));
     }
+
+    @Test
+    public void checkNewOptionsTest() throws Exception {
+        boolean incompatible = optionService.checkNewOptions(availableOptions);
+        Assert.assertTrue(!incompatible);
+    }
+
 }

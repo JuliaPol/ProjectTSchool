@@ -5,16 +5,16 @@
     <div class="row addOption">
       <div class="col-md-5">
         <p>Select tariff</p>
-        <select class="form-control col-md-4" #selectTariff>
-          <option *ngFor="let rate of rates" [value]="rate.id">{{rate.name}}</option>
+        <select class="form-control col-md-4" [(ngModel)]="selectedTariff">
+          <option *ngFor="let rate of rates" [ngValue]="rate">{{rate.name}}</option>
         </select>
       </div>
     </div>
     <div class="row addOption">
       <div class="col-md-5">
         <p>Select number</p>
-        <select class="form-control col-md-4" #selectNumber>
-          <option *ngFor="let number of numbers" [value]="number">{{number}}</option>
+        <select class="form-control col-md-4" [(ngModel)]="selectedNumber">
+          <option *ngFor="let number of numbers" [ngValue]="number">{{number}}</option>
         </select>
       </div>
     </div>

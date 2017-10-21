@@ -1,5 +1,6 @@
 package com.tsystems.ecare.config;
 
+import com.tsystems.ecare.filter.ClearCacheFilter;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import javax.servlet.Filter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;;
@@ -84,6 +86,10 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebApplication
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
+    }
+
+    protected Filter[] getServletFilters() {
+        return new Filter[]{new ClearCacheFilter()};
     }
 
 }

@@ -32,4 +32,10 @@ public class ContractController {
                                        @RequestParam("option") String option ) throws Exception {
         contractFacade.deleteOption(number, Long.parseLong(option));
     }
+
+    @RequestMapping(value = "/create/{id}", method = RequestMethod.POST)
+    public void create(@PathVariable("id") Long id,
+                       @RequestBody ContractDTO contractDTO) throws Exception {
+        contractFacade.create(id, contractDTO);
+    }
 }

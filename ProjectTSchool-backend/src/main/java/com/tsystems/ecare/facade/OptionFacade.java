@@ -15,4 +15,5 @@ public interface OptionFacade extends Facade<OptionDTO, Option> {
     void create(OptionDTO optionDTO);
     void edit(OptionDTO optionDTO);
     void deleteOption(Long id);
+    void editRateOptions(Long id, OptionDTO optionDTOS);
 }

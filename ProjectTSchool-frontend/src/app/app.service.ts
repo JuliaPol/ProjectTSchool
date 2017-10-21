@@ -1,4 +1,4 @@
-import {Http, Response} from "@angular/http";
+import {Http, Response, Headers, RequestOptions} from "@angular/http";
 import {Injectable} from "@angular/core";
 import 'rxjs/add/operator/toPromise';
 import {IOption} from "./interfaces/options";
@@ -45,16 +45,27 @@ export class AppService {
       .toPromise();
   }
 
-  createTariff(rate) {
-    return this.http.post('http://localhost:8080/tariff/create', rate).toPromise();
-  }
-
   createUser(user) {
     return this.http.post('http://localhost:8080/customers/create', user).toPromise();
   }
 
-  editTariff(option) {
-    return this.http.post('http://localhost:8080/tariffs/edit', option).toPromise();
+  createContract(id, contract) {
+    return this.http.post('http://localhost:8080/contract/create/' + id, contract).toPromise();
+  }
+
+  createTariff(rate) {
+    return this.http.post('http://localhost:8080/tariffs/create', rate).toPromise();
+  }
+
+  editTariff(rate) {
+    let headers = new Headers();
+    headers.set('content-type', 'application/json');
+
+    // let headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({
+      headers: headers
+    });
+    return this.http.post('http://localhost:8080/tariffs/edit', JSON.stringify(rate), options).toPromise();
   }
 
   editOption(option) {

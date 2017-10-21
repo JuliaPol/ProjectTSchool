@@ -1,5 +1,5 @@
 <div class="panel panel-default back col-md-9">
-  <a class="btn btn-info button-one" [routerLink]="['../customers']">Back</a>
+  <a class="btn btn-info button-one"  [routerLink]="['../customers']">Back</a>
   <div>
     <h3>
       Add customer
@@ -8,58 +8,65 @@
   <form (ngSubmit)="onSubmit(); todoForm.reset()" #todoForm="ngForm">
     <div class="row addOption">
       <div class="col-md-3">
-        <input type="text" class="form-control" name="firstName" [(ngModel)]="customer.firstName" placeholder="First Name" #firstName="ngModel"
+        <input type="text" class="form-control" name="firstName"
+               [(ngModel)]="customer.firstName" placeholder="First Name" #firstName="ngModel"
                required>
       </div>
       <div class="col-md-3">
-        <input type="text" class="form-control" name="lastName" [(ngModel)]="customer.lastName" placeholder="Last Name" #lastName="ngModel"
+        <input type="text" class="form-control" name="lastName"
+               [(ngModel)]="customer.lastName" placeholder="Last Name" #lastName="ngModel"
                required>
       </div>
       <div class="col-md-3">
-        <input type="text" class="form-control" name="email" [(ngModel)]="customer.email" placeholder="Email" #email="ngModel"
+        <input type="text" class="form-control" name="email"
+               [(ngModel)]="customer.email" placeholder="Email" #email="ngModel"
                required>
       </div>
       <div class="col-md-3 dateField">
         <label for="birthDate">Birthday</label>
-        <input id="birthDate" type="date" class="form-control" name="birthDate" [(ngModel)]="customer.birthDate" placeholder="Birthday" #birthDate="ngModel">
+        <input id="birthDate" type="date" class="form-control" name="birthDate"
+               [(ngModel)]="customer.birthDate" placeholder="Birthday" #birthDate="ngModel">
       </div>
     </div>
     <div class="row addOption">
       <div class="col-md-3">
-        <input type="text" class="form-control" name="passportNumber" [(ngModel)]="customer.passportNumber"
+        <input type="text" class="form-control" name="passportNumber"
+               [(ngModel)]="customer.passportNumber"
                placeholder="Passport number" #passportNumber="ngModel" required>
       </div>
       <div class="col-md-4">
-        <input type="text" class="form-control" name="passportIssuedByWhom" [(ngModel)]="customer.passportIssuedByWhom"
+        <input type="text" class="form-control" name="passportIssuedByWhom"
+               [(ngModel)]="customer.passportIssuedByWhom"
                placeholder="Passport issued by whom" #passportIssuedByWhom="ngModel">
       </div>
       <div class="col-md-3 dateField">
         <label for="passportIssuedWhen">Passport Issued:</label>
-        <input id="passportIssuedWhen" type="date" class="form-control" name="passportIssuedWhen" [(ngModel)]="customer.passportIssuedWhen" placeholder="Passport issued when" #passportIssuedWhen="ngModel">
+        <input id="passportIssuedWhen" type="date" class="form-control" name="passportIssuedWhen"
+               [(ngModel)]="customer.passportIssuedWhen" placeholder="Passport issued when" #passportIssuedWhen="ngModel">
       </div>
     </div>
     <div class="row addOption">
       <div class="col-md-3">
-        <input type="text" class="form-control" name="address.country" [(ngModel)]="customer.address.country"
-               placeholder="Country" #address.country="ngModel">
+        <input type="text" class="form-control" name="country" [(ngModel)]="address.country"
+               placeholder="Country" #country="ngModel">
       </div>
       <div class="col-md-3">
-        <input type="text" class="form-control" name="address.city" [(ngModel)]="customer.address.city"
-               placeholder="City" #address.city="ngModel">
+        <input type="text" class="form-control" name="city" [(ngModel)]="address.city"
+               placeholder="City" #city="ngModel">
       </div>
       <div class="col-md-3">
-        <input type="text" class="form-control" name="address.street" [(ngModel)]="customer.address.street"
-               placeholder="Street" #address.street="ngModel">
+        <input type="text" class="form-control" name="street" [(ngModel)]="address.street"
+               placeholder="Street" #street="ngModel">
       </div>
     </div>
     <div class="row addOption">
       <div class="col-md-3">
-        <input type="text" class="form-control" name="address.zipcode" [(ngModel)]="customer.address.zipcode"
-               placeholder="Zipcode" #address.zipcode="ngModel">
+        <input type="text" class="form-control" name="zipcode" [(ngModel)]="address.zipcode"
+               placeholder="Zipcode" #zipcode="ngModel">
       </div>
       <div class="col-md-3">
-        <input type="text" class="form-control" name="address.houseNumber" [(ngModel)]="customer.address.houseNumber"
-               placeholder="House number" #address.houseNumber="ngModel">
+        <input type="text" class="form-control" name="houseNumber" [(ngModel)]="address.houseNumber"
+               placeholder="House number" #houseNumber="ngModel">
       </div>
     </div>
     <div class="row addOption">
