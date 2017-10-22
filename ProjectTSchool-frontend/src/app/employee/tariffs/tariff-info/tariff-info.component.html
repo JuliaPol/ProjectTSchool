@@ -12,40 +12,41 @@
       <div class="col-md-4">
         <p>Name:</p>
         <input type="text" class="form-control" name="name" [(ngModel)]="tariff.name"
-               value={{tariff.name}}
+               value={{tariff?.name}}
                #name="ngModel"
                required>
       </div>
       <div class="col-md-8">
         <p>Description:</p>
         <input type="text" class="form-control" name="description" [(ngModel)]="tariff.description"
-               value={{tariff.description}} #description="ngModel" required>
+               value={{tariff?.description}} #description="ngModel" required>
       </div>
     </div>
     <div class="row addOption">
       <div class="col-md-3">
         <p>Cost</p>
         <input type="text" class="form-control" name="cost" [(ngModel)]="tariff.cost"
-               value={{tariff.cost}} #cost="ngModel" required>
+               value={{tariff?.cost}} #cost="ngModel" required>
       </div>
       <div class="col-md-3">
         <p>Calls:</p>
         <input type="text" class="form-control" name="costOfConnection" [(ngModel)]="tariff.calls"
-               value={{tariff.calls}} #calls="ngModel" required>
+               value={{tariff?.calls}} #calls="ngModel" required>
       </div>
       <div class="col-md-3">
         <p>Sms:</p>
         <input type="text" class="form-control" name="costOfConnection" [(ngModel)]="tariff.sms"
-               value={{tariff.sms}} #sms="ngModel" required>
+               value={{tariff?.sms}} #sms="ngModel" required>
       </div>
       <div class="col-md-3">
         <p>Internet:</p>
         <input type="text" class="form-control" name="costOfConnection" [(ngModel)]="tariff.internet"
-               value={{tariff.internet}} #internet="ngModel" required>
+               value={{tariff?.internet}} #internet="ngModel" required>
       </div>
     </div>
-    <div class="row addOption" *ngIf="tariff.optionList">
-        <option-list [optionList]="tariff.optionList"></option-list>
+    <div class="row addOption" *ngIf="tariff?.optionList">
+        <option-list [optionList]="tariff?.optionList"></option-list>
+    </div>
       <div class="row addOption">
         <div class="col-md-8">
           <button type="submit" class="btn btn-info button-one col-md-4" (click)="onSubmit(); todoForm.reset()"
@@ -53,7 +54,6 @@
           </button>
         </div>
       </div>
-    </div>
   </form>
   {{result}}
 </div>

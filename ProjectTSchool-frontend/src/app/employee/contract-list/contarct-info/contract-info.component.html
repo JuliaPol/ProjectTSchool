@@ -4,25 +4,25 @@
   <h3>Edit contract</h3>
   <form #todoForm="ngForm">
     <div class="row addOption">
-      <p>{{contract.rate.name}}</p>
+      <p id="changedTariff">{{contract?.rate?.name}}</p>
       <div class="col-md-5">
-        <p>Select new tariff</p>
+        <p>Select new tariff:</p>
         <select class="form-control col-md-4" #selectRate (change)="rateSelected(selectRate.value)">
-          <option value="">Select option</option>
-          <option *ngFor="let rate of rates" [value]="rate.id">{{rate.name}}</option>
+          <option value="">Select tariff</option>
+          <option *ngFor="let rate of rates" [value]="rate?.id">{{rate?.name}}</option>
         </select>
       </div>
     </div>
     <div class="row addOption">
       <div class="col-lg-6">
-        <p>Rate options:</p>
-        <ul class="list-group scroll-bar">
+        <p>Tariff options:</p>
+        <ul class="list-group scrollbar-cyan bordered-cyan card example-2 square">
           <li class="list-group-item" *ngFor="let option of selectedTariff?.optionList">
-            {{option.name}}
+            {{option?.name}}
           </li>
         </ul>
       </div>
-      <p>{{contract.status}}</p>
+      <p id="changedStatus">{{contract?.status}}</p>
       <div class="col-lg-6">
         <p>Select new status:</p>
           <select class="form-control col-md-4" #selectStatus (change)="statusSelected(selectStatus.value)">

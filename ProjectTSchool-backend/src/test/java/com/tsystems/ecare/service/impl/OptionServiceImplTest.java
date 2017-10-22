@@ -1,6 +1,7 @@
 package com.tsystems.ecare.service.impl;
 
 import com.tsystems.ecare.config.AppConfig;
+import com.tsystems.ecare.dao.ContractDao;
 import com.tsystems.ecare.dao.OptionDao;
 import com.tsystems.ecare.dao.RateDao;
 import com.tsystems.ecare.dao.impl.OptionDaoImpl;
@@ -47,6 +48,12 @@ public class OptionServiceImplTest {
             RateDao rateDao = mock(RateDao.class);
             return rateDao;
         }
+
+        @Bean
+        public ContractDao contractDao() {
+            ContractDao contractDao = mock(ContractDao.class);
+            return contractDao;
+        }
     }
 
     private List<Option> optionsInContract;
@@ -61,6 +68,9 @@ public class OptionServiceImplTest {
 
     @Autowired
     private RateDao rateDao;
+
+    @Autowired
+    private ContractDao contractDao;
 
     @Autowired
     private OptionService optionService;

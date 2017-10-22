@@ -213,6 +213,13 @@
   overflow-x: hidden;
 }
 
+.example-2 {
+  position: relative;
+  overflow-y: auto;
+  height: 120px;
+  overflow-x: hidden;
+}
+
 /* Base for label styling */
 [type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
@@ -298,4 +305,19 @@ label {
   margin-left: 10px;
   width: 100px;
   color: #95989A;
+}
+
+#changedTariff {
+  margin-left: 15px;
+  font-size: large;
+}
+
+#changedStatus {
+  margin-left: 15px;
+  font-size: large;
+}
+
+.warn {
+  color: red;
+  font-size: 13px;
 }

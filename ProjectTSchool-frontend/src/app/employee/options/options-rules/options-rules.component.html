@@ -5,13 +5,13 @@
     <div class="col-md-4">
       <select class="form-control col-md-4" #selectOpt (change)="optionSelected(selectOpt.value)">
         <option value="">Select option</option>
-        <option *ngFor="let option of options" [value]="option.id">{{option.name}}</option>
+        <option *ngFor="let option of options" [value]="option?.id">{{option?.name}}</option>
       </select>
     </div>
     <div class="col-md-4" >
       <select class="form-control col-md-4" [(ngModel)]="selectPurpose" #selectPurp (change)="purposeOptionSelected(selectPurp.value)">
         <option [value]="0">Select option</option>
-        <option *ngFor="let option of optionsForSelection" [value]="option.id">{{option.name}}</option>
+        <option *ngFor="let option of optionsForSelection" [value]="option?.id">{{option?.name}}</option>
       </select>
     </div>
     <div class="col-md-2">
@@ -21,9 +21,9 @@
     <div class="row" id="purpList">
       <ul class="list-group scroll-bar" id="listSelectedOptions">
           <li class="list-group-item col-md-3" *ngFor="let option of purposeList" >
-            <input id={{option.name}} type="checkbox" [checked]="option.selected"
+            <input id={{option?.name}} type="checkbox" [checked]="option.selected"
                    (change)="option.selected = !option.selected">
-            <label for={{option.name}}> {{option.name}} </label>
+            <label for={{option?.name}}> {{option?.name}} </label>
           </li>
       </ul>
     </div>

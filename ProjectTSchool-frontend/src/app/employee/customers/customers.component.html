@@ -19,14 +19,14 @@
             <div class="row">
               <button (click)="onToggle(customer)">v</button>
               <p data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="col-md-9 client-href">
-                {{customer.firstName}} {{customer.lastName}}</p>
+                {{customer?.firstName}} {{customer?.lastName}}</p>
               <input type="submit" class="btn btn-info button-one button-act col-md-2" value="Add contract"
                      (click)="addContract(); addToSharedService(customer.id)">
             </div>
           </h4>
         </div>
         <div id="collapseOne" class="panel-collapse collapse" [style.display]="customer.selected===true?'block':'none'">
-          <contract-list [contractList]="customer.contractList"></contract-list>
+          <contract-list [contractList]="customer?.contractList"></contract-list>
         </div>
       </div>
     </div>

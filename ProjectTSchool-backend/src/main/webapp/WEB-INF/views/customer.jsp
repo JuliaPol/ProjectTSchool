@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Login page</title>
+    <title>Satellite</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/customer.css" rel="stylesheet">
 </head>

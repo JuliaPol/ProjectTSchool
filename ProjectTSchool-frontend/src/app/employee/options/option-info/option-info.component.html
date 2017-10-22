@@ -11,41 +11,41 @@
     <div class="row addOption">
       <div class="col-md-4">
         <p>Name:</p>
-        <input type="text" class="form-control" name="name" [(ngModel)]="option.name" value={{option.name}}
+        <input type="text" class="form-control" name="name" [(ngModel)]="option.name" value={{option?.name}}
                #name="ngModel"
                required>
       </div>
       <div class="col-md-8">
         <p>Description:</p>
         <input type="text" class="form-control" name="description" [(ngModel)]="option.description"
-               value={{option.description}} #description="ngModel" required>
+               value={{option?.description}} #description="ngModel" required>
       </div>
     </div>
     <div class="row addOption">
       <div class="col-md-4">
         <p>Cost</p>
         <input type="text" class="form-control" name="cost" [(ngModel)]="option.cost"
-               value={{option.cost}} #cost="ngModel" required>
+               value={{option?.cost}} #cost="ngModel" required>
       </div>
       <div class="col-md-4">
         <p>Cost of connection:</p>
         <input type="text" class="form-control" name="costOfConnection" [(ngModel)]="option.costOfConnection"
-               value={{option.costOfConnection}} #costOfConnection="ngModel" required>
+               value={{option?.costOfConnection}} #costOfConnection="ngModel" required>
       </div>
     </div>
     <div class="row addOption">
       <div class="col-lg-6">
         <p>This option must be connected with the options:</p>
-        <ul class="list-group scroll-bar">
-          <li class="list-group-item" *ngFor="let option of option.compatibleOptions">
+        <ul class="list-group scroll-bar scrollbar-cyan bordered-cyan card example-2 square">
+          <li class="list-group-item" *ngFor="let option of option?.compatibleOptions">
             {{option}}
           </li>
         </ul>
       </div>
       <div class="col-lg-6">
         <p>This option can not be connected with the options:</p>
-        <ul class="list-group scroll-bar">
-          <li class="list-group-item" *ngFor="let option of option.incompatibleOptions">
+        <ul class="list-group scroll-bar scrollbar-cyan bordered-cyan card example-2 square">
+          <li class="list-group-item" *ngFor="let option of option?.incompatibleOptions">
             {{option}}
           </li>
         </ul>

@@ -7,7 +7,7 @@
         <p>Select tariff</p>
         <select class="form-control col-md-4" #selectRate (change)="rateSelected(selectRate.value)">
           <option value="">Select rate</option>
-          <option *ngFor="let rate of rates" [value]="rate.id">{{rate.name}}</option>
+          <option *ngFor="let rate of rates" [value]="rate.id">{{rate?.name}}</option>
         </select>
       </div>
     </div>

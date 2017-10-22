@@ -2,9 +2,9 @@
   <a class="btn btn-info button-one" [routerLink]="['../customers']">Back</a>
   <h3>Edit contract</h3>
   <form #todoForm="ngForm">
-    <div class="row addOption" *ngIf="contract?.optionList && contract?.rate.optionList">
+    <div class="row addOption" *ngIf="contract?.optionList && contract?.rate?.optionList">
     <option-list [optionList]="contract?.optionList"
-                 [rateOptions]="contract?.rate.optionList"></option-list>
+                 [rateOptions]="contract?.rate?.optionList"></option-list>
     </div>
     <div class="row addOption" >
       <div class="col-md-8">
