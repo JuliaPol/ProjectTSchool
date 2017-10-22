@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -152,6 +153,7 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
     public void updateContract(ContractDTO contractDTO) throws Exception {
         Rate rate = modelMapper.map(contractDTO.getRate(), Rate.class);
         Contract contract = contractService.get(contractDTO.getId());
+        contract.setOptionList(new ArrayList<>());
         contract.setRate(rate);
         contract.setStatus(ContractStatus.valueOf(contractDTO.getStatus()));
         contractService.updateContract(contract);

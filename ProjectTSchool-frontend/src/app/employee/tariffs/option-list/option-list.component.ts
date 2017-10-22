@@ -71,6 +71,7 @@ export class OptionListComponent implements OnInit {
         })
       }
       this.sharedService.saveData(this.convert());
+      this.sharedService.saveWarningsCount(this.warnings.length);
     });
   }
 
@@ -125,6 +126,7 @@ export class OptionListComponent implements OnInit {
     });
     this.selectedOption = null;
     this.sharedService.saveData(this.convert());
+    this.sharedService.saveWarningsCount(this.warnings.length);
   }
 
   private checkPurposeListByCompabilities() {
@@ -147,6 +149,7 @@ export class OptionListComponent implements OnInit {
   changeSelected() {
     this.checkPurposeListByCompabilities();
     this.sharedService.saveData(this.convert());
+    this.sharedService.saveWarningsCount(this.warnings.length);
   }
   private cleanWarnings(item) {
     this.warnings

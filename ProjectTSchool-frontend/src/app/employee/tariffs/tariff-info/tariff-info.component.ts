@@ -33,12 +33,18 @@ export class TariffInfoComponent implements OnInit {
   }
 
   onSubmit() {
-    this.tariff.optionList = this.sharedServiceOptions.getData();
-    this.appService.editTariff(this.tariff).then(() => {
+    let warningCount = this.sharedServiceOptions.getWarningsCount();
+    if (warningCount === 0) {
+      this.tariff.optionList = this.sharedServiceOptions.getData();
+      this.appService.editTariff(this.tariff).then(() => {
         this.init();
         this.result = 'Changed';
         this.sharedServiceOptions.clean();
       });
+    } else {
+        this.init();
+        this.result = 'Error';
+    }
   }
 
   delete() {

@@ -32,10 +32,16 @@ export class ContractOptionsComponent implements OnInit {
   }
 
   onSubmit() {
-    this.appService.updateContractOptions(this.contractId, this.sharedServiceOptions.getData()).then(() => {
+    let warningCount = this.sharedServiceOptions.getWarningsCount();
+    if (warningCount === 0) {
+      this.appService.updateContractOptions(this.contractId, this.sharedServiceOptions.getData()).then(() => {
+        this.init();
+        this.result = 'Changed';
+        this.sharedServiceOptions.clean();
+      });
+    } else {
       this.init();
-      this.result = 'Changed';
-      this.sharedServiceOptions.clean();
-    });
+      this.result = 'Error';
+    }
   }
 }
