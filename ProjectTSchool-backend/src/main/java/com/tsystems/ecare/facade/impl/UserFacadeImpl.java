@@ -16,6 +16,8 @@ import com.tsystems.ecare.util.Util;
 import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -74,6 +76,7 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
     public void createCustomer(UserDTO userDTO){
         try {
             userService.saveCustomer(convertToEntityWithException(userDTO));
+            userService.sendEmailToNewCustomer(userDTO);
         } catch (ParseException e) {
             log.error("Couldn't create a customer", e);
         }

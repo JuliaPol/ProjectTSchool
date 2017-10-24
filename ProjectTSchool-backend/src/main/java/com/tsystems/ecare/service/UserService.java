@@ -13,4 +13,5 @@ public interface UserService extends Service<User> {
     User findByLogin(String login);
     List<User> getAllCustomers();
     void saveCustomer(User user);
+    void sendEmailToNewCustomer(UserDTO user);
 }

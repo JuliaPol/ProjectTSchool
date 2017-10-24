@@ -4,10 +4,14 @@ import com.tsystems.ecare.dao.AddressDao;
 import com.tsystems.ecare.dao.JpaDao;
 import com.tsystems.ecare.dao.RoleDao;
 import com.tsystems.ecare.dao.UserDao;
+import com.tsystems.ecare.dto.UserDTO;
 import com.tsystems.ecare.entities.User;
 import com.tsystems.ecare.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -25,6 +29,9 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    public JavaMailSender mailSender;
 
     private static Logger log = Logger.getLogger(UserServiceImpl.class);
 
@@ -44,6 +51,16 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService {
     @Transactional
     public void saveCustomer(User user) {
         userDao.insert(user);
+    }
+
+    @Async
+    @Override
+    public void sendEmailToNewCustomer(UserDTO user) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(user.getEmail());
+        message.setSubject("Welcome to Satellite!");
+        message.setText("Your login: " + user.getEmail() + "\n" + "Your password: " + user.getLastName());
+        mailSender.send(message);
     }
 
     @Override

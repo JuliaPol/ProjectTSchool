@@ -96,7 +96,6 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
     }
 
     @Override
-    @Transactional
     public List<Option> getBy(Long id) {
         Option option = optionDao.get(id);
         return option.getCompOptions();

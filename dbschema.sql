@@ -1,8 +1,5 @@
--- DROP TABLE address, contract, contract_option, `option`, rate_option,
---  rate, user, role, compatible_options, incompatible_options ;
--- DROP DATABASE ecare;
-
--- CREATE DATABASE ecare;
+DROP TABLE address, contract, contract_option, `option`, rate_option,
+ rate, user, role, compatible_options, incompatible_options ;
 
 CREATE TABLE address (
   id           SERIAL PRIMARY KEY,

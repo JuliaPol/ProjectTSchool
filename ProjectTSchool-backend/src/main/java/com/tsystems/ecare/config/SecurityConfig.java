@@ -34,11 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobalAuthentication(AuthenticationManagerBuilder authenticationMgr) throws Exception {
-//        authenticationMgr.jdbcAuthentication()
-//                .usersByUsernameQuery("select login, password, 1 from user where login=?")
-//                .authoritiesByUsernameQuery("select u.login, r.role_name from user u, role r where r.id = u.role_id and u.login=?")
-//                //.authoritiesByUsernameQuery("select u.login, r.role_name from user u, role r, user_role ur where u.id = ur.user_id and u.login=?")
-//                .dataSource(ecare);
         authenticationMgr.authenticationProvider(authProvider());
     }
 
@@ -59,18 +54,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable();
     }
-
-//    @Bean
-//    @Override
-//    public AuthenticationManager authenticationManagerBean() throws Exception {
-//        return super.authenticationManagerBean();
-//    }
-
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsServiceBean() throws Exception {
-//        return super.userDetailsServiceBean();
-//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
