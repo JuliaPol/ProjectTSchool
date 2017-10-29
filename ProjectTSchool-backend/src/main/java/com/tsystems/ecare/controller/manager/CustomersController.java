@@ -24,8 +24,8 @@ public class CustomersController {
         return userFacade.getAllCustomers();
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public void create(@RequestBody UserDTO userDTO) throws ParseException {
-        userFacade.createCustomer(userDTO);
-    }
+//    @RequestMapping(value = "/create", method = RequestMethod.POST)
+//    public void create(@RequestBody UserDTO userDTO) throws ParseException {
+//        userFacade.createCustomer(userDTO);
+//    }
 }

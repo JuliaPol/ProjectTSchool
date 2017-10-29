@@ -31,6 +31,9 @@ import {CustomerContractNumberFiler} from "./employee/customers/customer-contrac
 import {ContractInfoComponent} from "./employee/contract-list/contarct-info/contract-info.component";
 import {ContractSharedService} from "./employee/contract-list/contract-shared.service";
 import {ContractOptionsComponent} from "./employee/contract-list/contract-options/contract-options.component";
+import {SignupComponent} from "./signup/signup.component"
+import {NewAccountComponent} from "./signup/new-account/new-account.component"
+import {SignupSharedService} from "./signup/signup-shared.service";
 
 @NgModule({
   declarations: [
@@ -53,6 +56,8 @@ import {ContractOptionsComponent} from "./employee/contract-list/contract-option
     CustomerContractNumberFiler,
     ContractInfoComponent,
     ContractOptionsComponent,
+    SignupComponent,
+    NewAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +73,7 @@ import {ContractOptionsComponent} from "./employee/contract-list/contract-option
     OptionListSharedService,
     CustomerSharedService,
     ContractSharedService,
+    SignupSharedService,
     {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]

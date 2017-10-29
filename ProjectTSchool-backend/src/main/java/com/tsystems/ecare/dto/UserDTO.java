@@ -26,8 +26,9 @@ public class UserDTO extends IdDTO {
     @NotNull
     private String email;
 
-    @NotNull
     private String login;
+
+    private String password;
 
     private String birthDate;
 

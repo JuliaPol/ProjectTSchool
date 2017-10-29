@@ -5,6 +5,7 @@ import com.tsystems.ecare.dao.JpaDao;
 import com.tsystems.ecare.dao.RoleDao;
 import com.tsystems.ecare.dao.UserDao;
 import com.tsystems.ecare.dto.UserDTO;
+import com.tsystems.ecare.entities.Role;
 import com.tsystems.ecare.entities.User;
 import com.tsystems.ecare.service.UserService;
 import org.apache.log4j.Logger;
@@ -50,6 +51,7 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService {
     @Override
     @Transactional
     public void saveCustomer(User user) {
+        user.setRole(getRole("ROLE_CUSTOMER"));
         userDao.insert(user);
     }
 
@@ -59,8 +61,13 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(user.getEmail());
         message.setSubject("Welcome to Satellite!");
-        message.setText("Your login: " + user.getEmail() + "\n" + "Your password: " + user.getLastName());
+        message.setText("Your login: " + user.getLogin() + "\n" + "Your password: " + user.getPassword());
         mailSender.send(message);
+    }
+
+    @Override
+    public Role getRole(String name) {
+        return roleDao.getByName(name);
     }
 
     @Override

@@ -18,7 +18,7 @@ import java.security.Principal;
  */
 @RestController
 @RequestMapping("/user")
-@Secured({"ROLE_CUSTOMER", "ROLE_MANAGER"})
+//@Secured({"ROLE_CUSTOMER", "ROLE_MANAGER"})
 public class UserController {
     @Autowired
     private UserFacade userFacade;
@@ -27,5 +27,11 @@ public class UserController {
     @ResponseBody
     public UserDTO getCurrentUser(Principal principal) {
         return userFacade.findByLogin(principal.getName());
+    }
+
+
+    @RequestMapping(value = "/createNewAccount", method = RequestMethod.POST)
+    public void createNewAccount(@RequestBody UserDTO userDTO) {
+        userFacade.createCustomer(userDTO);
     }
 }

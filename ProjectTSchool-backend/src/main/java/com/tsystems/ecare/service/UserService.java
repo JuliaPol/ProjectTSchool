@@ -1,6 +1,7 @@
 package com.tsystems.ecare.service;
 
 import com.tsystems.ecare.dto.UserDTO;
+import com.tsystems.ecare.entities.Role;
 import com.tsystems.ecare.entities.User;
 
 import java.util.List;
@@ -14,4 +15,5 @@ public interface UserService extends Service<User> {
     List<User> getAllCustomers();
     void saveCustomer(User user);
     void sendEmailToNewCustomer(UserDTO user);
+    Role getRole(String name);
 }

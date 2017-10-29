@@ -61,7 +61,7 @@ export class AppService {
   }
 
   createUser(user) {
-    return this.http.post('http://localhost:8080/customers/create', user).toPromise();
+    return this.http.post('http://localhost:8080/user/createNewAccount', user).toPromise();
   }
 
   createContract(id, contract) {

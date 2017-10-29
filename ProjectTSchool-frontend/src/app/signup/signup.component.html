@@ -1,0 +1,23 @@
+<h2 id="labelH2"> Sign up to <a>eCare</a></h2>
+<div class="form" id="signUpForm">
+  <form class="form-horizontal UP" id="signUpFH" (ngSubmit)="change('/new-account')" #todoForm="ngForm">
+    <div class="form-group ">
+      <label for="inputEmail"><p>Email</p></label>
+      <input type="email" class="form-control input-UP" id="inputEmail" name="email"
+             placeholder="Email" [(ngModel)]="model.email" #email="ngModel" required>
+    </div>
+    <div class="form-group ">
+      <label for="inputUsername"><p>Username</p></label>
+      <input type="email" class="form-control input-UP" id="inputUsername" name="username"
+             placeholder="Username" [(ngModel)]="model.username" #username="ngModel" required>
+    </div>
+    <div class="form-group ">
+      <label for="inputPassword"><p>Password</p></label>
+      <input type="password" class="form-control input-UP" id="inputPassword" name="password"
+             placeholder="Password" [(ngModel)]="model.password" #password="ngModel" required>
+    </div>
+    <div class="form-group ">
+      <button type="submit" class="btn btn-info sign-in" id="signUP" [disabled]="todoForm.form.invalid"><p id="signIN">Sign up</p></button>
+    </div>
+  </form>
+</div>

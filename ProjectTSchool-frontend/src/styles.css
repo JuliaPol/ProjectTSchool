@@ -165,7 +165,7 @@
 }
 
 .addOption {
-  margin: 20px;
+  margin: 40px;
 }
 
 .scrollbar-cyan::-webkit-scrollbar-track {
@@ -320,4 +320,93 @@ label {
 .warn {
   color: red;
   font-size: 13px;
+}
+p {
+  color: #95989A;
+}
+
+#labelH2 {
+  font-size: 25px;
+  text-align: center;
+  margin-top: 94px;
+  color: #95989A;
+}
+.form {
+  width: 600px;
+  height: 350px;
+  background-color: #E4FFF6;
+  margin: 20px auto;
+  border: solid #95989A 1px;
+}
+#formUP {
+  margin: 60px;
+}
+#passwordCol {
+  margin-top: 30px;
+}
+
+.UP {
+  margin-top: 40px;
+  margin-right: 150px;
+  margin-left: 150px;
+}
+.sign-in {
+  margin-top: 20px;
+  width: -webkit-fill-available;
+  height: 60px;
+  background-color: #13BFB9;
+}
+
+.input-UP {
+  height: 50px;
+}
+
+#forgotPass {
+  margin-left: 130px;
+}
+
+#signIN {
+  color: #FFFFFF;
+  font-size: larger;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.sign-in:hover {
+  background-color: #11AFAA;
+}
+
+#miniForm {
+  height: 52px;
+  text-align: center;
+  color: #95989A;
+}
+
+#signUp {
+  margin-top: 15px;
+}
+
+#signUP {
+  margin-top: 10px;
+}
+
+#signUpForm {
+  height: 400px;
+}
+
+#signUpFH {
+  margin-top: 10px;
+}
+.customerInfo {
+  width: 800px;
+  height: 450px;
+  background-color: #E4FFF6;
+  margin: 20px auto;
+  border: solid #95989A 1px;
+}
+#buttonForNewAcc {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }

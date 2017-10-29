@@ -8,6 +8,8 @@ export interface ICustomer {
   contractList: IContract[],
   selected: boolean;
   email: string;
+  login: string;
+  password: string;
   birthDate: string;
   passportNumber: string;
   passportIssuedWhen: string;

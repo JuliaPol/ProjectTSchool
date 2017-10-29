@@ -46,9 +46,6 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
     @Autowired
     private ContractService contractService;
 
-    @Autowired
-    private RoleDao roleDao;
-
     private static Logger log = Logger.getLogger(UserFacadeImpl.class.getName());
 
     @Override
@@ -94,13 +91,20 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
         User user = new User();
         user.setAddress(address);
         user.setEmail(dto.getEmail());
-        user.setLogin(dto.getEmail());
+        if (dto.getLogin() != null) {
+            user.setLogin(dto.getLogin());
+        } else {
+            user.setLogin(dto.getEmail());
+        }
         user.setFirstName(dto.getFirstName());
         user.setLastName(dto.getLastName());
         user.setPassportNumber(dto.getPassportNumber());
         user.setPassportIssuedByWhom(dto.getPassportIssuedByWhom());
-        user.setPassword(passwordEncoder.encode(user.getLastName()));
-        user.setRole(roleDao.getByName("ROLE_CUSTOMER"));
+        if (dto.getPassword() != null) {
+            user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        } else {
+            user.setPassword(passwordEncoder.encode(user.getLastName()));
+        }
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         if (dto.getBirthDate() != null) {
             user.setBirthDate(formatter.parse(dto.getBirthDate()));
