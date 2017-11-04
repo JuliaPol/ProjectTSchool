@@ -61,7 +61,11 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(user.getEmail());
         message.setSubject("Welcome to Satellite!");
-        message.setText("Your login: " + user.getLogin() + "\n" + "Your password: " + user.getPassword());
+        if (user.getLogin() != null) {
+            message.setText("Your login: " + user.getLogin() + "\n" + "Your password: " + user.getPassword());
+        } else {
+            message.setText("Your login: " + user.getEmail() + "\n" + "Your password: " + user.getLastName());
+        }
         mailSender.send(message);
     }
 

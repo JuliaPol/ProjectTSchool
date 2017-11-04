@@ -137,6 +137,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+            <version>4.3.9.RELEASE</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>2.7.13</version>
@@ -164,6 +170,12 @@
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
             <version>1.5.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jms</artifactId>
+            <version>2.20.0</version>
         </dependency>
 
     </dependencies>
@@ -309,11 +321,12 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>target/classes</outputDirectory>
+                            <outputDirectory>target</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${project.basedir}/src/main/webapp/WEB-INF</directory>
                                     <includes>
+                                        <include>jboss-web.xml</include>
                                         <include>web.xml</include>
                                     </includes>
                                 </resource>

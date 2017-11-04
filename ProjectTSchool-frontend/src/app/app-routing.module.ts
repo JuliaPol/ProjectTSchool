@@ -19,7 +19,7 @@ import {SignupComponent} from "./signup/signup.component";
 import {NewAccountComponent} from "./signup/new-account/new-account.component";
 
 const appRoutes: Routes =[
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: '', redirectTo: 'employee', pathMatch: 'full'},
   {path: 'employee',  component: EmployeeComponent,
     children: [
       {path: '', redirectTo: 'customers', pathMatch: 'full'},
@@ -37,7 +37,7 @@ const appRoutes: Routes =[
       {path: 'contract-options', component: ContractOptionsComponent},
     ]},
   { path: 'login-error', component: LoginErrorComponent},
-  { path: 'login', component: LoginComponent},
+  //{ path: 'login', component: LoginComponent},
   { path: 'signUp', component: SignupComponent},
   { path: 'new-account', component: NewAccountComponent},
 ];

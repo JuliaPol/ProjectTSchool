@@ -10,6 +10,7 @@ import com.tsystems.ecare.entities.Option;
 import com.tsystems.ecare.entities.Rate;
 import com.tsystems.ecare.service.RateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -31,6 +32,9 @@ public class RateServiceImpl extends ServiceImpl<Rate> implements RateService {
     @Autowired
     private ContractDao contractDao;
 
+    @Autowired
+    private JmsTemplate jmsTemplate;
+
     @Override
     @Transactional
     public Rate findByName(String name) {
@@ -51,6 +55,7 @@ public class RateServiceImpl extends ServiceImpl<Rate> implements RateService {
     @Transactional
     public void editRate(Rate rate) {
         rateDao.update(rate);
+        jmsTemplate.send(s -> s.createTextMessage("hello queue world"));
     }
 
     @Override
