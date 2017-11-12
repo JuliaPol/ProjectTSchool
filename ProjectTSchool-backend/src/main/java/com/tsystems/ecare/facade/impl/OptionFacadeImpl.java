@@ -8,6 +8,7 @@ import com.tsystems.ecare.service.Service;
 import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -22,6 +23,9 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
 
     @Autowired
     private OptionService optionService;
+
+    @Autowired
+    private JmsTemplate jmsTemplate;
 
     private static Logger log = Logger.getLogger(OptionFacadeImpl.class.getName());
 
@@ -124,14 +128,10 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
     }
 
     @Override
-    public void editRateOptions(Long id, OptionDTO optionDTOS) {
-        optionService.editRateOptions(id, convertToEntity(optionDTOS));
-    }
-
-    @Override
     public void create(OptionDTO optionDTO) {
         try {
             optionService.insert(convertToEntity(optionDTO));
+            jmsTemplate.send(s -> s.createTextMessage("create: option created "));
         } catch (Exception e) {
             log.error("Couldn't create an option:", e);
         }
@@ -139,12 +139,14 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
     @Override
     public void deleteOption(Long id) {
         optionService.deleteOption(id);
+        jmsTemplate.send(s -> s.createTextMessage("delete: option deleted " + id));
     }
 
     @Override
     public void edit(OptionDTO optionDTO) {
         try {
             optionService.update(convertToEntity(optionDTO));
+            jmsTemplate.send(s -> s.createTextMessage("edit: option changed " + optionDTO.getId()));
         } catch (Exception e) {
             log.error("Couldn't edit an option:", e);
         }

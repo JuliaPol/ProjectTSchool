@@ -8,5 +8,7 @@ import {AppService} from "./app.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
+  signOut(link: string) {
+    window.location.href = link;
+  }
 }

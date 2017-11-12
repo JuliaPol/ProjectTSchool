@@ -1,41 +1,50 @@
-<div class="panel panel-default back col-md-9">
+<div class="back col-md-9">
   <a class="btn btn-info button-one" [routerLink]="['../options']">Back</a>
   <h3>Select options</h3>
   <div class="row">
     <div class="col-md-4">
-      <select class="form-control col-md-4" #selectOpt (change)="optionSelected(selectOpt.value)">
+    <div class="select">
+      <select #selectOpt (change)="optionSelected(selectOpt.value)">
         <option value="">Select option</option>
         <option *ngFor="let option of options" [value]="option?.id">{{option?.name}}</option>
       </select>
     </div>
-    <div class="col-md-4" >
-      <select class="form-control col-md-4" [(ngModel)]="selectPurpose" #selectPurp (change)="purposeOptionSelected(selectPurp.value)">
+    </div>
+    <div class="col-md-4">
+    <div class="select">
+      <select [(ngModel)]="selectPurpose" #selectPurp (change)="purposeOptionSelected(selectPurp.value)">
         <option [value]="0">Select option</option>
         <option *ngFor="let option of optionsForSelection" [value]="option?.id">{{option?.name}}</option>
       </select>
+    </div>
     </div>
     <div class="col-md-2">
       <button class="form-control btn btn-info button-one" (click)="addToPurposeList()">Add</button>
     </div>
   </div>
     <div class="row" id="purpList">
-      <ul class="list-group scroll-bar" id="listSelectedOptions">
-          <li class="list-group-item col-md-3" *ngFor="let option of purposeList" >
-            <input id={{option?.name}} type="checkbox" [checked]="option.selected"
-                   (change)="option.selected = !option.selected">
-            <label for={{option?.name}}> {{option?.name}} </label>
-          </li>
-      </ul>
+      <!--<ul class="list-group scroll-bar" id="listSelectedOptions">-->
+          <!--<li class="list-group-item col-md-3" *ngFor="let option of purposeList" >-->
+            <!--<input id={{option?.name}} type="checkbox" [checked]="option.selected"-->
+                   <!--(change)="option.selected = !option.selected">-->
+            <!--<label for={{option?.name}}> {{option?.name}} </label>-->
+          <!--</li>-->
+      <!--</ul>-->
+      <span class="label" *ngFor="let option of purposeList"><clr-checkbox
+        [(ngModel)]="option.selected">
+                    {{option?.name}}
+                </clr-checkbox></span>
     </div>
   <div class="row" id="addRule">
-    <div class="col-md-8">
-      <select class="form-control" [(ngModel)]="selectedRule" (change)="optionSelected(null)">
+    <div class="select">
+      <select [(ngModel)]="selectedRule" (change)="optionSelected(null)">
         <option [ngValue]="false">Incompatible</option>
         <option [ngValue]="true">Compatible</option>
       </select>
     </div>
+    </div>
     <div class="col-md-2">
       <button class="form-control btn btn-info button-one" (click)="addRule()">Add rule</button>
-    </div>
+
   </div>
 </div>

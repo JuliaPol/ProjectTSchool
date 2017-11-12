@@ -32,9 +32,6 @@ public class RateServiceImpl extends ServiceImpl<Rate> implements RateService {
     @Autowired
     private ContractDao contractDao;
 
-    @Autowired
-    private JmsTemplate jmsTemplate;
-
     @Override
     @Transactional
     public Rate findByName(String name) {
@@ -55,17 +52,12 @@ public class RateServiceImpl extends ServiceImpl<Rate> implements RateService {
     @Transactional
     public void editRate(Rate rate) {
         rateDao.update(rate);
-        jmsTemplate.send(s -> s.createTextMessage("hello queue world"));
     }
 
     @Override
     @Transactional
     public void deleteRate(Long id) {
         Rate rate = rateDao.get(id);
-//        for (Option option : rate.getOptionList()) {
-//            option.getRateList().remove(rate);
-//        }
-//        rate.set
         contractDao.updateContractWithDeletedRate(id);
         rateDao.delete(rate);
     }

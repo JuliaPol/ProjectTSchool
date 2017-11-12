@@ -1,9 +1,10 @@
-import {ICustomer} from "../../interfaces/customers";
+import {IContract, ICustomer} from "../../interfaces/customers";
 import {Component, OnInit} from "@angular/core";
 import {AppService} from "../../app.service";
 import {Router} from "@angular/router";
 import {CustomerSharedService} from "./customer-shared.service";
 import {CustomerContractNumberFiler} from "./customer-contract-number.component";
+import {ContractSharedService} from "../contract-list/contract-shared.service";
 
 @Component({
   moduleId: module.id,
@@ -16,7 +17,8 @@ export class CustomersComponent implements OnInit {
 
   constructor(private appService: AppService,
               private router: Router,
-              private sharedService: CustomerSharedService) {
+              private sharedService: CustomerSharedService,
+              private contractSaredService: ContractSharedService) {
 
   }
 
@@ -40,5 +42,10 @@ export class CustomersComponent implements OnInit {
 
   addToSharedService(id) {
     this.sharedService.saveData(id);
+  }
+
+  changeContract(contract: IContract) {
+    this.contractSaredService.saveData(contract.id);
+    this.router.navigate(['/employee/contract-info']);
   }
 }

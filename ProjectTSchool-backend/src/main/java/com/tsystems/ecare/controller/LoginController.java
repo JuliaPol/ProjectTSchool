@@ -24,6 +24,11 @@ public class LoginController {
 //        return "index.html";
 //    }
 
+    @RequestMapping(value = "/signUp", method = RequestMethod.GET)
+    public String signUp() {
+        return "index.html";
+    }
+
     @Secured("ROLE_MANAGER")
     @RequestMapping(value = "/employee", method = RequestMethod.GET)
     public String employee() {

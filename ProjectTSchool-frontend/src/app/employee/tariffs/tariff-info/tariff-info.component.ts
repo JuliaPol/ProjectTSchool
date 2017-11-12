@@ -11,7 +11,7 @@ import {OptionListSharedService} from "../option-list/option-list-shared.service
   templateUrl: './tariff-info.component.html'
 })
 export class TariffInfoComponent implements OnInit {
-  tariff: ITariff;
+  tariff: ITariff = {} as ITariff;
   tariffId: number;
   result: string;
 

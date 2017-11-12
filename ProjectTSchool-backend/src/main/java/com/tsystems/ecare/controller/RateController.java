@@ -30,7 +30,7 @@ public class RateController {
         return rateFacade.findForCustomerByNumber(number);
     }
 
-    @Secured("ROLE_MANAGER")
+//    @Secured("ROLE_MANAGER")
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     @ResponseBody
     public List<RateDTO> getAllTariffs() throws Exception {
@@ -47,7 +47,7 @@ public class RateController {
     @Secured("ROLE_MANAGER")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public void createRate(@RequestBody RateDTO rateDTO) throws Exception {
-        rateFacade.insert(rateDTO);
+        rateFacade.create(rateDTO);
     }
 
     @Secured("ROLE_MANAGER")
@@ -55,8 +55,8 @@ public class RateController {
     public void deleteRate(@PathVariable("id") Long id) throws Exception {
         rateFacade.deleteRate(id);
     }
-
-    @Secured("ROLE_MANAGER")
+//
+//    @Secured("ROLE_MANAGER")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public RateDTO getTariffById(@PathVariable("id") Long id) throws Exception {

@@ -6,6 +6,7 @@
     </h3>
   </div>
   <form (ngSubmit)="onSubmit(); todoForm.reset()" #todoForm="ngForm">
+    <section class="form-block">
     <div class="row addOption">
       <div class="col-md-8">
         <input type="text" class="form-control" name="name" [(ngModel)]="option.name" placeholder="Name" #name="ngModel"
@@ -33,6 +34,7 @@
         <button type="submit" class="btn btn-info button-one col-md-2" [disabled]="todoForm.form.invalid">Add</button>
       </div>
     </div>
+    </section>
   </form>
   {{result}}
 </div>

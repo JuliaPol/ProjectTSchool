@@ -11,4 +11,5 @@ public interface RateFacade extends Facade<RateDTO, Rate> {
     RateDTO findForCustomerByNumber(String number);
     void editRate(RateDTO rateDTO);
     void deleteRate(Long id);
+    void create(RateDTO rateDTO);
 }

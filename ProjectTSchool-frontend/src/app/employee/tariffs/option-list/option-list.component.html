@@ -1,25 +1,36 @@
 <div class="row addOption">
-  <div class="col-md-2" >
+  <div class="col-md-2">
     <p>Options:</p>
   </div>
-  <div class="col-md-4" >
-    <select class="form-control col-md-4" [(ngModel)]="selectedOption">
-      <option *ngFor="let option of anotherOptions" [ngValue]="option">{{option?.name}}</option>
-    </select>
+  <div class="col-md-4">
+    <div class="select">
+      <select [(ngModel)]="selectedOption">
+        <option *ngFor="let option of anotherOptions" [ngValue]="option">{{option?.name}}</option>
+      </select>
+    </div>
   </div>
 </div>
 <div class="col-md-2">
   <button class="form-control btn btn-info button-one" (click)="addOption()">Add option</button>
 </div>
 <div class="row" id="purpList">
-  <ul class="list-group scroll-bar" id="listSelectedOptions">
-    <li class="list-group-item col-md-3" *ngFor="let option of purposeList">
-      <input id={{option?.name}} type="checkbox" [checked]="option.selected"
-             (change)="option.selected = !option.selected; changeSelected()">
-      <label for={{option?.name}}> {{option?.name}} </label>
-    </li>
-  </ul>
-  <div *ngFor="let warning of warnings">
-    <p class="warn">{{warning?.description}}</p>
+  <div *ngFor="let option of purposeList">
+  <span class="label" [ngClass]="isOptionInWarningsList(option)">
+    <clr-checkbox
+      [(ngModel)]="option.selected" (change)="changeSelected()">
+                    {{option?.name}}
+                </clr-checkbox>
+  </span>
+
   </div>
+  <div *ngFor="let warning of warnings">
+  <p class="warn">{{warning?.description}}</p>
+  </div>
+  <clr-tooltip>
+    <clr-icon clrTooltipTrigger shape="info-circle" size="24"></clr-icon>
+    <clr-tooltip-content clrPosition="top-right" clrSize="xs" *clrIfOpen>
+      <!--<span *ngFor="let warning of warnings">{{warning?.description}}</span>-->
+    dasd
+    </clr-tooltip-content>
+  </clr-tooltip>
 </div>

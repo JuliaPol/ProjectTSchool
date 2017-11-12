@@ -32,9 +32,9 @@
         </div>
     </form>
 </div>
-<%--<div class="form" id="miniForm">--%>
-    <%--<label id="signUp">New to Satellite?<a> Create an account.</a></label>--%>
-<%--</div>--%>
+<div class="form" id="miniForm">
+    <label id="signUp">New to Satellite?<a href="/signUp"> Create an account.</a></label>
+</div>
 
 </body>
 </html>

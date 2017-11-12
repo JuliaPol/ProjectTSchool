@@ -1,4 +1,4 @@
-<div class="panel panel-default back col-md-9">
+<div class="back col-md-9">
   <div class="row add-contract-and-search">
     <input type="submit" class="btn btn-info button-one button-act col-md-2" value="Add tariff"
            (click)="openTab('/employee/tariff-form')">
@@ -9,19 +9,15 @@
           <!--</span>-->
     <!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
   </div>
-  <div class="optionPanel scrollbar-cyan bordered-cyan card example-1 square">
-    <div *ngFor="let rate of rates">
-      <div class="row">
-        <div class="well well-sm col-md-11 panel-number">
-          <p class="col-md-9">
-            {{rate?.name}}
-          </p>
-          <button class="btn btn-info button-one button-act col-md-2 button-number"
-                  (click)="change(rate?.id, '/employee/tariff-info')">
-            Change
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <clr-stack-view>
+    <clr-stack-header>All tariffs</clr-stack-header>
+
+    <clr-stack-block *ngFor="let rate of rates">
+      <clr-stack-label>{{rate?.name}}</clr-stack-label>
+      <clr-stack-content><button class="btn btn-info button-one button-act col-md-2 button-number"
+                                 (click)="change(rate?.id, '/employee/tariff-info')">
+        Change
+      </button></clr-stack-content>
+    </clr-stack-block>
+  </clr-stack-view>
 </div>

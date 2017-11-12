@@ -1,4 +1,4 @@
-<div class="panel panel-default back col-md-9">
+<div class="back col-md-9">
   <div class="row add-contract-and-search">
     <input type="submit" class="btn btn-info button-one col-md-2"
            value="Add option" (click)="openTab('/employee/option-form')">
@@ -12,19 +12,15 @@
     <!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
   </div>
   <!-- 1 панель -->
-  <div class="optionPanel scrollbar-cyan bordered-cyan card example-1 square">
-    <div *ngFor="let option of options">
-      <div class="row">
-        <div class="well well-sm col-md-11 panel-number">
-          <p class="col-md-9">
-            {{option?.name}}
-          </p>
-          <button class="btn btn-info button-one button-act col-md-2 button-number"
-                  (click)="change(option.id, '/employee/option-info')">
-            Change
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <clr-stack-view>
+    <clr-stack-header>All options</clr-stack-header>
+
+    <clr-stack-block *ngFor="let option of options">
+      <clr-stack-label>{{option?.name}}</clr-stack-label>
+      <clr-stack-content><button class="btn btn-info button-one button-act col-md-2 button-number"
+                                 (click)="change(option.id, '/employee/option-info')">
+        Change
+      </button></clr-stack-content>
+    </clr-stack-block>
+  </clr-stack-view>
 </div>

@@ -1,35 +1,30 @@
-<div class="panel panel-default back col-md-9">
-  <div class="row add-contract-and-search">
-    <input type="submit" class="btn btn-info button-one button-act col-md-2"
-           value="Add user" [routerLink]="['/employee/customer-form']">
-    <div class="input-group col-md-6 search-inp">
-      <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="contratNumber">
-      <!--<span class="input-group-btn">-->
-            <!--<button class="btn btn-default" type="button">Go!</button>-->
-          <!--</span>-->
-    </div><!-- /input-group -->
-  </div>
-  <div class="panel-group big-panel scrollbar-cyan bordered-cyan card example-1 square" id="accordion">
-    <!-- 1 панель -->
-    <div *ngFor="let customer of customers | customerContractNumberFiler:contratNumber">
-      <div class="panel panel-default">
-        <!-- Заголовок 1 панели -->
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <div class="row">
-              <button (click)="onToggle(customer)">v</button>
-              <p data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="col-md-9 client-href">
-                {{customer?.firstName}} {{customer?.lastName}}</p>
-              <input type="submit" class="btn btn-info button-one button-act col-md-2" value="Add contract"
-                     (click)="addContract(); addToSharedService(customer.id)">
-            </div>
-          </h4>
-        </div>
-        <div id="collapseOne" class="panel-collapse collapse" [style.display]="customer.selected===true?'block':'none'">
-          <contract-list [contractList]="customer?.contractList"></contract-list>
-        </div>
+<div class="col-md-9">
+    <div class="row add-contract-and-search">
+      <input type="submit" class="btn btn-info button-one button-act col-md-2"
+             value="Add user" [routerLink]="['/employee/customer-form']">
+      <div class="input-group col-md-6 search-inp">
+        <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="contratNumber">
+
       </div>
     </div>
-  </div>
+    <clr-stack-view>
+      <clr-stack-header>All users</clr-stack-header>
+      <clr-stack-block *ngFor="let customer of customers | customerContractNumberFiler: contratNumber">
+        <clr-stack-label>{{customer?.firstName}} {{customer?.lastName}}</clr-stack-label>
+        <clr-stack-content>
+          <button class="btn btn-info button-one button-act col-md-2"
+                  (click)="addContract(); addToSharedService(customer.id)">Add contract</button>
+        </clr-stack-content>
+        <clr-stack-block *ngFor="let contract of customer.contractList">
+          <clr-stack-label>{{contract.number}}</clr-stack-label>
+          <clr-stack-content>
+            <button class="btn btn-info button-one button-act col-md-2 button-number"
+                    (click)="changeContract(contract)">
+              Change contract
+            </button>
+          </clr-stack-content>
+        </clr-stack-block>
+      </clr-stack-block>
+    </clr-stack-view>
 </div>
 

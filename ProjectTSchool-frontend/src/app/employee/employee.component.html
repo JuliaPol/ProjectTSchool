@@ -1,29 +1,15 @@
-<nav class="navbar navbar-default head" role="navigation">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse"
-              data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li id="a3">{{user?.firstName}} {{user?.lastName}}</li>
-        <li><input id="signOut" type="submit" class="btn btn-info button-one col-md-2 button-number" value="Sign out" (click)="signOut('/logout')"></li>
-      </ul>
-    </div>
+<!--<div class="btn-group-vertical button-group col-md-4">-->
+<!--<div class="btn-group" *ngFor="let button of buttons">-->
+<!--<input type="submit" id="contactButton" class="btn btn-info button-one button-one1"-->
+<!--[ngClass]="{'active': button.isActive}" value="{{button.name}}" (click)="openTab(button)">-->
+<!--</div>-->
+<!--</div>-->
+<div class="content-container">
+  <clr-vertical-nav>
+    <a clrVerticalNavLink (click)="openTab(button)" routerLinkActive="active" *ngFor="let button of buttons">{{button.name}}</a>
+  </clr-vertical-nav>
+  <div class="content-area">
+    <router-outlet></router-outlet>
   </div>
-</nav>
-<body>
-<div class="row">
-  <div class="btn-group-vertical button-group col-md-4">
-    <div class="btn-group" *ngFor="let button of buttons">
-      <input type="submit" id="contactButton" class="btn btn-info button-one button-one1"
-             [ngClass]="{'active': button.isActive}" value="{{button.name}}" (click)="openTab(button)">
-    </div>
-  </div>
-  <router-outlet></router-outlet>
 </div>
-</body>
+

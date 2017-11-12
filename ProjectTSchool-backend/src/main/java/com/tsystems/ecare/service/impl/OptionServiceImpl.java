@@ -13,6 +13,7 @@ import com.tsystems.ecare.service.OptionService;
 import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -255,11 +256,6 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
         }
         optionDao.delete(option);
         log.info("Option deleted");
-    }
-
-    @Override
-    public void editRateOptions(Long id, Option option) {
-       Rate rate = rateDao.get(id);
     }
 
     @Override

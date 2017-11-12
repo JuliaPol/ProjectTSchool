@@ -186,6 +186,15 @@ export class OptionListComponent implements OnInit {
       compatibleOptionsOf: item.compatibleOptionsOf,
     } as IOption;
   }
+
+  isOptionInWarningsList(option) {
+    if (this.myIndexOfWarningsOptionName(option) !== -1) {
+      return 'label-warning';
+    } else {
+      return '';
+    }
+  }
+
   private myIndexPurposeList(o) {
     if (!o) {
       return;
@@ -219,6 +228,18 @@ export class OptionListComponent implements OnInit {
     }
     for (let i = 0; i < this.anotherOptions.length; i++) {
       if (this.anotherOptions[i].name === o.name) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  private myIndexOfWarningsOptionName(o) {
+    if (!o) {
+      return;
+    }
+    for (let i = 0; i < this.warnings.length; i++) {
+      if (this.warnings[i].optionName === o.name) {
         return i;
       }
     }

@@ -10,7 +10,6 @@ import {LoginErrorComponent} from "./login-error/login-error.component";
 import {LoginComponent} from "./login/login.component"
 import {AppRoutingModule} from "./app-routing.module";
 import {AppService} from "./app.service";
-import {ContractListComponent} from "./employee/contract-list/contract-list.component";
 import {ContractFormComponent} from "./employee/contract-form/contract-form.component";
 import {CustomersComponent} from "./employee/customers/customers.component";
 import {OptionsComponent} from "./employee/options/options.component";
@@ -34,6 +33,8 @@ import {ContractOptionsComponent} from "./employee/contract-list/contract-option
 import {SignupComponent} from "./signup/signup.component"
 import {NewAccountComponent} from "./signup/new-account/new-account.component"
 import {SignupSharedService} from "./signup/signup-shared.service";
+import {ClarityModule} from "clarity-angular";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,6 @@ import {SignupSharedService} from "./signup/signup-shared.service";
     EmployeeComponent,
     LoginComponent,
     LoginErrorComponent,
-    ContractListComponent,
     ContractFormComponent,
     CustomersComponent,
     OptionsComponent,
@@ -65,6 +65,8 @@ import {SignupSharedService} from "./signup/signup-shared.service";
     HttpModule,
     RouterModule,
     AppRoutingModule,
+    ClarityModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [
     AppService,

@@ -38,5 +38,4 @@ public interface OptionService extends Service<Option> {
 
     void deleteOption(Long id);
 
-    void editRateOptions(Long id, Option option);
 }
