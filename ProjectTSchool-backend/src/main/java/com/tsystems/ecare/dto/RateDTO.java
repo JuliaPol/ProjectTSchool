@@ -19,5 +19,6 @@ public class RateDTO extends IdDTO {
     private Integer calls;
     private Integer sms;
     private Integer internet;
+    private String image;
     private List<OptionDTO> optionList;
 }

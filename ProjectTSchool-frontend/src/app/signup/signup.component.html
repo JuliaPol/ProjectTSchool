@@ -4,20 +4,167 @@
     <div class="form-group ">
       <label for="inputEmail"><p>Email</p></label>
       <input type="email" class="form-control input-UP" id="inputEmail" name="email"
-             placeholder="Email" [(ngModel)]="model.email" #email="ngModel" required>
+             placeholder="Email" [(ngModel)]="customer.email" #email="ngModel" required>
     </div>
     <div class="form-group ">
       <label for="inputUsername"><p>Username</p></label>
-      <input type="email" class="form-control input-UP" id="inputUsername" name="username"
-             placeholder="Username" [(ngModel)]="model.username" #username="ngModel" required>
+      <input type="email" class="form-control input-UP" id="inputUsername" name="login"
+             placeholder="Login" [(ngModel)]="customer.login" #login="ngModel" required>
     </div>
     <div class="form-group ">
       <label for="inputPassword"><p>Password</p></label>
       <input type="password" class="form-control input-UP" id="inputPassword" name="password"
-             placeholder="Password" [(ngModel)]="model.password" #password="ngModel" required>
+             placeholder="Password" [(ngModel)]="customer.password" #password="ngModel" required>
     </div>
     <div class="form-group ">
       <button type="submit" class="btn btn-info sign-in" id="signUP" [disabled]="todoForm.form.invalid"><p id="signIN">Sign up</p></button>
     </div>
   </form>
 </div>
+
+<clr-wizard #wizard [(clrWizardOpen)]="open" [clrWizardSize]="'lg'"
+            [clrWizardPreventNavigation]="loading"
+            [clrWizardDisableStepnav]="readyToFinish"
+            [clrWizardPreventDefaultCancel]="true"
+            (clrWizardOnCancel)="doCancel()"
+            [clrWizardClosable]="!readyToFinish">
+  <clr-wizard-title>New customer</clr-wizard-title>
+
+  <clr-wizard-button type="cancel" *ngIf="!readyToFinish">Cancel</clr-wizard-button>
+  <clr-wizard-button type="previous" *ngIf="!readyToFinish">Back</clr-wizard-button>
+  <clr-wizard-button type="next">Next</clr-wizard-button>
+  <clr-wizard-button type="finish">
+    <span *ngIf="untouched && !loading">Sign up</span>
+    <span *ngIf="loading">Please wait...</span>
+    <span *ngIf="readyToFinish">OK</span>
+  </clr-wizard-button>
+
+  <clr-wizard-page
+    [clrWizardPageNextDisabled]="(firstName.pristine && lastName.pristine && email.pristine && passportNumber.pristine) || !formPage.valid">
+    <ng-template clrPageTitle>Personal information</ng-template> <!-- mandatory -->
+
+    <form #formPage="ngForm">
+      <section class="form-block">
+        <div class="form-group">
+          <label class="required">First name:</label>
+          <label for="nameInput" aria-haspopup="true" role="tooltip"
+                 [class.invalid]="firstName.touched && !firstName.valid"
+                 class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+            <input type="text" id="nameInput" required [(ngModel)]="customer.firstName" name="firstName" #firstName="ngModel">
+            <span class="tooltip-content">This field cannot be empty!</span>
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="required">Last name:</label>
+          <label for="LastNameInput" aria-haspopup="true" role="tooltip"
+                 [class.invalid]="lastName.touched && !lastName.valid"
+                 class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+            <input type="text" id="LastNameInput" required [(ngModel)]="customer.lastName"  name="lastName" #lastName="ngModel">
+            <span class="tooltip-content">This field cannot be empty!</span>
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="required ">Email:</label>
+          <label for="emailInput" aria-haspopup="true" role="tooltip"
+                 [class.invalid]="email.touched && !email.valid"
+                 class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+            <input type="text" id="emailInput" required [(ngModel)]="customer.email"
+                   name="email" #email="ngModel" value="{{customer?.email}}">
+            <span class="tooltip-content">This field cannot be empty!</span>
+          </label>
+        </div>
+        <div class="form-group">
+          <label  for="birthDate">Birthday:</label>
+          <input  id="birthDate" type="date" name="birthDate"
+                 [(ngModel)]="customer.birthDate" #birthDate="ngModel">
+        </div>
+        <div class="form-group">
+          <label class="required">Passport number:</label>
+          <label for="passportNumberInput" aria-haspopup="true" role="tooltip"
+                 [class.invalid]="passportNumber.touched && !passportNumber.valid"
+                 class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+            <input type="text" id="passportNumberInput" required [(ngModel)]="customer.passportNumber"
+                   name="passportNumber" #passportNumber="ngModel">
+            <span class="tooltip-content">This field cannot be empty!</span>
+          </label>
+        </div>
+        <div class="form-group">
+          <label >Passport issued by whom:</label>
+          <input type="text" name="passportIssuedByWhom"
+                 [(ngModel)]="customer.passportIssuedByWhom" #passportIssuedByWhom="ngModel">
+        </div>
+        <div class="form-group">
+          <label>Passport issued when:</label>
+          <input id="passportIssuedWhen" type="date" name="passportIssuedWhen"
+                 [(ngModel)]="customer.passportIssuedWhen" #passportIssuedWhen="ngModel">
+        </div>
+      </section>
+    </form>
+  </clr-wizard-page>
+  <clr-wizard-page>
+    <ng-template clrPageTitle>Address</ng-template>
+    <div class="form-group row">
+      <label class="col-md-4"> Country: </label>
+      <input class="col-md-8" type="text" name="country" [(ngModel)]="address.country"
+             #country="ngModel">
+    </div>
+    <p></p>
+    <div class="form-group row">
+      <label class="col-md-4" >City: </label>
+      <input class="col-md-8" type="text" name="city" [(ngModel)]="address.city"
+             #city="ngModel">
+    </div>
+    <p></p>
+    <div class="form-group row">
+      <label class="col-md-4">Street: </label>
+      <input class="col-md-8" type="text" name="street" [(ngModel)]="address.street"
+             #street="ngModel">
+    </div>
+    <p></p>
+    <div class="form-group row">
+      <label class="col-md-4" >Zipcode: </label>
+      <input class="col-md-8"  type="text" name="zipcode" [(ngModel)]="address.zipcode"
+             #zipcode="ngModel">
+    </div>
+    <p></p>
+    <div class="form-group row">
+      <label class="col-md-4" >House number: </label>
+      <input class="col-md-8" type="text" name="houseNumber" [(ngModel)]="address.houseNumber"
+             #houseNumber="ngModel">
+    </div>
+  </clr-wizard-page>
+  <clr-wizard-page
+    [clrWizardPagePreventDefaultNext]="true"
+    (clrWizardPageOnCommit)="onCommit()">
+    <ng-template clrPageTitle>
+      Tariff
+    </ng-template>
+
+    <div *ngIf="untouched && !loading" class="form-group">
+      <label for="selects_1">Select tariff: </label>
+      <div class="select">
+        <select id="selects_1" [(ngModel)]="selectedRate">
+          <option value="">Select tariff</option>
+          <option *ngFor="let r of rates" [ngValue]="r.id">{{r.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <ng-container *ngIf="loading">
+      <p>Loading...</p>
+      <div class="progress loop"><progress></progress></div>
+    </ng-container>
+
+    <clr-alert *ngIf="readyToFinish && !errorFlag" clrAlertType="alert-success">
+      <div class="alert-item">
+        You have successfully registered.
+      </div>
+    </clr-alert>
+
+    <clr-alert *ngIf="readyToFinish && errorFlag" clrAlertType="alert-danger">
+      <div class="alert-item">
+        Username or email is already taken.
+      </div>
+    </clr-alert>
+  </clr-wizard-page>
+</clr-wizard>

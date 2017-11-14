@@ -45,6 +45,9 @@ public class Option {
     @Column(name = "description")
     private String description;
 
+    @Column(name ="image")
+    private String image;
+
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(mappedBy = "optionList")
     private List<Contract> contractList;

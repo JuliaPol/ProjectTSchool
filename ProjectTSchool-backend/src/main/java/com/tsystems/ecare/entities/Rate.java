@@ -48,6 +48,9 @@ public class Rate {
     @Column(name ="internet")
     private Integer internet;
 
+    @Column(name ="image")
+    private String image;
+
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany
     @JoinTable(

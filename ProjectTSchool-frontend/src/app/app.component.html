@@ -1,18 +1,14 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <!--<div class="logo">-->
-  <!--<a id="logo" href="#">Satellite</a>-->
+<!--<a id="logo" href="#">Satellite</a>-->
 <!--</div>-->
 
-<div class="main-container">
-<header class="header-4">
-  <div class="branding">
-    <h2>Satellite</h2>
+<clr-main-container>
+  <div class="content-container">
+    <div class="content-area">
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+    </div>
   </div>
-  <div class="header-nav">
-  <button class="btn btn-info-outline" (click)="signOut('/logout')">Sign out</button>
-  </div>
-</header>
-<div>
-  <router-outlet></router-outlet>
-</div>
-</div>
+</clr-main-container>

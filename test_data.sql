@@ -22,18 +22,18 @@ INSERT INTO contract (number, status, customer_id, rate_id) VALUES ('14014014051
 INSERT INTO contract (number, status, customer_id, rate_id) VALUES ('1401401405124', 'BLOCKED_BY_AN_EMPLOYEE', 1, 2);
 INSERT INTO contract (number, status, customer_id, rate_id) VALUES ('1401401405125', 'AVAILABLE', 3, 3);
 
-INSERT INTO rate (name, cost, calls, sms, internet, description)
-VALUES ('For ladies', 300, 1000 , 1000, 1000 , 'Simple, wonderful tariff');
-INSERT INTO rate (name, cost, calls, sms, internet, description)
-VALUES ('All in one', 300, 1000, 1000, 1000, 'All inclusive');
-INSERT INTO rate (name, cost, calls, sms, internet, description)
-VALUES ('Premium', 1500, 1000, 1000, 1000, 'The most expensive tariff');
+INSERT INTO rate (name, cost, calls, sms, internet, description, image)
+VALUES ('For ladies', 300, 1000 , 1000, 1000 , 'Simple, wonderful tariff', 'http://localhost:8080/img/star (1).png');
+INSERT INTO rate (name, cost, calls, sms, internet, description, image)
+VALUES ('All in one', 300, 1000, 1000, 1000, 'All inclusive', 'http://localhost:8080/img/users.png');
+INSERT INTO rate (name, cost, calls, sms, internet, description, image)
+VALUES ('Premium', 1500, 1000, 1000, 1000, 'The most expensive tariff', 'http://localhost:8080/img/smartphone.png');
 
-INSERT INTO `option` (name, cost, cost_of_connection, description) VALUES ('SMS', 100, 100, 'Include 200 SMS');
-INSERT INTO `option` (name, cost, cost_of_connection, description) VALUES ('Super calls', 200, 100, 'Include 200 minutes for outgoing calls:');
-INSERT INTO `option` (name, cost, cost_of_connection, description) VALUES ('Mobile Internet 3 Gb', 200, 100, 'Include 3 Gb');
-INSERT INTO `option` (name, cost, cost_of_connection, description) VALUES ('Space', 300, 10, 'Include 5 Gb, 200 SMS');
-INSERT INTO `option` (name, cost, cost_of_connection, description) VALUES ('Mega mobile Internet', 300, 10, 'Include 15 Gb');
+INSERT INTO `option` (name, cost, cost_of_connection, description, image) VALUES ('SMS', 100, 100, 'Include 200 SMS', 'http://localhost:8080/img/smartphone (1).png');
+INSERT INTO `option` (name, cost, cost_of_connection, description, image) VALUES ('Super calls', 200, 100, 'Include 200 minutes for outgoing calls:', 'http://localhost:8080/img/users.png');
+INSERT INTO `option` (name, cost, cost_of_connection, description, image) VALUES ('Mobile Internet 3 Gb', 200, 100, 'Include 3 Gb', 'http://localhost:8080/img/internet.png');
+INSERT INTO `option` (name, cost, cost_of_connection, description, image) VALUES ('Space', 300, 10, 'Include 5 Gb, 200 SMS', 'http://localhost:8080/img/paper-plane (1).png');
+INSERT INTO `option` (name, cost, cost_of_connection, description, image) VALUES ('Mega mobile Internet', 300, 10, 'Include 15 Gb', 'http://localhost:8080/img/internet.png');
 
 INSERT INTO rate_option (rate_id, option_id) VALUES (1, 1);
 INSERT INTO rate_option (rate_id, option_id) VALUES (1, 2);

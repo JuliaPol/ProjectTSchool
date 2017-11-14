@@ -4,6 +4,19 @@
 <!--[ngClass]="{'active': button.isActive}" value="{{button.name}}" (click)="openTab(button)">-->
 <!--</div>-->
 <!--</div>-->
+<header class="header-6">
+  <div class="branding">
+    <a href="..." class="nav-link">
+      <clr-icon shape="vm-bug"></clr-icon>
+      <span class="title">Satellite</span>
+    </a>
+  </div>
+  <div class="header-actions">
+    <a href="..." class="nav-link nav-text">
+      Log Out
+    </a>
+  </div>
+</header>
 <div class="content-container">
   <clr-vertical-nav>
     <a clrVerticalNavLink (click)="openTab(button)" routerLinkActive="active" *ngFor="let button of buttons">{{button.name}}</a>

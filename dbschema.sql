@@ -35,7 +35,8 @@ CREATE TABLE `option` (
   name                VARCHAR(255),
   cost                INT UNSIGNED,
   cost_of_connection  INT UNSIGNED,
-  description         VARCHAR(255)
+  description         VARCHAR(255),
+  image         VARCHAR(255)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -47,7 +48,8 @@ CREATE TABLE rate (
   calls       INT UNSIGNED,
   sms         INT UNSIGNED,
   internet    INT UNSIGNED,
-  description VARCHAR(255)
+  description VARCHAR(255),
+  image         VARCHAR(255)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
