@@ -1,7 +1,6 @@
 import {Component, ViewChild} from "@angular/core";
 import {Http} from "@angular/http";
 import {AppService} from "../app.service";
-import {SignupSharedService} from "./signup-shared.service";
 import {Router} from "@angular/router";
 import {Wizard} from "clarity-angular";
 import {ITariff} from "../interfaces/tariff";
@@ -73,7 +72,7 @@ export class SignupComponent {
     }
   }
 
-  change(link: string) {
+  change() {
     this.open = true;
   }
 

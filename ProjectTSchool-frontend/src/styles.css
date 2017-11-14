@@ -410,3 +410,17 @@ p {
   align-items: center;
   display: flex;
 }
+#signUpPage {
+  width: 900px;
+  margin-left: 200px;
+  margin-top: 80px;
+  margin-right: 200px;
+}
+
+#signUpLog {
+  min-height: 60vh;
+}
+
+#signUpWrap {
+  width: 900px;
+}

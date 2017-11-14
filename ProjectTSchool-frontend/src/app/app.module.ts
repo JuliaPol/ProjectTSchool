@@ -31,7 +31,6 @@ import {ContractInfoComponent} from "./employee/contract-list/contarct-info/cont
 import {ContractSharedService} from "./employee/contract-list/contract-shared.service";
 import {ContractOptionsComponent} from "./employee/contract-list/contract-options/contract-options.component";
 import {SignupComponent} from "./signup/signup.component"
-import {SignupSharedService} from "./signup/signup-shared.service";
 import {ClarityModule} from "clarity-angular";
 import {ClarityIcons} from 'clarity-icons';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
