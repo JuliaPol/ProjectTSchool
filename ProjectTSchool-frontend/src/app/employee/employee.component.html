@@ -7,22 +7,37 @@
 <header class="header-6">
   <div class="branding">
     <a href="..." class="nav-link">
-      <clr-icon shape="vm-bug"></clr-icon>
+      <img id="logoImg" src="http://localhost:8080/img/Satellite-icon.png">
       <span class="title">Satellite</span>
     </a>
   </div>
-  <div class="header-actions">
+  <div class="header-actions" id="logout">
     <a href="..." class="nav-link nav-text">
-      Log Out
+      Log Out <clr-icon id="iconLogout" shape="logout"></clr-icon>
     </a>
   </div>
 </header>
 <div class="content-container">
-  <clr-vertical-nav>
-    <a clrVerticalNavLink (click)="openTab(button)" routerLinkActive="active" *ngFor="let button of buttons">{{button.name}}</a>
-  </clr-vertical-nav>
+  <!--<clr-vertical-nav>-->
+    <!--<a clrVerticalNavLink (click)="openTab(button)" routerLinkActive="active" *ngFor="let button of buttons">{{button.name}}</a>-->
+  <!--</clr-vertical-nav>-->
   <div class="content-area">
     <router-outlet></router-outlet>
   </div>
+  <clr-vertical-nav id="navVert">
+    <a clrVerticalNavLink routerLink="./customers" routerLinkActive="active">
+      <clr-icon clrVerticalNavIcon shape="users"></clr-icon>Customers</a>
+    <a clrVerticalNavLink routerLink="./tariffs" routerLinkActive="active">
+      <clr-icon clrVerticalNavIcon shape="phone-handset"></clr-icon>Tariffs</a>
+    <a clrVerticalNavLink routerLink="./options" routerLinkActive="active">
+      <clr-icon clrVerticalNavIcon shape="view-cards"></clr-icon>Options</a>
+  </clr-vertical-nav>
+  <!--<nav class="sidenav">-->
+    <!--<section class="sidenav-content">-->
+      <!--<a *ngFor="let button of buttons" (click)="openTab(button)" class="nav-link" [ngClass]="{'active': button.isActive}">-->
+        <!--{{button.name}}-->
+      <!--</a>-->
+    <!--</section>-->
+  <!--</nav>-->
 </div>
 

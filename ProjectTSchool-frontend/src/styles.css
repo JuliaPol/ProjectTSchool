@@ -424,3 +424,35 @@ p {
 #signUpWrap {
   width: 900px;
 }
+
+#mainCont {
+  min-height: 100vh;
+  height: 100%;
+}
+
+#userList {
+  overflow-y: auto;
+  height: 400px;
+}
+
+#navVert {
+  height: 100%;
+  min-height: 91vh;
+}
+
+#search-pan {
+  margin-top: 30px;
+  margin-left: 0px;
+}
+.search-elem {
+  margin-top: 10px;
+}
+#logoImg {
+  width: 36px;
+}
+.logout {
+  margin-right: 50px;
+}
+#iconLogout {
+  margin-left: 50px;
+}

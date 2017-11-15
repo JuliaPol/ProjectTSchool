@@ -8,11 +8,32 @@
         </label>
         <div class="login-group">
           <input class="username" type="text" id="login_username" name="login" placeholder="Username"
-                 [(ngModel)]="customer.login" #login="ngModel" required>
-          <input class="username" type="text"  id="login_email" name="email"
-                 placeholder="Email" [(ngModel)]="customer.email" #email="ngModel" required>
+                 [(ngModel)]="customer.login" #login="ngModel" required minlength="4">
+          <input class="username" type="text" id="login_email" name="anEmail"
+                 placeholder="Email" [(ngModel)]="customer.email" #anEmail="ngModel" required email>
           <input class="password" type="password" id="login_password" name="password"
-                 placeholder="Password" [(ngModel)]="customer.password" #password="ngModel" required>
+                 placeholder="Password" [(ngModel)]="customer.password" #password="ngModel" required minlength="6">
+          <div *ngIf="login.errors && (login.dirty || login.touched)" class="error active">
+            <div [hidden]="!login.errors.required">
+              Login is required!
+            </div>
+            <div [hidden]="!login.errors.minlength">
+              Username must be at least 4 characters long.
+            </div>
+          </div>
+          <div *ngIf="anEmail.errors && (anEmail.dirty || anEmail.touched)" class="error active">
+            <div [hidden]="!anEmail.errors.email">
+              Must be a valid email!
+            </div>
+          </div>
+          <div *ngIf="password.errors && (password.dirty || password.touched)" class="error active">
+            <div [hidden]="!password.errors.required">
+              Password is required!
+            </div>
+            <div [hidden]="!password.errors.minlength">
+              Password must be at least 6 characters long.
+            </div>
+          </div>
           <button type="submit" class="btn btn-primary" [disabled]="todoForm.form.invalid">NEXT</button>
         </div>
       </form>
@@ -44,8 +65,9 @@
               <label class="required">First name:</label>
               <label for="nameInput" aria-haspopup="true" role="tooltip"
                      [class.invalid]="firstName.touched && !firstName.valid"
-                     class="tooltip tooltip-validation tooltip-md tooltip-top-left">
-                <input type="text" id="nameInput" required [(ngModel)]="customer.firstName" name="firstName" #firstName="ngModel">
+                     class="tooltip tooltip-validation tooltip-md tooltip-bottom-right">
+                <input type="text" id="nameInput" required [(ngModel)]="customer.firstName" name="firstName"
+                       #firstName="ngModel">
                 <span class="tooltip-content">This field cannot be empty!</span>
               </label>
             </div>
@@ -54,24 +76,25 @@
               <label for="LastNameInput" aria-haspopup="true" role="tooltip"
                      [class.invalid]="lastName.touched && !lastName.valid"
                      class="tooltip tooltip-validation tooltip-md tooltip-top-left">
-                <input type="text" id="LastNameInput" required [(ngModel)]="customer.lastName"  name="lastName" #lastName="ngModel">
+                <input type="text" id="LastNameInput" required [(ngModel)]="customer.lastName" name="lastName"
+                       #lastName="ngModel">
                 <span class="tooltip-content">This field cannot be empty!</span>
               </label>
             </div>
             <div class="form-group">
               <label class="required ">Email:</label>
               <label for="emailInput" aria-haspopup="true" role="tooltip"
-                     [class.invalid]="email.touched && !email.valid"
+                     [class.invalid]="email.touched && !email.valid && !email.errors.email"
                      class="tooltip tooltip-validation tooltip-md tooltip-top-left">
-                <input type="text" id="emailInput" required [(ngModel)]="customer.email"
+                <input type="text" id="emailInput" required email [(ngModel)]="customer.email"
                        name="email" #email="ngModel" value="{{customer?.email}}">
-                <span class="tooltip-content">This field cannot be empty!</span>
+                <span class="tooltip-content">Invalid email!</span>
               </label>
             </div>
             <div class="form-group">
-              <label  for="birthDate">Birthday:</label>
-              <input  id="birthDate" type="date" name="birthDate"
-                      [(ngModel)]="customer.birthDate" #birthDate="ngModel">
+              <label for="birthDate">Birthday:</label>
+              <input id="birthDate" type="date" name="birthDate"
+                     [(ngModel)]="customer.birthDate" #birthDate="ngModel">
             </div>
             <div class="form-group">
               <label class="required">Passport number:</label>
@@ -84,7 +107,7 @@
               </label>
             </div>
             <div class="form-group">
-              <label >Passport issued by whom:</label>
+              <label>Passport issued by whom:</label>
               <input type="text" name="passportIssuedByWhom"
                      [(ngModel)]="customer.passportIssuedByWhom" #passportIssuedByWhom="ngModel">
             </div>
@@ -105,7 +128,7 @@
         </div>
         <p></p>
         <div class="form-group row">
-          <label class="col-md-4" >City: </label>
+          <label class="col-md-4">City: </label>
           <input class="col-md-8" type="text" name="city" [(ngModel)]="address.city"
                  #city="ngModel">
         </div>
@@ -117,13 +140,13 @@
         </div>
         <p></p>
         <div class="form-group row">
-          <label class="col-md-4" >Zipcode: </label>
-          <input class="col-md-8"  type="text" name="zipcode" [(ngModel)]="address.zipcode"
+          <label class="col-md-4">Zipcode: </label>
+          <input class="col-md-8" type="text" name="zipcode" [(ngModel)]="address.zipcode"
                  #zipcode="ngModel">
         </div>
         <p></p>
         <div class="form-group row">
-          <label class="col-md-4" >House number: </label>
+          <label class="col-md-4">House number: </label>
           <input class="col-md-8" type="text" name="houseNumber" [(ngModel)]="address.houseNumber"
                  #houseNumber="ngModel">
         </div>
@@ -138,16 +161,23 @@
         <div *ngIf="untouched && !loading" class="form-group">
           <label for="selects_1">Select tariff: </label>
           <div class="select">
+            <!--<select id="selects_1" [(ngModel)]="selectedRate">-->
+            <!--<option value="Default">Select tariff...</option>-->
+            <!--<option *ngFor="let r of rates" [ngValue]="r.id">{{r.name}}</option>-->
+            <!--</select>-->
             <select id="selects_1" [(ngModel)]="selectedRate">
-              <!--<option>Select tariff</option>-->
-              <option *ngFor="let r of rates" [ngValue]="r.id">{{r.name}}</option>
+              <option *ngFor="let t of rates; let i = index" [attr.value]="t.id" [attr.selected]="i == 0 ? true : null">
+                {{t.name}}
+              </option>
             </select>
           </div>
         </div>
 
         <ng-container *ngIf="loading">
           <p>Loading...</p>
-          <div class="progress loop"><progress></progress></div>
+          <div class="progress loop">
+            <progress></progress>
+          </div>
         </ng-container>
 
         <clr-alert *ngIf="readyToFinish && !errorFlag" clrAlertType="alert-success">

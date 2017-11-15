@@ -1,30 +1,203 @@
-<div class="col-md-9">
-    <div class="row add-contract-and-search">
-      <input type="submit" class="btn btn-info button-one button-act col-md-2"
-             value="Add user" [routerLink]="['/employee/customer-form']">
-      <div class="input-group col-md-6 search-inp">
-        <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="contratNumber">
-
-      </div>
+<clr-tabs>
+  <clr-tab>
+    <button clrTabLink>All users</button>
+    <clr-tab-content *clrIfActive>
+      <div class="col-md-9">
+        <div class="row" id="search-pan">
+          <button type="button" title="Add user" class="btn btn-icon" (click)="change()">
+            <clr-icon shape="plus"></clr-icon>
+            <clr-icon shape="user"></clr-icon>
+          </button>
+          <div class="input-group col-md-6 search-elem">
+            <input type="text" size="45" placeholder="Search..." [(ngModel)]="contratNumber">
+          </div>
+        </div>
+        <clr-stack-view id="userList">
+          <clr-stack-block *ngFor="let customer of customers | customerContractNumberFiler: contratNumber">
+            <clr-stack-label>{{customer?.firstName}} {{customer?.lastName}}</clr-stack-label>
+            <clr-stack-content>
+              <button type="button" title="Add contract" class="btn btn-icon" (click)="addContract(customer.id)">
+                <clr-icon shape="plus"></clr-icon>
+                <clr-icon shape="phone-handset"></clr-icon>
+              </button>
+            </clr-stack-content>
+            <clr-stack-block *ngFor="let contract of customer.contractList">
+              <clr-stack-label>{{contract.number}}</clr-stack-label>
+              <clr-stack-content>
+                <button type="button" title="Change contract" class="btn btn-icon" (click)="changeContract(contract)">
+                  <clr-icon shape="pencil"></clr-icon>
+                </button>
+              </clr-stack-content>
+            </clr-stack-block>
+          </clr-stack-block>
+        </clr-stack-view>
     </div>
-    <clr-stack-view>
-      <clr-stack-header>All users</clr-stack-header>
-      <clr-stack-block *ngFor="let customer of customers | customerContractNumberFiler: contratNumber">
-        <clr-stack-label>{{customer?.firstName}} {{customer?.lastName}}</clr-stack-label>
-        <clr-stack-content>
-          <button class="btn btn-info button-one button-act col-md-2"
-                  (click)="addContract(); addToSharedService(customer.id)">Add contract</button>
-        </clr-stack-content>
-        <clr-stack-block *ngFor="let contract of customer.contractList">
-          <clr-stack-label>{{contract.number}}</clr-stack-label>
-          <clr-stack-content>
-            <button class="btn btn-info button-one button-act col-md-2 button-number"
-                    (click)="changeContract(contract)">
-              Change contract
-            </button>
-          </clr-stack-content>
-        </clr-stack-block>
-      </clr-stack-block>
-    </clr-stack-view>
-</div>
+      <clr-wizard #wizard [(clrWizardOpen)]="open" [clrWizardSize]="'lg'"
+                  [clrWizardPreventNavigation]="loading"
+                  [clrWizardDisableStepnav]="readyToFinish"
+                  [clrWizardPreventDefaultCancel]="true"
+                  (clrWizardOnCancel)="doCancel()"
+                  [clrWizardClosable]="!readyToFinish">
+        <clr-wizard-title>New customer</clr-wizard-title>
 
+        <clr-wizard-button type="cancel" *ngIf="!readyToFinish">Cancel</clr-wizard-button>
+        <clr-wizard-button type="previous" *ngIf="!readyToFinish">Back</clr-wizard-button>
+        <clr-wizard-button type="next">Next</clr-wizard-button>
+        <clr-wizard-button type="finish">
+          <span *ngIf="untouched && !loading">Add</span>
+          <span *ngIf="loading">Please wait...</span>
+          <span *ngIf="readyToFinish">OK</span>
+        </clr-wizard-button>
+
+        <clr-wizard-page
+          [clrWizardPageNextDisabled]="(firstName.pristine && lastName.pristine && email.pristine && passportNumber.pristine) || !formPage.valid">
+          <ng-template clrPageTitle>Personal information</ng-template> <!-- mandatory -->
+
+          <form #formPage="ngForm">
+            <section class="form-block">
+              <div class="form-group">
+                <label class="required">First name:</label>
+                <label for="nameInput" aria-haspopup="true" role="tooltip"
+                       [class.invalid]="firstName.touched && !firstName.valid"
+                       class="tooltip tooltip-validation tooltip-md tooltip-bottom-right">
+                  <input type="text" id="nameInput" required [(ngModel)]="customer.firstName" name="firstName"
+                         #firstName="ngModel">
+                  <span class="tooltip-content">This field cannot be empty!</span>
+                </label>
+              </div>
+              <div class="form-group">
+                <label class="required">Last name:</label>
+                <label for="LastNameInput" aria-haspopup="true" role="tooltip"
+                       [class.invalid]="lastName.touched && !lastName.valid"
+                       class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+                  <input type="text" id="LastNameInput" required [(ngModel)]="customer.lastName" name="lastName"
+                         #lastName="ngModel">
+                  <span class="tooltip-content">This field cannot be empty!</span>
+                </label>
+              </div>
+              <div class="form-group">
+                <label class="required ">Email:</label>
+                <label for="emailInput" aria-haspopup="true" role="tooltip"
+                       [class.invalid]="email.touched && !email.valid && !email.errors.email"
+                       class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+                  <input type="text" id="emailInput" required email [(ngModel)]="customer.email"
+                         name="email" #email="ngModel" value="{{customer?.email}}">
+                  <span class="tooltip-content">Invalid email!</span>
+                </label>
+              </div>
+              <div class="form-group">
+                <label for="birthDate">Birthday:</label>
+                <input id="birthDate" type="date" name="birthDate"
+                       [(ngModel)]="customer.birthDate" #birthDate="ngModel">
+              </div>
+              <div class="form-group">
+                <label class="required">Passport number:</label>
+                <label for="passportNumberInput" aria-haspopup="true" role="tooltip"
+                       [class.invalid]="passportNumber.touched && !passportNumber.valid"
+                       class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+                  <input type="text" id="passportNumberInput" required [(ngModel)]="customer.passportNumber"
+                         name="passportNumber" #passportNumber="ngModel">
+                  <span class="tooltip-content">This field cannot be empty!</span>
+                </label>
+              </div>
+              <div class="form-group">
+                <label>Passport issued by whom:</label>
+                <input type="text" name="passportIssuedByWhom"
+                       [(ngModel)]="customer.passportIssuedByWhom" #passportIssuedByWhom="ngModel">
+              </div>
+              <div class="form-group">
+                <label>Passport issued when:</label>
+                <input id="passportIssuedWhen" type="date" name="passportIssuedWhen"
+                       [(ngModel)]="customer.passportIssuedWhen" #passportIssuedWhen="ngModel">
+              </div>
+            </section>
+          </form>
+        </clr-wizard-page>
+        <clr-wizard-page
+          [clrWizardPagePreventDefaultNext]="true"
+          (clrWizardPageOnCommit)="onCommit()">
+          <ng-template clrPageTitle>
+            Address
+          </ng-template>
+
+          <div *ngIf="untouched && !loading" class="form-group">
+            <div class="form-group row">
+              <label class="col-md-4"> Country: </label>
+              <input class="col-md-8" type="text" name="country" [(ngModel)]="address.country"
+                     #country="ngModel">
+            </div>
+            <p></p>
+            <div class="form-group row">
+              <label class="col-md-4">City: </label>
+              <input class="col-md-8" type="text" name="city" [(ngModel)]="address.city"
+                     #city="ngModel">
+            </div>
+            <p></p>
+            <div class="form-group row">
+              <label class="col-md-4">Street: </label>
+              <input class="col-md-8" type="text" name="street" [(ngModel)]="address.street"
+                     #street="ngModel">
+            </div>
+            <p></p>
+            <div class="form-group row">
+              <label class="col-md-4">Zipcode: </label>
+              <input class="col-md-8" type="text" name="zipcode" [(ngModel)]="address.zipcode"
+                     #zipcode="ngModel">
+            </div>
+            <p></p>
+            <div class="form-group row">
+              <label class="col-md-4">House number: </label>
+              <input class="col-md-8" type="text" name="houseNumber" [(ngModel)]="address.houseNumber"
+                     #houseNumber="ngModel">
+            </div>
+          </div>
+
+          <ng-container *ngIf="loading">
+            <p>Loading...</p>
+            <div class="progress loop">
+              <progress></progress>
+            </div>
+          </ng-container>
+
+          <clr-alert *ngIf="readyToFinish && !errorFlag" clrAlertType="alert-success">
+            <div class="alert-item">
+              User have successfully added.
+            </div>
+          </clr-alert>
+
+          <clr-alert *ngIf="readyToFinish && errorFlag" clrAlertType="alert-danger">
+            <div class="alert-item">
+              Error: email or passport number is already taken.
+            </div>
+          </clr-alert>
+        </clr-wizard-page>
+      </clr-wizard>
+    </clr-tab-content>
+  </clr-tab>
+
+  <clr-tab>
+    <button clrTabLink>New users <span class="badge badge-3">{{countCustomer}}</span></button>
+    <clr-tab-content *clrIfActive>
+      <div class="row">
+        <div *ngFor="let customer of newCustomers" class="col-md-4">
+          <div class="card">
+            <div class="card-block">
+              <h3 class="card-title">{{customer?.firstName}} {{customer?.lastName}}</h3>
+              <p class="card-text">
+                {{customer?.email}}
+                RRRR
+              </p>
+            </div>
+            <div class="card-footer">
+              <button type="button" title="Add contract" class="btn btn-icon" (click)="addContract(customer.id)">
+                <clr-icon shape="plus"></clr-icon>
+                <clr-icon shape="phone-handset"></clr-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </clr-tab-content>
+  </clr-tab>
+</clr-tabs>
+  <contract-form></contract-form>

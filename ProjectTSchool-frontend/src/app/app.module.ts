@@ -32,7 +32,7 @@ import {ContractSharedService} from "./employee/contract-list/contract-shared.se
 import {ContractOptionsComponent} from "./employee/contract-list/contract-options/contract-options.component";
 import {SignupComponent} from "./signup/signup.component"
 import {ClarityModule} from "clarity-angular";
-import {ClarityIcons} from 'clarity-icons';
+import { FormControl } from '@angular/forms';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({

@@ -4,6 +4,8 @@ import {AppService} from "../app.service";
 import {Router} from "@angular/router";
 import {Wizard} from "clarity-angular";
 import {ITariff} from "../interfaces/tariff";
+import {EmailValidator, FormBuilder, Validators} from '@angular/forms';
+import {isNullOrUndefined} from "util";
 
 @Component({
   moduleId: module.id,
@@ -30,6 +32,7 @@ export class SignupComponent {
               private router: Router) {
   }
 
+
   get readyToFinish(): boolean {
     return !this.untouched && !this.loading;
   }
@@ -54,6 +57,10 @@ export class SignupComponent {
       this.untouched = false;
       this.loading = true;
       this.customer.address = this.address;
+      if(isNullOrUndefined(this.selectedRate)) {
+        this.selectedRate = this.rates[0];
+      }
+      console.log(this.selectedRate);
       this.appService.createUser(this.customer)
         .then(() => {
           this.errorFlag = false;
