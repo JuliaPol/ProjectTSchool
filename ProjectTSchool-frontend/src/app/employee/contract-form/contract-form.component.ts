@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {ITariff} from "../../interfaces/tariff";
 import {AppService} from "../../app.service";
 import {IContract, ICustomer} from "../../interfaces/customers";
@@ -22,6 +22,7 @@ export class ContractFormComponent implements OnInit {
   contract: IContract;
   selectedNumber: string;
   open: boolean = false;
+  @Output() onChanged = new EventEmitter<boolean>();
 
   constructor(private appService: AppService,
               private sharedService: CustomerSharedService, private router: Router) {
@@ -67,7 +68,7 @@ export class ContractFormComponent implements OnInit {
     };
     this.appService.createContract(this.customerId, this.contract).then(() => {
         this.reset();
-        location.reload();
+        this.onChanged.emit();
       }
     )
   }

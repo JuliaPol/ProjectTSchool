@@ -1,44 +1,70 @@
-<div class=" back col-md-9">
-  <a class="btn btn-info button-one" [routerLink]="['../customers']">Back</a>
-  <a class="btn btn-info button-one" [routerLink]="['/employee/contract-options']">Change options</a>
-  <h3>Edit contract</h3>
-  <form #todoForm="ngForm">
-    <div class="row addOption">
-      <p id="changedTariff">{{contract?.rate?.name}}</p>
-      <div class="col-md-5">
-        <p>Select new tariff:</p>
-        <select class="form-control col-md-4" #selectRate (change)="rateSelected(selectRate.value)">
-          <option value="">Select tariff</option>
-          <option *ngFor="let rate of rates" [value]="rate?.id">{{rate?.name}}</option>
-        </select>
-      </div>
-    </div>
-    <div class="row addOption">
-      <div class="col-lg-6">
-        <p>Tariff options:</p>
-        <ul class="list-group scrollbar-cyan bordered-cyan card example-2 square">
-          <li class="list-group-item" *ngFor="let option of selectedTariff?.optionList">
-            {{option?.name}}
-          </li>
-        </ul>
-      </div>
+
+<clr-icon [routerLink]="['../customers']" shape="circle-arrow left" title="Back" style="width: 36px; height: 36px;"></clr-icon>
+<clr-tabs>
+  <clr-tab>
+    <button clrTabLink>Change status</button>
+    <clr-tab-content *clrIfActive>
+      <h3>Edit contract</h3>
       <p id="changedStatus">{{contract?.status}}</p>
-      <div class="col-lg-6">
-        <p>Select new status:</p>
-          <select class="form-control col-md-4" #selectStatus (change)="statusSelected(selectStatus.value)">
-            <option value="">Select status</option>
-            <option [value]="'AVAILABLE'">Available</option>
-            <option [value]="'BLOCKED_BY_AN_EMPLOYEE'">Deactivated</option>
-          </select>
+      <div class="col-md-6">
+        <form #todoForm="ngForm">
+          <label for="selects_2">Select new status: </label>
+          <p></p>
+          <div class="select">
+            <select id="selects_2" #selectStatus (change)="statusSelected(selectStatus.value)">
+              <option value="">Select status</option>
+              <option [value]="'AVAILABLE'">Available</option>
+              <option [value]="'BLOCKED_BY_AN_EMPLOYEE'">Deactivated</option>
+            </select>
+          </div>
+          <p></p>
+          <button type="button" class="btn btn-outline" (click)="onSubmit(); todoForm.reset()"
+                  [disabled]="todoForm.form.invalid">Change status
+          </button>
+        </form>
       </div>
-    </div>
-    <div class="row addOption">
-      <div class="col-md-8">
-        <button type="submit" class="btn btn-info button-one col-md-2" (click)="onSubmit(); todoForm.reset()"
-                [disabled]="todoForm.form.invalid">Add
-        </button>
+    </clr-tab-content>
+  </clr-tab>
+  <clr-tab>
+    <button clrTabLink>Change tariff</button>
+    <clr-tab-content *clrIfActive>
+      <div class="row">
+        <div class="col-md-5">
+          <form #todoForm1="ngForm">
+            <label for="selects_3">Select new tariff: </label>
+            <p></p>
+            <div class="select">
+              <select id="selects_3" #selectRate (change)="rateSelected(selectRate.value)">
+                <option value="">Select tariff</option>
+                <option *ngFor="let rate of rates" [value]="rate?.id">{{rate?.name}}</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-outline" (click)="onSubmit(); todoForm1.reset()"
+                    [disabled]="todoForm1.form.invalid">Change tariff
+            </button>
+          </form>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let option of selectedTariff?.optionList">
+              {{option?.name}}
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-5 right-rate" >
+          <p id="changedRate">{{contract?.rate?.name}}</p>
+          <p>Tariff options:</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let option of contract?.rate?.optionList">
+              {{option?.name}}
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </form>
-  {{result}}
-</div>
+    </clr-tab-content>
+  </clr-tab>
+  <clr-tab>
+    <button clrTabLink>Change options</button>
+    <clr-tab-content *clrIfActive>
+      <contract-options></contract-options>
+    </clr-tab-content>
+  </clr-tab>
+</clr-tabs>

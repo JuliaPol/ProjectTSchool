@@ -56,10 +56,6 @@ export class CustomersComponent implements OnInit {
     this.modal.open = true;
   }
 
-  addToSharedService(id) {
-    this.sharedService.saveData(id);
-  }
-
   changeContract(contract: IContract) {
     this.contractSharedService.saveData(contract.id);
     this.router.navigate(['/employee/contract-info']);

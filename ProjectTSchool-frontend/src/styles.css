@@ -315,6 +315,13 @@ label {
 #changedStatus {
   margin-left: 15px;
   font-size: large;
+  color: #007cbb;
+}
+#changedRate {
+  margin-top: 60px;
+  margin-left: 150px;
+  font-size: large;
+  color: #007cbb;
 }
 
 .warn {
@@ -455,4 +462,8 @@ p {
 }
 #iconLogout {
   margin-left: 50px;
+}
+
+.right-rate {
+  margin-left: 60px;
 }
