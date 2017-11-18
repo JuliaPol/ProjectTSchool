@@ -1,0 +1,20 @@
+<div class="col-md-9">
+  <clr-stack-view class="userList">
+    <clr-stack-header>Contracts: </clr-stack-header>
+    <clr-stack-block *ngFor="let contract of user?.contractList">
+      <clr-stack-label class="customers">{{contract?.number}}</clr-stack-label>
+      <clr-stack-content>Status: {{contract?.status}}<clr-icon shape="dollar"></clr-icon></clr-stack-content>
+      <clr-stack-content>
+        <button *ngIf="contract.status==='AVAILABLE' " type="button" class="btn btn-outline butt-right" (click)="changeStatus(contract?.id);"
+                [disabled]="true">Block
+        </button>
+        <button *ngIf="contract.status==='BLOCKED_BY_CUSTOMER' " type="button" class="btn btn-outline butt-right" (click)="changeStatus(contract?.id);"
+                [disabled]="false">Unblock
+        </button>
+        <button *ngIf="contract.status==='BLOCKED_BY_EMPLOYEE' " type="button" class="btn btn-outline butt-right" (click)="changeStatus(contract?.id);"
+                [disabled]="true">Unblock
+        </button>
+      </clr-stack-content>
+    </clr-stack-block>
+  </clr-stack-view>
+</div>

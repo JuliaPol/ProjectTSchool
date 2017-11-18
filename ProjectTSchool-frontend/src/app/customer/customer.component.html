@@ -1,0 +1,25 @@
+<header class="header-6">
+  <div class="branding">
+    <a href="..." class="nav-link">
+      <img id="logoImg" src="http://localhost:8080/img/Satellite-icon.png">
+      <span class="title">Satellite</span>
+    </a>
+  </div>
+  <div class="header-actions">
+    <a href="..." class="nav-link nav-text">{{user?.firstName}} {{user?.lastName}}</a>
+  </div>
+</header>
+<div class="content-container">
+  <div class="content-area">
+    <router-outlet></router-outlet>
+  </div>
+  <clr-vertical-nav id="navVert">
+    <a clrVerticalNavLink routerLink="./customers" routerLinkActive="active">
+      <clr-icon clrVerticalNavIcon shape="phone-handset"></clr-icon>My contracts</a>
+    <a clrVerticalNavLink routerLink="./tariffs" routerLinkActive="active">
+      <clr-icon clrVerticalNavIcon shape="tags"></clr-icon>Tariffs</a>
+    <a clrVerticalNavLink routerLink="./options" routerLinkActive="active">
+      <clr-icon clrVerticalNavIcon shape="view-cards"></clr-icon>Options</a>
+  </clr-vertical-nav>
+
+</div>

@@ -15,6 +15,8 @@ import {ContractInfoComponent} from "./employee/contract-list/contarct-info/cont
 import {ContractOptionsComponent} from "./employee/contract-list/contract-options/contract-options.component";
 import {LoginComponent} from "./login/login.component";
 import {SignupComponent} from "./signup/signup.component";
+import {CustomerComponent} from "./customer/customer.component";
+import {CustomerContractComponent} from "./customer/customer-contract/customer-contract.component";
 
 const appRoutes: Routes =[
   //{path: '', redirectTo: 'employee', pathMatch: 'full'},
@@ -35,7 +37,12 @@ const appRoutes: Routes =[
     ]},
   { path: 'login-error', component: LoginErrorComponent},
   //{ path: 'login', component: LoginComponent},
-  { path: 'signUp', component: SignupComponent}
+  { path: 'signUp', component: SignupComponent},
+  {path: 'customer', component: CustomerComponent,
+    children: [
+      {path: '', redirectTo: 'contract', pathMatch: 'full'},
+      {path: 'contract', component: CustomerContractComponent}
+    ]}
 ];
 
 @NgModule({

@@ -33,6 +33,8 @@ import {SignupComponent} from "./signup/signup.component"
 import {ClarityModule} from "clarity-angular";
 import { FormControl } from '@angular/forms';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {CustomerComponent} from "./customer/customer.component";
+import {CustomerContractComponent} from "./customer/customer-contract/customer-contract.component";
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     CustomerContractNumberFiler,
     ContractInfoComponent,
     ContractOptionsComponent,
+    CustomerComponent,
+    CustomerContractComponent,
     SignupComponent,
   ],
   imports: [
