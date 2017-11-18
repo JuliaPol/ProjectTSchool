@@ -4,6 +4,7 @@ import com.tsystems.ecare.dao.RoleDao;
 import com.tsystems.ecare.dto.CustomerDTO;
 import com.tsystems.ecare.dto.RateDTO;
 import com.tsystems.ecare.dto.UserDTO;
+import com.tsystems.ecare.dto.UserWithPasswordDTO;
 import com.tsystems.ecare.entities.Address;
 import com.tsystems.ecare.entities.Contract;
 import com.tsystems.ecare.entities.Rate;
@@ -70,7 +71,7 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
     }
 
     @Override
-    public void createCustomer(UserDTO userDTO){
+    public void createCustomer(UserWithPasswordDTO userDTO){
         try {
             userService.saveCustomer(convertToEntityWithException(userDTO));
             userService.sendEmailToNewCustomer(userDTO);
@@ -82,11 +83,12 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
     @Override
     public CustomerDTO convertToCustomerDto(User entity) {
         CustomerDTO customerDTO = modelMapper.map(entity, CustomerDTO.class);
+        customerDTO.dateConverter(entity.getRegistrationDate());
         return customerDTO;
     }
 
 
-    private User convertToEntityWithException(UserDTO dto) throws ParseException {
+    private User convertToEntityWithException(UserWithPasswordDTO dto) throws ParseException {
         Address address = modelMapper.map(dto.getAddress(), Address.class);
         User user = new User();
         user.setAddress(address);
@@ -100,6 +102,7 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
         user.setLastName(dto.getLastName());
         user.setPassportNumber(dto.getPassportNumber());
         user.setPassportIssuedByWhom(dto.getPassportIssuedByWhom());
+        user.setComment(dto.getComment());
         if (dto.getPassword() != null) {
             user.setPassword(passwordEncoder.encode(dto.getPassword()));
         } else {

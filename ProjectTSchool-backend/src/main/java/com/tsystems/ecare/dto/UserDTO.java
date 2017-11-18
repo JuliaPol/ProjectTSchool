@@ -4,6 +4,7 @@ package com.tsystems.ecare.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
@@ -24,11 +25,10 @@ public class UserDTO extends IdDTO {
     private String lastName;
 
     @NotNull
+    @Email
     private String email;
 
     private String login;
-
-    private String password;
 
     private String birthDate;
 

@@ -118,4 +118,8 @@ export class CustomersComponent implements OnInit {
   change() {
     this.open = true;
   }
+
+  delete(contract: IContract) {
+    this.init();
+  }
 }

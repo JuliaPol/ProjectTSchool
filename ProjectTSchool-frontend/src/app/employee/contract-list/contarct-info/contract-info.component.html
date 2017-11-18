@@ -1,10 +1,11 @@
-
-<clr-icon [routerLink]="['../customers']" shape="circle-arrow left" title="Back" style="width: 36px; height: 36px;"></clr-icon>
+<button [routerLink]="['../customers']" class="btn btn-link">
+  <clr-icon  shape="circle-arrow left" title="Back" style="width: 36px; height: 36px;"></clr-icon>
+</button>
 <clr-tabs>
   <clr-tab>
     <button clrTabLink>Change status</button>
     <clr-tab-content *clrIfActive>
-      <h3>Edit contract</h3>
+      <h3 id="edit-status">Edit status</h3>
       <p id="changedStatus">{{contract?.status}}</p>
       <div class="col-md-6">
         <form #todoForm="ngForm">
@@ -43,7 +44,7 @@
                     [disabled]="todoForm1.form.invalid">Change tariff
             </button>
           </form>
-          <ul class="list-group list-group-flush">
+          <ul class="list-group list-group-flush option-rate-list">
             <li class="list-group-item" *ngFor="let option of selectedTariff?.optionList">
               {{option?.name}}
             </li>

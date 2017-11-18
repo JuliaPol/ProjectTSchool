@@ -1,61 +1,89 @@
-<div class="back col-md-9">
-  <div class="row">
-    <div class="col-md-10">
-      <a class="btn btn-info button-one" [routerLink]="['../options']">Back</a>
+<button [routerLink]="['../options']" class="btn btn-link">
+  <clr-icon shape="circle-arrow left" title="Back" style="width: 36px; height: 36px;"></clr-icon>
+</button>
+<button type="button" title="Delete option" class="btn btn-icon butt-right" (click)="delete()">
+  <clr-icon shape="trash"></clr-icon>
+</button>
+<ng-container *ngIf="loading">
+  <p>Loading...</p>
+  <div class="progress loop">
+    <progress></progress>
+  </div>
+</ng-container>
+<clr-alert *ngIf="finish && !errorFlag" clrAlertType="alert-success">
+  <div class="alert-item">
+    Option have successfully changed.
+  </div>
+</clr-alert>
+<clr-alert *ngIf="finish && errorFlag" clrAlertType="alert-danger">
+  <div class="alert-item">
+    Error. The option name must be original.
+  </div>
+</clr-alert>
+<form #todoForm="ngForm">
+  <div class="row rate-row">
+    <div class="form-group">
+      <label class="required ">Name:</label>
+      <label for="nameInput" aria-haspopup="true" role="tooltip"
+             [class.invalid]="name.touched && !name.valid"
+             class="tooltip tooltip-validation tooltip-sm tooltip-bottom-right">
+        <input type="text" id="nameInput" required [(ngModel)]="option.name"
+               name="name" #name="ngModel" value="{{option?.name}}">
+        <span class="tooltip-content">Name is required!</span>
+      </label>
     </div>
-    <div class="col-md-2">
-      <button type="submit" class="btn btn-info button-one" (click)="delete()">Delete</button>
+    <div class="form-group rate-field">
+      <label class="required ">Description:</label>
+      <label for="descrInput" aria-haspopup="true" role="tooltip"
+             [class.invalid]="description.touched && !description.valid"
+             class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+        <input size="45" type="text" id="descrInput" required [(ngModel)]="option.description"
+               name="description" #description="ngModel" value="{{option?.description}}">
+        <span class="tooltip-content">Invalid description!</span>
+      </label>
     </div>
   </div>
-  <form (ngSubmit)="onSubmit(); todoForm.reset()" #todoForm="ngForm">
-    <div class="row addOption">
-      <div class="col-md-4">
-        <p>Name:</p>
-        <input type="text" class="form-control" name="name" [(ngModel)]="option.name" value={{option?.name}}
-               #name="ngModel"
-               required>
-      </div>
-      <div class="col-md-8">
-        <p>Description:</p>
-        <input type="text" class="form-control" name="description" [(ngModel)]="option.description"
-               value={{option?.description}} #description="ngModel" required>
-      </div>
+  <div class="row rate-row">
+    <div class="form-group">
+      <label class="required ">Cost:</label>
+      <label for="costInput" aria-haspopup="true" role="tooltip"
+             [class.invalid]="cost.touched && !cost.valid"
+             class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+        <input type="text" id="costInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="option.cost"
+               name="cost" #cost="ngModel" value="{{option?.cost}}">
+        <span class="tooltip-content">Invalid cost!</span>
+      </label>
     </div>
-    <div class="row addOption">
-      <div class="col-md-4">
-        <p>Cost</p>
-        <input type="text" class="form-control" name="cost" [(ngModel)]="option.cost"
-               value={{option?.cost}} #cost="ngModel" required>
-      </div>
-      <div class="col-md-4">
-        <p>Cost of connection:</p>
-        <input type="text" class="form-control" name="costOfConnection" [(ngModel)]="option.costOfConnection"
-               value={{option?.costOfConnection}} #costOfConnection="ngModel" required>
-      </div>
+    <div class="form-group rate-field">
+      <label class="required ">Cost of connection: </label>
+      <label for="costOfConnectionInput" aria-haspopup="true" role="tooltip"
+             [class.invalid]="costOfConnection.touched && !costOfConnection.valid"
+             class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+        <input type="text" id="costOfConnectionInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="option.costOfConnection"
+               name="costOfConnection" #costOfConnection="ngModel" value="{{option?.costOfConnection}}">
+        <span class="tooltip-content">Invalid cost!</span>
+      </label>
     </div>
-    <div class="row addOption">
-      <div class="col-lg-6">
-        <p>This option must be connected with the options:</p>
-        <ul class="list-group scroll-bar scrollbar-cyan bordered-cyan card example-2 square">
-          <li class="list-group-item" *ngFor="let option of option?.compatibleOptions">
-            {{option}}
-          </li>
-        </ul>
-      </div>
-      <div class="col-lg-6">
-        <p>This option can not be connected with the options:</p>
-        <ul class="list-group scroll-bar scrollbar-cyan bordered-cyan card example-2 square">
-          <li class="list-group-item" *ngFor="let option of option?.incompatibleOptions">
-            {{option}}
-          </li>
-        </ul>
-      </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <p>This option must be connected with the options:</p>
+      <ul class="list-group list-group-flush option-list">
+        <li class="list-group-item" *ngFor="let option1 of option?.compatibleOptions">
+          {{option1}}
+        </li>
+      </ul>
     </div>
-    <div class="row addOption">
-      <div class="col-md-8">
-        <button type="submit" class="btn btn-info button-one col-md-4" [disabled]="todoForm.form.invalid">Save</button>
-      </div>
+    <div class="col-md-6">
+      <p>This option can not be connected with the options:</p>
+      <ul class="list-group list-group-flush option-list">
+        <li class="list-group-item" *ngFor="let option1 of option?.incompatibleOptions">
+          {{option1}}
+        </li>
+      </ul>
     </div>
-  </form>
-  {{result}}
-</div>
+  </div>
+  <button type="button" class="btn btn-outline" (click)="onSubmit(); todoForm.reset()"
+          [disabled]="todoForm.form.invalid">Change option
+  </button>
+</form>

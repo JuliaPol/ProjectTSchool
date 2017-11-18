@@ -5,6 +5,7 @@ import com.tsystems.ecare.dao.JpaDao;
 import com.tsystems.ecare.dao.RoleDao;
 import com.tsystems.ecare.dao.UserDao;
 import com.tsystems.ecare.dto.UserDTO;
+import com.tsystems.ecare.dto.UserWithPasswordDTO;
 import com.tsystems.ecare.entities.Role;
 import com.tsystems.ecare.entities.User;
 import com.tsystems.ecare.service.UserService;
@@ -16,6 +17,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,12 +55,13 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService {
     @Transactional
     public void saveCustomer(User user) {
         user.setRole(getRole("ROLE_CUSTOMER"));
+        user.setRegistrationDate(new Date());
         userDao.insert(user);
     }
 
     @Async
     @Override
-    public void sendEmailToNewCustomer(UserDTO user) {
+    public void sendEmailToNewCustomer(UserWithPasswordDTO user) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(user.getEmail());
         message.setSubject("Welcome to Satellite!");

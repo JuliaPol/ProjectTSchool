@@ -1,26 +1,28 @@
-<div class="back col-md-9">
-  <div class="row add-contract-and-search">
-    <input type="submit" class="btn btn-info button-one col-md-2"
-           value="Add option" (click)="openTab('/employee/option-form')">
-    <input type="submit" class="btn btn-info button-one col-md-2"
-           value="Add rules" (click)="openTab('/employee/options-rules')">
-    <!--<div class="input-group col-md-6 search-inp">-->
-      <!--<input type="text" class="form-control" placeholder="Search...">-->
-      <!--<span class="input-group-btn">-->
-            <!--<button class="btn btn-default" type="button">Go!</button>-->
-          <!--</span>-->
-    <!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
-  </div>
-  <!-- 1 панель -->
-  <clr-stack-view>
+<div class="col-md-9">
+  <button type="button" title="Add option" class="btn btn-icon" (click)="addOption()">
+    <clr-icon shape="plus"></clr-icon>
+    <clr-icon shape="view-cards"></clr-icon>
+  </button>
+  <button type="button" title="Add rules" class="btn btn-icon" (click)="openTab('/employee/options-rules')">
+    <clr-icon shape="plus"></clr-icon>
+    <clr-icon shape="ruler-pencil"></clr-icon>
+  </button>
+  <clr-stack-view class="userList">
     <clr-stack-header>All options</clr-stack-header>
 
     <clr-stack-block *ngFor="let option of options">
-      <clr-stack-label>{{option?.name}}</clr-stack-label>
-      <clr-stack-content><button class="btn btn-info button-one button-act col-md-2 button-number"
-                                 (click)="change(option.id, '/employee/option-info')">
-        Change
-      </button></clr-stack-content>
+      <clr-stack-label class="customers">{{option?.name}}</clr-stack-label>
+      <clr-stack-content>Cost of connection: {{option?.costOfConnection}}<clr-icon shape="dollar"></clr-icon></clr-stack-content>
+      <clr-stack-content>
+        <button type="button" title="Change option" class="btn btn-icon butt-right" (click)="change(option.id, '/employee/option-info')">
+          <clr-icon shape="pencil"></clr-icon>
+        </button>
+        <button type="button" title="Delete option" class="btn btn-icon butt-right" (click)="deleteOption(option.id)">
+          <clr-icon shape="trash"></clr-icon>
+        </button>
+      </clr-stack-content>
     </clr-stack-block>
   </clr-stack-view>
 </div>
+<option-form (onChanged)="init()"></option-form>
+

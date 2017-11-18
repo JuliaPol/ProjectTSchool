@@ -60,7 +60,7 @@ export class SignupComponent {
       if(isNullOrUndefined(this.selectedRate)) {
         this.selectedRate = this.rates[0];
       }
-      console.log(this.selectedRate);
+      this.customer.comment = this.selectedRate.name;
       this.appService.createUser(this.customer)
         .then(() => {
           this.errorFlag = false;

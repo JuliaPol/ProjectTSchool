@@ -1,40 +1,69 @@
-<div class="panel panel-default back col-md-9">
-  <a class="btn btn-info button-one" [routerLink]="['../options']">Back</a>
-  <div>
-    <h3>
-      Create option
-    </h3>
+<clr-modal [(clrModalOpen)]="open">
+  <h3 class="modal-title">New option:</h3>
+  <div class="modal-body">
+    <form #formPage="ngForm">
+      <div class="form-group">
+        <label class="required ">Name:</label>
+        <label for="nameInput" aria-haspopup="true" role="tooltip"
+               [class.invalid]="name.touched && !name.valid"
+               class="tooltip tooltip-validation tooltip-sm tooltip-bottom-right">
+          <input type="text" id="nameInput" required [(ngModel)]="option.name"
+                 name="name" #name="ngModel">
+          <span class="tooltip-content">Name is required!</span>
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="required ">Description:</label>
+        <label for="descrInput" aria-haspopup="true" role="tooltip"
+               [class.invalid]="description.touched && !description.valid"
+               class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+          <input type="text" id="descrInput" required [(ngModel)]="option.description"
+                 name="description" #description="ngModel">
+          <span class="tooltip-content">Invalid description!</span>
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="required ">Cost:</label>
+        <label for="costInput" aria-haspopup="true" role="tooltip"
+               [class.invalid]="cost.touched && !cost.valid"
+               class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+          <input type="text" id="costInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="option.cost"
+                 name="cost" #cost="ngModel">
+          <span class="tooltip-content">Invalid cost!</span>
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="required ">Cost of connection: </label>
+        <label for="costOfConnectionInput" aria-haspopup="true" role="tooltip"
+               [class.invalid]="costOfConnection.touched && !costOfConnection.valid"
+               class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+          <input type="text" id="costOfConnectionInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="option.costOfConnection"
+                 name="costOfConnection" #costOfConnection="ngModel">
+          <span class="tooltip-content">Invalid cost!</span>
+        </label>
+      </div>
+    </form>
+    <ng-container *ngIf="loading">
+      <p>Loading...</p>
+      <div class="progress loop">
+        <progress></progress>
+      </div>
+    </ng-container>
+    <clr-alert *ngIf="finish && !errorFlag" clrAlertType="alert-success">
+      <div class="alert-item">
+        Option have successfully added.
+      </div>
+    </clr-alert>
+    <clr-alert *ngIf="finish && errorFlag" clrAlertType="alert-danger">
+      <div class="alert-item">
+        Error. The option name must be original.
+      </div>
+    </clr-alert>
   </div>
-  <form (ngSubmit)="onSubmit(); todoForm.reset()" #todoForm="ngForm">
-    <section class="form-block">
-    <div class="row addOption">
-      <div class="col-md-8">
-        <input type="text" class="form-control" name="name" [(ngModel)]="option.name" placeholder="Name" #name="ngModel"
-               required>
-      </div>
-    </div>
-    <div class="row addOption">
-      <div class="col-md-8">
-        <input type="text" class="form-control" name="description" [(ngModel)]="option.description"
-               placeholder="Description" #description="ngModel" required>
-      </div>
-    </div>
-    <div class="row addOption">
-      <div class="col-md-4">
-        <input type="text" class="form-control" name="cost" [(ngModel)]="option.cost"
-               placeholder="Cost" #cost="ngModel" required>
-      </div>
-      <div class="col-md-4">
-        <input type="text" class="form-control" name="costOfConnection" [(ngModel)]="option.costOfConnection"
-               placeholder="Cost of connection" #costOfConnection="ngModel" required>
-      </div>
-    </div>
-    <div class="row addOption">
-      <div class="col-md-8">
-        <button type="submit" class="btn btn-info button-one col-md-2" [disabled]="todoForm.form.invalid">Add</button>
-      </div>
-    </div>
-    </section>
-  </form>
-  {{result}}
-</div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="reset()">Cancel</button>
+    <button  *ngIf="finish" type="button" class="btn btn-outline" (click)="exit()">Ok</button>
+    <button  *ngIf="!finish" type="button" class="btn btn-primary" (click)="onSubmit()" [disabled]="formPage.form.invalid">Add
+    </button>
+  </div>
+</clr-modal>

@@ -61,6 +61,7 @@ export class ContractFormComponent implements OnInit {
       this.selectedNumber = this.numbers[0];
     this.contract = {
       id: null,
+      creationDate: null,
       rate: this.rates[this.myIndexOf(this.rates.filter((item) => item.id === this.selectedTariff).pop())],
       status: 'AVAILABLE',
       number: this.selectedNumber,

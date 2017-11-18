@@ -1,59 +1,98 @@
-<div class="back col-md-9">
-  <div class="row">
-    <div class="col-md-10">
-      <a class="btn btn-info button-one" [routerLink]="['../tariffs']">Back</a>
+<button [routerLink]="['../tariffs']" class="btn btn-link">
+  <clr-icon shape="circle-arrow left" title="Back" style="width: 36px; height: 36px;"></clr-icon>
+</button>
+<button type="button" title="Delete tariff" class="btn btn-icon butt-right" (click)="delete()">
+  <clr-icon shape="trash"></clr-icon>
+</button>
+<ng-container *ngIf="loading">
+  <p>Loading...</p>
+  <div class="progress loop">
+    <progress></progress>
+  </div>
+</ng-container>
+<clr-alert *ngIf="finish && !errorFlag" clrAlertType="alert-success">
+  <div class="alert-item">
+    Tariff have successfully changed.
+  </div>
+</clr-alert>
+<clr-alert *ngIf="finish && errorFlag" clrAlertType="alert-danger">
+  <div class="alert-item">
+    Error. The tariff name must be original.
+  </div>
+</clr-alert>
+<form #todoForm="ngForm">
+  <div class="row rate-row">
+    <div class="form-group">
+      <label class="required ">Name:</label>
+      <label for="nameInput" aria-haspopup="true" role="tooltip"
+             [class.invalid]="name.touched && !name.valid"
+             class="tooltip tooltip-validation tooltip-sm tooltip-bottom-right">
+        <input type="text" id="nameInput" required [(ngModel)]="tariff.name"
+               name="name" #name="ngModel" value="{{tariff?.name}}">
+        <span class="tooltip-content">Name is required!</span>
+      </label>
     </div>
-    <div class="col-md-2">
-      <button class="btn btn-info button-one" (click)="delete()">Delete</button>
+    <div class="form-group rate-field">
+      <label class="required ">Cost:</label>
+      <label for="costInput" aria-haspopup="true" role="tooltip"
+             [class.invalid]="cost.touched && !cost.valid"
+             class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+        <input type="text" id="costInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="tariff.cost"
+               name="cost" #cost="ngModel" value="{{tariff?.cost}}">
+        <span class="tooltip-content">Invalid cost!</span>
+      </label>
     </div>
   </div>
-  <form #todoForm="ngForm">
-    <div class="row addOption">
-      <div class="col-md-4">
-        <p>Name:</p>
-        <input type="text" class="form-control" name="name" [(ngModel)]="tariff.name"
-               value={{tariff?.name}}
-               #name="ngModel"
-               required>
-      </div>
-      <div class="col-md-8">
-        <p>Description:</p>
-        <input type="text" class="form-control" name="description" [(ngModel)]="tariff.description"
-               value={{tariff?.description}} #description="ngModel" required>
-      </div>
+  <div class="row rate-row">
+    <div class="form-group">
+      <label class="required ">Description:</label>
+      <label for="descrInput" aria-haspopup="true" role="tooltip"
+             [class.invalid]="description.touched && !description.valid"
+             class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+        <input size="45" type="text" id="descrInput" required [(ngModel)]="tariff.description"
+               name="description" #description="ngModel" value="{{tariff?.description}}">
+        <span class="tooltip-content">Invalid description!</span>
+      </label>
     </div>
-    <div class="row addOption">
-      <div class="col-md-3">
-        <p>Cost</p>
-        <input type="text" class="form-control" name="cost" [(ngModel)]="tariff.cost"
-               value={{tariff?.cost}} #cost="ngModel" required>
-      </div>
-      <div class="col-md-3">
-        <p>Calls:</p>
-        <input type="text" class="form-control" name="costOfConnection" [(ngModel)]="tariff.calls"
-               value={{tariff?.calls}} #calls="ngModel" required>
-      </div>
-      <div class="col-md-3">
-        <p>Sms:</p>
-        <input type="text" class="form-control" name="costOfConnection" [(ngModel)]="tariff.sms"
-               value={{tariff?.sms}} #sms="ngModel" required>
-      </div>
-      <div class="col-md-3">
-        <p>Internet:</p>
-        <input type="text" class="form-control" name="costOfConnection" [(ngModel)]="tariff.internet"
-               value={{tariff?.internet}} #internet="ngModel" required>
-      </div>
+  </div>
+  <div class="row rate-row">
+    <div class="form-group">
+      <label class="required ">SMS: </label>
+      <label for="smsInput" aria-haspopup="true" role="tooltip"
+             [class.invalid]="sms.touched && !sms.valid"
+             class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+        <input type="text" id="smsInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="tariff.sms"
+               name="sms" #sms="ngModel" value="{{tariff?.sms}}">
+        <span class="tooltip-content">Invalid sms!</span>
+      </label>
     </div>
-    <div class="row addOption" *ngIf="tariff?.optionList">
-        <option-list [optionList]="tariff?.optionList"></option-list>
+    <div class="form-group rate-field">
+      <label class="required ">Number of minutes for outgoing calls: </label>
+      <label for="callsInput" aria-haspopup="true" role="tooltip"
+             [class.invalid]="calls.touched && !calls.valid"
+             class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+        <input type="text" id="callsInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="tariff.calls"
+               name="calls" #calls="ngModel" value="{{tariff?.calls}}">
+        <span class="tooltip-content">Invalid field!</span>
+      </label>
     </div>
-      <div class="row addOption">
-        <div class="col-md-8">
-          <button type="submit" class="btn btn-info button-one col-md-4" (click)="onSubmit(); todoForm.reset()"
-                  [disabled]="todoForm.form.invalid">Save
-          </button>
-        </div>
-      </div>
-  </form>
-  {{result}}
-</div>
+  </div>
+  <div class="row rate-row">
+    <div class="form-group">
+      <label class="required ">Mobile Internet: </label>
+      <label for="intInput" aria-haspopup="true" role="tooltip"
+             [class.invalid]="internet.touched && !internet.valid"
+             class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+        <input type="text" id="intInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="tariff.internet"
+               name="internet" #internet="ngModel" value="{{tariff?.internet}}">
+        <span class="tooltip-content">Invalid field!</span>
+      </label>
+    </div>
+  </div>
+  <div class="row addOption" *ngIf="tariff?.optionList">
+    <option-list [optionList]="tariff?.optionList"></option-list>
+  </div>
+  <button type="button" class="btn btn-outline" (click)="onSubmit(); todoForm.reset()"
+          [disabled]="todoForm.form.invalid">Change tariff
+  </button>
+</form>

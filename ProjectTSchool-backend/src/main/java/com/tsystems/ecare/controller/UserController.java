@@ -1,6 +1,7 @@
 package com.tsystems.ecare.controller;
 
 import com.tsystems.ecare.dto.UserDTO;
+import com.tsystems.ecare.dto.UserWithPasswordDTO;
 import com.tsystems.ecare.facade.UserFacade;
 import com.tsystems.ecare.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class UserController {
     @Autowired
     private UserFacade userFacade;
 
+    @Secured({"ROLE_CUSTOMER", "ROLE_MANAGER"})
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public UserDTO getCurrentUser(Principal principal) {
@@ -31,7 +33,7 @@ public class UserController {
 
 
     @RequestMapping(value = "/createNewAccount", method = RequestMethod.POST)
-    public void createNewAccount(@RequestBody UserDTO userDTO) {
+    public void createNewAccount(@RequestBody UserWithPasswordDTO userDTO) {
         userFacade.createCustomer(userDTO);
     }
 }

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -33,16 +34,25 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "comment")
+    private String comment;
+
     @Column(name = "login", unique = true)
     private String login;
 
     @Column(name = "birth_date")
+    @Type(type="date")
     private Date birthDate;
+
+    @Column(name = "registration_date")
+    @Type(type="date")
+    private Date registrationDate;
 
     @Column(name = "passport_number", unique = true)
     private String passportNumber;
 
     @Column(name = "passport_issued_when")
+    @Type(type="date")
     private Date passportIssuedWhen;
 
     @Column(name = "passport_issued_by_whom")

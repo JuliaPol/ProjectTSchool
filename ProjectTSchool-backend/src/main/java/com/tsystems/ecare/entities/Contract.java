@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -46,6 +48,10 @@ public class Contract {
 
     @Column(name = "number")
     private String number;
+
+    @Column(name = "creation_date")
+    @Type(type="date")
+    private Date creationDate;
 
     @ManyToOne
     @JoinColumn(name = "rate_id")

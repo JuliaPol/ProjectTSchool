@@ -158,6 +158,8 @@
 
 #purpList {
   margin-top: 10px;
+  margin-left: 0px;
+  height: 30px;
 }
 
 #addRule {
@@ -437,7 +439,7 @@ p {
   height: 100%;
 }
 
-#userList {
+.userList {
   overflow-y: auto;
   height: 400px;
 }
@@ -457,7 +459,7 @@ p {
 #logoImg {
   width: 36px;
 }
-.logout {
+#logout {
   margin-right: 50px;
 }
 #iconLogout {
@@ -466,4 +468,28 @@ p {
 
 .right-rate {
   margin-left: 60px;
+}
+#edit-status {
+  margin-left: 15px;
+}
+.customers {
+  font-size: 14px;
+}
+.butt-right {
+  float: right;
+  margin-right: 30px;
+}
+.rate-row {
+  margin-left: 20px;
+}
+.rate-field {
+  margin-left: 50px;
+}
+.option-list {
+  overflow-y: auto;
+  max-height: 200px;
+}
+.option-rate-list {
+  overflow-y: auto;
+  max-height: 400px;
 }

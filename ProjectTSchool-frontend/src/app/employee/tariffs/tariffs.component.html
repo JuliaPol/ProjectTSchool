@@ -1,23 +1,23 @@
-<div class="back col-md-9">
-  <div class="row add-contract-and-search">
-    <input type="submit" class="btn btn-info button-one button-act col-md-2" value="Add tariff"
-           (click)="openTab('/employee/tariff-form')">
-    <!--<div class="input-group col-md-6 search-inp">-->
-      <!--<input type="text" class="form-control" placeholder="Search...">-->
-      <!--<span class="input-group-btn">-->
-            <!--<button class="btn btn-default" type="button">Go!</button>-->
-          <!--</span>-->
-    <!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
-  </div>
-  <clr-stack-view>
+<div class="col-md-9">
+  <button type="button" title="Add tariff" class="btn btn-icon" (click)="addRate()">
+    <clr-icon shape="plus"></clr-icon>
+    <clr-icon shape="tags"></clr-icon>
+  </button>
+  <clr-stack-view class="userList">
     <clr-stack-header>All tariffs</clr-stack-header>
 
     <clr-stack-block *ngFor="let rate of rates">
-      <clr-stack-label>{{rate?.name}}</clr-stack-label>
-      <clr-stack-content><button class="btn btn-info button-one button-act col-md-2 button-number"
-                                 (click)="change(rate?.id, '/employee/tariff-info')">
-        Change
-      </button></clr-stack-content>
+      <clr-stack-label class="customers">{{rate?.name}}</clr-stack-label>
+      <clr-stack-content>Cost: {{rate?.cost}}<clr-icon shape="dollar"></clr-icon></clr-stack-content>
+      <clr-stack-content>
+        <button type="button" title="Change tariff" class="btn btn-icon butt-right" (click)="change(rate?.id, '/employee/tariff-info')">
+          <clr-icon shape="pencil"></clr-icon>
+        </button>
+        <button type="button" title="Delete tariff" class="btn btn-icon butt-right" (click)="deleteRate(rate?.id)">
+          <clr-icon shape="trash"></clr-icon>
+        </button>
+      </clr-stack-content>
     </clr-stack-block>
   </clr-stack-view>
 </div>
+<tariff-form (onChanged)="init()"></tariff-form>

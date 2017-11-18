@@ -18,7 +18,6 @@ import {OptionsRulesComponent} from "./employee/options/options-rules/options-ru
 import {OptionFormComponent} from "./employee/options/option-form/option-form.component";
 import {OptionInfoComponent} from "./employee/options/option-info/option-info.component";
 import {TariffFormComponent} from "./employee/tariffs/tariff-form/tariff-form.component";
-import {CustomerFormComponent} from "./employee/customers/customer-form/customer-form.component";
 import {OptionsSharedService} from "./employee/options/options-shared.service";
 import {TariffInfoComponent} from "./employee/tariffs/tariff-info/tariff-info.component";
 import {TariffSharedService} from "./employee/tariffs/tariff-shared.service";
@@ -49,7 +48,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     OptionFormComponent,
     OptionInfoComponent,
     TariffFormComponent,
-    CustomerFormComponent,
     TariffInfoComponent,
     OptionListComponent,
     CustomerContractNumberFiler,

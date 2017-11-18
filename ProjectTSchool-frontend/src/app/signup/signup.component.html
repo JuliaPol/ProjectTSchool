@@ -84,7 +84,7 @@
             <div class="form-group">
               <label class="required ">Email:</label>
               <label for="emailInput" aria-haspopup="true" role="tooltip"
-                     [class.invalid]="email.touched && !email.valid && !email.errors.email"
+                     [class.invalid]="email.touched && !email.valid"
                      class="tooltip tooltip-validation tooltip-md tooltip-top-left">
                 <input type="text" id="emailInput" required email [(ngModel)]="customer.email"
                        name="email" #email="ngModel" value="{{customer?.email}}">

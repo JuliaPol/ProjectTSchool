@@ -1,6 +1,17 @@
-<div class="back col-md-9">
-  <a class="btn btn-info button-one" [routerLink]="['../options']">Back</a>
-  <h3>Select options</h3>
+<div class="col-md-9">
+  <button [routerLink]="['../options']" class="btn btn-link">
+    <clr-icon shape="circle-arrow left" title="Back" style="width: 36px; height: 36px;"></clr-icon>
+  </button>
+  <p></p>
+  <label for="selects_3">Select type: </label>
+  <div class="select">
+    <select id="selects_3" [(ngModel)]="selectedRule" (change)="optionSelected(null)">
+      <option [ngValue]="false">Incompatible</option>
+      <option [ngValue]="true">Compatible</option>
+    </select>
+  </div>
+  <p></p>
+  <label>Select option: </label>
   <div class="row">
     <div class="col-md-4">
     <div class="select">
@@ -18,9 +29,9 @@
       </select>
     </div>
     </div>
-    <div class="col-md-2">
-      <button class="form-control btn btn-info button-one" (click)="addToPurposeList()">Add</button>
-    </div>
+    <button type="button" title="Add" class="btn btn-icon butt-right" (click)="addToPurposeList()">
+      <clr-icon shape="plus"></clr-icon>
+    </button>
   </div>
     <div class="row" id="purpList">
       <!--<ul class="list-group scroll-bar" id="listSelectedOptions">-->
@@ -35,16 +46,8 @@
                     {{option?.name}}
                 </clr-checkbox></span>
     </div>
-  <div class="row" id="addRule">
-    <div class="select">
-      <select [(ngModel)]="selectedRule" (change)="optionSelected(null)">
-        <option [ngValue]="false">Incompatible</option>
-        <option [ngValue]="true">Compatible</option>
-      </select>
-    </div>
-    </div>
-    <div class="col-md-2">
-      <button class="form-control btn btn-info button-one" (click)="addRule()">Add rule</button>
-
-  </div>
+  <button type="button" title="Add rules" class="btn btn-icon" (click)="addRule()">
+    <clr-icon shape="plus"></clr-icon>
+    <clr-icon shape="ruler-pencil"></clr-icon>
+  </button>
 </div>

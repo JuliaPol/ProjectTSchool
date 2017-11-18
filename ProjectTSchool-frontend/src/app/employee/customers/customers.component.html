@@ -12,11 +12,16 @@
             <input type="text" size="45" placeholder="Search..." [(ngModel)]="contratNumber">
           </div>
         </div>
-        <clr-stack-view id="userList">
+        <clr-stack-view class="userList">
           <clr-stack-block *ngFor="let customer of customers | customerContractNumberFiler: contratNumber">
-            <clr-stack-label>{{customer?.firstName}} {{customer?.lastName}}</clr-stack-label>
+            <clr-stack-label class="customers">{{customer?.firstName}} {{customer?.lastName}}</clr-stack-label>
             <clr-stack-content>
-              <button type="button" title="Add contract" class="btn btn-icon" (click)="addContract(customer.id)">
+              <clr-icon shape="clock"></clr-icon>
+              Date of registration:
+              {{customer.registrationDate}}
+            </clr-stack-content>
+            <clr-stack-content>
+              <button type="button" title="Add contract" class="btn btn-icon butt-right" (click)="addContract(customer.id)">
                 <clr-icon shape="plus"></clr-icon>
                 <clr-icon shape="phone-handset"></clr-icon>
               </button>
@@ -24,8 +29,14 @@
             <clr-stack-block *ngFor="let contract of customer.contractList">
               <clr-stack-label>{{contract.number}}</clr-stack-label>
               <clr-stack-content>
-                <button type="button" title="Change contract" class="btn btn-icon" (click)="changeContract(contract)">
+                <clr-icon shape="clock"></clr-icon>{{contract.creationDate}}
+              </clr-stack-content>
+              <clr-stack-content>
+                <button type="button" title="Change contract" class="btn btn-icon butt-right" (click)="changeContract(contract)">
                   <clr-icon shape="pencil"></clr-icon>
+                </button>
+                <button type="button" title="Delete contract" class="btn btn-icon butt-right" (click)="delete(contract)">
+                  <clr-icon shape="trash"></clr-icon>
                 </button>
               </clr-stack-content>
             </clr-stack-block>
@@ -78,10 +89,10 @@
               <div class="form-group">
                 <label class="required ">Email:</label>
                 <label for="emailInput" aria-haspopup="true" role="tooltip"
-                       [class.invalid]="email.touched && !email.valid && !email.errors.email"
+                       [class.invalid]="email.touched && !email.valid"
                        class="tooltip tooltip-validation tooltip-md tooltip-top-left">
                   <input type="text" id="emailInput" required email [(ngModel)]="customer.email"
-                         name="email" #email="ngModel" value="{{customer?.email}}">
+                         name="email" #email="ngModel">
                   <span class="tooltip-content">Invalid email!</span>
                 </label>
               </div>
@@ -181,12 +192,14 @@
       <div class="row">
         <div *ngFor="let customer of newCustomers" class="col-md-4">
           <div class="card">
+            <div class="card-header">
+              {{customer?.firstName}} {{customer?.lastName}}
+            </div>
             <div class="card-block">
-              <h3 class="card-title">{{customer?.firstName}} {{customer?.lastName}}</h3>
-              <p class="card-text">
-                {{customer?.email}}
-                RRRR
-              </p>
+              Email: {{customer?.email}}
+            </div>
+            <div class="card-block">
+              Desired tariff: {{customer?.comment}}
             </div>
             <div class="card-footer">
               <button type="button" title="Add contract" class="btn btn-icon" (click)="addContract(customer.id)">

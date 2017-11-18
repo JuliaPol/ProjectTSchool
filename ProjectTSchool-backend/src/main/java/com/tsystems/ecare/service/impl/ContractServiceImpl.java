@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -178,6 +179,7 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
         if (rate.getContractList() == null ) {
             rate.setContractList(new ArrayList<>());
         }
+        contract.setCreationDate(new Date());
         rate.getContractList().add(contract);
         rateDao.update(rate);
         userDao.update(user);

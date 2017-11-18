@@ -11,9 +11,12 @@ import {Router} from "@angular/router";
 })
 
 export class OptionInfoComponent implements OnInit {
-  option: IOption;
+  option: IOption = {} as IOption;
   result: string = '';
   optionId: number;
+  loading: boolean = false;
+  finish: boolean = false;
+  errorFlag: boolean = false;
 
   constructor(private router: Router,
               private appService: AppService,
@@ -33,9 +36,17 @@ export class OptionInfoComponent implements OnInit {
   }
 
   onSubmit() {
+    this.finish = false;
+    this.loading = true;
     this.appService.editOption(this.option).then(() => {
       this.init();
-      this.result = 'Changed';
+      this.loading = false;
+      this.finish = true;
+      this.errorFlag = false;
+    }).catch(() => {
+      this.loading = false;
+      this.finish = true;
+      this.errorFlag = true;
     });
   }
 

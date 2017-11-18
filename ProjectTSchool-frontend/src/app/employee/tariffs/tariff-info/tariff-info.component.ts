@@ -14,6 +14,9 @@ export class TariffInfoComponent implements OnInit {
   tariff: ITariff = {} as ITariff;
   tariffId: number;
   result: string;
+  loading: boolean = false;
+  finish: boolean = false;
+  errorFlag: boolean = false;
 
   constructor(private router: Router,
               private appService: AppService,
@@ -33,17 +36,25 @@ export class TariffInfoComponent implements OnInit {
   }
 
   onSubmit() {
+    this.finish = false;
     let warningCount = this.sharedServiceOptions.getWarningsCount();
     if (warningCount === 0) {
+      this.loading = true;
       this.tariff.optionList = this.sharedServiceOptions.getData();
       this.appService.editTariff(this.tariff).then(() => {
         this.init();
-        this.result = 'Changed';
+        this.loading = false;
+        this.finish = true;
+        this.errorFlag = false;
         this.sharedServiceOptions.clean();
+      }).catch(() => {
+        this.loading = false;
+        this.finish = true;
+        this.errorFlag = true;
       });
     } else {
         this.init();
-        this.result = 'Error';
+        this.errorFlag = true;
     }
   }
 
