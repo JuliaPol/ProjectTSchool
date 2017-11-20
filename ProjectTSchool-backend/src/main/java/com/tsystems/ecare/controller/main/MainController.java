@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@Secured({"ROLE_MANAGER","ROLE_CUSTOMER"})
+//@Secured({"ROLE_MANAGER","ROLE_CUSTOMER"})
 public class MainController {
 
     @Autowired

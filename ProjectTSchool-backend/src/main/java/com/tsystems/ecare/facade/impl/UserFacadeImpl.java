@@ -131,6 +131,11 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
     }
 
     @Override
+    public CustomerDTO findByLoginWithContract(String login) {
+        return convertToCustomerDto(userService.findByLogin(login));
+    }
+
+    @Override
     protected Service<User> getDefaultService() {
         return userService;
     }

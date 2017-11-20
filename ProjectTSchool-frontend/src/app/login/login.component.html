@@ -1,16 +1,23 @@
-<div class="col-sm-6">
-  <h1>LOGIN</h1>
-  <div class="col-sm-12 form-group">
-    <label>Username</label>
-    <input class="form-control" type="text" [(ngModel)]="model.username" />
+<div class="content-container">
+  <div class="content-area" id="signUpPage">
+    <div class="login-wrapper" id="signUpWrap">
+      <form id="signUpLog" class="login" (ngSubmit)="login()" #todoForm="ngForm" >
+        <label class="title">
+          <h3 class="welcome">Welcome to</h3>
+          Satellite
+          <h5 class="hint">Use your username to sign in or create one now</h5>
+        </label>
+        <div class="login-group">
+          <input class="username" type="text" placeholder="Username" name="username" #username="ngModel" [(ngModel)]="model.username">
+          <input class="password" type="password" placeholder="Password" name="password" #password="ngModel"
+                 [(ngModel)]="model.password"/>
+          <div *ngIf="errorFlag" class="error active">
+            Invalid user name or password
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="todoForm.form.invalid">NEXT</button>
+          <a [routerLink]="['/signUp']" class="signup">Sign up</a>
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="col-sm-12 form-group">
-    <label>Password</label>
-    <input class="form-control" type="password"  [(ngModel)]="model.password"/>
-  </div>
-  <div class="col-sm-12">
-    <button class="btn btn-primary pull-right" (click)="login()" type="submit">Login</button>
-  </div>
-
-  <button class="btn btn-primary pull-right" (click)="openTab('/signUp')" type="submit">Sign up</button>
 </div>

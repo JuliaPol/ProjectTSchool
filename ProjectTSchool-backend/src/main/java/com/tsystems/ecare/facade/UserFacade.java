@@ -12,5 +12,6 @@ public interface UserFacade extends Facade<UserDTO, User> {
     List<CustomerDTO> getAllCustomers();
     void createCustomer(UserWithPasswordDTO userDTO);
     UserDTO findByLogin(String login);
+    CustomerDTO findByLoginWithContract(String login);
     CustomerDTO convertToCustomerDto(User entity);
 }

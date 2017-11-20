@@ -13,6 +13,11 @@ export class AppService {
       .toPromise();
   }
 
+  getCurrentRole(): Promise<Response> {
+    return this.http.get('http://localhost:8080/checkRole')
+      .toPromise();
+  }
+
   getAllOptions(): Promise<Response> {
     return this.http.get('http://localhost:8080/options/all')
       .toPromise();

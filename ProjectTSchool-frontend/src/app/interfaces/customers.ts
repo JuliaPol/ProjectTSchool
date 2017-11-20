@@ -35,3 +35,7 @@ export interface IAddress {
   zipcode: string,
   houseNumber: string,
 }
+
+export interface IRole {
+  role: string;
+}

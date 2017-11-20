@@ -1,5 +1,6 @@
 package com.tsystems.ecare.controller;
 
+import com.tsystems.ecare.dto.CustomerDTO;
 import com.tsystems.ecare.dto.UserDTO;
 import com.tsystems.ecare.dto.UserWithPasswordDTO;
 import com.tsystems.ecare.facade.UserFacade;
@@ -27,8 +28,8 @@ public class UserController {
     @Secured({"ROLE_CUSTOMER", "ROLE_MANAGER"})
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public UserDTO getCurrentUser(Principal principal) {
-        return userFacade.findByLogin(principal.getName());
+    public CustomerDTO getCurrentUser(Principal principal) {
+        return userFacade.findByLoginWithContract(principal.getName());
     }
 
 

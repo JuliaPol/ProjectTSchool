@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Implementation of {@link org.springframework.security.core.userdetails.UserDetailsService} interface.
+ * Implementation of {@link UserDetailsService} interface.
  */
 
 @Service("userDetailService")

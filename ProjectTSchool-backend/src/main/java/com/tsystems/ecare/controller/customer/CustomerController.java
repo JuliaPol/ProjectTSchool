@@ -19,10 +19,10 @@ public class CustomerController {
     @Autowired
     private UserFacade userFacade;
 
-    @RequestMapping
-    public ModelAndView getUser(Principal principal) {
-        return new ModelAndView("/customer.jsp", "customerInfo", userFacade.findByLogin(principal.getName()));
-    }
+//    @RequestMapping
+//    public ModelAndView getUser(Principal principal) {
+//        return new ModelAndView("/customer.jsp", "customerInfo", userFacade.findByLogin(principal.getName()));
+//    }
 
     @RequestMapping(value = "/basket")
     public ModelAndView showBagPage(HttpServletRequest request) {
