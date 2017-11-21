@@ -1,6 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {IUser} from "./interfaces/user";
-import {AppService} from "./app.service";
+import {Component} from '@angular/core';
 import 'clarity-icons';
 import 'clarity-icons/shapes/all-shapes';
 

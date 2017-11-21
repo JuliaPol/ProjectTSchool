@@ -1,20 +1,33 @@
 import {Http, Response, Headers, RequestOptions} from "@angular/http";
 import {Injectable} from "@angular/core";
 import 'rxjs/add/operator/toPromise';
-import {IOption} from "./interfaces/options";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class AppService {
-  constructor(private http: Http) {
+  constructor(private http: Http, private router: Router) {
+  }
+
+  login(username, password): Promise<Response> {
+    let url = ''
+    let params = new URLSearchParams();
+    params.append('username', username);
+    params.append('password', password);
+    params.append('grant_type','password');
+    params.append('client_id','fooClientIdPassword');
+    let headers = new Headers();
+    headers.set('content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+    headers.set('Authorization', 'Basic '+btoa("fooClientIdPassword:secret"));
+
+    const options = new RequestOptions({
+      headers: headers
+    });
+    return this.http.post('http://localhost:8080/check', params.toString(), options)
+        .toPromise()
   }
 
   getCurrentUser(): Promise<Response> {
     return this.http.get('http://localhost:8080/user')
-      .toPromise();
-  }
-
-  getCurrentRole(): Promise<Response> {
-    return this.http.get('http://localhost:8080/checkRole')
       .toPromise();
   }
 
@@ -30,6 +43,16 @@ export class AppService {
 
   getContractById(id: number): Promise<Response> {
     return this.http.get('http://localhost:8080/contract?id=' + id)
+      .toPromise();
+  }
+
+  signOut(): Promise<Response> {
+    return this.http.post('http://localhost:8080/logout',{})
+      .toPromise();
+  }
+
+  changeContractByCustomer(id: number): Promise<Response> {
+    return this.http.post('http://localhost:8080/contract/customer/' + id, {})
       .toPromise();
   }
 

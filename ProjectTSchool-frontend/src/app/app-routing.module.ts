@@ -17,11 +17,12 @@ import {LoginComponent} from "./login/login.component";
 import {SignupComponent} from "./signup/signup.component";
 import {CustomerComponent} from "./customer/customer.component";
 import {CustomerContractComponent} from "./customer/customer-contract/customer-contract.component";
+import {ContractTariffComponent} from "./customer/contract-tariff/contract-tariff.component";
+import {ContractOptionsCustomerComponent} from "./customer/contract-options-customer/contract-options-customer.component";
 
-const appRoutes: Routes = [
+const appRoutes: Routes =[
   {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {
-    path: 'employee', component: EmployeeComponent,
+  {path: 'employee',  component: EmployeeComponent,
     children: [
       {path: '', redirectTo: 'customers', pathMatch: 'full'},
       {path: 'customers', component: CustomersComponent},
@@ -44,7 +45,9 @@ const appRoutes: Routes = [
     path: 'customer', component: CustomerComponent,
     children: [
       {path: '', redirectTo: 'contract', pathMatch: 'full'},
-      {path: 'contract', component: CustomerContractComponent}
+      {path: 'contract', component: CustomerContractComponent},
+      {path: 'contract-tariff', component: ContractTariffComponent},
+      {path: 'contract-options-customer', component: ContractOptionsCustomerComponent},
     ]
   },
 ];
@@ -53,5 +56,4 @@ const appRoutes: Routes = [
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

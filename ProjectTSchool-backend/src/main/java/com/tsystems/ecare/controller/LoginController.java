@@ -24,13 +24,13 @@ public class LoginController {
         return "index.html";
     }
 
-    @RequestMapping(value = "/signUp", method = RequestMethod.GET)
-    public String signUp() {
+    @RequestMapping(value = "/login-error", method = RequestMethod.GET)
+    public String loginError() {
         return "index.html";
     }
 
-    @RequestMapping(value = "/login-error", method = RequestMethod.GET)
-    public String loginError() {
+    @RequestMapping(value = "/signUp", method = RequestMethod.GET)
+    public String signUp() {
         return "index.html";
     }
 
@@ -46,4 +46,9 @@ public class LoginController {
         return "index.html";
     }
 
+    @Secured("ROLE_MANAGER")
+    @RequestMapping(value = "/contract-form", method = RequestMethod.GET)
+    public String contractForm() {
+        return "index.html";
+    }
 }

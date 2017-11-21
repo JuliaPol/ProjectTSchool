@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from "@angular/core";
 import {IOption} from "../../../interfaces/options";
 import {AppService} from "../../../app.service";
 import {OptionListSharedService} from "./option-list-shared.service";
+import {Util} from "../../../util/Util";
+
 
 export interface IOptionItem {
   id: number,
@@ -17,6 +19,7 @@ export interface IOptionItem {
 interface IWarnings {
   description: string,
   optionName: string[],
+  purposeOption: string,
 }
 @Component({
   moduleId: module.id,
@@ -77,14 +80,18 @@ export class OptionListComponent implements OnInit {
 
   private clean(item) {
     this.anotherOptions
-      .splice(this.myIndexOf(this.anotherOptions
-        .filter(value => value.name === item.name).pop()), 1);
+      .splice(Util.myIndexOf(this.anotherOptions
+        .filter(value => value.name === item.name).pop(),
+        this.anotherOptions,
+        'id', 'id'), 1);
   }
 
   private cleanByName(item) {
     this.anotherOptions
-      .splice(this.myIndexOfAnotherOtionsName(this.anotherOptions
-        .filter(value => value.name === item).pop()), 1);
+      .splice(Util.myIndexOf(
+        this.anotherOptions.filter(value => value.name === item).pop(),
+        this.anotherOptions,
+        'name', 'name'), 1);
   }
 
   private cleanIncomp() {
@@ -140,7 +147,7 @@ export class OptionListComponent implements OnInit {
             desc = desc + i;
             optName.push(i);
           });
-          this.warnings.push({description: desc, optionName: optName});
+          this.warnings.push({purposeOption: item.name, description: desc, optionName: optName});
         }
       }
     });
@@ -151,10 +158,12 @@ export class OptionListComponent implements OnInit {
     this.sharedService.saveData(this.convert());
     this.sharedService.saveWarningsCount(this.warnings.length);
   }
+
   private cleanWarnings(item) {
     this.warnings
-      .splice(this.myIndexOfWarnings(this.warnings
-        .filter(value => value.description === item.description).pop()), 1);
+      .splice(Util.myIndexOf(
+        this.warnings.filter(value => value.description === item.description).pop(),
+        this.warnings, null, 'description'), 1);
   }
 
   arrayContainsArray(subset) {
@@ -188,7 +197,7 @@ export class OptionListComponent implements OnInit {
   }
 
   isOptionInWarningsList(option) {
-    if (this.myIndexOfWarningsOptionName(option) !== -1) {
+    if (Util.myIndexOf(option, this.warnings, 'name', 'purposeOption') !== -1) {
       return 'label-warning';
     } else {
       return '';
@@ -210,51 +219,4 @@ export class OptionListComponent implements OnInit {
     return -1;
   }
 
-  private myIndexOf(o) {
-    if (!o) {
-      return;
-    }
-    for (let i = 0; i < this.anotherOptions.length; i++) {
-      if (this.anotherOptions[i].id === o.id) {
-        return i;
-      }
-    }
-    return -1;
-  }
-
-  private myIndexOfAnotherOtionsName(o) {
-    if (!o) {
-      return;
-    }
-    for (let i = 0; i < this.anotherOptions.length; i++) {
-      if (this.anotherOptions[i].name === o.name) {
-        return i;
-      }
-    }
-    return -1;
-  }
-
-  private myIndexOfWarningsOptionName(o) {
-    if (!o) {
-      return;
-    }
-    for (let i = 0; i < this.warnings.length; i++) {
-      if (this.warnings[i].optionName === o.name) {
-        return i;
-      }
-    }
-    return -1;
-  }
-
-  private myIndexOfWarnings(o) {
-    if (!o) {
-      return;
-    }
-    for (let i = 0; i < this.warnings.length; i++) {
-      if (this.warnings[i].description === o) {
-        return i;
-      }
-    }
-    return -1;
-  }
 }

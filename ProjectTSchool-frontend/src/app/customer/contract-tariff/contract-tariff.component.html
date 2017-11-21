@@ -1,0 +1,90 @@
+<div class="col-md-9">
+  <clr-tabs>
+    <clr-tab>
+      <button clrTabLink>Your tariff</button>
+      <ng-template [(clrIfActive)]="yourTariffActive">
+        <clr-tab-content>
+          <div class="row">
+            <div class="card">
+              <div class="card-header">
+                {{contract?.rate?.name}}
+              </div>
+              <div class="card-block">
+                <div class="card-media-block">
+                  <img src="{{contract?.rate?.image}}" class="card-media-image">
+                  <div class="card-media-description">
+                        <span class="card-media-title">
+                            Cost: {{contract?.rate?.cost}}<clr-icon shape="dollar"></clr-icon>
+                        </span>
+                    <span class="card-media-text">
+                            SMS: {{contract?.rate?.sms}}
+                        </span>
+                    <span class="card-media-text">
+                            Mobile Internet: {{contract?.rate?.internet}}
+                        </span>
+                    <span class="card-media-text">
+                            Number of minutes for outgoing calls: {{contract?.rate?.calls}}
+                        </span>
+                  </div>
+                </div>
+                <div class="card-text">
+                  {{contract?.rate?.description}}
+                </div>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngFor="let option of contract?.rate?.optionList">
+                  {{option?.name}}
+                </li>
+              </ul>
+              <div class="card-footer">
+                <button (click)="showAllRates()" class="btn btn-sm btn-link">Change tariff</button>
+              </div>
+            </div>
+          </div>
+        </clr-tab-content>
+      </ng-template>
+    </clr-tab>
+    <clr-tab>
+      <button clrTabLink>All tariffs</button>
+      <ng-template [(clrIfActive)]="allTariffsActive">
+        <clr-tab-content>
+          <div class="row">
+            <div class="card" *ngFor="let rate of rates">
+              <div class="card-header">
+                {{rate?.name}}
+              </div>
+              <div class="card-block">
+                <div class="card-media-block">
+                  <img src="{{rate?.image}}" class="card-media-image">
+                  <div class="card-media-description">
+                    <div class="row">
+                      <p class="col-md-2">Cost: {{rate?.cost}}
+                        <clr-icon shape="dollar"></clr-icon>
+                      </p>
+                      <p class="col-md-2">SMS: {{rate?.sms}}</p>
+                      <p class="col-md-3">Mobile Internet: {{rate?.internet}}</p>
+                      <p class="col-md-5">Number of minutes for outgoing calls: {{rate?.calls}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-text">
+                  {{rate?.description}}
+                </div>
+              </div>
+              <div class="card-block">
+              <ul class="list">
+                <li *ngFor="let option of rate?.optionList">
+                  {{option?.name}}
+                </li>
+              </ul>
+              </div>
+              <div class="card-footer">
+                <button (click)="changeRate(rate?.id)" title="Change tariff" class="btn btn-link butt-right">Change tariff</button>
+              </div>
+            </div>
+          </div>
+        </clr-tab-content>
+      </ng-template>
+    </clr-tab>
+  </clr-tabs>
+</div>

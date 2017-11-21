@@ -8,5 +8,6 @@ export interface ITariff {
   calls: number,
   sms: number,
   internet: number,
+  image: string,
   optionList: any[]
 }

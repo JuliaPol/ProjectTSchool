@@ -44,6 +44,14 @@
                     [disabled]="todoForm1.form.invalid">Change tariff
             </button>
           </form>
+          <div class="row">
+            <p class="col-md-12">Cost: {{selectedTariff?.cost}}<clr-icon shape="dollar"></clr-icon></p>
+          </div>
+          <div class="row">
+            <p class="col-md-3" >SMS: {{selectedTariff?.sms}}</p> <p class="col-md-5"> Mobile Internet: {{selectedTariff?.internet}}
+            Gb </p>
+           <p class="col-md-4"> Minutes: {{selectedTariff?.calls}}</p>
+          </div>
           <ul class="list-group list-group-flush option-rate-list">
             <li class="list-group-item" *ngFor="let option of selectedTariff?.optionList">
               {{option?.name}}
@@ -52,6 +60,14 @@
         </div>
         <div class="col-md-5 right-rate" >
           <p id="changedRate">{{contract?.rate?.name}}</p>
+          <div class="row">
+          <p class="col-md-12">Cost: {{contract?.rate?.cost}}<clr-icon shape="dollar"></clr-icon></p>
+          </div>
+          <div class="row">
+            <p class="col-md-3">SMS: {{contract?.rate?.sms}}</p>
+            <p class="col-md-5"> Mobile Internet: {{contract?.rate?.internet}}Gb </p>
+            <p class="col-md-4"> Minutes: {{contract?.rate?.calls}}</p>
+          </div>
           <p>Tariff options:</p>
           <ul class="list-group list-group-flush">
             <li class="list-group-item" *ngFor="let option of contract?.rate?.optionList">

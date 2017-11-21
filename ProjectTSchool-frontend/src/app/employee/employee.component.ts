@@ -36,7 +36,7 @@ export class EmployeeComponent implements OnInit {
   ngOnInit() {
     this.appService.getCurrentUser().then(data =>
       this.user = data.json() as IUser
-    )
+    ).catch(res => this.router.navigate(['/login']))
   }
 
   openTab(button) {
@@ -48,6 +48,6 @@ export class EmployeeComponent implements OnInit {
   }
 
   signOut(link: string) {
-    window.location.href = link;
+    this.appService.signOut().then(() => this.router.navigate(['/login']))
   }
 }

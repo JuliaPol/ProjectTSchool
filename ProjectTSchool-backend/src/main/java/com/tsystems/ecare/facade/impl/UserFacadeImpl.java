@@ -47,7 +47,7 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
     @Autowired
     private ContractService contractService;
 
-    private static Logger log = Logger.getLogger(UserFacadeImpl.class.getName());
+    private static Logger log = Logger.getLogger(UserFacadeImpl.class);
 
     @Override
     public List<CustomerDTO> getAllCustomers() {

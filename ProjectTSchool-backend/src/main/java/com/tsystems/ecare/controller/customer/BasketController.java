@@ -21,9 +21,7 @@ public class BasketController {
     private BasketFacade basketFacade;
 
     @RequestMapping
-    public ModelAndView showBasketPage(Principal principal,
-                                       HttpSession request,
-                                       @RequestParam("number") String number) throws Exception {
+    public ModelAndView showBasketPage(Principal principal, HttpSession request, @RequestParam("number") String number) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/basket.jsp");
         BasketForm basketForm = (BasketForm) request.getAttribute(number);
@@ -39,10 +37,8 @@ public class BasketController {
     }
 
     @RequestMapping(value = "/add")
-    public String addTariffOrOption(HttpSession httpSession,
-                                    @RequestParam("number") String number,
-                                    @RequestParam("tariff") String tariff,
-                                    @RequestParam("option") String option) {
+    public String addTariffOrOption(HttpSession httpSession, @RequestParam("number") String number,
+                                    @RequestParam("tariff") String tariff, @RequestParam("option") String option) {
         BasketForm basket = (BasketForm) httpSession.getAttribute(number);
         if (basket == null) {
             basket = new BasketForm();
@@ -58,8 +54,7 @@ public class BasketController {
     }
 
     @RequestMapping(value = "/delete")
-    public String deleteTariffOrOption(HttpSession httpSession,
-                                       @RequestParam("number") String number,
+    public String deleteTariffOrOption(HttpSession httpSession, @RequestParam("number") String number,
                                        @RequestParam("option") String option) {
         BasketForm basket = (BasketForm) httpSession.getAttribute(number);
         if (option.equals("")) {

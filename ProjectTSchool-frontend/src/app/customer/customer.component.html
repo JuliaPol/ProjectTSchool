@@ -6,19 +6,37 @@
     </a>
   </div>
   <div class="header-actions">
+    <a href="..." class="nav-link nav-text">
+      <clr-icon shape="shopping-bag"></clr-icon>
+    </a>
     <a href="..." class="nav-link nav-text">{{user?.firstName}} {{user?.lastName}}</a>
+    <a class="nav-link nav-text">{{selectedContract?.number}}</a>
+    <clr-dropdown class="nav-link nav-text" [clrCloseMenuOnItemClick]="false">
+      <button type="button" clrDropdownTrigger>
+        <clr-icon shape="mobile" size="36"></clr-icon>
+        <clr-icon id="arrowMob" shape="caret down" size="16"></clr-icon>
+      </button>
+      <clr-dropdown-menu *clrIfOpen>
+        <label class="dropdown-header">Your contracts</label>
+        <button (click)="change(contract?.id)" type="button" clrDropdownItem *ngFor="let contract of user?.contractList">
+          {{contract?.number}}</button>
+      </clr-dropdown-menu>
+    </clr-dropdown>
+    <a (click)="signOut('/logout')" class="nav-link nav-text" id="logout">
+      Log Out <clr-icon id="iconLogout" shape="logout"></clr-icon>
+    </a>
   </div>
 </header>
 <div class="content-container">
   <div class="content-area">
-    <router-outlet></router-outlet>
+    <router-outlet ></router-outlet>
   </div>
   <clr-vertical-nav id="navVert">
-    <a clrVerticalNavLink routerLink="./customers" routerLinkActive="active">
+    <a clrVerticalNavLink routerLink="./contract" routerLinkActive="active">
       <clr-icon clrVerticalNavIcon shape="phone-handset"></clr-icon>My contracts</a>
-    <a clrVerticalNavLink routerLink="./tariffs" routerLinkActive="active">
+    <a clrVerticalNavLink routerLink="./contract-tariff" routerLinkActive="active">
       <clr-icon clrVerticalNavIcon shape="tags"></clr-icon>Tariffs</a>
-    <a clrVerticalNavLink routerLink="./options" routerLinkActive="active">
+    <a clrVerticalNavLink routerLink="./contract-options-customer" routerLinkActive="active">
       <clr-icon clrVerticalNavIcon shape="view-cards"></clr-icon>Options</a>
   </clr-vertical-nav>
 

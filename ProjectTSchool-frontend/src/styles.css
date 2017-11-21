@@ -160,7 +160,7 @@
   margin-top: 10px;
   margin-left: 0px;
   height: 30px;
-  
+
 }
 
 #addRule {
@@ -446,7 +446,7 @@ p {
 }
 
 #navVert {
-  height: 100%;
+  //height: 100%;
   min-height: 91vh;
 }
 
@@ -493,4 +493,7 @@ p {
 .option-rate-list {
   overflow-y: auto;
   max-height: 400px;
+}
+#arrowMob {
+  margin-left: 20px;
 }

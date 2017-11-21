@@ -1,7 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
@@ -24,17 +24,19 @@ import {TariffSharedService} from "./employee/tariffs/tariff-shared.service";
 import {OptionListComponent} from "./employee/tariffs/option-list/option-list.component";
 import {OptionListSharedService} from "./employee/tariffs/option-list/option-list-shared.service";
 import {CustomerSharedService} from "./employee/customers/customer-shared.service";
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {CustomerContractNumberFiler} from "./employee/customers/customer-contract-number.component";
 import {ContractInfoComponent} from "./employee/contract-list/contarct-info/contract-info.component";
 import {ContractSharedService} from "./employee/contract-list/contract-shared.service";
 import {ContractOptionsComponent} from "./employee/contract-list/contract-options/contract-options.component";
 import {SignupComponent} from "./signup/signup.component"
 import {ClarityModule} from "clarity-angular";
-import { FormControl } from '@angular/forms';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CustomerComponent} from "./customer/customer.component";
 import {CustomerContractComponent} from "./customer/customer-contract/customer-contract.component";
+import {ContractTariffComponent} from "./customer/contract-tariff/contract-tariff.component";
+import {ContractOptionsCustomerComponent} from "./customer/contract-options-customer/contract-options-customer.component";
+import {CustomerContractSharedService} from "./customer/customer-contract-shared.service";
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import {CustomerContractComponent} from "./customer/customer-contract/customer-c
     CustomerComponent,
     CustomerContractComponent,
     SignupComponent,
+    ContractTariffComponent,
+    ContractOptionsCustomerComponent
   ],
   imports: [
     BrowserModule,
@@ -75,6 +79,7 @@ import {CustomerContractComponent} from "./customer/customer-contract/customer-c
     OptionListSharedService,
     CustomerSharedService,
     ContractSharedService,
+    CustomerContractSharedService,
     {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]

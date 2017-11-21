@@ -1,16 +1,15 @@
 import {Component, OnInit} from "@angular/core";
 import "rxjs/add/operator/map";
 import {Router} from "@angular/router";
-import {IUser} from "../../interfaces/user";
 import {AppService} from "../../app.service";
 import {ICustomer} from "../../interfaces/customers";
 
 @Component({
   moduleId: module.id,
-  selector: 'contract',
-  templateUrl: './customer-contract.component.html'
+  selector: 'contract-options-customer',
+  templateUrl: './contract-options-customer.component.html'
 })
-export class CustomerContractComponent implements OnInit {
+export class ContractOptionsCustomerComponent implements OnInit {
 
   user: ICustomer = null;
   status: string = '';
@@ -28,7 +27,4 @@ export class CustomerContractComponent implements OnInit {
     )
   }
 
-  changeStatus(id: number) {
-    this.appService.changeContractByCustomer(id).then(() => this.init())
-  }
 }

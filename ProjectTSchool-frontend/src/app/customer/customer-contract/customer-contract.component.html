@@ -3,16 +3,16 @@
     <clr-stack-header>Contracts: </clr-stack-header>
     <clr-stack-block *ngFor="let contract of user?.contractList">
       <clr-stack-label class="customers">{{contract?.number}}</clr-stack-label>
-      <clr-stack-content>Status: {{contract?.status}}<clr-icon shape="dollar"></clr-icon></clr-stack-content>
+      <clr-stack-content>Status: {{contract?.status}}</clr-stack-content>
       <clr-stack-content>
-        <button *ngIf="contract.status==='AVAILABLE' " type="button" class="btn btn-outline butt-right" (click)="changeStatus(contract?.id);"
-                [disabled]="true">Block
+        <button *ngIf="contract.status==='AVAILABLE' " type="button" class="btn btn-icon butt-right" (click)="changeStatus(contract?.number);"
+                [disabled]="false"><clr-icon shape="lock"></clr-icon>
         </button>
-        <button *ngIf="contract.status==='BLOCKED_BY_CUSTOMER' " type="button" class="btn btn-outline butt-right" (click)="changeStatus(contract?.id);"
-                [disabled]="false">Unblock
+        <button *ngIf="contract.status==='BLOCKED_BY_THE_CUSTOMER' " type="button" class="btn btn-icon butt-right" (click)="changeStatus(contract?.number);"
+                [disabled]="false"><clr-icon shape="unlock"></clr-icon>
         </button>
-        <button *ngIf="contract.status==='BLOCKED_BY_EMPLOYEE' " type="button" class="btn btn-outline butt-right" (click)="changeStatus(contract?.id);"
-                [disabled]="true">Unblock
+        <button *ngIf="contract.status==='BLOCKED_BY_AN_EMPLOYEE' " type="button" class="btn btn-icon butt-right" (click)="changeStatus(contract?.number);"
+                [disabled]="true"><clr-icon shape="unlock"></clr-icon>
         </button>
       </clr-stack-content>
     </clr-stack-block>

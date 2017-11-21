@@ -26,7 +26,7 @@ import static org.hibernate.cfg.AvailableSettings.*;
 @Configuration
 @EnableTransactionManagement
 @PropertySource(value = { "classpath:persistence-mysql.properties" })
-public class DatabaseConfig implements EnvironmentAware{
+public class DatabaseConfig implements EnvironmentAware {
 
     private Environment env;
 
