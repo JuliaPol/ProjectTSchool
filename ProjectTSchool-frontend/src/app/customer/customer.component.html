@@ -1,17 +1,17 @@
-<header class="header-6">
+<header *ngIf="load" class="header-6">
   <div class="branding">
-    <a href="..." class="nav-link">
+    <a [routerLink]="['/main-page']" class="nav-link">
       <img id="logoImg" src="http://localhost:8080/img/Satellite-icon.png">
       <span class="title">Satellite</span>
     </a>
   </div>
   <div class="header-actions">
-    <a href="..." class="nav-link nav-text">
+    <a [routerLink]="['./basket']" class="nav-link nav-text">
       <clr-icon shape="shopping-bag"></clr-icon>
     </a>
     <a href="..." class="nav-link nav-text">{{user?.firstName}} {{user?.lastName}}</a>
     <a class="nav-link nav-text">{{selectedContract?.number}}</a>
-    <clr-dropdown class="nav-link nav-text" [clrCloseMenuOnItemClick]="false">
+    <clr-dropdown id="contrList" class="nav-link nav-text" [clrCloseMenuOnItemClick]="false">
       <button type="button" clrDropdownTrigger>
         <clr-icon shape="mobile" size="36"></clr-icon>
         <clr-icon id="arrowMob" shape="caret down" size="16"></clr-icon>
@@ -27,7 +27,7 @@
     </a>
   </div>
 </header>
-<div class="content-container">
+<div *ngIf="load" class="content-container">
   <div class="content-area">
     <router-outlet ></router-outlet>
   </div>
@@ -39,5 +39,4 @@
     <a clrVerticalNavLink routerLink="./contract-options-customer" routerLinkActive="active">
       <clr-icon clrVerticalNavIcon shape="view-cards"></clr-icon>Options</a>
   </clr-vertical-nav>
-
 </div>

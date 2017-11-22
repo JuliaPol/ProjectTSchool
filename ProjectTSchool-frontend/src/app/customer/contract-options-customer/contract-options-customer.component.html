@@ -1,10 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="back col-md-9">
+  <clr-tabs>
+    <clr-tab>
+      <button clrTabLink>Your options</button>
+      <clr-tab-content *clrIfActive>
+        <h3>Contract options:</h3>
+        <form #todoForm="ngForm">
+          <div *ngIf="contract?.optionList && contract?.rate?.optionList">
+            <option-list [optionList]="contract?.optionList"
+                         [rateOptions]="contract?.rate?.optionList" [showSelect]="true"></option-list>
+          </div>
+          <button type="button" class="btn btn-outline" (click)="onSubmit(); todoForm.reset()"
+                  [disabled]="todoForm.form.invalid || block">Add options
+          </button>
+        </form>
+      </clr-tab-content>
+    </clr-tab>
+    <clr-tab>
+      <button clrTabLink>All options</button>
+      <clr-tab-content *clrIfActive>
+        <div class="row">
+          <div class="card col-md-6" *ngFor="let option of options">
+            <div class="card-header">
+              {{option?.name}}
+            </div>
+            <div class="card-block">
+              <div class="card-media-block">
+                <img src="{{option?.image}}" class="card-media-image">
+                <div class="card-media-description">
+                  <div class="row">
+                    <p class="col-md-5">Cost: {{option?.cost}}
+                      <clr-icon shape="dollar"></clr-icon>
+                    </p>
+                    <p class="col-md-7">Cost of connection: {{option?.costOfConnection}}
+                      <clr-icon shape="dollar"></clr-icon></p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-text">
+                {{option?.description}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </clr-tab-content>
+    </clr-tab>
+  </clr-tabs>
+</div>

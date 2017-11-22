@@ -1,0 +1,22 @@
+<header class="header-6">
+  <div class="branding">
+    <a [routerLink]="['/main-page']"class="nav-link">
+      <img id="logoImg" src="http://localhost:8080/img/Satellite-icon.png">
+      <span class="title">Satellite</span>
+    </a>
+  </div>
+  <div class="header-nav">
+    <a routerLink="./main-tariff" routerLinkActive="active" class="nav-link"><span class="nav-text">Tariffs</span></a>
+    <a routerLink="./main-option" routerLinkActive="active" class="nav-link"><span class="nav-text">Options</span></a>
+  </div>
+  <div class="header-actions">
+    <a routerLink="/customer" class="nav-link nav-icon" id="logout">
+      <clr-icon shape="user"></clr-icon>
+    </a>
+  </div>
+</header>
+<div class="content-container">
+  <div class="content-area" id="mainPage">
+    <router-outlet></router-outlet>
+  </div>
+</div>

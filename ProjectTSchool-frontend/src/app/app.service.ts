@@ -36,10 +36,21 @@ export class AppService {
       .toPromise();
   }
 
+  getAllOptionsInBasket(id: number): Promise<Response> {
+    return this.http.get('http://localhost:8080/basket/get/options/' + id)
+      .toPromise();
+  }
+
   getOptionById(id: number): Promise<Response> {
     return this.http.get('http://localhost:8080/options?id=' + id)
       .toPromise();
   }
+
+  getAllFreeOptions(number: string): Promise<Response> {
+    return this.http.get('http://localhost:8080/options/free/' + number)
+      .toPromise();
+  }
+
 
   getContractById(id: number): Promise<Response> {
     return this.http.get('http://localhost:8080/contract?id=' + id)
@@ -63,6 +74,16 @@ export class AppService {
 
   updateContractOptions(id, options): Promise<Response> {
     return this.http.post('http://localhost:8080/contract/update/options/' + id, options)
+      .toPromise();
+  }
+
+  updateContractOptionsInBasket(id, options): Promise<Response> {
+    return this.http.post('http://localhost:8080/basket/add/options/' + id, options)
+      .toPromise();
+  }
+
+  clearBasket(id): Promise<Response> {
+    return this.http.post('http://localhost:8080/basket/clear/' + id, {})
       .toPromise();
   }
 

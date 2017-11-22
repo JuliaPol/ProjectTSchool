@@ -19,10 +19,15 @@ import {CustomerComponent} from "./customer/customer.component";
 import {CustomerContractComponent} from "./customer/customer-contract/customer-contract.component";
 import {ContractTariffComponent} from "./customer/contract-tariff/contract-tariff.component";
 import {ContractOptionsCustomerComponent} from "./customer/contract-options-customer/contract-options-customer.component";
+import {BasketComponent} from "./customer/basket/basket.component";
+import {MainPageComponent} from "./main/main-page.component";
+import {MainTariffComponent} from "./main/main-tariff/main-tariff.component";
+import {MainOptionComponent} from "./main/main-option/main-option.component";
 
-const appRoutes: Routes =[
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {path: 'employee',  component: EmployeeComponent,
+const appRoutes: Routes = [
+  {path: '', redirectTo: 'main-page', pathMatch: 'full'},
+  {
+    path: 'employee', component: EmployeeComponent,
     children: [
       {path: '', redirectTo: 'customers', pathMatch: 'full'},
       {path: 'customers', component: CustomersComponent},
@@ -42,12 +47,21 @@ const appRoutes: Routes =[
   {path: 'login', component: LoginComponent},
   {path: 'signUp', component: SignupComponent},
   {
+    path: 'main-page', component: MainPageComponent,
+    children: [
+      {path: '', redirectTo: 'main-tariff', pathMatch: 'full'},
+      {path: 'main-tariff', component: MainTariffComponent},
+      {path: 'main-option', component: MainOptionComponent}
+    ]
+  },
+  {
     path: 'customer', component: CustomerComponent,
     children: [
       {path: '', redirectTo: 'contract', pathMatch: 'full'},
       {path: 'contract', component: CustomerContractComponent},
       {path: 'contract-tariff', component: ContractTariffComponent},
       {path: 'contract-options-customer', component: ContractOptionsCustomerComponent},
+      {path: 'basket', component: BasketComponent},
     ]
   },
 ];
@@ -56,4 +70,5 @@ const appRoutes: Routes =[
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

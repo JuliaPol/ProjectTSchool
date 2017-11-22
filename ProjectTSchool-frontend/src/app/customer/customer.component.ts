@@ -16,6 +16,7 @@ export class CustomerComponent implements OnInit {
 
   user: ICustomer = null;
   selectedContract: IContract;
+  load: boolean = false;
   //hl@ViewChild(ContractTariffComponent) tariffForm: ContractTariffComponent;
 
   constructor(private appService: AppService,
@@ -32,6 +33,7 @@ export class CustomerComponent implements OnInit {
         this.user = data.json() as ICustomer;
         this.sharedService.saveData(this.user.contractList[0].id);
         this.selectedContract = this.user.contractList[0];
+        this.load = true;
       }
     ).catch(res => this.router.navigate(['/login']))
   }

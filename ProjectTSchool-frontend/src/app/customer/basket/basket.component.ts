@@ -9,15 +9,16 @@ import {IOption} from "../../interfaces/options";
 
 @Component({
   moduleId: module.id,
-  selector: 'contract-options-customer',
-  templateUrl: './contract-options-customer.component.html'
+  selector: 'basket',
+  templateUrl: './basket.component.html'
 })
-export class ContractOptionsCustomerComponent implements OnInit {
+export class BasketComponent implements OnInit {
 
   contractId: number;
   contract: IContract;
-  block: boolean = false;
   options: IOption[];
+  emptyBasket: boolean = false;
+  load: boolean = false;
 
   constructor(private appService: AppService, private router: Router,
               private sharedService: CustomerContractSharedService,
@@ -31,27 +32,28 @@ export class ContractOptionsCustomerComponent implements OnInit {
   }
 
   init() {
+    this.emptyBasket = false;
     this.contractId = this.sharedService.getData();
     this.appService.getContractById(this.contractId).then(data => {
       this.contract = data.json() as IContract;
-      this.changeBlockStatus(this.contract.status);
-      this.appService.getAllFreeOptions(this.contract.number).then(data => {
-        this.options = data.json() as IOption[];
-      })
     });
-  }
-
-  changeBlockStatus(status: string) {
-    this.block = status === 'BLOCKED_BY_THE_CUSTOMER' || status === 'BLOCKED_BY_AN_EMPLOYEE';
+    this.appService.getAllOptionsInBasket(this.contractId).then(data => {
+      this.options = data.json() as IOption[];
+      if (this.options.length === 0)
+        this.emptyBasket = true;
+      else
+        this.load = true;
+    });
   }
 
   onSubmit() {
     let warningCount = this.sharedServiceOptions.getWarningsCount();
     if (warningCount === 0) {
-      this.appService.updateContractOptionsInBasket(this.contractId,
-        this.sharedServiceOptions.getData()).then(() => {
-        this.init();
-        this.sharedServiceOptions.clean();
+      this.appService.updateContractOptions(this.contractId, this.sharedServiceOptions.getData()).then(() => {
+        this.appService.clearBasket(this.contractId).then(() => {
+          this.init();
+          this.sharedServiceOptions.clean();
+        });
       });
     } else {
       this.init();

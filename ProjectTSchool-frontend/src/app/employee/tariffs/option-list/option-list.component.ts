@@ -3,6 +3,7 @@ import {IOption} from "../../../interfaces/options";
 import {AppService} from "../../../app.service";
 import {OptionListSharedService} from "./option-list-shared.service";
 import {Util} from "../../../util/Util";
+import {CustomerContractSharedService} from "../../../customer/customer-contract-shared.service";
 
 
 export interface IOptionItem {
@@ -29,6 +30,7 @@ interface IWarnings {
 export class OptionListComponent implements OnInit {
   @Input() optionList: IOption[];
   @Input() rateOptions: IOption[];
+  @Input() showSelect: boolean;
   purposeList: IOptionItem[] = [];
   options: IOption[];
   anotherOptions: IOption[] = [];
@@ -36,8 +38,10 @@ export class OptionListComponent implements OnInit {
   warnings: IWarnings[] = [];
   purposeListEntity: any[] = [];
 
-  constructor(private appService: AppService, private sharedService: OptionListSharedService) {
-
+  constructor(private appService: AppService, private sharedService: OptionListSharedService,
+              private sharedServiceCust: CustomerContractSharedService) {
+    sharedServiceCust.changeEmitted$.subscribe(
+      () => this.init());
   }
 
   ngOnInit() {
@@ -45,6 +49,8 @@ export class OptionListComponent implements OnInit {
   }
 
   init() {
+    this.purposeList = [];
+    this.warnings = [];
     this.sharedService.clean();
     if (this.optionList.length !== 0) {
       this.optionList.forEach((item) => {

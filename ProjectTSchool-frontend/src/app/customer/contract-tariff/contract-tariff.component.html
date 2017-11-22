@@ -37,7 +37,7 @@
                 </li>
               </ul>
               <div class="card-footer">
-                <button (click)="showAllRates()" class="btn btn-sm btn-link">Change tariff</button>
+                <button [disabled]="block" (click)="showAllRates()" class="btn btn-sm btn-link">Change tariff</button>
               </div>
             </div>
           </div>
@@ -72,14 +72,16 @@
                 </div>
               </div>
               <div class="card-block">
-              <ul class="list">
-                <li *ngFor="let option of rate?.optionList">
-                  {{option?.name}}
-                </li>
-              </ul>
+                <ul class="list">
+                  <li *ngFor="let option of rate?.optionList">
+                    {{option?.name}}
+                  </li>
+                </ul>
               </div>
               <div class="card-footer">
-                <button (click)="changeRate(rate?.id)" title="Change tariff" class="btn btn-link butt-right">Change tariff</button>
+                <button [disabled]="block" (click)="changeRate(rate?.id)" title="Change tariff" class="btn btn-sm btn-link">Change
+                  tariff
+                </button>
               </div>
             </div>
           </div>
@@ -88,3 +90,30 @@
     </clr-tab>
   </clr-tabs>
 </div>
+
+
+<clr-modal [(clrModalOpen)]="open">
+  <h3 class="modal-title">New tariff</h3>
+  <div class="modal-body">
+    <div class="alert alert-warning">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="exclamation-triangle"></clr-icon>
+          </div>
+          <span class="alert-text">
+                            You'll change the tariff and lose options!
+                        </span>
+        </div>
+      </div>
+    </div>
+    <h5>Your choice:</h5>
+    <h6>Tariff: {{selectedTariff?.name}}</h6>
+    <h6>Cost: {{selectedTariff?.cost}}</h6>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="open = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="onSubmit()">Ok
+    </button>
+  </div>
+</clr-modal>

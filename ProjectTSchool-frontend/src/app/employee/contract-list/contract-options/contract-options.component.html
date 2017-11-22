@@ -3,7 +3,7 @@
   <form #todoForm="ngForm">
     <div *ngIf="contract?.optionList && contract?.rate?.optionList">
     <option-list [optionList]="contract?.optionList"
-                 [rateOptions]="contract?.rate?.optionList"></option-list>
+                 [rateOptions]="contract?.rate?.optionList" [showSelect]="true"></option-list>
     </div>
     <button type="button" class="btn btn-outline" (click)="onSubmit(); todoForm.reset()"
             [disabled]="todoForm.form.invalid">Change options</button>

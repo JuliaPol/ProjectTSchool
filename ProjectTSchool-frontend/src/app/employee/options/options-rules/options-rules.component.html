@@ -41,7 +41,7 @@
             <!--<label for={{option?.name}}> {{option?.name}} </label>-->
           <!--</li>-->
       <!--</ul>-->
-      <span class="label" *ngFor="let option of purposeList"><clr-checkbox
+      <span class="label options" *ngFor="let option of purposeList"><clr-checkbox
         [(ngModel)]="option.selected">
                     {{option?.name}}
                 </clr-checkbox></span>

@@ -1,0 +1,28 @@
+<div *ngFor = "let option of options" class="row">
+  <div class="card">
+    <div class="card-header">
+      {{option?.name}}
+    </div>
+    <div class="card-block">
+      <div class="card-media-block">
+        <img src="{{option?.image}}" class="card-media-image">
+        <div class="card-media-description">
+                        <span class="card-media-title">
+                            Cost: {{option?.cost}}<clr-icon shape="dollar"></clr-icon>
+                        </span>
+          <span class="card-media-text">
+                            Cost of connection: {{option?.costOfConnection}}
+            <clr-icon shape="dollar"></clr-icon>
+                        </span>
+        </div>
+      </div>
+      <div class="card-text">
+        {{option?.description}}
+      </div>
+    </div>
+    <div class="card-footer">
+      <button (click)="buy()" class="btn btn-sm btn-link">Connect</button>
+    </div>
+  </div>
+</div>
+

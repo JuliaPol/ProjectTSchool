@@ -75,4 +75,10 @@ public class OptionController {
     public List<OptionDTO> getAllOptions(@RequestParam("number") String number) {
         return optionFacade.getAllOptionsForCustomer(number);
     }
+
+    @Secured({"ROLE_CUSTOMER"})
+    @RequestMapping(value = "/free/{number}", method = RequestMethod.GET)
+    public List<OptionDTO> getAllFreeOptions(@PathVariable("number") String number) {
+        return optionFacade.getAllFreeOption(number);
+    }
 }

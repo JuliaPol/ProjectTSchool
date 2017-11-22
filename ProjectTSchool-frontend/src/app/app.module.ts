@@ -37,6 +37,10 @@ import {CustomerContractComponent} from "./customer/customer-contract/customer-c
 import {ContractTariffComponent} from "./customer/contract-tariff/contract-tariff.component";
 import {ContractOptionsCustomerComponent} from "./customer/contract-options-customer/contract-options-customer.component";
 import {CustomerContractSharedService} from "./customer/customer-contract-shared.service";
+import {BasketComponent} from "./customer/basket/basket.component";
+import {MainPageComponent} from "./main/main-page.component";
+import {MainOptionComponent} from "./main/main-option/main-option.component";
+import {MainTariffComponent} from "./main/main-tariff/main-tariff.component";
 
 @NgModule({
   declarations: [
@@ -61,7 +65,11 @@ import {CustomerContractSharedService} from "./customer/customer-contract-shared
     CustomerContractComponent,
     SignupComponent,
     ContractTariffComponent,
-    ContractOptionsCustomerComponent
+    ContractOptionsCustomerComponent,
+    BasketComponent,
+    MainPageComponent,
+    MainTariffComponent,
+    MainOptionComponent
   ],
   imports: [
     BrowserModule,

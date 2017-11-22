@@ -90,7 +90,7 @@
     </div>
   </div>
   <div class="row addOption" *ngIf="tariff?.optionList">
-    <option-list [optionList]="tariff?.optionList"></option-list>
+    <option-list [optionList]="tariff?.optionList" [showSelect]="true"></option-list>
   </div>
   <button type="button" class="btn btn-outline" (click)="onSubmit(); todoForm.reset()"
           [disabled]="todoForm.form.invalid">Change tariff

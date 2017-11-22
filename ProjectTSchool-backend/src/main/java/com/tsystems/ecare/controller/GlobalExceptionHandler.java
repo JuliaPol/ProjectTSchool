@@ -1,5 +1,6 @@
 package com.tsystems.ecare.controller;
 
+import com.tsystems.ecare.exception.ContractUpdateException;
 import com.tsystems.ecare.exception.LoginFailedException;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,13 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public void onLoginFailedException(Exception exception) {
+        logException(exception);
+    }
+
+    @ExceptionHandler(ContractUpdateException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public void onContractUpdateException(Exception exception) {
         logException(exception);
     }
 

@@ -1,0 +1,114 @@
+<h4>Choose your tariff:</h4>
+<section class="form-block">
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="toggle-switch">
+          <input type="checkbox" id="toggle_4" [(ngModel)]="callsToggle" (change)="filterChange()">
+          <label for="toggle_4">
+            I call
+            <clr-icon shape="phone-handset"></clr-icon>
+          </label>
+          <clr-icon shape="mobile"></clr-icon>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="toggle-switch">
+          <input type="checkbox" id="toggle_5" [(ngModel)]="smsToggle" (change)="filterChange()">
+          <label for="toggle_5">
+            I use SMS
+            <clr-icon shape="chat-bubble"></clr-icon>
+          </label>
+          <clr-icon shape="talk-bubbles"></clr-icon>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="toggle-switch">
+          <input type="checkbox" id="toggle_6" [(ngModel)]="internetToggle" (change)="filterChange()">
+          <label for="toggle_6">
+            I use Internet
+            <clr-icon shape="no-wifi"></clr-icon>
+          </label>
+          <clr-icon shape="wifi"></clr-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div *ngIf="!notFound">
+  <p id="weRecommend">We recommend</p>
+  <div class="row">
+    <div class="card" id="selectedTariff">
+      <div class="card-header">
+        {{rate?.name}}
+      </div>
+      <div class="card-block">
+        <div class="card-media-block">
+          <img src="{{rate?.image}}" class="card-media-image">
+          <div class="card-media-description">
+                        <span class="card-media-title">
+                            Cost: {{rate?.cost}}<clr-icon shape="dollar"></clr-icon>
+                        </span>
+            <span class="card-media-text">
+                            SMS: {{rate?.sms}}
+                        </span>
+            <span class="card-media-text">
+                            Mobile Internet: {{rate?.internet}}
+                        </span>
+            <span class="card-media-text">
+                            Number of minutes for outgoing calls: {{rate?.calls}}
+                        </span>
+          </div>
+        </div>
+        <div class="card-text">
+          {{rate?.description}}
+        </div>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let option of rate?.optionList">
+          {{option?.name}}
+        </li>
+      </ul>
+      <div class="card-footer">
+        <button (click)="buy()" class="btn btn-sm btn-link">Connect</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngFor="let rate of rates" class="row">
+  <div class="card">
+    <div class="card-header">
+      {{rate?.name}}
+    </div>
+    <div class="card-block">
+      <div class="card-media-block">
+        <img src="{{rate?.image}}" class="card-media-image">
+        <div class="card-media-description">
+                        <span class="card-media-title">
+                            Cost: {{rate?.cost}}<clr-icon shape="dollar"></clr-icon>
+                        </span>
+          <span class="card-media-text">
+                            SMS: {{rate?.sms}}
+                        </span>
+          <span class="card-media-text">
+                            Mobile Internet: {{rate?.internet}}
+                        </span>
+          <span class="card-media-text">
+                            Number of minutes for outgoing calls: {{rate?.calls}}
+                        </span>
+        </div>
+      </div>
+      <div class="card-text">
+        {{rate?.description}}
+      </div>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let option of rate?.optionList">
+        {{option?.name}}
+      </li>
+    </ul>
+    <div class="card-footer">
+      <button (click)="buy()" class="btn btn-sm btn-link">Connect</button>
+    </div>
+  </div>
+</div>

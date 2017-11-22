@@ -91,6 +91,9 @@ public class RateFacadeImpl extends FacadeImpl<Rate, RateDTO> implements RateFac
     @Override
     public void create(RateDTO rateDTO) {
         try {
+            if (rateDTO.getImage() == null) {
+                rateDTO.setImage("http://localhost:8080/img/picture.png");
+            }
             rateService.insert(convertToEntity(rateDTO));
             jmsTemplate.send(s -> s.createTextMessage("create: rate created "));
         } catch (Exception e) {

@@ -223,74 +223,74 @@
   overflow-x: hidden;
 }
 
-/* Base for label styling */
-[type="checkbox"]:not(:checked),
-[type="checkbox"]:checked {
-  position: absolute;
-  left: -9999px;
-}
-[type="checkbox"]:not(:checked) + label,
-[type="checkbox"]:checked + label {
-  position: relative;
-  padding-left: 1.95em;
-  cursor: pointer;
-}
+/*!* Base for label styling *!*/
+/*[type="checkbox"]:not(:checked),*/
+/*[type="checkbox"]:checked {*/
+/*position: absolute;*/
+/*left: -9999px;*/
+/*}*/
+/*[type="checkbox"]:not(:checked) + label,*/
+/*[type="checkbox"]:checked + label {*/
+/*position: relative;*/
+/*padding-left: 1.95em;*/
+/*cursor: pointer;*/
+/*}*/
 
-/* checkbox aspect */
-[type="checkbox"]:not(:checked) + label:before,
-[type="checkbox"]:checked + label:before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0;
-  width: 1.25em; height: 1.25em;
-  border: 2px solid #ccc;
-  background: #fff;
-  border-radius: 4px;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
-}
-/* checked mark aspect */
-[type="checkbox"]:not(:checked) + label:after,
-[type="checkbox"]:checked + label:after {
-  content: '✔';
-  position: absolute;
-  top: .1em; left: .3em;
-  font-size: 1.3em;
-  line-height: 0.8;
-  color: #13BFB9;
-  transition: all .2s;
-}
-/* checked mark aspect changes */
-[type="checkbox"]:not(:checked) + label:after {
-  opacity: 0;
-  transform: scale(0);
-}
-[type="checkbox"]:checked + label:after {
-  opacity: 1;
-  transform: scale(1);
-}
-/* disabled checkbox */
-[type="checkbox"]:disabled:not(:checked) + label:before,
-[type="checkbox"]:disabled:checked + label:before {
-  box-shadow: none;
-  border-color: #bbb;
-  background-color: #ddd;
-}
-[type="checkbox"]:disabled:checked + label:after {
-  color: #999;
-}
-[type="checkbox"]:disabled + label {
-  color: #aaa;
-}
-/* accessibility */
-[type="checkbox"]:checked:focus + label:before,
-[type="checkbox"]:not(:checked):focus + label:before {
-  border: 2px dotted #13BFB9;
-}
+/*!* checkbox aspect *!*/
+/*[type="checkbox"]:not(:checked) + label:before,*/
+/*[type="checkbox"]:checked + label:before {*/
+/*content: '';*/
+/*position: absolute;*/
+/*left: 0; top: 0;*/
+/*width: 1.25em; height: 1.25em;*/
+/*border: 2px solid #ccc;*/
+/*background: #fff;*/
+/*border-radius: 4px;*/
+/*box-shadow: inset 0 1px 3px rgba(0,0,0,.1);*/
+/*}*/
+/*!* checked mark aspect *!*/
+/*[type="checkbox"]:not(:checked) + label:after,*/
+/*[type="checkbox"]:checked + label:after {*/
+/*content: '✔';*/
+/*position: absolute;*/
+/*top: .1em; left: .3em;*/
+/*font-size: 1.3em;*/
+/*line-height: 0.8;*/
+/*color: #13BFB9;*/
+/*transition: all .2s;*/
+/*}*/
+/*!* checked mark aspect changes *!*/
+/*[type="checkbox"]:not(:checked) + label:after {*/
+/*opacity: 0;*/
+/*transform: scale(0);*/
+/*}*/
+/*[type="checkbox"]:checked + label:after {*/
+/*opacity: 1;*/
+/*transform: scale(1);*/
+/*}*/
+/*!* disabled checkbox *!*/
+/*[type="checkbox"]:disabled:not(:checked) + label:before,*/
+/*[type="checkbox"]:disabled:checked + label:before {*/
+/*box-shadow: none;*/
+/*border-color: #bbb;*/
+/*background-color: #ddd;*/
+/*}*/
+/*[type="checkbox"]:disabled:checked + label:after {*/
+/*color: #999;*/
+/*}*/
+/*[type="checkbox"]:disabled + label {*/
+/*color: #aaa;*/
+/*}*/
+/*!* accessibility *!*/
+/*[type="checkbox"]:checked:focus + label:before,*/
+/*[type="checkbox"]:not(:checked):focus + label:before {*/
+/*border: 2px dotted #13BFB9;*/
+/*}*/
 
-/* hover style just for information */
-label:hover:before {
-  border: 2px solid #13BFB9!important;
-}
+/*!* hover style just for information *!*/
+/*label:hover:before {*/
+/*border: 2px solid #13BFB9!important;*/
+/*}*/
 
 #listSelectedOptions {
   margin-left: 30px;
@@ -303,6 +303,7 @@ label:hover:before {
 label {
   font-weight: 100;
 }
+
 #signOut {
   margin-top: 5px;
   margin-left: 10px;
@@ -320,6 +321,7 @@ label {
   font-size: large;
   color: #007cbb;
 }
+
 #changedRate {
   margin-top: 60px;
   margin-left: 150px;
@@ -331,6 +333,7 @@ label {
   color: red;
   font-size: 13px;
 }
+
 p {
   color: #95989A;
 }
@@ -341,6 +344,7 @@ p {
   margin-top: 94px;
   color: #95989A;
 }
+
 .form {
   width: 600px;
   height: 350px;
@@ -348,9 +352,11 @@ p {
   margin: 20px auto;
   border: solid #95989A 1px;
 }
+
 #formUP {
   margin: 60px;
 }
+
 #passwordCol {
   margin-top: 30px;
 }
@@ -360,6 +366,7 @@ p {
   margin-right: 150px;
   margin-left: 150px;
 }
+
 .sign-in {
   margin-top: 20px;
   width: -webkit-fill-available;
@@ -407,6 +414,7 @@ p {
 #signUpFH {
   margin-top: 10px;
 }
+
 .customerInfo {
   width: 800px;
   height: 450px;
@@ -414,12 +422,14 @@ p {
   margin: 20px auto;
   border: solid #95989A 1px;
 }
+
 #buttonForNewAcc {
   width: 100%;
   justify-content: center;
   align-items: center;
   display: flex;
 }
+
 #signUpPage {
   width: 900px;
   margin-left: 200px;
@@ -446,7 +456,7 @@ p {
 }
 
 #navVert {
-  //height: 100%;
+/ / height: 100 %;
   min-height: 91vh;
 }
 
@@ -454,15 +464,19 @@ p {
   margin-top: 30px;
   margin-left: 0px;
 }
+
 .search-elem {
   margin-top: 10px;
 }
+
 #logoImg {
   width: 36px;
 }
+
 #logout {
   margin-right: 50px;
 }
+
 #iconLogout {
   margin-left: 50px;
 }
@@ -470,30 +484,73 @@ p {
 .right-rate {
   margin-left: 60px;
 }
+
 #edit-status {
   margin-left: 15px;
 }
+
 .customers {
   font-size: 14px;
 }
+
 .butt-right {
   float: right;
   margin-right: 30px;
 }
+
 .rate-row {
   margin-left: 20px;
 }
+
 .rate-field {
   margin-left: 50px;
 }
+
 .option-list {
   overflow-y: auto;
   max-height: 200px;
 }
+
 .option-rate-list {
   overflow-y: auto;
   max-height: 400px;
 }
+
 #arrowMob {
+  margin-left: 30px;
+}
+
+#contrList {
+  width: 80px;
+}
+
+.options {
+  height: 30px !important;
+  font-size: 14px !important;
+}
+
+.centerSpin {
+  margin-left: 300px;
+}
+
+#mainPage {
+  margin-left: 200px;
+  margin-right: 200px;
+}
+.filterTariff {
   margin-left: 20px;
+}
+#selectedTariff {
+  border: 2px solid #53d3cf;
+  box-shadow: 0 0.125rem 0 0 #53d3cf;
+}
+#weRecommend {
+  position: absolute;
+  color: #fafafa;
+  z-index: 1;
+  text-align: center;
+  margin-left: 55%;
+  height: 30px;
+  width: 169px;
+  background-color: #53d3cf;
 }

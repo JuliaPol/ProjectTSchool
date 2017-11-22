@@ -96,6 +96,11 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
     }
 
     @Override
+    public List<OptionDTO> getAllFreeOption(String number) {
+        return convertList(optionService.getAllFreeOptions(number));
+    }
+
+    @Override
     public boolean checkNewOptions(List<OptionDTO> optionList) {
         return optionService.checkNewOptions(convertToEntitiesList(optionList));
     }
@@ -130,6 +135,9 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
     @Override
     public void create(OptionDTO optionDTO) {
         try {
+            if (optionDTO.getImage().equals("")) {
+                optionDTO.setImage("http://localhost:8080/img/picture.png");
+            }
             optionService.insert(convertToEntity(optionDTO));
             jmsTemplate.send(s -> s.createTextMessage("create: option created "));
         } catch (Exception e) {

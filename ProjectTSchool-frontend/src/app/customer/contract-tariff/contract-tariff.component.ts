@@ -13,6 +13,7 @@ import {ITariff} from "../../interfaces/tariff";
 })
 export class ContractTariffComponent implements OnInit {
 
+  open: boolean = false;
   selectedTariffId: number;
   selectedTariff: ITariff;
   selectedStatus: string;
@@ -21,6 +22,7 @@ export class ContractTariffComponent implements OnInit {
   rates: ITariff[] = [];
   allTariffsActive: boolean = false;
   yourTariffActive: boolean = true;
+  block: boolean = false;
 
   constructor(private appService: AppService, private router: Router,
               private sharedService: CustomerContractSharedService) {
@@ -36,11 +38,12 @@ export class ContractTariffComponent implements OnInit {
     this.contractId = this.sharedService.getData();
     this.appService.getContractById(this.contractId).then(data => {
       this.contract = data.json() as IContract;
+      this.changeBlockStatus(this.contract.status);
     }).then(() => this.appService.getAllTariffs().then(data => {
       this.rates = data.json() as ITariff[];
     }).then(() => {
       this.selectedTariffId = this.contract.rate.id;
-      this.rates.filter((item) => item.id === this.selectedTariffId).pop();
+      this.rates = this.rates.filter((item) => item.id !== this.selectedTariffId);
     }));
   }
 
@@ -52,9 +55,18 @@ export class ContractTariffComponent implements OnInit {
   changeRate(id: number) {
     this.selectedTariff = this.rates
       .find(x => x.id === id);
+    this.open = true;
+  }
+
+  changeBlockStatus(status: string) {
+    this.block = status === 'BLOCKED_BY_THE_CUSTOMER' || status === 'BLOCKED_BY_AN_EMPLOYEE';
+  }
+
+  onSubmit() {
     this.contract.rate = this.selectedTariff;
     this.appService.updateContract(this.contract).then(() => {
-      this.appService.getContractById(this.contractId).then(data => this.contract = data.json() as IContract);
+      this.init();
+      this.open = false;
     });
   }
 
