@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +26,14 @@ public class ContractDTO  extends IdDTO {
             this.creationDate = null;
         } else {
             this.creationDate = dateFormat.format(creationDate);
+        }
+    }
+
+    public Date dateConverterInEntity() throws ParseException {
+        if (this.creationDate.equals("")) {
+            return null;
+        } else {
+            return dateFormat.parse(creationDate);
         }
     }
 }

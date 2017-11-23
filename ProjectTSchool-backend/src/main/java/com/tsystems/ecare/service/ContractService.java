@@ -37,4 +37,6 @@ public interface ContractService extends Service<Contract> {
     void create(Long id, Contract contract);
 
     void updateContract(Contract contract);
+
+    void delete(Long id);
 }

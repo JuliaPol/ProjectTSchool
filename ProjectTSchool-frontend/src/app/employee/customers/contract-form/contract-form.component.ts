@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {ITariff} from "../../interfaces/tariff";
-import {AppService} from "../../app.service";
-import {IContract, ICustomer} from "../../interfaces/customers";
-import {CustomerSharedService} from "../customers/customer-shared.service";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {Router} from "@angular/router";
 import {isNullOrUndefined} from "util";
+import {ITariff} from "../../../interfaces/tariff";
+import {IContract} from "../../../interfaces/customers";
+import {AppService} from "../../../app.service";
+import {CustomerSharedService} from "../customer-shared.service";
 
 @Component({
   moduleId: module.id,

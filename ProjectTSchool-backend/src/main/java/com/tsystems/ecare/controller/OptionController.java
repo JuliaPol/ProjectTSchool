@@ -52,29 +52,29 @@ public class OptionController {
         optionFacade.deleteOption(id);
     }
 
-    @Secured({"ROLE_MANAGER","ROLE_CUSTOMER"})
-    @RequestMapping(value = "/available", method = RequestMethod.GET)
-    public List<OptionDTO> getAllAvailableOptions(@RequestParam("number") String number) {
-        return optionFacade.getAllAvailableOptionsForCustomer(number);
-    }
-
-    @Secured({"ROLE_MANAGER","ROLE_CUSTOMER"})
-    @RequestMapping(value = "/unavailable", method = RequestMethod.GET)
-    public List<OptionDTO> getAllIncompatibleOptions(@RequestParam("number") String number) {
-        return optionFacade.getAllIncompatibleOptionsForCustomer(number);
-    }
-
-    @Secured({"ROLE_MANAGER","ROLE_CUSTOMER"})
-    @RequestMapping(value = "/compatible", method = RequestMethod.GET)
-    public List<OptionDTO> getAllAvailableOptions() {
-        return optionFacade.getBy(3L);
-    }
-
-    @Secured({"ROLE_MANAGER","ROLE_CUSTOMER"})
-    @RequestMapping(value = "/active", method = RequestMethod.GET)
-    public List<OptionDTO> getAllOptions(@RequestParam("number") String number) {
-        return optionFacade.getAllOptionsForCustomer(number);
-    }
+//    @Secured({"ROLE_MANAGER","ROLE_CUSTOMER"})
+//    @RequestMapping(value = "/available", method = RequestMethod.GET)
+//    public List<OptionDTO> getAllAvailableOptions(@RequestParam("number") String number) {
+//        return optionFacade.getAllAvailableOptionsForCustomer(number);
+//    }
+//
+//    @Secured({"ROLE_MANAGER","ROLE_CUSTOMER"})
+//    @RequestMapping(value = "/unavailable", method = RequestMethod.GET)
+//    public List<OptionDTO> getAllIncompatibleOptions(@RequestParam("number") String number) {
+//        return optionFacade.getAllIncompatibleOptionsForCustomer(number);
+//    }
+//
+//    @Secured({"ROLE_MANAGER","ROLE_CUSTOMER"})
+//    @RequestMapping(value = "/compatible", method = RequestMethod.GET)
+//    public List<OptionDTO> getAllAvailableOptions() {
+//        return optionFacade.getBy(3L);
+//    }
+//
+//    @Secured({"ROLE_MANAGER","ROLE_CUSTOMER"})
+//    @RequestMapping(value = "/active", method = RequestMethod.GET)
+//    public List<OptionDTO> getAllOptions(@RequestParam("number") String number) {
+//        return optionFacade.getAllOptionsForCustomer(number);
+//    }
 
     @Secured({"ROLE_CUSTOMER"})
     @RequestMapping(value = "/free/{number}", method = RequestMethod.GET)

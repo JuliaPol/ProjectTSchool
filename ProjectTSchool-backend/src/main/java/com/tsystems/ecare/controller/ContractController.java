@@ -21,24 +21,18 @@ public class ContractController {
     @Autowired
     private ContractFacade contractFacade;
 
-    @RequestMapping(value = "/delete/rate/{number}", method = RequestMethod.POST)
-    @ResponseBody
-    public void deleteRateFromContract(@PathVariable("number") String number) {
-        contractFacade.deleteRate(number);
-    }
-
-    @RequestMapping(value = "/delete/option/{number}", method = RequestMethod.POST)
-    @ResponseBody
-    public void deleteRateFromContract(@PathVariable("number") String number,
-                                       @RequestParam("option") String option ) throws Exception {
-        contractFacade.deleteOption(number, Long.parseLong(option));
-    }
-
-    @RequestMapping(value = "/create/{id}", method = RequestMethod.POST)
-    public void create(@PathVariable("id") Long id,
-                       @RequestBody ContractDTO contractDTO) throws Exception {
-        contractFacade.create(id, contractDTO);
-    }
+//    @RequestMapping(value = "/delete/rate/{number}", method = RequestMethod.POST)
+//    @ResponseBody
+//    public void deleteRateFromContract(@PathVariable("number") String number) {
+//        contractFacade.deleteRate(number);
+//    }
+//
+//    @RequestMapping(value = "/delete/option/{number}", method = RequestMethod.POST)
+//    @ResponseBody
+//    public void deleteRateFromContract(@PathVariable("number") String number,
+//                                       @RequestParam("option") String option ) throws Exception {
+//        contractFacade.deleteOption(number, Long.parseLong(option));
+//    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ContractDTO getById(@RequestParam("id") Long id) throws Exception {
@@ -49,6 +43,7 @@ public class ContractController {
     public void update(@RequestBody ContractDTO contractDTO) throws Exception {
         contractFacade.updateContract(contractDTO);
     }
+
     @RequestMapping(value = "/update/options/{id}", method = RequestMethod.POST)
     public void updateOptions(@PathVariable("id") Long id, @RequestBody List<OptionDTO> optionDTOS) throws Exception {
         contractFacade.updateContractOptions(id, optionDTOS);

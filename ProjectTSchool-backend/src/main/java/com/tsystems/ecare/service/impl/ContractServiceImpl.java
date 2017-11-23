@@ -187,6 +187,16 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
         log.info("Added a new contract");
     }
 
+    @Transactional
+    @Override
+    public void delete(Long id) {
+        Contract contract = contractDao.get(id);
+        contract.setRate(null);
+        contract.setOptionList(new ArrayList<>());
+        contract.setUser(null);
+        contractDao.delete(contract);
+    }
+
     @Override
     @Transactional
     public void updateContract(Contract contract) {

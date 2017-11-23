@@ -57,6 +57,11 @@ export class AppService {
       .toPromise();
   }
 
+  deleteContract(id: number): Promise<Response> {
+    return this.http.post('http://localhost:8080/contract/delete/' + id, {})
+      .toPromise();
+  }
+
   signOut(): Promise<Response> {
     return this.http.post('http://localhost:8080/logout',{})
       .toPromise();

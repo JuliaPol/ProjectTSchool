@@ -4,7 +4,7 @@
       <form id="signUpLog" class="login" (ngSubmit)="login()" #todoForm="ngForm" >
         <label class="title">
           <h3 class="welcome">Welcome to</h3>
-          Satellite
+          <a [routerLink]="['/main-page']" >Satellite</a>
           <h5 class="hint">Use your username to sign in or create one now</h5>
         </label>
         <div class="login-group">

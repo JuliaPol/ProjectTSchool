@@ -3,10 +3,9 @@ import {Component, OnInit, ViewChild} from "@angular/core";
 import {AppService} from "../../app.service";
 import {Router} from "@angular/router";
 import {CustomerSharedService} from "./customer-shared.service";
-import {CustomerContractNumberFiler} from "./customer-contract-number.component";
-import {ContractSharedService} from "../contract-list/contract-shared.service";
+import {ContractSharedService} from "./contract-shared.service";
 import {Wizard} from "clarity-angular";
-import {ContractFormComponent} from "../contract-form/contract-form.component";
+import {ContractFormComponent} from "./contract-form/contract-form.component";
 
 @Component({
   moduleId: module.id,
@@ -119,7 +118,8 @@ export class CustomersComponent implements OnInit {
     this.open = true;
   }
 
-  delete(contract: IContract) {
-    this.init();
+  deleteContract(contract: number) {
+    this.appService.deleteContract(contract).then(() =>
+      this.init());
   }
 }

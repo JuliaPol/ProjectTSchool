@@ -33,4 +33,6 @@ public interface ContractFacade extends Facade<ContractDTO, Contract> {
     void updateContract(ContractDTO contractDTO) throws Exception;
 
     void updateContractOptions(Long id, List<OptionDTO> optionDTOS) throws Exception;
+
+    void delete(Long id);
 }

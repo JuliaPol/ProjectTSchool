@@ -22,60 +22,60 @@ import java.util.List;
 @Secured("ROLE_CUSTOMER")
 public class BasketController {
 
-    @Autowired
-    private BasketFacade basketFacade;
-
-    @RequestMapping
-    public ModelAndView showBasketPage(Principal principal, HttpSession request, @RequestParam("number") String number) throws Exception {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/basket.jsp");
-        BasketForm basketForm = (BasketForm) request.getAttribute(number);
-        BasketDTO basketDTO;
-        if (basketForm != null) {
-            basketDTO = basketFacade.getBasket(principal.getName(), basketForm.getRate(), basketForm.getOptions());
-        } else {
-            basketDTO = basketFacade.getBasket(principal.getName(), null, null);
-        }
-        modelAndView.addObject("customerInfo", basketDTO.getUser());
-        modelAndView.addObject("basket", basketDTO);
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/add")
-    public String addTariffOrOption(HttpSession httpSession, @RequestParam("number") String number,
-                                    @RequestParam("tariff") String tariff, @RequestParam("option") String option) {
-        BasketForm basket = (BasketForm) httpSession.getAttribute(number);
-        if (basket == null) {
-            basket = new BasketForm();
-            basket.setNumber(number);
-        }
-        if (tariff.equals("")) {
-            basket.getOptions().add(option);
-        } else {
-            basket.setRate(tariff);
-        }
-        httpSession.setAttribute(number, basket);
-        return basket.getCountOfProduct().toString();
-    }
-
-    @RequestMapping(value = "/delete")
-    public String deleteTariffOrOption(HttpSession httpSession, @RequestParam("number") String number,
-                                       @RequestParam("option") String option) {
-        BasketForm basket = (BasketForm) httpSession.getAttribute(number);
-        if (option.equals("")) {
-            basket.setRate(null);
-        } else {
-            basket.getOptions().remove(option);
-        }
-        httpSession.setAttribute(number, basket);
-        return basket.getCountOfProduct().toString();
-    }
-
-    @RequestMapping(value = "/getCount")
-    public String addOption(HttpSession httpSession, @RequestParam("number") String number) {
-        BasketForm basket = (BasketForm) httpSession.getAttribute(number);
-        return basket == null ? "" : basket.getCountOfProduct().toString();
-    }
+//    @Autowired
+//    private BasketFacade basketFacade;
+//
+//    @RequestMapping
+//    public ModelAndView showBasketPage(Principal principal, HttpSession request, @RequestParam("number") String number) throws Exception {
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("/basket.jsp");
+//        BasketForm basketForm = (BasketForm) request.getAttribute(number);
+//        BasketDTO basketDTO;
+//        if (basketForm != null) {
+//            basketDTO = basketFacade.getBasket(principal.getName(), basketForm.getRate(), basketForm.getOptions());
+//        } else {
+//            basketDTO = basketFacade.getBasket(principal.getName(), null, null);
+//        }
+//        modelAndView.addObject("customerInfo", basketDTO.getUser());
+//        modelAndView.addObject("basket", basketDTO);
+//        return modelAndView;
+//    }
+//
+//    @RequestMapping(value = "/add")
+//    public String addTariffOrOption(HttpSession httpSession, @RequestParam("number") String number,
+//                                    @RequestParam("tariff") String tariff, @RequestParam("option") String option) {
+//        BasketForm basket = (BasketForm) httpSession.getAttribute(number);
+//        if (basket == null) {
+//            basket = new BasketForm();
+//            basket.setNumber(number);
+//        }
+//        if (tariff.equals("")) {
+//            basket.getOptions().add(option);
+//        } else {
+//            basket.setRate(tariff);
+//        }
+//        httpSession.setAttribute(number, basket);
+//        return basket.getCountOfProduct().toString();
+//    }
+//
+//    @RequestMapping(value = "/delete")
+//    public String deleteTariffOrOption(HttpSession httpSession, @RequestParam("number") String number,
+//                                       @RequestParam("option") String option) {
+//        BasketForm basket = (BasketForm) httpSession.getAttribute(number);
+//        if (option.equals("")) {
+//            basket.setRate(null);
+//        } else {
+//            basket.getOptions().remove(option);
+//        }
+//        httpSession.setAttribute(number, basket);
+//        return basket.getCountOfProduct().toString();
+//    }
+//
+//    @RequestMapping(value = "/getCount")
+//    public String addOption(HttpSession httpSession, @RequestParam("number") String number) {
+//        BasketForm basket = (BasketForm) httpSession.getAttribute(number);
+//        return basket == null ? "" : basket.getCountOfProduct().toString();
+//    }
 
     @RequestMapping(value = "/add/options/{id}", method = RequestMethod.POST)
     public void updateOptions(HttpSession httpSession, @PathVariable("id") Long id, @RequestBody List<OptionDTO> optionDTOS) {

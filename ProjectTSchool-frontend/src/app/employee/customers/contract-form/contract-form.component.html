@@ -1,0 +1,27 @@
+<clr-modal [(clrModalOpen)]="open">
+  <h3 class="modal-title">New contract</h3>
+    <div class="modal-body">
+      <form #formPage="ngForm">
+        <label for="selects_1">Select tariff: </label>
+        <div class="select">
+          <select id="selects_1" #selectRate (change)="rateSelected(selectRate.value)">
+            <option value="">Select rate</option>
+            <option *ngFor="let rate of rates" [value]="rate.id">{{rate?.name}}</option>
+          </select>
+        </div>
+        <p></p>
+        <label for="selects_2">Select number: </label>
+        <div class="select">
+          <select id="selects_2"  #selectNumber (change)="numberSelected(selectNumber.value)">
+            <option value="">Select number</option>
+            <option *ngFor="let number of numbers" [value]="number">{{number}}</option>
+          </select>
+        </div>
+      </form>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="reset()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmit()" [disabled]="formPage.form.invalid">Add
+        </button>
+    </div>
+</clr-modal>

@@ -16,19 +16,19 @@ public class RateController {
     private RateFacade rateFacade;
 
 
-    @Secured("ROLE_CUSTOMER")
-    @RequestMapping(method = RequestMethod.GET)
-    @ResponseBody
-    public List<RateDTO> findAllForCustomer(@RequestParam("number") String number) throws Exception{
-        return rateFacade.findAllForCustomer(number);
-    }
+//    @Secured("ROLE_CUSTOMER")
+//    @RequestMapping(method = RequestMethod.GET)
+//    @ResponseBody
+//    public List<RateDTO> findAllForCustomer(@RequestParam("number") String number) throws Exception{
+//        return rateFacade.findAllForCustomer(number);
+//    }
 
-    @Secured("ROLE_CUSTOMER")
-    @RequestMapping(value = "/active", method = RequestMethod.GET)
-    @ResponseBody
-    public RateDTO findForCustomerByNumber(@RequestParam("number") String number) throws Exception{
-        return rateFacade.findForCustomerByNumber(number);
-    }
+//    @Secured("ROLE_CUSTOMER")
+//    @RequestMapping(value = "/active", method = RequestMethod.GET)
+//    @ResponseBody
+//    public RateDTO findForCustomerByNumber(@RequestParam("number") String number) throws Exception{
+//        return rateFacade.findForCustomerByNumber(number);
+//    }
 
 //    @Secured("ROLE_MANAGER")
     @RequestMapping(value = "/all", method = RequestMethod.GET)

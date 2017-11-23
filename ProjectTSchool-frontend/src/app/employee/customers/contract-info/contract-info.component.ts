@@ -1,8 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {IContract} from "../../../interfaces/customers";
 import {AppService} from "../../../app.service";
-import {ContractSharedService} from "../contract-shared.service";
 import {ITariff} from "../../../interfaces/tariff";
+import {ContractSharedService} from "../contract-shared.service";
 
 @Component({
   moduleId: module.id,

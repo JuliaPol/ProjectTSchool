@@ -4,7 +4,7 @@
       <form id="signUpLog" class="login" (ngSubmit)="change()" #todoForm="ngForm">
         <label class="title">
           <h3 class="welcome">Sign up to</h3>
-          Satellite
+          <a class="nav-link" [routerLink]="['/main-page']" >Satellite</a>
         </label>
         <div class="login-group">
           <input class="username" type="text" id="login_username" name="login" placeholder="Username"

@@ -16,6 +16,7 @@ import com.tsystems.ecare.form.BasketForm;
 import com.tsystems.ecare.service.ContractService;
 import com.tsystems.ecare.service.OptionService;
 import com.tsystems.ecare.service.Service;
+import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -46,6 +47,8 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
     @Autowired
     private UserFacade userFacade;
 
+    private static Logger log = Logger.getLogger(ContractFacadeImpl.class);
+
     @Override
     public ContractDTO getContractByNumber(String number) {
         return convertToDto(contractService.getContractByNumber(number));
@@ -58,6 +61,7 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
 
     /**
      * The method changes contract status to "BLOCKED_BY_AN_EMPLOYEE" or "AVAILABLE"
+     *
      * @param number
      */
     @Override
@@ -67,6 +71,7 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
 
     /**
      * The method changes contract status to "BLOCKED_BY_THE_CUSTOMER" or "AVAILABLE"
+     *
      * @param number
      */
     @Override
@@ -76,6 +81,7 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
 
     /**
      * The method deletes Tariff in Contract.
+     *
      * @param number
      */
     @Override
@@ -85,6 +91,7 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
 
     /**
      * The method deletes Option in Contract.
+     *
      * @param number
      * @param optionId
      */
@@ -95,11 +102,12 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
 
     /**
      * The method takes Tariff or Options from the basket and adds to Contract.
+     *
      * @param basket
      */
     @Override
     public void addRateOrOptionsInContract(BasketForm basket) throws Exception {
-        if (basket.getRate()!= null) {
+        if (basket.getRate() != null) {
             contractService.addRateInContract(basket.getNumber(),
                     Long.parseLong(basket.getRate()));
         } else {
@@ -121,7 +129,7 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
 
     @Override
     public List<CustomerDTO> searchByName(String likeName, int limit) {
-        return contractService.searchByName(likeName , limit).stream()
+        return contractService.searchByName(likeName, limit).stream()
                 .map(userFacade::convertToCustomerDto)
                 .collect(Collectors.toList());
     }
@@ -142,7 +150,13 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
 
     @Override
     public Contract convertToEntity(ContractDTO dto) {
-        return modelMapper.map(dto, Contract.class);
+        Contract contract = modelMapper.map(dto, Contract.class);
+        try {
+            contract.setCreationDate(dto.dateConverterInEntity());
+        } catch (ParseException e) {
+            log.error("Failed convert");
+        }
+        return contract;
     }
 
     @Override
@@ -166,6 +180,11 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
         List<Option> options = optionFacade.convertToEntitiesList(optionDTOS);
         contract.setOptionList(options);
         contractService.updateContract(contract);
+    }
+
+    @Override
+    public void delete(Long id) {
+        contractService.delete(id);
     }
 
     @Override

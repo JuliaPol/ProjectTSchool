@@ -31,14 +31,14 @@ public class ContractCustomerController {
         contractFacade.changeContractStatusByCustomer(number);
     }
 
-    @RequestMapping(value = "/add/{number}", method = RequestMethod.POST)
-    @ResponseBody
-    public void addRateOrOption(HttpSession httpSession, @PathVariable("number") String number) throws Exception {
-        BasketForm basket = (BasketForm) httpSession.getAttribute(number);
-        if (basket != null) {
-            contractFacade.addRateOrOptionsInContract(basket);
-            basket.setRate(null);
-            basket.getOptions().clear();
-        }
-    }
+//    @RequestMapping(value = "/add/{number}", method = RequestMethod.POST)
+//    @ResponseBody
+//    public void addRateOrOption(HttpSession httpSession, @PathVariable("number") String number) throws Exception {
+//        BasketForm basket = (BasketForm) httpSession.getAttribute(number);
+//        if (basket != null) {
+//            contractFacade.addRateOrOptionsInContract(basket);
+//            basket.setRate(null);
+//            basket.getOptions().clear();
+//        }
+//    }
 }

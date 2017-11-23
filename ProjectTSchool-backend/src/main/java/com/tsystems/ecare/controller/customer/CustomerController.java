@@ -22,9 +22,9 @@ public class CustomerController {
 //        return new ModelAndView("/customer.jsp", "customerInfo", userFacade.findByLogin(principal.getName()));
 //    }
 
-    @RequestMapping(value = "/basket")
-    public ModelAndView showBagPage(HttpServletRequest request) {
-        return new ModelAndView("/basket.jsp",
-                "basket", request.getSession().getAttribute("basket"));
-    }
+//    @RequestMapping(value = "/basket")
+//    public ModelAndView showBagPage(HttpServletRequest request) {
+//        return new ModelAndView("/basket.jsp",
+//                "basket", request.getSession().getAttribute("basket"));
+//    }
 }

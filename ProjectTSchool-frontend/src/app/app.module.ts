@@ -10,7 +10,7 @@ import {LoginErrorComponent} from "./login-error/login-error.component";
 import {LoginComponent} from "./login/login.component"
 import {AppRoutingModule} from "./app-routing.module";
 import {AppService} from "./app.service";
-import {ContractFormComponent} from "./employee/contract-form/contract-form.component";
+import {ContractFormComponent} from "./employee/customers/contract-form/contract-form.component";
 import {CustomersComponent} from "./employee/customers/customers.component";
 import {OptionsComponent} from "./employee/options/options.component";
 import {TariffsComponent} from "./employee/tariffs/tariffs.component";
@@ -26,9 +26,9 @@ import {OptionListSharedService} from "./employee/tariffs/option-list/option-lis
 import {CustomerSharedService} from "./employee/customers/customer-shared.service";
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {CustomerContractNumberFiler} from "./employee/customers/customer-contract-number.component";
-import {ContractInfoComponent} from "./employee/contract-list/contarct-info/contract-info.component";
-import {ContractSharedService} from "./employee/contract-list/contract-shared.service";
-import {ContractOptionsComponent} from "./employee/contract-list/contract-options/contract-options.component";
+import {ContractInfoComponent} from "./employee/customers/contract-info/contract-info.component";
+import {ContractSharedService} from "./employee/customers/contract-shared.service";
+import {ContractOptionsComponent} from "./employee/customers/contract-options/contract-options.component";
 import {SignupComponent} from "./signup/signup.component"
 import {ClarityModule} from "clarity-angular";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
