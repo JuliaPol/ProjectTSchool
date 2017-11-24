@@ -151,18 +151,46 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
     /**
      * The method checks if options in list are incompatible
      * @param optionList
-     * @return true if incompatible or false if not
+     * @return false if incompatible or true if not
      */
     @Override
-    public boolean checkNewOptions(List<Option> optionList) {
+    public boolean checkNewOptions(List<Option> optionList,
+                                   List<Option> optionInRateAndContract) {
+        log.info("Options" + optionList);
+        log.info("Options in contract and rate" + optionInRateAndContract);
         for (Option option : optionList) {
-            if (option.getCompOptions() != null && option.getIncOptions().stream().anyMatch(optionList::contains)) {
-                return true;
+            log.info("option " +  option + " incompOpt " +option.getIncOptions());
+            if (option.getIncOptions() != null && option.getIncOptions().size() > 0 && (option.getIncOptions().stream()
+                    .anyMatch(optionList::contains) || option.getIncOptions().stream()
+                    .anyMatch(optionInRateAndContract::contains))) {
+                log.info("error");
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
+    /**
+     * The method checks if options in list are compatible with options in rate and contract
+     * @param optionList
+     * @return false if incompatible or true if not
+     */
+    @Override
+    public boolean checkOptionListForCompatible(List<Option> optionList,
+                                                List<Option> optionInRateAndContract) {
+        log.info("Options" + optionList);
+        log.info("Options in contract and rate" + optionInRateAndContract);
+        for (Option option : optionList) {
+            log.info("option " +  option + " compOpt " + option.getCompOptions());
+            if (option.getCompOptions() != null && option.getCompOptions().size() > 0 && (option.getCompOptions().stream()
+                    .noneMatch(optionList::contains) || option.getCompOptions().stream()
+                    .noneMatch(optionInRateAndContract::contains))) {
+                log.info("error");
+                return false;
+            }
+        }
+        return true;
+    }
     /**
      * The method adds rules for options. They can be compatible or incompatible.
      * @param current option id

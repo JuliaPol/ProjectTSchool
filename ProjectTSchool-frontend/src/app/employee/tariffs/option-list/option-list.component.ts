@@ -17,11 +17,13 @@ export interface IOptionItem {
   compatibleOptionsOf: string[],
   selected: boolean,
 }
+
 interface IWarnings {
   description: string,
   optionName: string[],
   purposeOption: string,
 }
+
 @Component({
   moduleId: module.id,
   selector: 'option-list',
@@ -66,7 +68,7 @@ export class OptionListComponent implements OnInit {
           this.clean(item);
         });
       }
-      if (this.rateOptions && this.rateOptions.length !== 0 ) {
+      if (this.rateOptions && this.rateOptions.length !== 0) {
         this.rateOptions.forEach((item) => {
           this.clean(item);
         });
@@ -87,7 +89,7 @@ export class OptionListComponent implements OnInit {
   private clean(item) {
     this.anotherOptions
       .splice(Util.myIndexOf(this.anotherOptions
-        .filter(value => value.name === item.name).pop(),
+          .filter(value => value.name === item.name).pop(),
         this.anotherOptions,
         'id', 'id'), 1);
   }
@@ -133,7 +135,7 @@ export class OptionListComponent implements OnInit {
     this.cleanIncomp();
     this.checkPurposeListByCompabilities();
     this.warnings.forEach((item) => {
-      if(this.arrayContainsArray(item.optionName)) {
+      if (this.arrayContainsArray(item.optionName)) {
         this.cleanWarnings(item);
       }
     });
@@ -143,7 +145,7 @@ export class OptionListComponent implements OnInit {
   }
 
   private checkPurposeListByCompabilities() {
-    this.warnings= [];
+    this.warnings = [];
     this.purposeList.forEach((item) => {
       if (item.selected && item.compatibleOptions.length !== 0) {
         if (!this.arrayContainsArray(item.compatibleOptions)) {
@@ -183,8 +185,8 @@ export class OptionListComponent implements OnInit {
     if (this.purposeList.length !== 0) {
       this.purposeList.filter((item) => item.selected)
         .forEach((item) => {
-        this.purposeListEntity.push(this.convertToEntity(item))
-      });
+          this.purposeListEntity.push(this.convertToEntity(item))
+        });
       return this.purposeListEntity;
     }
   }
@@ -224,5 +226,4 @@ export class OptionListComponent implements OnInit {
     }
     return -1;
   }
-
 }

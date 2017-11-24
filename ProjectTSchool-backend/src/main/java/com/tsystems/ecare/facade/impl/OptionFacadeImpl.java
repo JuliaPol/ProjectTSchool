@@ -101,8 +101,16 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
     }
 
     @Override
-    public boolean checkNewOptions(List<OptionDTO> optionList) {
-        return optionService.checkNewOptions(convertToEntitiesList(optionList));
+    public boolean checkNewOptions(List<OptionDTO> optionList, String number) {
+        List<Option> optionInRateAndContract = optionService.getAllOptionsInRateAndContract(number);
+        return optionService.checkNewOptions(convertToEntitiesList(optionList), optionInRateAndContract);
+    }
+
+    @Override
+    public boolean checkNewOptionsForCompatible(List<OptionDTO> optionList, String number) {
+        List<Option> optionInRateAndContract = optionService.getAllOptionsInRateAndContract(number);
+        return optionService.checkOptionListForCompatible(convertToEntitiesList(optionList),
+                optionInRateAndContract);
     }
 
     @Override

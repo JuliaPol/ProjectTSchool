@@ -21,58 +21,58 @@ import java.util.Set;
 @Component("basketFacade")
 public class BasketFacadeImpl extends FacadeImpl<User, BasketDTO> implements BasketFacade {
 
-    @Autowired
-    private UserFacade userFacade;
-
-    @Autowired
-    private RateFacade rateFacade;
-
-    @Autowired
-    private OptionFacade optionFacade;
-
-    private static Logger log = Logger.getLogger(BasketFacadeImpl.class);
-
-    @Override
-    public BasketDTO getBasket(String user, String rate, Set<String> optionList){
-        BasketDTO basketDTO = new BasketDTO();
-        basketDTO.setUser(userFacade.findByLogin(user));
-        RateDTO rateDto;
-        if (rate != null) {
-            try {
-                rateDto = rateFacade.get(Long.parseLong(rate));
-            } catch (Exception e) {
-                log.error("Tariff not found" , e);
-                rateDto = new RateDTO();
-            }
-        } else {
-            rateDto = new RateDTO();
-        }
-        basketDTO.setRateId(rateDto.getId());
-        basketDTO.setRateName(rateDto.getName());
-        basketDTO.setRateCost(rateDto.getCost());
-        basketDTO.setRateSms(rateDto.getSms());
-        basketDTO.setRateCalls(rateDto.getCalls());
-        basketDTO.setRateInternet(rateDto.getInternet());
-        basketDTO.setRateDescription(rateDto.getDescription());
-        List<OptionDTO> optionDTOList = new ArrayList<>();
-        if (optionList != null) {
-            for (String id : optionList) {
-                try {
-                    optionDTOList.add(optionFacade.get(Long.parseLong(id)));
-                } catch (Exception e) {
-                    log.error("Option not found" , e);
-                }
-            }
-        }
-        if(optionFacade.checkNewOptions(optionDTOList)) {
-            basketDTO.setWarning("Options are incompatible!");
-        } else {
-            basketDTO.setWarning("");
-        }
-        basketDTO.setOptionList(optionDTOList);
-        return basketDTO;
-    }
-
+//    @Autowired
+//    private UserFacade userFacade;
+//
+//    @Autowired
+//    private RateFacade rateFacade;
+//
+//    @Autowired
+//    private OptionFacade optionFacade;
+//
+//    private static Logger log = Logger.getLogger(BasketFacadeImpl.class);
+//
+//    @Override
+//    public BasketDTO getBasket(String user, String rate, Set<String> optionList){
+//        BasketDTO basketDTO = new BasketDTO();
+//        basketDTO.setUser(userFacade.findByLogin(user));
+//        RateDTO rateDto;
+//        if (rate != null) {
+//            try {
+//                rateDto = rateFacade.get(Long.parseLong(rate));
+//            } catch (Exception e) {
+//                log.error("Tariff not found" , e);
+//                rateDto = new RateDTO();
+//            }
+//        } else {
+//            rateDto = new RateDTO();
+//        }
+//        basketDTO.setRateId(rateDto.getId());
+//        basketDTO.setRateName(rateDto.getName());
+//        basketDTO.setRateCost(rateDto.getCost());
+//        basketDTO.setRateSms(rateDto.getSms());
+//        basketDTO.setRateCalls(rateDto.getCalls());
+//        basketDTO.setRateInternet(rateDto.getInternet());
+//        basketDTO.setRateDescription(rateDto.getDescription());
+//        List<OptionDTO> optionDTOList = new ArrayList<>();
+//        if (optionList != null) {
+//            for (String id : optionList) {
+//                try {
+//                    optionDTOList.add(optionFacade.get(Long.parseLong(id)));
+//                } catch (Exception e) {
+//                    log.error("Option not found" , e);
+//                }
+//            }
+//        }
+//        if(optionFacade.checkNewOptions(optionDTOList)) {
+//            basketDTO.setWarning("Options are incompatible!");
+//        } else {
+//            basketDTO.setWarning("");
+//        }
+//        basketDTO.setOptionList(optionDTOList);
+//        return basketDTO;
+//    }
+//
     @Override
     public BasketDTO convertToDto(User entity) {
         return null;

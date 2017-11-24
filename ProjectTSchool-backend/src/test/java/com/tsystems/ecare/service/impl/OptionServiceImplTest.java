@@ -62,6 +62,9 @@ public class OptionServiceImplTest {
     private Option option1;
     private Option option2;
     private Option option3;
+    private Option option5;
+    private Option option6;
+    private Option option7;
 
     @Autowired
     private OptionDao optionDao;
@@ -93,6 +96,18 @@ public class OptionServiceImplTest {
         option3.setId(4L);
         option3.setName("opt4");
 
+        option5 = new Option();
+        option5.setId(5L);
+        option5.setName("opt5");
+
+        option6 = new Option();
+        option6.setId(6L);
+        option6.setName("opt6");
+
+        option7 = new Option();
+        option7.setId(7L);
+        option7.setName("opt7");
+
         List<Option> optionList = new ArrayList<>();
         optionList.add(option);
         optionList.add(option2);
@@ -100,6 +115,11 @@ public class OptionServiceImplTest {
         List<Option> optionList1 = new ArrayList<>();
         optionList1.add(option1);
         option3.setIncOptions(optionList1);
+        List<Option> optionList2 = new ArrayList<>();
+        optionList2.add(option6);
+        optionList2.add(option7);
+        option5.setCompOptions(optionList2);
+        option5.setIncOptions(new ArrayList<>());
 
         optionsInContract = new ArrayList<>();
         optionsInContract.add(option);
@@ -108,6 +128,7 @@ public class OptionServiceImplTest {
         availableOptions = new ArrayList<>();
         availableOptions.add(option2);
         availableOptions.add(option3);
+        availableOptions.add(option5);
     }
 
     @Test
@@ -124,8 +145,13 @@ public class OptionServiceImplTest {
 
     @Test
     public void checkNewOptionsTest() throws Exception {
-        boolean incompatible = optionService.checkNewOptions(availableOptions);
-        Assert.assertTrue(!incompatible);
+        boolean incompatible = optionService.checkNewOptions(availableOptions, optionsInContract);
+        Assert.assertFalse(incompatible);
     }
 
+    @Test
+    public void checkNewOptionsForCompatibleOptionsTest() throws Exception {
+        boolean compatible = optionService.checkOptionListForCompatible(availableOptions, optionsInContract);
+        Assert.assertFalse(compatible);
+    }
 }

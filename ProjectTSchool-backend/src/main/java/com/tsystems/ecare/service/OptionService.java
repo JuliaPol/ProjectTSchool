@@ -30,7 +30,9 @@ public interface OptionService extends Service<Option> {
 
     List<Option> getAllFreeOptions(String number);
 
-    boolean checkNewOptions(List<Option> optionList);
+    boolean checkNewOptions(List<Option> optionList, List<Option> optionInRateAndContract);
+
+    boolean checkOptionListForCompatible(List<Option> optionList, List<Option> optionInRateAndContract);
 
     void addIncompatible(Long current, List<String> incomp, boolean isCompatible);
 

@@ -178,8 +178,13 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
     public void updateContractOptions(Long id, List<OptionDTO> optionDTOS) throws Exception {
         Contract contract = contractService.get(id);
         List<Option> options = optionFacade.convertToEntitiesList(optionDTOS);
-        contract.setOptionList(options);
-        contractService.updateContract(contract);
+        if (optionFacade.checkNewOptions(optionDTOS, contract.getNumber())
+                && optionFacade.checkNewOptionsForCompatible(optionDTOS, contract.getNumber())) {
+            contract.setOptionList(options);
+            contractService.updateContract(contract);
+        } else {
+            log.warn("Bad option list");
+        }
     }
 
     @Override
