@@ -7,8 +7,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -33,16 +36,20 @@ public class Option {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
+    @NotEmpty
     private String name;
 
     @Column(name = "cost")
+    @NotNull
     private Integer cost;
 
     @Column(name = "cost_of_connection")
+    @NotNull
     private Integer costOfConnection;
 
     @Column(name = "description")
+    @Max(100)
     private String description;
 
     @Column(name ="image")

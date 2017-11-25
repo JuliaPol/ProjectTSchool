@@ -20,7 +20,7 @@
     Error. The tariff name must be original.
   </div>
 </clr-alert>
-<form #todoForm="ngForm">
+<form #todoForm="ngForm" class="form-info">
   <div class="row rate-row">
     <div class="form-group">
       <label class="required ">Name:</label>
@@ -89,8 +89,8 @@
       </label>
     </div>
   </div>
-  <div class="row addOption" *ngIf="tariff?.optionList">
-    <option-list [optionList]="tariff?.optionList" [showSelect]="true"></option-list>
+  <div class="row" *ngIf="tariff?.optionList">
+    <option-list class="col-md-9" [optionList]="tariff?.optionList" [showSelect]="true"></option-list>
   </div>
   <button type="button" class="btn btn-outline" (click)="onSubmit(); todoForm.reset()"
           [disabled]="todoForm.form.invalid">Change tariff

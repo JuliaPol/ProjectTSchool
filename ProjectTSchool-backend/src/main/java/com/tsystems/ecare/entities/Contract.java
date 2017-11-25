@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.Date;
 import java.util.List;
 
@@ -46,7 +48,9 @@ public class Contract {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "number")
+    @Column(name = "number", unique = true)
+    @Min(10)
+    @Max(25)
     private String number;
 
     @Column(name = "creation_date")

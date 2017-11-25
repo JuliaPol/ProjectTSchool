@@ -1,6 +1,6 @@
 <p>Options: </p>
 <div class="row">
-  <div *ngFor="let option of purposeList">
+  <div class="option-label" *ngFor="let option of purposeList">
   <span class="label options" [ngClass]="isOptionInWarningsList(option)">
     <clr-checkbox
       [(ngModel)]="option.selected" (change)="changeSelected()">
@@ -8,9 +8,6 @@
                 </clr-checkbox>
   </span>
   </div>
-  <!--<div *ngFor="let warning of warnings">-->
-    <!--<p class="warn">{{warning?.description}}</p>-->
-  <!--</div>-->
   <clr-tooltip *ngIf="warnings.length !== 0">
     <clr-icon clrTooltipTrigger shape="info-circle" size="24"></clr-icon>
     <clr-tooltip-content clrPosition="top-right" clrSize="md" *clrIfOpen>
@@ -19,12 +16,19 @@
     </clr-tooltip-content>
   </clr-tooltip>
 </div>
-<div *ngIf="showSelect" class="select">
-  <select id="selects_3" [(ngModel)]="selectedOption">
-    <option *ngFor="let option of anotherOptions" [ngValue]="option">{{option?.name}}</option>
-  </select>
+<div *ngIf="showSelect" class="row">
+  <div class="col-md-6">
+    <div class="select">
+      <select id="selects_3" [(ngModel)]="selectedOption">
+        <option *ngFor="let option of anotherOptions" [ngValue]="option">{{option?.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div>
+    <button type="button" title="Add option" class="btn btn-icon" (click)="addOption()">
+      <clr-icon shape="plus"></clr-icon>
+      <clr-icon shape="view-cards"></clr-icon>
+    </button>
+  </div>
 </div>
-<button *ngIf="showSelect" type="button" title="Add option" class="btn btn-icon" (click)="addOption()">
-  <clr-icon shape="plus"></clr-icon>
-  <clr-icon shape="view-cards"></clr-icon>
-</button>
+

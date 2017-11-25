@@ -203,29 +203,20 @@
                 </executions>
             </plugin>
 
-            <!--<plugin>-->
-                <!--<groupId>org.wildfly.plugins</groupId>-->
-                <!--<artifactId>wildfly-maven-plugin</artifactId>-->
-                <!--<version>1.2.0.Alpha6</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<phase>install</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>deploy</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-                <!--<configuration>-->
-                    <!--<username>admin</username>-->
-                    <!--<password>admin</password>-->
-                    <!--<hostname>localhost</hostname>-->
-                    <!--<port>9990</port>-->
-                    <!--<filename>eCare-1.1.war</filename>-->
-                    <!--&lt;!&ndash;<address>http://localhost:8080/</address>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<artifact>eCare-1.1.war</artifact>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<name>eCare-1.1.war</name>&ndash;&gt;-->
-                <!--</configuration>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>1.2.1.Final</version>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 </project>

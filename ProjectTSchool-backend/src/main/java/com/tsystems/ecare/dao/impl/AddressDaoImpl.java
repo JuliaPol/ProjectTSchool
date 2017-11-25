@@ -15,36 +15,6 @@ public class AddressDaoImpl extends JpaDaoImpl<Address> implements AddressDao {
     private EntityManager entityManager;
 
     @Override
-    public List<Address> getAll() {
-        return null;
-    }
-
-    @Override
-    public void delete(Address entity) {
-
-    }
-
-    @Override
-    public void update(Address entity) {
-
-    }
-
-    @Override
-    public void insert(Address entity) {
-
-    }
-
-    @Override
-    public Address get(Long id) {
-        return null;
-    }
-
-    @Override
-    public void refresh(Address entity) {
-
-    }
-
-    @Override
     public EntityManager getEntityManager() {
         return entityManager;
     }

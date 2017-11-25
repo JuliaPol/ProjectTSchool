@@ -1,11 +1,9 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import "rxjs/add/operator/map";
 import {AppService} from "../app.service";
-import {IUser} from "../interfaces/user";
 import {Router} from "@angular/router";
 import {IContract, ICustomer} from "../interfaces/customers";
 import {CustomerContractSharedService} from "./customer-contract-shared.service";
-import {ContractTariffComponent} from "./contract-tariff/contract-tariff.component";
 
 @Component({
   moduleId: module.id,
@@ -17,7 +15,6 @@ export class CustomerComponent implements OnInit {
   user: ICustomer = null;
   selectedContract: IContract;
   load: boolean = false;
-  //hl@ViewChild(ContractTariffComponent) tariffForm: ContractTariffComponent;
 
   constructor(private appService: AppService,
               private router: Router,
@@ -39,8 +36,7 @@ export class CustomerComponent implements OnInit {
   }
 
 
-  signOut(link: string) {
-    // window.location.href = link;
+  signOut() {
     this.appService.signOut().then(() => this.router.navigate(['/login']))
   }
 
@@ -49,6 +45,5 @@ export class CustomerComponent implements OnInit {
     this.sharedService.emitChange(id);
     this.selectedContract = this.user.contractList
       .find(x => x.id === id);
-    //this.tariffForm.init();
   }
 }

@@ -18,6 +18,7 @@ export class ContractOptionsCustomerComponent implements OnInit {
   contract: IContract;
   block: boolean = false;
   options: IOption[];
+  open: boolean = false;
 
   constructor(private appService: AppService, private router: Router,
               private sharedService: CustomerContractSharedService,
@@ -48,13 +49,29 @@ export class ContractOptionsCustomerComponent implements OnInit {
   onSubmit() {
     let warningCount = this.sharedServiceOptions.getWarningsCount();
     if (warningCount === 0) {
-      this.appService.updateContractOptionsInBasket(this.contractId,
-        this.sharedServiceOptions.getData()).then(() => {
-        this.init();
-        this.sharedServiceOptions.clean();
-      });
+      let options = this.sharedServiceOptions.getData();
+      if (options.length > 0) {
+        this.appService.updateContractOptionsInBasket(this.contractId, options)
+          .then(() => {
+            this.init();
+            this.sharedServiceOptions.clean();
+          });
+      } else {
+        if (this.contract.optionList.length > 0) {
+          this.open = true;
+        }
+      }
     } else {
       this.init();
     }
+  }
+
+  confirmDelete() {
+    this.appService.updateContractOptions(this.contractId, this.sharedServiceOptions.getData())
+      .then( () => {
+        this.open = false;
+        this.sharedService.emitChange(this.contractId);
+        this.init();
+      })
   }
 }

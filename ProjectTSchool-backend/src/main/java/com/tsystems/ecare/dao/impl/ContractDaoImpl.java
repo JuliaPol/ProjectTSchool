@@ -24,10 +24,6 @@ public class ContractDaoImpl extends JpaDaoImpl<Contract> implements ContractDao
                 .setParameter("id", id)
                 .getResultList();
         options.addAll(options1);
-//        List<Option> options2 = entityManager.createNamedQuery("findAllOptionsByContract")
-//                .setParameter("id", id)
-//                .getResultList();
-        // options.addAll(options2);
         return options;
     }
 
@@ -55,7 +51,7 @@ public class ContractDaoImpl extends JpaDaoImpl<Contract> implements ContractDao
     public List<User> searchByNumber(String likeNumber, int limit) {
         return entityManager.createNamedQuery(Contract.CONTRACT_SEARCH_BY_NUMBER, User.class)
                 .setMaxResults(limit)
-                .setParameter("number", String.join("",likeNumber,"%"))
+                .setParameter("number", String.join("", likeNumber, "%"))
                 .getResultList();
     }
 
@@ -63,7 +59,7 @@ public class ContractDaoImpl extends JpaDaoImpl<Contract> implements ContractDao
     public List<User> searchByName(String name, int limit) {
         return entityManager.createNamedQuery(Contract.CONTRACT_SEARCH_BY_NAME, User.class)
                 .setMaxResults(limit)
-                .setParameter("name", String.join("",name,"%"))
+                .setParameter("name", String.join("", name, "%"))
                 .getResultList();
     }
 

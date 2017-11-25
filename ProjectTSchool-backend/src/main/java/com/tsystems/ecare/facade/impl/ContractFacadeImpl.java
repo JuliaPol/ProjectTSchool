@@ -12,21 +12,16 @@ import com.tsystems.ecare.facade.ContractFacade;
 import com.tsystems.ecare.facade.OptionFacade;
 import com.tsystems.ecare.facade.RateFacade;
 import com.tsystems.ecare.facade.UserFacade;
-import com.tsystems.ecare.form.BasketForm;
 import com.tsystems.ecare.service.ContractService;
-import com.tsystems.ecare.service.OptionService;
 import com.tsystems.ecare.service.Service;
 import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component("contractFacade")
@@ -98,26 +93,6 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
     @Override
     public void deleteOption(String number, Long optionId) throws Exception {
         contractService.deleteOption(number, optionId);
-    }
-
-    /**
-     * The method takes Tariff or Options from the basket and adds to Contract.
-     *
-     * @param basket
-     */
-    @Override
-    public void addRateOrOptionsInContract(BasketForm basket) throws Exception {
-        if (basket.getRate() != null) {
-            contractService.addRateInContract(basket.getNumber(),
-                    Long.parseLong(basket.getRate()));
-        } else {
-            if (!(basket.getOptions().isEmpty() || basket.getOptions() == null)) {
-                List<Long> options = basket.getOptions().stream()
-                        .map(Long::parseLong)
-                        .collect(Collectors.toList());
-                contractService.addOptionsInContract(basket.getNumber(), options);
-            }
-        }
     }
 
     @Override

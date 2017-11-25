@@ -4,8 +4,11 @@ package com.tsystems.ecare.entities;
 import lombok.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter
@@ -30,22 +33,29 @@ public class Rate {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
+    @NotEmpty
     private String name;
 
     @Column(name = "cost")
+    @NotNull
     private Integer cost;
 
     @Column(name = "description")
+    @NotEmpty
+    @Max(100)
     private String description;
 
     @Column(name ="calls")
+    @NotNull
     private Integer calls;
 
     @Column(name ="sms")
+    @NotNull
     private Integer sms;
 
     @Column(name ="internet")
+    @NotNull
     private Integer internet;
 
     @Column(name ="image")

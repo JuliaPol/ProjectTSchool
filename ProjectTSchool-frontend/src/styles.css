@@ -530,7 +530,9 @@ p {
 }
 
 .centerSpin {
-  margin-left: 300px;
+  width: 200px;
+  height: 200px;
+  margin: auto;
 }
 
 #mainPage {
@@ -553,4 +555,11 @@ p {
   height: 30px;
   width: 169px;
   background-color: #53d3cf;
+}
+
+.form-info {
+  margin-left: 15px;
+}
+.option-label {
+  margin-left: 10px;
 }

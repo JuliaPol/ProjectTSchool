@@ -6,11 +6,11 @@
         <h3>Contract options:</h3>
         <form #todoForm="ngForm">
           <div *ngIf="contract?.optionList && contract?.rate?.optionList">
-            <option-list [optionList]="contract?.optionList"
+            <option-list class="col-md-9" [optionList]="contract?.optionList"
                          [rateOptions]="contract?.rate?.optionList" [showSelect]="true"></option-list>
           </div>
           <button type="button" class="btn btn-outline" (click)="onSubmit(); todoForm.reset()"
-                  [disabled]="todoForm.form.invalid || block">Add options
+                  [disabled]="todoForm.form.invalid || block">Change options
           </button>
         </form>
       </clr-tab-content>
@@ -46,3 +46,28 @@
     </clr-tab>
   </clr-tabs>
 </div>
+
+<clr-modal [(clrModalOpen)]="open">
+  <h3 class="modal-title">Delete options</h3>
+  <div class="modal-body">
+    <div class="alert alert-warning">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="exclamation-triangle"></clr-icon>
+          </div>
+          <span class="alert-text">
+                            Do you want to delete all options in the contract?
+                        </span>
+        </div>
+      </div>
+    </div>
+    <h5>Delete options:</h5>
+    <h6 *ngFor="let option of contract?.optionList">{{option?.name}}</h6>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="open = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="confirmDelete()">Ok
+    </button>
+  </div>
+</clr-modal>

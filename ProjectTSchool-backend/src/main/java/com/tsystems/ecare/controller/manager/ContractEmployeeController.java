@@ -3,7 +3,6 @@ package com.tsystems.ecare.controller.manager;
 import com.tsystems.ecare.dto.ContractDTO;
 import com.tsystems.ecare.dto.UserDTO;
 import com.tsystems.ecare.facade.ContractFacade;
-import com.tsystems.ecare.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +16,6 @@ public class ContractEmployeeController {
 
     @Autowired
     private ContractFacade contractFacade;
-
-//    @Autowired
-//    private ContractService contractService;
 
     @RequestMapping(value = "/allContracts", method = RequestMethod.GET)
     @ResponseBody
@@ -49,16 +45,4 @@ public class ContractEmployeeController {
     public void delete(@PathVariable("id") Long id) throws Exception {
         contractFacade.delete(id);
     }
-
-//    @RequestMapping(value = "add/rate/{number}", method = RequestMethod.POST)
-//    @ResponseBody
-//    public void addTariffForCustomer(@PathVariable("number") String number, @RequestParam("rate") String  rate) throws Exception {
-//        contractService.addRateInContract(number,Long.parseLong(rate));
-//    }
-//
-//    @RequestMapping(value = "add/option/{number}", method = RequestMethod.POST)
-//    @ResponseBody
-//    public void addOptionForCustomer(@PathVariable("number") String number, @RequestParam("rate") String  rate) throws Exception {
-//        contractService.addRateInContract(number,Long.parseLong(rate));
-//    }
 }

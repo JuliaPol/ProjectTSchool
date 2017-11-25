@@ -29,8 +29,8 @@ public class OptionController {
     @Secured("ROLE_MANAGER")
     @RequestMapping(value = "/addRule", method = RequestMethod.POST)
     public void addRule(@RequestParam("optionId") Long current,
-                                @RequestParam("isCompatible") boolean isCompatible,
-                                @RequestBody List<String> incompOptions) throws Exception {
+                        @RequestParam("isCompatible") boolean isCompatible,
+                        @RequestBody List<String> incompOptions) throws Exception {
         optionFacade.addIncompatible(current, incompOptions, isCompatible);
     }
 
@@ -51,30 +51,6 @@ public class OptionController {
     public void delete(@RequestParam("id") Long id) throws Exception {
         optionFacade.deleteOption(id);
     }
-
-//    @Secured({"ROLE_MANAGER","ROLE_CUSTOMER"})
-//    @RequestMapping(value = "/available", method = RequestMethod.GET)
-//    public List<OptionDTO> getAllAvailableOptions(@RequestParam("number") String number) {
-//        return optionFacade.getAllAvailableOptionsForCustomer(number);
-//    }
-//
-//    @Secured({"ROLE_MANAGER","ROLE_CUSTOMER"})
-//    @RequestMapping(value = "/unavailable", method = RequestMethod.GET)
-//    public List<OptionDTO> getAllIncompatibleOptions(@RequestParam("number") String number) {
-//        return optionFacade.getAllIncompatibleOptionsForCustomer(number);
-//    }
-//
-//    @Secured({"ROLE_MANAGER","ROLE_CUSTOMER"})
-//    @RequestMapping(value = "/compatible", method = RequestMethod.GET)
-//    public List<OptionDTO> getAllAvailableOptions() {
-//        return optionFacade.getBy(3L);
-//    }
-//
-//    @Secured({"ROLE_MANAGER","ROLE_CUSTOMER"})
-//    @RequestMapping(value = "/active", method = RequestMethod.GET)
-//    public List<OptionDTO> getAllOptions(@RequestParam("number") String number) {
-//        return optionFacade.getAllOptionsForCustomer(number);
-//    }
 
     @Secured({"ROLE_CUSTOMER"})
     @RequestMapping(value = "/free/{number}", method = RequestMethod.GET)

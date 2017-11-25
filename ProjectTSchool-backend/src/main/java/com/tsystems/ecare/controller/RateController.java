@@ -15,22 +15,6 @@ public class RateController {
     @Autowired
     private RateFacade rateFacade;
 
-
-//    @Secured("ROLE_CUSTOMER")
-//    @RequestMapping(method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<RateDTO> findAllForCustomer(@RequestParam("number") String number) throws Exception{
-//        return rateFacade.findAllForCustomer(number);
-//    }
-
-//    @Secured("ROLE_CUSTOMER")
-//    @RequestMapping(value = "/active", method = RequestMethod.GET)
-//    @ResponseBody
-//    public RateDTO findForCustomerByNumber(@RequestParam("number") String number) throws Exception{
-//        return rateFacade.findForCustomerByNumber(number);
-//    }
-
-//    @Secured("ROLE_MANAGER")
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     @ResponseBody
     public List<RateDTO> getAllTariffs() throws Exception {
@@ -55,8 +39,7 @@ public class RateController {
     public void deleteRate(@PathVariable("id") Long id) throws Exception {
         rateFacade.deleteRate(id);
     }
-//
-//    @Secured("ROLE_MANAGER")
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public RateDTO getTariffById(@PathVariable("id") Long id) throws Exception {
