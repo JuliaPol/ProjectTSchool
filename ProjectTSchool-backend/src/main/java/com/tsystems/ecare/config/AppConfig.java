@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         "com.tsystems.ecare.filter",
         "com.tsystems.ecare.facade",
         "com.tsystems.ecare.util",
-        "com.tsystems.ecare.session"
+        "com.tsystems.ecare.session",
 })
 @EnableJpaRepositories
 public class AppConfig {

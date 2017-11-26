@@ -70,7 +70,8 @@ export class ContractOptionsCustomerComponent implements OnInit {
     this.appService.updateContractOptions(this.contractId, this.sharedServiceOptions.getData())
       .then( () => {
         this.open = false;
-        this.sharedService.emitChange(this.contractId);
+        //this.sharedService.emitChange(this.contractId);
+        this.router.navigate(['customer/contract-options-customer']);
         this.init();
       })
   }
