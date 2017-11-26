@@ -19,34 +19,18 @@ export class LoginComponent {
 
   login() {
     this.errorFlag = false;
-    // let params = new URLSearchParams();
-    // params.append('username', this.model.username);
-    // params.append('password', this.model.password);
-    // params.append('grant_type','password');
-    // params.append('client_id','fooClientIdPassword');
-    // let headers = new Headers();
-    // headers.set('content-type', 'application/x-www-form-urlencoded; charset=utf-8');
-    // headers.set('Authorization', 'Basic '+btoa("fooClientIdPassword:secret"));
-    //
-    // const options = new RequestOptions({
-    //   headers: headers
-    // });
-    // return this.http.post('http://localhost:8080/check', params.toString(), options)
-    //   .map(res => this.router.navigate(['/' + res.json().url.split('/')[1]]))
 
     this.service.login(this.model.username, this.model.password)
       .then((response) => {
-        var str = response.url;
-        var newstr = str.slice(21);
-        console.log(newstr);
+        let str = response.url;
+        let newstr = str.slice(21);
         if (newstr === '/login-error')
           this.errorFlag = true;
         else
-          this.router.navigate([str.slice(21)]);
+          this.router.navigate([newstr]);
       })
       .catch((response) => {
       this.errorFlag = true;
-      console.log(response.url);
       }
     )
   }

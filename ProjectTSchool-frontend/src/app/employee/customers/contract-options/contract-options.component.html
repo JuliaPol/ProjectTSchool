@@ -2,7 +2,7 @@
   <h3>Contract options:</h3>
   <form #todoForm="ngForm">
     <div *ngIf="contract?.optionList && contract?.rate?.optionList">
-    <option-list class="col-md-9" [optionList]="contract?.optionList"
+    <option-list [optionList]="contract?.optionList"
                  [rateOptions]="contract?.rate?.optionList" [showSelect]="true"></option-list>
     </div>
     <button type="button" class="btn btn-outline" (click)="onSubmit(); todoForm.reset()"

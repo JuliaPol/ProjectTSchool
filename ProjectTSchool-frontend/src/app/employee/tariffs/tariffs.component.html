@@ -1,12 +1,18 @@
-<div class="col-md-9">
-  <button type="button" title="Add tariff" class="btn btn-icon" (click)="addRate()">
-    <clr-icon shape="plus"></clr-icon>
-    <clr-icon shape="tags"></clr-icon>
-  </button>
-  <clr-stack-view class="userList">
+ <div class="col-md-9">
+    <div class="row" id="search-pan">
+      <button type="button" title="Add tariff" class="btn btn-icon" (click)="addRate()">
+        <clr-icon shape="plus"></clr-icon>
+        <clr-icon shape="tags"></clr-icon>
+      </button>
+      <div class="input-group col-md-6 search-elem">
+        <input type="text" size="45" placeholder="Search..." [(ngModel)]="tariffName">
+      </div>
+    </div>
+
+  <clr-stack-view>
     <clr-stack-header>All tariffs</clr-stack-header>
 
-    <clr-stack-block *ngFor="let rate of rates">
+    <clr-stack-block *ngFor="let rate of rates | tariffFiler: tariffName">
       <clr-stack-label class="customers">{{rate?.name}}</clr-stack-label>
       <clr-stack-content>Cost: {{rate?.cost}}<clr-icon shape="dollar"></clr-icon></clr-stack-content>
       <clr-stack-content>

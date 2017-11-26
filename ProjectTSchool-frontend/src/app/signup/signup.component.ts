@@ -75,7 +75,7 @@ export class SignupComponent {
       this.resetWizard();
     } else {
       this.wizard.forceFinish();
-      this.router.navigate(['/login']);
+      this.signOut('/logout');
     }
   }
 

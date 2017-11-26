@@ -11,7 +11,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Data
@@ -42,14 +44,16 @@ public class Option {
 
     @Column(name = "cost")
     @NotNull
+    @Min(0)
     private Integer cost;
 
     @Column(name = "cost_of_connection")
     @NotNull
+    @Min(0)
     private Integer costOfConnection;
 
     @Column(name = "description")
-    @Max(100)
+    @Size(max = 150)
     private String description;
 
     @Column(name ="image")

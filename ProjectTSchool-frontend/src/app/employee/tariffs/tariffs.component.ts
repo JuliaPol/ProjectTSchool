@@ -13,6 +13,7 @@ import {TariffFormComponent} from "./tariff-form/tariff-form.component";
 export class TariffsComponent implements OnInit {
 
   rates: ITariff = null;
+  tariffName: string;
 
   @ViewChild(TariffFormComponent) modal: TariffFormComponent;
 

@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import "rxjs/add/operator/map";
 import {Router} from "@angular/router";
 import {AppService} from "../../app.service";
-import {IContract, ICustomer} from "../../interfaces/customers";
+import {IContract} from "../../interfaces/customers";
 import {CustomerContractSharedService} from "../customer-contract-shared.service";
 import {ITariff} from "../../interfaces/tariff";
 
@@ -16,7 +16,6 @@ export class ContractTariffComponent implements OnInit {
   open: boolean = false;
   selectedTariffId: number;
   selectedTariff: ITariff;
-  selectedStatus: string;
   contractId: number;
   contract: IContract;
   rates: ITariff[] = [];

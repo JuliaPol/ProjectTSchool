@@ -31,6 +31,8 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebApplication
         servletContext.addListener(new ContextLoaderListener(context));
         servletContext.addFilter("springSecurityFilterChain", DelegatingFilterProxy.class)
                 .addMappingForUrlPatterns(null, false, "/*");
+        servletContext.addFilter("clearCashFilter", ClearCacheFilter.class)
+                .addMappingForUrlPatterns(null, false, "/*");
         // Registering the dispatcher servlet mappings.
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(context));
         dispatcher.setLoadOnStartup(1);

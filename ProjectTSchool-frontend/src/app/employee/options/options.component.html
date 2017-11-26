@@ -1,16 +1,23 @@
 <div class="col-md-9">
-  <button type="button" title="Add option" class="btn btn-icon" (click)="addOption()">
-    <clr-icon shape="plus"></clr-icon>
-    <clr-icon shape="view-cards"></clr-icon>
-  </button>
-  <button type="button" title="Add rules" class="btn btn-icon" (click)="openTab('/employee/options-rules')">
-    <clr-icon shape="plus"></clr-icon>
-    <clr-icon shape="ruler-pencil"></clr-icon>
-  </button>
-  <clr-stack-view class="userList">
+
+  <div class="row" id="search-pan">
+    <button type="button" title="Add option" class="btn btn-icon" (click)="addOption()">
+      <clr-icon shape="plus"></clr-icon>
+      <clr-icon shape="view-cards"></clr-icon>
+    </button>
+    <button type="button" title="Add rules" class="btn btn-icon" (click)="openTab('/employee/options-rules')">
+      <clr-icon shape="plus"></clr-icon>
+      <clr-icon shape="ruler-pencil"></clr-icon>
+    </button>
+    <div class="input-group col-md-6 search-elem">
+      <input type="text" size="45" placeholder="Search..." [(ngModel)]="optionName">
+    </div>
+  </div>
+
+  <clr-stack-view>
     <clr-stack-header>All options</clr-stack-header>
 
-    <clr-stack-block *ngFor="let option of options">
+    <clr-stack-block *ngFor="let option of options | tariffFiler: optionName">
       <clr-stack-label class="customers">{{option?.name}}</clr-stack-label>
       <clr-stack-content>Cost of connection: {{option?.costOfConnection}}<clr-icon shape="dollar"></clr-icon></clr-stack-content>
       <clr-stack-content>

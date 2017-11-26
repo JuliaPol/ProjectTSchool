@@ -41,6 +41,8 @@ import {BasketComponent} from "./customer/basket/basket.component";
 import {MainPageComponent} from "./main/main-page.component";
 import {MainOptionComponent} from "./main/main-option/main-option.component";
 import {MainTariffComponent} from "./main/main-tariff/main-tariff.component";
+import { PermissionErrorComponent } from './permission-error/permission-error.component';
+import {TariffFilter} from "./employee/tariffs/tariff-filter";
 
 @NgModule({
   declarations: [
@@ -59,6 +61,7 @@ import {MainTariffComponent} from "./main/main-tariff/main-tariff.component";
     TariffInfoComponent,
     OptionListComponent,
     CustomerContractNumberFiler,
+    TariffFilter,
     ContractInfoComponent,
     ContractOptionsComponent,
     CustomerComponent,
@@ -69,7 +72,8 @@ import {MainTariffComponent} from "./main/main-tariff/main-tariff.component";
     BasketComponent,
     MainPageComponent,
     MainTariffComponent,
-    MainOptionComponent
+    MainOptionComponent,
+    PermissionErrorComponent
   ],
   imports: [
     BrowserModule,

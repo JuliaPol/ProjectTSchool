@@ -5,6 +5,8 @@ import com.tsystems.ecare.dao.OptionDao;
 import com.tsystems.ecare.dao.RateDao;
 import com.tsystems.ecare.dao.UserDao;
 import com.tsystems.ecare.entities.Contract;
+import com.tsystems.ecare.entities.User;
+import com.tsystems.ecare.entities.enums.ContractStatus;
 import com.tsystems.ecare.service.ContractService;
 import com.tsystems.ecare.service.OptionService;
 import com.tsystems.ecare.service.RateService;
@@ -17,6 +19,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -103,4 +108,64 @@ public class ContractServiceImplTest {
         assertEquals(id, contract1.getId());
     }
 
+    @Test
+    public void searchByNameTest() {
+        String name= "Ivan";
+        String name2 = "Ivan2";
+        Long id = 11L;
+        Long id2 = 12L;
+        int limit = 2;
+        User user = new User();
+        user.setId(id);
+        User user2 = new User();
+        user2.setId(id2);
+        List<User> userList = new ArrayList<>();
+        userList.add(user);
+        userList.add(user2);
+        when(contractDao.searchByName(name, limit)).thenReturn(userList);
+        List<User> c = contractService.searchByName(name, limit);
+        assertNotNull(c);
+        assertEquals(userList.get(0).getId(),c.get(0).getId());
+        assertEquals(userList.get(1).getId(),c.get(1).getId());
+    }
+
+    @Test
+    public void changeStatus() {
+        String number = "11111";
+        Contract contract = new Contract();
+        contract.setId(35L);
+        contract.setNumber(number);
+        contract.setStatus(ContractStatus.AVAILABLE);
+        when(contractService.getContractByNumber(number)).thenReturn(contract);
+        contractService.changeContractStatusByCustomer(number);
+        assertEquals(contract.getStatus(), ContractStatus.BLOCKED_BY_THE_CUSTOMER);
+        contractService.changeContractStatusByCustomer(number);
+        assertEquals(contract.getStatus(), ContractStatus.AVAILABLE);
+    }
+
+    @Test
+    public void changeStatusByEmployee() {
+        String number = "11111";
+        Contract contract = new Contract();
+        contract.setId(35L);
+        contract.setNumber(number);
+        contract.setStatus(ContractStatus.AVAILABLE);
+        when(contractService.getContractByNumber(number)).thenReturn(contract);
+        contractService.changeContractStatusByEmployee(number);
+        assertEquals(contract.getStatus(), ContractStatus.BLOCKED_BY_AN_EMPLOYEE);
+        contractService.changeContractStatusByEmployee(number);
+        assertEquals(contract.getStatus(), ContractStatus.AVAILABLE);
+    }
+
+    @Test
+    public void findUserByNumber() {
+        String number = "111111";
+        Long id = 11L;
+        User user = new User();
+        user.setId(id);
+        when(contractDao.findUserByNumber(number)).thenReturn(user);
+        User user1 = contractService.findUserByNumber(number);
+        assertNotNull(user1);
+        assertEquals(id, user1.getId());
+    }
 }

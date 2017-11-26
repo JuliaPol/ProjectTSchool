@@ -7,6 +7,7 @@ import com.tsystems.ecare.dao.RateDao;
 import com.tsystems.ecare.dao.impl.OptionDaoImpl;
 import com.tsystems.ecare.dao.impl.RateDaoImpl;
 import com.tsystems.ecare.entities.Option;
+import com.tsystems.ecare.entities.User;
 import com.tsystems.ecare.service.OptionService;
 import com.tsystems.ecare.service.impl.OptionServiceImpl;
 import org.junit.Assert;
@@ -23,7 +24,10 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class)
@@ -153,5 +157,15 @@ public class OptionServiceImplTest {
     public void checkNewOptionsForCompatibleOptionsTest() throws Exception {
         boolean compatible = optionService.checkOptionListForCompatible(availableOptions, optionsInContract);
         Assert.assertFalse(compatible);
+    }
+
+    @Test
+    public void getAllOptionsForCustomer() {
+        String number = "11111";
+        when(optionDao.getAllOptionsForCustomer(number)).thenReturn(availableOptions);
+        List<Option> optionList = optionService.getAllOptionsForCustomer(number);
+        assertNotNull(optionList);
+        assertEquals(availableOptions.get(0).getId(),optionList.get(0).getId());
+        assertEquals(availableOptions.get(1).getId(),optionList.get(1).getId());
     }
 }

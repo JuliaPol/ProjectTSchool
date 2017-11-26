@@ -42,29 +42,6 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
     }
 
     /**
-     * The method gets options that aren't contained in the tariff and the contract
-     * and checks for compatibility.
-     * @param number
-     * @return list available options
-     */
-    @Override
-    public List<Option> getAllAvailableOptionsForCustomer(String number) {
-        List<Option> listOptionsInRateAndContract = getAllOptionsInRateAndContract(number);
-        List<Option> freeOptions = getAllFreeOptions(number);
-        List<Option> availableOptions = checkCompatibleOptions(listOptionsInRateAndContract, freeOptions);
-        log.info("Check compatible options:");
-        for (Option o : availableOptions) {
-            log.info(o.getId() + "  " + o.getName());
-        }
-        List<Option> allAvailableOptions = checkIncompatibleOptions(listOptionsInRateAndContract, availableOptions);
-        log.info("Check incompatible options:");
-        for (Option o : allAvailableOptions) {
-            log.info(o.getId() + "  " + o.getName());
-        }
-        return allAvailableOptions;
-    }
-
-    /**
      * The method gets options that are contained in the tariff and the contract.
      * @param number
      * @return list options
@@ -77,30 +54,11 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
         return listOptionsInRateAndContract;
     }
 
-    /**
-     * The method gets list options that aren't contained in tariff or contract
-     * and returns all options that wouldn't plugged in contract.
-     * @param number
-     * @param availableOptions
-     * @return list available options
-     */
-    @Override
-    public List<Option> getAllIncompatibleOptions(String number, List<Option> availableOptions) {
-        List<Option> allOptions = getAllFreeOptions(number);
-        return allOptions.stream()
-                .filter(op -> !availableOptions.contains(op)).collect(Collectors.toList());
-    }
-
     @Override
     public Option findOptionByName(String name) {
         return optionDao.findOptionByName(name);
     }
 
-    @Override
-    public List<Option> getBy(Long id) {
-        Option option = optionDao.get(id);
-        return option.getCompOptions();
-    }
 
     /**
      * The method checks two option lists. If option from availableOptions has the compatible option
@@ -252,16 +210,6 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
         }
     }
 
-
-    @Override
-    public List<Option> getOptionsForRules(Long optionId) {
-        Option option = optionDao.get(optionId);
-        List<Option> optionList= optionDao.getAll();
-        List<Option> checkedOption = option.getCompOptionsOf().stream()
-                .filter(o->!optionList.contains(o)).collect(Collectors.toList());
-        checkedOption.remove(option);
-        return checkedOption;
-    }
 
     /**
      * The method deletes an option.

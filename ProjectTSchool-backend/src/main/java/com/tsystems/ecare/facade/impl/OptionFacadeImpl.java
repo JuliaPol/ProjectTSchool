@@ -64,36 +64,6 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
         return optionDTO;
     }
 
-    @Override
-    public List<OptionDTO> getAllOptionsForCustomer(String number) {
-        return convertList(optionService.getAllOptionsForCustomer(number));
-    }
-
-    @Override
-    public List<OptionDTO> getAllAvailableOptionsForCustomer(String number) {
-        List<Option> optionList = optionService.getAllAvailableOptionsForCustomer(number);
-        log.info("Compatible options:");
-        for (Option o : optionList) {
-            log.info(o.getId() +"  " + o.getName());
-        }
-        return convertList(optionList);
-    }
-
-    @Override
-    public List<OptionDTO> getAllIncompatibleOptionsForCustomer(String number) {
-        List<Option> optionList = optionService.getAllIncompatibleOptions(number,
-                optionService.getAllAvailableOptionsForCustomer(number));
-        log.info("Incompatible options:");
-        for (Option o : optionList) {
-            log.info(o.getId() +"  " + o.getName());
-        }
-        return convertList(optionList);
-    }
-
-    @Override
-    public List<OptionDTO> getBy(Long id) {
-        return convertList(optionService.getBy(id));
-    }
 
     @Override
     public List<OptionDTO> getAllFreeOption(String number) {

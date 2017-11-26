@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 
 @Data
 @AllArgsConstructor
@@ -15,23 +16,23 @@ public class Address {
     private Long id;
 
     @Column(name = "street")
-    @Max(30)
+    @Size(max = 40)
     private String street;
 
     @Column(name = "city")
-    @Max(30)
+    @Size(max = 40)
     private String city;
 
     @Column(name = "country")
-    @Max(30)
+    @Size(max = 40)
     private String country;
 
     @Column(name = "zipcode")
-    @Max(10)
+    @Size(max = 40)
     private String zipcode;
 
     @Column(name = "house_number")
-    @Max(10)
+    @Size(max = 40)
     private Integer houseNumber;
 
     @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)

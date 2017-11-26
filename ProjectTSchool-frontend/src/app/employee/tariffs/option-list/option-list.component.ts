@@ -4,6 +4,7 @@ import {AppService} from "../../../app.service";
 import {OptionListSharedService} from "./option-list-shared.service";
 import {Util} from "../../../util/Util";
 import {CustomerContractSharedService} from "../../../customer/customer-contract-shared.service";
+import {isUndefined} from "util";
 
 
 export interface IOptionItem {
@@ -39,6 +40,7 @@ export class OptionListComponent implements OnInit {
   selectedOption: IOption;
   warnings: IWarnings[] = [];
   purposeListEntity: any[] = [];
+  incompatibleOptions: IOption[] = [];
 
   constructor(private appService: AppService, private sharedService: OptionListSharedService,
               private sharedServiceCust: CustomerContractSharedService) {
@@ -95,26 +97,41 @@ export class OptionListComponent implements OnInit {
   }
 
   private cleanByName(item) {
-    this.anotherOptions
-      .splice(Util.myIndexOf(
-        this.anotherOptions.filter(value => value.name === item).pop(),
-        this.anotherOptions,
-        'name', 'name'), 1);
+    let index = Util.myIndexOf(
+      this.anotherOptions.filter(value => value.name === item).pop(),
+      this.anotherOptions,
+      'name', 'name');
+    if (index || index === 0) {
+      return this.anotherOptions.splice(index, 1);
+    }
   }
 
   private cleanIncomp() {
     if (this.purposeList.length !== 0) {
       this.purposeList.forEach((item) => {
-        item.incompatibleOptions.forEach((i) => {
-          this.cleanByName(i);
-        })
+        if (item.selected) {
+          item.incompatibleOptions.forEach((i) => {
+            this.addToArrayOfIncompatibleAndDeleteFromSelectorOptions(i);
+          })
+        }
       });
     }
+  }
 
+  private addToArrayOfIncompatibleAndDeleteFromSelectorOptions(item) {
+    let incOption = this.cleanByName(item);
+    if (incOption) {
+      if (!Util.myIndexOf(
+          this.incompatibleOptions.filter(value => value.name === item).pop(),
+          this.incompatibleOptions,
+          'name', 'name')) {
+        this.incompatibleOptions.push(incOption.pop());
+      }
+    }
   }
 
   private createOptionItem(item) {
-    let optionItem = {
+    return {
       id: item.id,
       description: item.description,
       cost: item.cost,
@@ -125,11 +142,19 @@ export class OptionListComponent implements OnInit {
       compatibleOptionsOf: item.compatibleOptionsOf,
       selected: true,
     } as IOptionItem;
-
-    return optionItem;
   }
 
   addOption() {
+    this.purposeList.forEach((item) => {
+      if (!item.selected) {
+        this.anotherOptions.push(this.convertToEntity(item));
+      }
+    });
+    this.purposeList = this.purposeList.filter((item) => item.selected);
+    this.incompatibleOptions.forEach((d, i) => {
+      this.anotherOptions.push(d);
+    });
+    this.incompatibleOptions = [];
     this.purposeList.push(this.createOptionItem(this.selectedOption));
     this.clean(this.selectedOption);
     this.cleanIncomp();
@@ -151,9 +176,9 @@ export class OptionListComponent implements OnInit {
         if (!this.arrayContainsArray(item.compatibleOptions)) {
           let desc = item.name + ' can not be added without ';
           let optName: string[] = [];
-          item.compatibleOptions.forEach((i) => {
-            desc = desc + i;
-            optName.push(i);
+          item.compatibleOptions.forEach((d, i) => {
+            desc = desc + d + (i === item.compatibleOptions.length - 1 ? '; ': ', ');
+            optName.push(d);
           });
           this.warnings.push({purposeOption: item.name, description: desc, optionName: optName});
         }
@@ -161,10 +186,23 @@ export class OptionListComponent implements OnInit {
     });
   }
 
-  changeSelected() {
+  changeSelected(option: IOptionItem) {
+    if (!option.selected && option.incompatibleOptions.length !== 0) {
+      this.refreshOptionsInSelector(option);
+    }
+    this.cleanIncomp();
     this.checkPurposeListByCompabilities();
     this.sharedService.saveData(this.convert());
     this.sharedService.saveWarningsCount(this.warnings.length);
+  }
+
+  private refreshOptionsInSelector(option) {
+    option.incompatibleOptions.forEach((i) => {
+      let incOption = Util.myIndexOf(i, this.incompatibleOptions, null, 'name');
+      if (!(isUndefined(incOption) || incOption === -1 || incOption === null)) {
+        this.anotherOptions.push(this.incompatibleOptions.splice(incOption, 1).pop());
+      }
+    });
   }
 
   private cleanWarnings(item) {
@@ -217,10 +255,8 @@ export class OptionListComponent implements OnInit {
       return;
     }
     for (let i = 0; i < this.purposeList.length; i++) {
-      if (!this.purposeList[i].selected) {
-        return -1;
-      }
-      if (this.purposeList[i].name === o) {
+      if (this.purposeList[i].name === o
+        && this.purposeList[i].selected) {
         return i;
       }
     }

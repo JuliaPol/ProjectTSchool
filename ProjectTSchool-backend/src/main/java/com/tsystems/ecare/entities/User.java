@@ -9,10 +9,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
+import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.List;
 
@@ -48,8 +45,7 @@ public class User {
     private String comment;
 
     @Column(name = "login", unique = true)
-    @Min(4)
-    @Max(50)
+    @Size(min = 4, max = 25)
     private String login;
 
     @Past
@@ -81,7 +77,7 @@ public class User {
     private List<Contract> contractList;
 
     @Column(name = "password", nullable = false)
-    @Min(6)
+    @Size(min = 6)
     @NotEmpty
     private String password;
 

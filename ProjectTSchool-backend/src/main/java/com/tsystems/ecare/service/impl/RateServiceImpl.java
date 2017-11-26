@@ -27,13 +27,9 @@ public class RateServiceImpl extends ServiceImpl<Rate> implements RateService {
     private RateDao rateDao;
 
     @Autowired
-    private OptionDao optionDao;
-
-    @Autowired
     private ContractDao contractDao;
 
     @Override
-    @Transactional
     public Rate findByName(String name) {
         return rateDao.findByName(name);
     }

@@ -10,6 +10,7 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -49,8 +50,7 @@ public class Contract {
     private Long id;
 
     @Column(name = "number", unique = true)
-    @Min(10)
-    @Max(25)
+    @Size(min = 10, max = 20)
     private String number;
 
     @Column(name = "creation_date")

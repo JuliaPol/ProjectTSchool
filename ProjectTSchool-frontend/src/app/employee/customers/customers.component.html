@@ -12,7 +12,7 @@
             <input type="text" size="45" placeholder="Search..." [(ngModel)]="contratNumber">
           </div>
         </div>
-        <clr-stack-view class="userList">
+        <clr-stack-view >
           <clr-stack-block *ngFor="let customer of customers | customerContractNumberFiler: contratNumber">
             <clr-stack-label class="customers">{{customer?.firstName}} {{customer?.lastName}}</clr-stack-label>
             <clr-stack-content>

@@ -3,7 +3,7 @@
   <div class="option-label" *ngFor="let option of purposeList">
   <span class="label options" [ngClass]="isOptionInWarningsList(option)">
     <clr-checkbox
-      [(ngModel)]="option.selected" (change)="changeSelected()">
+      [(ngModel)]="option.selected" (change)="changeSelected(option)">
                     {{option?.name}}
                 </clr-checkbox>
   </span>
@@ -12,7 +12,13 @@
     <clr-icon clrTooltipTrigger shape="info-circle" size="24"></clr-icon>
     <clr-tooltip-content clrPosition="top-right" clrSize="md" *clrIfOpen>
       <span *ngFor="let warning of warnings">{{warning?.description}}</span>
-      <!--{{warning?.description }}-->
+    </clr-tooltip-content>
+  </clr-tooltip>
+  <clr-tooltip *ngIf="showSelect && anotherOptions.length === 0 && incompatibleOptions.length !== 0">
+    <clr-icon clrTooltipTrigger shape="info-circle" size="24"></clr-icon>
+    <clr-tooltip-content clrPosition="top-right" clrSize="md" *clrIfOpen>
+      <span>Selector is empty because already chosen options have incompatible: </span>
+      <span *ngFor="let inc of incompatibleOptions">{{inc.name}}, </span>
     </clr-tooltip-content>
   </clr-tooltip>
 </div>
@@ -31,4 +37,3 @@
     </button>
   </div>
 </div>
-

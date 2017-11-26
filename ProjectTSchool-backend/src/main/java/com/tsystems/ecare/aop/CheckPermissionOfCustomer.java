@@ -3,6 +3,8 @@ package com.tsystems.ecare.aop;
 import com.tsystems.ecare.dao.ContractDao;
 import com.tsystems.ecare.dao.UserDao;
 import com.tsystems.ecare.entities.User;
+import com.tsystems.ecare.exception.ResourcePermissionException;
+import com.tsystems.ecare.util.Util;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -23,14 +25,18 @@ public class CheckPermissionOfCustomer {
     @Autowired
     private ContractDao contractDao;
 
-    @Around("@annotation(com.tsystems.ecare.aop.annotation.CheckCustomerPermission) && args(number, principal)")
-    public Object checkPermission(ProceedingJoinPoint joinPoint, String number, Principal principal) throws Throwable {
+    @Autowired
+    private Util util;
+
+    @Around("@annotation(com.tsystems.ecare.aop.annotation.CheckCustomerPermission) && args(id, principal)")
+    public Object checkPermission(ProceedingJoinPoint joinPoint, Long id, Principal principal) throws Throwable {
         User user = userDao.findByLogin(principal.getName());
-        if (user.getContractList() != null && user.getContractList().contains(contractDao.getContractByNumber(number))) {
-            return joinPoint.proceed(new Object[]{number, principal});
+        if (util.isManager() || (util.isCustomer()
+                && user.getContractList() != null
+                && user.getContractList().contains(contractDao.get(id)))) {
+            return joinPoint.proceed(new Object[]{id, principal});
         } else {
-            log.error("Error");
-            return joinPoint.proceed(new Object[]{number, principal});
+            throw new ResourcePermissionException();
         }
     }
 }

@@ -12,6 +12,7 @@ import {OptionFormComponent} from "./option-form/option-form.component";
 })
 export class OptionsComponent implements OnInit {
   options: IOption = null;
+  optionName: string;
 
   @ViewChild(OptionFormComponent) modal: OptionFormComponent;
 

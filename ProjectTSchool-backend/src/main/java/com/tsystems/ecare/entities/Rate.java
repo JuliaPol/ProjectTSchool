@@ -8,7 +8,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Getter
@@ -39,23 +41,27 @@ public class Rate {
 
     @Column(name = "cost")
     @NotNull
+    @Min(0)
     private Integer cost;
 
     @Column(name = "description")
     @NotEmpty
-    @Max(100)
+    @Size(max = 150)
     private String description;
 
     @Column(name ="calls")
     @NotNull
+    @Min(0)
     private Integer calls;
 
     @Column(name ="sms")
     @NotNull
+    @Min(0)
     private Integer sms;
 
     @Column(name ="internet")
     @NotNull
+    @Min(0)
     private Integer internet;
 
     @Column(name ="image")

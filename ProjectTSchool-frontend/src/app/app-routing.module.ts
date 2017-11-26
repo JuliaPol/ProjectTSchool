@@ -23,6 +23,7 @@ import {BasketComponent} from "./customer/basket/basket.component";
 import {MainPageComponent} from "./main/main-page.component";
 import {MainTariffComponent} from "./main/main-tariff/main-tariff.component";
 import {MainOptionComponent} from "./main/main-option/main-option.component";
+import {PermissionErrorComponent} from "./permission-error/permission-error.component";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'main-page', pathMatch: 'full'},
@@ -44,6 +45,7 @@ const appRoutes: Routes = [
     ]
   },
   {path: 'login-error', component: LoginErrorComponent},
+  {path: 'permission-error', component: PermissionErrorComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signUp', component: SignupComponent},
   {

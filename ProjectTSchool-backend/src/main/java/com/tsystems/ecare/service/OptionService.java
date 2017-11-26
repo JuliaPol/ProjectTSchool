@@ -14,15 +14,9 @@ public interface OptionService extends Service<Option> {
 
     List<Option> getAllOptionsForCustomer(String number);
 
-    List<Option> getAllAvailableOptionsForCustomer(String number);
-
     List<Option> getAllOptionsInRateAndContract(String number);
 
-    List<Option> getAllIncompatibleOptions(String number, List<Option> availableOptions);
-
     Option findOptionByName(String name);
-
-    List<Option> getBy(Long id);
 
     List<Option> checkCompatibleOptions(List<Option> optionsInContract, List<Option> availableOption);
 
@@ -35,8 +29,6 @@ public interface OptionService extends Service<Option> {
     boolean checkOptionListForCompatible(List<Option> optionList, List<Option> optionInRateAndContract);
 
     void addIncompatible(Long current, List<String> incomp, boolean isCompatible);
-
-    List<Option> getOptionsForRules(Long optionId);
 
     void deleteOption(Long id);
 
