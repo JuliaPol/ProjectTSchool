@@ -1,6 +1,5 @@
 package com.tsystems.ecare.controller;
 
-
 import com.tsystems.ecare.aop.annotation.CheckCustomerPermission;
 import com.tsystems.ecare.dto.ContractDTO;
 import com.tsystems.ecare.dto.OptionDTO;

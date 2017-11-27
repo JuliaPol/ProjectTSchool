@@ -161,15 +161,15 @@
         <div *ngIf="untouched && !loading" class="form-group">
           <label for="selects_1">Select tariff: </label>
           <div class="select">
-            <!--<select id="selects_1" [(ngModel)]="selectedRate">-->
-            <!--<option value="Default">Select tariff...</option>-->
-            <!--<option *ngFor="let r of rates" [ngValue]="r.id">{{r.name}}</option>-->
-            <!--</select>-->
             <select id="selects_1" [(ngModel)]="selectedRate">
-              <option *ngFor="let t of rates; let i = index" [attr.value]="t.id" [attr.selected]="i == 0 ? true : null">
-                {{t.name}}
-              </option>
+            <option value="">Select tariff...</option>
+            <option *ngFor="let r of rates" [value]="r.name">{{r.name}}</option>
             </select>
+            <!--<select id="selects_1" [(ngModel)]="selectedRate">-->
+              <!--<option *ngFor="let t of rates; let i = index" [attr.value]="t.id" [attr.selected]="i == 0 ? true : null">-->
+                <!--{{t.name}}-->
+              <!--</option>-->
+            <!--</select>-->
           </div>
         </div>
 

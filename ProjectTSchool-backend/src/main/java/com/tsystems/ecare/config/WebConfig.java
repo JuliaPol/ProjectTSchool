@@ -19,7 +19,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import javax.servlet.Filter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;;
+import javax.servlet.ServletRegistration;
 
 @Configuration
 @EnableWebMvc

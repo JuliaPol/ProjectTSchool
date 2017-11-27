@@ -1,7 +1,6 @@
 package com.tsystems.ecare.facade.impl;
 
 import com.tsystems.ecare.dto.ContractDTO;
-import com.tsystems.ecare.dto.CustomerDTO;
 import com.tsystems.ecare.dto.OptionDTO;
 import com.tsystems.ecare.dto.UserDTO;
 import com.tsystems.ecare.entities.Contract;
@@ -22,7 +21,6 @@ import org.springframework.stereotype.Component;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component("contractFacade")
 public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implements ContractFacade {
@@ -43,11 +41,6 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
     private UserFacade userFacade;
 
     private static Logger log = Logger.getLogger(ContractFacadeImpl.class);
-
-    @Override
-    public ContractDTO getContractByNumber(String number) {
-        return convertToDto(contractService.getContractByNumber(number));
-    }
 
     @Override
     public UserDTO findUserByNumber(String number) {
@@ -74,41 +67,6 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
         contractService.changeContractStatusByCustomer(number);
     }
 
-    /**
-     * The method deletes Tariff in Contract.
-     *
-     * @param number
-     */
-    @Override
-    public void deleteRate(String number) {
-        contractService.deleteRate(number);
-    }
-
-    /**
-     * The method deletes Option in Contract.
-     *
-     * @param number
-     * @param optionId
-     */
-    @Override
-    public void deleteOption(String number, Long optionId) throws Exception {
-        contractService.deleteOption(number, optionId);
-    }
-
-    @Override
-    public List<CustomerDTO> searchByNumber(String likeName, int limit) {
-        return contractService.searchByNumber(likeName, limit).stream()
-                .map(userFacade::convertToCustomerDto)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<CustomerDTO> searchByName(String likeName, int limit) {
-        return contractService.searchByName(likeName, limit).stream()
-                .map(userFacade::convertToCustomerDto)
-                .collect(Collectors.toList());
-    }
-
     @Override
     public ContractDTO convertToDto(Contract entity) {
         ContractDTO contractDTO = modelMapper.map(entity, ContractDTO.class);
@@ -126,11 +84,6 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
     @Override
     public Contract convertToEntity(ContractDTO dto) {
         Contract contract = modelMapper.map(dto, Contract.class);
-        try {
-            contract.setCreationDate(dto.dateConverterInEntity());
-        } catch (ParseException e) {
-            log.error("Failed convert");
-        }
         return contract;
     }
 

@@ -1,11 +1,8 @@
 package com.tsystems.ecare.service.impl;
 
 import com.tsystems.ecare.dao.ContractDao;
-import com.tsystems.ecare.dao.OptionDao;
 import com.tsystems.ecare.dao.RateDao;
-import com.tsystems.ecare.entities.Option;
 import com.tsystems.ecare.entities.Rate;
-import com.tsystems.ecare.service.OptionService;
 import com.tsystems.ecare.service.RateService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,11 +46,9 @@ public class RateServiceImplTest {
             return contractDao;
         }
     }
-    @Autowired
-    private RateDao rateDao;
 
     @Autowired
-    private ContractDao contractDao;
+    private RateDao rateDao;
 
     @Autowired
     private RateService rateService;

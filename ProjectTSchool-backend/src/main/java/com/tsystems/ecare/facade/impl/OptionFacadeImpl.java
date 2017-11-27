@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -89,21 +88,21 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
         if (dto.getCompatibleOptions() != null) {
             List<Option> optionList = dto.getCompatibleOptions()
                     .stream()
-                    .map(o->optionService.findOptionByName(o))
+                    .map(o -> optionService.findOptionByName(o))
                     .collect(Collectors.toList());
             option.setCompOptions(optionList);
         }
         if (dto.getIncompatibleOptions() != null) {
             List<Option> optionList = dto.getIncompatibleOptions()
                     .stream()
-                    .map(o->optionService.findOptionByName(o))
+                    .map(o -> optionService.findOptionByName(o))
                     .collect(Collectors.toList());
             option.setIncOptions(optionList);
         }
         if (dto.getCompatibleOptionsOf() != null) {
             List<Option> optionList = dto.getCompatibleOptionsOf()
                     .stream()
-                    .map(o->optionService.findOptionByName(o))
+                    .map(o -> optionService.findOptionByName(o))
                     .collect(Collectors.toList());
             option.setCompOptionsOf(optionList);
         }
@@ -113,7 +112,7 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
     @Override
     public void create(OptionDTO optionDTO) {
         try {
-            if (optionDTO.getImage().equals("")) {
+            if (optionDTO.getImage() == null) {
                 optionDTO.setImage("http://localhost:8080/img/picture.png");
             }
             optionService.insert(convertToEntity(optionDTO));
@@ -122,6 +121,7 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
             log.error("Couldn't create an option:", e);
         }
     }
+
     @Override
     public void deleteOption(Long id) {
         optionService.deleteOption(id);

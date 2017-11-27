@@ -25,7 +25,7 @@ public class ContractEmployeeController {
 
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
     @ResponseBody
-    public UserDTO getCustomerByNumber(@RequestParam("number") String number){
+    public UserDTO getCustomerByNumber(@RequestParam("number") String number) {
         return contractFacade.findUserByNumber(number);
     }
 

@@ -9,8 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AddressDTO extends IdDTO {
     private String country;
+
     private String city;
+
     private String street;
+
     private String houseNumber;
+
     private String zipcode;
 }

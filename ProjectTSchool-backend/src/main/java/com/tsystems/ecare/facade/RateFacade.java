@@ -6,10 +6,10 @@ import com.tsystems.ecare.entities.Rate;
 import java.util.List;
 
 public interface RateFacade extends Facade<RateDTO, Rate> {
-    RateDTO findByName(String name);
-    List<RateDTO> findAllForCustomer(String number);
-    RateDTO findForCustomerByNumber(String number);
+
     void editRate(RateDTO rateDTO);
+
     void deleteRate(Long id);
+
     void create(RateDTO rateDTO);
 }

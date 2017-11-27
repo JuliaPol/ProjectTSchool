@@ -4,7 +4,6 @@ import com.tsystems.ecare.dto.IdDTO;
 import com.tsystems.ecare.facade.Facade;
 import com.tsystems.ecare.service.Service;
 
-import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 

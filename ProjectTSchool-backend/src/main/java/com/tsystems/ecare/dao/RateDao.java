@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface RateDao extends JpaDao<Rate> {
     Rate findByName(String name);
+
     List<Rate> findAllForCustomer(String number);
+
     Rate findForCustomerByNumber(String number);
 }

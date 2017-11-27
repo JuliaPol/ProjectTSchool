@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -76,25 +77,10 @@ public class ContractServiceImplTest {
     }
 
     @Autowired
-    private UserDao userDao;
-
-    @Autowired
     private ContractDao contractDao;
 
     @Autowired
     private ContractService contractService;
-
-    @Autowired
-    private OptionService optionService;
-
-    @Autowired
-    private RateService rateService;
-
-    @Autowired
-    private OptionDao optionDao;
-
-    @Autowired
-    private RateDao rateDao;
 
     @Test
     public void getContractByNumber() {
@@ -117,8 +103,10 @@ public class ContractServiceImplTest {
         int limit = 2;
         User user = new User();
         user.setId(id);
+        user.setLastName(name);
         User user2 = new User();
         user2.setId(id2);
+        user2.setLastName(name2);
         List<User> userList = new ArrayList<>();
         userList.add(user);
         userList.add(user2);
@@ -130,7 +118,42 @@ public class ContractServiceImplTest {
     }
 
     @Test
-    public void changeStatus() {
+    public void searchByNumberTest() {
+        String number= "123";
+        String number2 = "543";
+        String number3 = "1234";
+        Long id = 11L;
+        Long id2 = 12L;
+        int limit = 2;
+        Contract contract = new Contract();
+        Contract contract2 = new Contract();
+        Contract contract3 = new Contract();
+        contract.setNumber(number);
+        contract2.setNumber(number2);
+        contract3.setNumber(number3);
+        List<Contract> contracts = new ArrayList<>();
+        contracts.add(contract);
+        contracts.add(contract2);
+        List<Contract> contracts2 = new ArrayList<>();
+        contracts2.add(contract3);
+        User user = new User();
+        user.setId(id);
+        user.setContractList(contracts);
+        User user2 = new User();
+        user2.setId(id2);
+        user2.setContractList(contracts2);
+        List<User> userList = new ArrayList<>();
+        userList.add(user);
+        userList.add(user2);
+        when(contractDao.searchByNumber(number, limit)).thenReturn(userList);
+        List<User> c = contractService.searchByNumber(number, limit);
+        assertNotNull(c);
+        assertEquals(userList.get(0).getId(),c.get(0).getId());
+        assertEquals(userList.get(1).getId(),c.get(1).getId());
+    }
+
+    @Test
+    public void changeStatusToUnblock() {
         String number = "11111";
         Contract contract = new Contract();
         contract.setId(35L);
@@ -139,12 +162,59 @@ public class ContractServiceImplTest {
         when(contractService.getContractByNumber(number)).thenReturn(contract);
         contractService.changeContractStatusByCustomer(number);
         assertEquals(contract.getStatus(), ContractStatus.BLOCKED_BY_THE_CUSTOMER);
+    }
+
+    @Test
+    public void changeStatusToBlock() {
+        String number = "11111";
+        Contract contract = new Contract();
+        contract.setId(35L);
+        contract.setNumber(number);
+        contract.setStatus(ContractStatus.BLOCKED_BY_THE_CUSTOMER);
+        when(contractService.getContractByNumber(number)).thenReturn(contract);
         contractService.changeContractStatusByCustomer(number);
         assertEquals(contract.getStatus(), ContractStatus.AVAILABLE);
     }
 
     @Test
-    public void changeStatusByEmployee() {
+    public void tryToChangeStatusToUnblock() {
+        String number = "11111";
+        Contract contract = new Contract();
+        contract.setId(35L);
+        contract.setNumber(number);
+        contract.setStatus(ContractStatus.BLOCKED_BY_AN_EMPLOYEE);
+        when(contractService.getContractByNumber(number)).thenReturn(contract);
+        contractService.changeContractStatusByCustomer(number);
+        assertNotEquals(contract.getStatus(), ContractStatus.AVAILABLE);
+    }
+
+    @Test
+    public void changeStatusByEmployeeToUnblock() {
+        String number = "11111";
+        Contract contract = new Contract();
+        contract.setId(35L);
+        contract.setNumber(number);
+        contract.setStatus(ContractStatus.BLOCKED_BY_AN_EMPLOYEE);
+        when(contractService.getContractByNumber(number)).thenReturn(contract);
+        contractService.changeContractStatusByEmployee(number);
+        assertEquals(contract.getStatus(), ContractStatus.AVAILABLE);
+    }
+
+
+    @Test
+    public void changeCustomerStatusByEmployeeToUnblock() {
+        String number = "11111";
+        Contract contract = new Contract();
+        contract.setId(35L);
+        contract.setNumber(number);
+        contract.setStatus(ContractStatus.BLOCKED_BY_THE_CUSTOMER);
+        when(contractService.getContractByNumber(number)).thenReturn(contract);
+        contractService.changeContractStatusByEmployee(number);
+        assertEquals(contract.getStatus(), ContractStatus.AVAILABLE);
+    }
+
+    @Test
+    public void changeStatusByEmployeeToBlock() {
         String number = "11111";
         Contract contract = new Contract();
         contract.setId(35L);
@@ -153,8 +223,6 @@ public class ContractServiceImplTest {
         when(contractService.getContractByNumber(number)).thenReturn(contract);
         contractService.changeContractStatusByEmployee(number);
         assertEquals(contract.getStatus(), ContractStatus.BLOCKED_BY_AN_EMPLOYEE);
-        contractService.changeContractStatusByEmployee(number);
-        assertEquals(contract.getStatus(), ContractStatus.AVAILABLE);
     }
 
     @Test

@@ -1,12 +1,9 @@
 package com.tsystems.ecare.config;
 
-import com.tsystems.ecare.controller.main.MainController;
-import com.tsystems.ecare.exception.LoginFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -17,17 +14,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @Import(DatabaseConfig.class)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private DataSource ecare;
 
     @Autowired
     private UserDetailsService userDetailService;
@@ -46,10 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().loginPage("/login").successForwardUrl("/")
                 .failureUrl("/login-error").permitAll().usernameParameter("username")
-//                .failureUrl("/login-error").permitAll().usernameParameter("username")
                 .passwordParameter("password").loginProcessingUrl("/check")
-//                .failureHandler((request, response, authException)
-//                        -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
                 .and()
                 .logout().logoutSuccessUrl("/login")
                 .and()

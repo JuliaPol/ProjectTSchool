@@ -9,7 +9,8 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
 @Entity
 @Table(name = "user")
 @NamedQueries({
-        @NamedQuery(name = User.USER_FIND_BY_LOGIN ,
+        @NamedQuery(name = User.USER_FIND_BY_LOGIN,
                 query = "select u from User u where u.login=:login")
 })
 public class User {
@@ -50,11 +51,11 @@ public class User {
 
     @Past
     @Column(name = "birth_date")
-    @Type(type="date")
+    @Type(type = "date")
     private Date birthDate;
 
     @Column(name = "registration_date")
-    @Type(type="date")
+    @Type(type = "date")
     private Date registrationDate;
 
     @Column(name = "passport_number", unique = true)
@@ -62,7 +63,7 @@ public class User {
     private String passportNumber;
 
     @Column(name = "passport_issued_when")
-    @Type(type="date")
+    @Type(type = "date")
     private Date passportIssuedWhen;
 
     @Column(name = "passport_issued_by_whom")
@@ -82,7 +83,7 @@ public class User {
     private String password;
 
     @ManyToOne
-    @JoinColumn(name="role_id")
+    @JoinColumn(name = "role_id")
     private Role role;
 
     @Override

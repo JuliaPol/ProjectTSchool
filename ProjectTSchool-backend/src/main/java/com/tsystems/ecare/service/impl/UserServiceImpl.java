@@ -1,10 +1,8 @@
 package com.tsystems.ecare.service.impl;
 
-import com.tsystems.ecare.dao.AddressDao;
 import com.tsystems.ecare.dao.JpaDao;
 import com.tsystems.ecare.dao.RoleDao;
 import com.tsystems.ecare.dao.UserDao;
-import com.tsystems.ecare.dto.UserDTO;
 import com.tsystems.ecare.dto.UserWithPasswordDTO;
 import com.tsystems.ecare.entities.Role;
 import com.tsystems.ecare.entities.User;
@@ -17,7 +15,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +23,6 @@ import java.util.List;
  */
 @Service("userService")
 public class UserServiceImpl extends ServiceImpl<User> implements UserService {
-
 
     @Autowired
     private RoleDao roleDao;
@@ -39,26 +35,48 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService {
 
     private static Logger log = Logger.getLogger(UserServiceImpl.class);
 
+    /**
+     * The method searches for an user by login
+     *
+     * @param login
+     * @return user
+     */
     @Override
     @Transactional
     public User findByLogin(String login) {
         return userDao.findByLogin(login);
     }
 
+    /**
+     * The method gets all customers.
+     *
+     * @return list users
+     */
     @Override
     @Transactional
     public List<User> getAllCustomers() {
         return roleDao.getAllCustomers();
     }
 
+    /**
+     * The method adds new customer.
+     *
+     * @param user
+     */
     @Override
     @Transactional
     public void saveCustomer(User user) {
         user.setRole(getRole("ROLE_CUSTOMER"));
         user.setRegistrationDate(new Date());
         userDao.insert(user);
+        log.info("Added new customer");
     }
 
+    /**
+     * The method sends email to new customer.
+     *
+     * @param user
+     */
     @Async
     @Override
     public void sendEmailToNewCustomer(UserWithPasswordDTO user) {
@@ -71,8 +89,15 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService {
             message.setText("Your login: " + user.getEmail() + "\n" + "Your password: " + user.getLastName());
         }
         mailSender.send(message);
+        log.info("Email sent");
     }
 
+    /**
+     * The method gets role for customer.
+     *
+     * @param name
+     * @return role
+     */
     @Override
     public Role getRole(String name) {
         return roleDao.getByName(name);

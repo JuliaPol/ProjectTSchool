@@ -1,13 +1,13 @@
 package com.tsystems.ecare.entities;
 
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -32,7 +32,8 @@ public class Rate {
     public static final String RATE_FIND_FOR_CUSTOMER_BY_NUMBER = "Rate.findForCustomerByNumber";
     public static final String RATE_FIND_ALL_FOR_CUSTOMER = "Rate.findAllForCustomer";
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name", unique = true)
@@ -49,22 +50,22 @@ public class Rate {
     @Size(max = 150)
     private String description;
 
-    @Column(name ="calls")
+    @Column(name = "calls")
     @NotNull
     @Min(0)
     private Integer calls;
 
-    @Column(name ="sms")
+    @Column(name = "sms")
     @NotNull
     @Min(0)
     private Integer sms;
 
-    @Column(name ="internet")
+    @Column(name = "internet")
     @NotNull
     @Min(0)
     private Integer internet;
 
-    @Column(name ="image")
+    @Column(name = "image")
     private String image;
 
     @LazyCollection(LazyCollectionOption.FALSE)

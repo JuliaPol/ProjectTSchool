@@ -18,7 +18,7 @@ export class SignupComponent {
   customer: any = {};
   address: any = {};
   rates: ITariff[] = [];
-  selectedRate: ITariff;
+  selectedRate: string;
 
   @ViewChild("wizard") wizard: Wizard;
 
@@ -58,9 +58,9 @@ export class SignupComponent {
       this.loading = true;
       this.customer.address = this.address;
       if(isNullOrUndefined(this.selectedRate)) {
-        this.selectedRate = this.rates[0];
+        this.selectedRate = this.rates[0].name;
       }
-      this.customer.comment = this.selectedRate.name;
+      this.customer.comment = this.selectedRate;
       this.appService.createUser(this.customer)
         .then(() => {
           this.errorFlag = false;
@@ -75,16 +75,12 @@ export class SignupComponent {
       this.resetWizard();
     } else {
       this.wizard.forceFinish();
-      this.signOut('/logout');
+      this.router.navigate(['/login']);
     }
   }
 
   change() {
     this.open = true;
-  }
-
-    signOut(link: string) : void {
-    window.location.href = link;
   }
 
   ngOnInit(): void {

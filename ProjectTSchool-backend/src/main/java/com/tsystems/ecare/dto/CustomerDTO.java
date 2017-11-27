@@ -13,12 +13,19 @@ import java.util.List;
 @AllArgsConstructor
 public class CustomerDTO {
     private Long id;
+
     private String firstName;
+
     private String lastName;
+
     private String registrationDate;
+
     private String email;
+
     private String comment;
+
     private List<ContractDTO> contractList;
+
     private static final SimpleDateFormat dateFormat
             = new SimpleDateFormat("yyyy-MM-dd");
 

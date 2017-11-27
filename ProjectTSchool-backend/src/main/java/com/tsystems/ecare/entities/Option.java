@@ -10,7 +10,6 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -35,7 +34,8 @@ public class Option {
     public static final String OPTION_FIND_ALL_OPTIONS_IN_RATE_FOR_CUSTOMER = "Option.findAllOptionsInRateForCustomer";
     public static final String OPTION_FIND_OPTION_BY_NAME = "Option.findAllOptionByName";
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name", unique = true)
@@ -56,7 +56,7 @@ public class Option {
     @Size(max = 150)
     private String description;
 
-    @Column(name ="image")
+    @Column(name = "image")
     private String image;
 
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -70,35 +70,35 @@ public class Option {
     @JsonIgnore
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany
-    @JoinTable(name="incompatible_options",
-            joinColumns=@JoinColumn(name="first_id"),
-            inverseJoinColumns=@JoinColumn(name="second_id")
+    @JoinTable(name = "incompatible_options",
+            joinColumns = @JoinColumn(name = "first_id"),
+            inverseJoinColumns = @JoinColumn(name = "second_id")
     )
     private List<Option> incOptions;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany
-    @JoinTable(name="incompatible_options",
-            joinColumns=@JoinColumn(name="second_id"),
-            inverseJoinColumns=@JoinColumn(name="first_id")
+    @JoinTable(name = "incompatible_options",
+            joinColumns = @JoinColumn(name = "second_id"),
+            inverseJoinColumns = @JoinColumn(name = "first_id")
     )
     private List<Option> incOptionsOf;
 
     @JsonIgnore
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany
-    @JoinTable(name="compatible_options",
-            joinColumns=@JoinColumn(name="first_id"),
-            inverseJoinColumns=@JoinColumn(name="second_id")
+    @JoinTable(name = "compatible_options",
+            joinColumns = @JoinColumn(name = "first_id"),
+            inverseJoinColumns = @JoinColumn(name = "second_id")
     )
     private List<Option> compOptions;
 
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany
-    @JoinTable(name="compatible_options",
-            joinColumns=@JoinColumn(name="second_id"),
-            inverseJoinColumns=@JoinColumn(name="first_id")
+    @JoinTable(name = "compatible_options",
+            joinColumns = @JoinColumn(name = "second_id"),
+            inverseJoinColumns = @JoinColumn(name = "first_id")
     )
     private List<Option> compOptionsOf;
 

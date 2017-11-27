@@ -1,10 +1,11 @@
 package com.tsystems.ecare.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -14,11 +15,17 @@ public class OptionDTO extends IdDTO {
     private String name;
 
     private Integer cost;
+
     private Integer costOfConnection;
+
     private String description;
+
     private String image;
+
     private List<String> compatibleOptions;
+
     private List<String> incompatibleOptions;
+
     private List<String> compatibleOptionsOf;
 
 }

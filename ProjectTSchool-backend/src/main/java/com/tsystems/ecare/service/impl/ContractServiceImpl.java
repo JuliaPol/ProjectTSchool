@@ -11,7 +11,6 @@ import com.tsystems.ecare.entities.User;
 import com.tsystems.ecare.entities.enums.ContractStatus;
 import com.tsystems.ecare.service.ContractService;
 import com.tsystems.ecare.service.OptionService;
-import com.tsystems.ecare.service.RateService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,9 +34,6 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
     private OptionService optionService;
 
     @Autowired
-    private RateService rateService;
-
-    @Autowired
     private UserDao userDao;
 
     @Autowired
@@ -45,24 +41,37 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
 
     private static Logger log = Logger.getLogger(ContractServiceImpl.class);
 
-    @Override
-    @Transactional
-    public List<String> findContactsByUserLogin(String login) {
-        return contractDao.findAllContactsByUserId(login);
-    }
-
+    /**
+     * The method searches for an contract by number
+     *
+     * @param number
+     * @return contract
+     */
     @Override
     @Transactional
     public Contract getContractByNumber(String number) {
         return contractDao.getContractByNumber(number);
     }
 
+    /**
+     * The method searches for an user by number
+     *
+     * @param number
+     * @return user
+     */
     @Override
     @Transactional
     public User findUserByNumber(String number) {
         return contractDao.findUserByNumber(number);
     }
 
+    /**
+     * The method changes contract status.
+     * If contract is blocked, he will has status 'AVAILABLE'.
+     * If contract is unblocked, he will has status 'BLOCKED_BY_AN_EMPLOYEE'.
+     *
+     * @param number
+     */
     @Override
     @Transactional
     public void changeContractStatusByEmployee(String number) {
@@ -75,6 +84,13 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
         log.info("Contract status changed by employee");
     }
 
+    /**
+     * The method changes contract status.
+     * If contract is blocked by customer, he will has status 'AVAILABLE'.
+     * If contract is unblocked, he will has status 'BLOCKED_BY_THE_CUSTOMER'.
+     *
+     * @param number
+     */
     @Override
     @Transactional
     public void changeContractStatusByCustomer(String number) {
@@ -87,96 +103,50 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
         log.info("Contract status changed by customer");
     }
 
-    @Override
-    @Transactional
-    public void deleteRate(String number) {
-        Contract contract = getContractByNumber(number);
-        contract.setRate(null);
-        contract.getOptionList().clear();
-    }
 
-    @Override
-    @Transactional
-    public void deleteOption(String number, Long optionId) {
-        Contract contract = getContractByNumber(number);
-        Option option = null;
-        try {
-            option = optionService.get(optionId);
-            contract.getOptionList().remove(option);
-        } catch (Exception e) {
-            log.error("Couldn't remove an option from the contract", e);
-        }
-    }
-
-    @Override
-    @Transactional
-    public void addRateInContract(String number, Long rateId) {
-        Contract contract = getContractByNumber(number);
-        if (contract.getStatus().equals(ContractStatus.AVAILABLE)) {
-            Rate rate = null;
-            try {
-                rate = rateService.get(rateId);
-                contract.setRate(rate);
-                contract.getOptionList().clear();
-            } catch (Exception e) {
-                log.error("Couldn't add a tariff", e);
-            }
-        }
-    }
-
-    @Override
-    @Transactional
-    public void addOptionsInContract(String number, List<Long> optionIds) {
-        Contract contract = getContractByNumber(number);
-        if (contract.getStatus().equals(ContractStatus.AVAILABLE) && contract.getRate() != null) {
-            for (Long id : optionIds) {
-                Option option = null;
-                try {
-                    option = optionService.get(id);
-                    contract.getOptionList().add(option);
-                } catch (Exception e) {
-                    log.error("Couldn't add an option", e);
-                }
-            }
-        }
-    }
-
-    @Override
-    @Transactional
-    public void addOptionInContract(String number, Long optionId) {
-        Contract contract = getContractByNumber(number);
-        if (contract.getStatus().equals(ContractStatus.AVAILABLE) && contract.getRate() != null) {
-            try {
-                contract.getOptionList().add(optionService.get(optionId));
-            } catch (Exception e) {
-                log.error("Couldn't add an option", e);
-            }
-        }
-    }
-
+    /**
+     * The method searches for an user by like number and gets list.
+     *
+     * @param likeNumber
+     * @param limit
+     * @return list users
+     */
     @Override
     @Transactional
     public List<User> searchByNumber(String likeNumber, int limit) {
         return contractDao.searchByNumber(likeNumber, limit);
     }
 
+    /**
+     * The method searches for an user by like name and gets list.
+     *
+     * @param likeName
+     * @param limit
+     * @return list users
+     */
     @Override
     @Transactional
     public List<User> searchByName(String likeName, int limit) {
         return contractDao.searchByName(likeName, limit);
     }
 
+    /**
+     * The method creates new contract for user.
+     *
+     * @param id
+     * @param contract
+     */
     @Override
     @Transactional
     public void create(Long id, Contract contract) {
         User user = userDao.get(id);
-        if (user.getContractList() == null ) {
+        if (user.getContractList() == null) {
             user.setContractList(new ArrayList<>());
         }
         user.getContractList().add(contract);
         contract.setUser(user);
         Rate rate = contract.getRate();
-        if (rate.getContractList() == null ) {
+        if (rate.getContractList() == null) {
             rate.setContractList(new ArrayList<>());
         }
         contract.setCreationDate(new Date());
@@ -187,6 +157,11 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
         log.info("Added a new contract");
     }
 
+    /**
+     * The method deletes contract for user.
+     *
+     * @param id
+     */
     @Transactional
     @Override
     public void delete(Long id) {
@@ -197,6 +172,11 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
         contractDao.delete(contract);
     }
 
+    /**
+     * The method updates contract for user.
+     *
+     * @param contract
+     */
     @Override
     @Transactional
     public void updateContract(Contract contract) {

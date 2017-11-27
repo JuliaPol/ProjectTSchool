@@ -4,8 +4,10 @@ import com.tsystems.ecare.entities.Option;
 
 import java.util.List;
 
-public interface OptionDao extends JpaDao<Option>{
+public interface OptionDao extends JpaDao<Option> {
     List<Option> getAllOptionsForCustomer(String number);
+
     List<Option> findAllOptionsInRateForCustomer(String number);
+
     Option findOptionByName(String name);
 }

@@ -12,7 +12,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableAsync
-@PropertySource(value = { "classpath:mail.properties" })
+@PropertySource(value = {"classpath:mail.properties"})
 public class MailConfig implements EnvironmentAware {
 
     private Environment env;

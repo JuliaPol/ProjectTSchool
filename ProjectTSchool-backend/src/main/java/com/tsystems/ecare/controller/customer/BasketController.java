@@ -26,7 +26,7 @@ public class BasketController {
     @ResponseBody
     public List<OptionDTO> getOptionsInBasket(@PathVariable("id") String number) {
         return basketBean.getBasket().get(number) == null ? new ArrayList<>()
-                : basketBean.getBasket().get(number) ;
+                : basketBean.getBasket().get(number);
     }
 
     @RequestMapping(value = "/clear/{id}", method = RequestMethod.POST)

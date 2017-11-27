@@ -8,8 +8,6 @@ import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
@@ -46,7 +44,8 @@ public class Contract {
     public static final String CONTRACT_SEARCH_BY_NAME = "Contract.searchByName";
     public static final String CONTRACT_UPDATE_WITH_DELETED_RATE = "Contract.updateWithDeletedRate";
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "number", unique = true)
@@ -54,7 +53,7 @@ public class Contract {
     private String number;
 
     @Column(name = "creation_date")
-    @Type(type="date")
+    @Type(type = "date")
     private Date creationDate;
 
     @ManyToOne
@@ -70,7 +69,7 @@ public class Contract {
     private List<Option> optionList;
 
     @Enumerated(EnumType.STRING)
-    @Column(name ="status")
+    @Column(name = "status")
     private ContractStatus status;
 
     @ManyToOne

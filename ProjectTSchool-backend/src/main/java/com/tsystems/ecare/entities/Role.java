@@ -11,9 +11,9 @@ import java.util.List;
 @Entity
 @Table(name = "role")
 @NamedQueries({
-        @NamedQuery(name = "Role.findAllUsersByRole" ,
+        @NamedQuery(name = "Role.findAllUsersByRole",
                 query = "select r.userList from Role r where r.roleName = 'ROLE_CUSTOMER'"),
-        @NamedQuery(name = "Role.findByName" ,
+        @NamedQuery(name = "Role.findByName",
                 query = "select r from Role r where r.roleName = :name")
 })
 public class Role {

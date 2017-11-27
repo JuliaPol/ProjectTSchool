@@ -15,7 +15,7 @@ export class MainTariffComponent implements OnInit {
   allTariffs: ITariff[];
   rates: ITariff[];
   rate: ITariff;
-  readonly internet: number = 2000;
+  readonly internet: number = 5000;
   readonly sms: number = 100;
   readonly calls: number = 300;
   callsToggle: boolean = false;

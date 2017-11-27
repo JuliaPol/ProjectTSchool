@@ -1,31 +1,24 @@
 package com.tsystems.ecare.config;
 
 import org.hibernate.jpa.HibernatePersistenceProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
-
-import static org.hibernate.cfg.AvailableSettings.*;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource(value = { "classpath:persistence-mysql.properties" })
+@PropertySource(value = {"classpath:persistence-mysql.properties"})
 public class DatabaseConfig implements EnvironmentAware {
 
     private Environment env;
@@ -79,18 +72,4 @@ public class DatabaseConfig implements EnvironmentAware {
     public void setEnvironment(Environment environment) {
         this.env = environment;
     }
-//
-//    @Bean
-//    public MethodValidationPostProcessor methodValidationPostProcessor() {
-//
-//        MethodValidationPostProcessor processor =
-//                new MethodValidationPostProcessor();
-//        processor.setValidator((javax.validation.Validator) validator());
-//        return processor;
-//    }
-//
-//    @Bean
-//    public Validator validator() {
-//        return new LocalValidatorFactoryBean();
-//    }
 }

@@ -1,9 +1,11 @@
 package com.tsystems.ecare.entities;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 @Data
@@ -12,7 +14,8 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "address")
 public class Address {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "street")
@@ -32,7 +35,7 @@ public class Address {
     private String zipcode;
 
     @Column(name = "house_number")
-    @Size(max = 40)
+    @Min(0)
     private Integer houseNumber;
 
     @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
@@ -45,7 +48,7 @@ public class Address {
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
                 ", houseNumber='" + houseNumber + '\'' +
-                ", zipcode='" + zipcode  +
+                ", zipcode='" + zipcode +
                 '}';
     }
 }

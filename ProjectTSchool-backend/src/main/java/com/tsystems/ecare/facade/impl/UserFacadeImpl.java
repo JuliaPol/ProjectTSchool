@@ -1,13 +1,9 @@
 package com.tsystems.ecare.facade.impl;
 
-import com.tsystems.ecare.dao.RoleDao;
 import com.tsystems.ecare.dto.CustomerDTO;
-import com.tsystems.ecare.dto.RateDTO;
 import com.tsystems.ecare.dto.UserDTO;
 import com.tsystems.ecare.dto.UserWithPasswordDTO;
 import com.tsystems.ecare.entities.Address;
-import com.tsystems.ecare.entities.Contract;
-import com.tsystems.ecare.entities.Rate;
 import com.tsystems.ecare.entities.User;
 import com.tsystems.ecare.facade.UserFacade;
 import com.tsystems.ecare.service.ContractService;
@@ -17,23 +13,16 @@ import com.tsystems.ecare.util.Util;
 import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component("userFacade")
 public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFacade {
-
-    @Autowired
-    private Util util;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -44,8 +33,6 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private ContractService contractService;
 
     private static Logger log = Logger.getLogger(UserFacadeImpl.class);
 
@@ -71,7 +58,7 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
     }
 
     @Override
-    public void createCustomer(UserWithPasswordDTO userDTO){
+    public void createCustomer(UserWithPasswordDTO userDTO) {
         try {
             userService.saveCustomer(convertToEntityWithException(userDTO));
             userService.sendEmailToNewCustomer(userDTO);
@@ -121,13 +108,6 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
     @Override
     public User convertToEntity(UserDTO dto) {
         return modelMapper.map(dto, User.class);
-    }
-
-    @Override
-    public UserDTO findByLogin(String login) {
-        UserDTO userDTO = convertToDto(userService.findByLogin(login));
-        userDTO.setContactNumbers(contractService.findContactsByUserLogin(login));
-        return userDTO;
     }
 
     @Override

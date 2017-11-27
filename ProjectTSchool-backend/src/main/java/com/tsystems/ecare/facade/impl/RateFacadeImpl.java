@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component("rateFacade")
 public class RateFacadeImpl extends FacadeImpl<Rate, RateDTO> implements RateFacade {
 
@@ -67,16 +65,6 @@ public class RateFacadeImpl extends FacadeImpl<Rate, RateDTO> implements RateFac
     }
 
     @Override
-    public RateDTO findByName(String name) {
-        return convertToDto(rateService.findByName(name));
-    }
-
-    @Override
-    public List<RateDTO> findAllForCustomer(String number) {
-        return convertList(rateService.findAllForCustomer(number));
-    }
-
-    @Override
     public void editRate(RateDTO rateDTO) {
         rateService.editRate(convertToEntity(rateDTO));
         jmsTemplate.send(s -> s.createTextMessage("edit: rate changed " + rateDTO.getId()));
@@ -99,10 +87,5 @@ public class RateFacadeImpl extends FacadeImpl<Rate, RateDTO> implements RateFac
         } catch (Exception e) {
             log.error("Couldn't create a rate:", e);
         }
-    }
-
-    @Override
-    public RateDTO findForCustomerByNumber(String number) {
-        return convertToDto(rateService.findForCustomerByNumber(number));
     }
 }
