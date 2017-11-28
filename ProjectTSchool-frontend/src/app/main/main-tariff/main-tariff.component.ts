@@ -49,14 +49,14 @@ export class MainTariffComponent implements OnInit {
       this.callsToggle ? item.calls >= this.calls : item.calls <= this.calls
     );
     filterTariffs = filterTariffs.filter(item =>
-      this.smsToggle ? item.sms >= this.sms : item.sms<= this.sms
+      this.smsToggle ? item.sms >= this.sms : item.sms <= this.sms
     );
     filterTariffs = filterTariffs.filter(item =>
       this.internetToggle ? item.internet >= this.internet : item.internet <= this.internet
     );
     this.rate = filterTariffs.sort((a, b) =>
-          a.cost - b.cost).shift();
-    if (isNullOrUndefined(this.rate)){
+      a.cost - b.cost).shift();
+    if (isNullOrUndefined(this.rate)) {
       this.rates = this.allTariffs;
       this.notFound = true;
     } else {

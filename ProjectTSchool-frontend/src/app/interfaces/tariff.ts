@@ -1,5 +1,3 @@
-import {IOption} from "./options";
-
 export interface ITariff {
   id: number,
   name: string,

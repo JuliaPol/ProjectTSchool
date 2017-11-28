@@ -19,9 +19,12 @@
 
     <clr-stack-block *ngFor="let option of options | tariffFiler: optionName">
       <clr-stack-label class="customers">{{option?.name}}</clr-stack-label>
-      <clr-stack-content>Cost of connection: {{option?.costOfConnection}}<clr-icon shape="dollar"></clr-icon></clr-stack-content>
+      <clr-stack-content>Cost of connection: {{option?.costOfConnection}}
+        <clr-icon shape="dollar"></clr-icon>
+      </clr-stack-content>
       <clr-stack-content>
-        <button type="button" title="Change option" class="btn btn-icon butt-right" (click)="change(option.id, '/employee/option-info')">
+        <button type="button" title="Change option" class="btn btn-icon butt-right"
+                (click)="change(option.id, '/employee/option-info')">
           <clr-icon shape="pencil"></clr-icon>
         </button>
         <button type="button" title="Delete option" class="btn btn-icon butt-right" (click)="deleteOption(option.id)">

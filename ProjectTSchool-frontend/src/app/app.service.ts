@@ -1,4 +1,4 @@
-import {Http, Response, Headers, RequestOptions} from "@angular/http";
+import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {Injectable} from "@angular/core";
 import 'rxjs/add/operator/toPromise';
 import {Router} from "@angular/router";
@@ -13,17 +13,17 @@ export class AppService {
     let params = new URLSearchParams();
     params.append('username', username);
     params.append('password', password);
-    params.append('grant_type','password');
-    params.append('client_id','fooClientIdPassword');
+    params.append('grant_type', 'password');
+    params.append('client_id', 'fooClientIdPassword');
     let headers = new Headers();
     headers.set('content-type', 'application/x-www-form-urlencoded; charset=utf-8');
-    headers.set('Authorization', 'Basic '+btoa("fooClientIdPassword:secret"));
+    headers.set('Authorization', 'Basic ' + btoa("fooClientIdPassword:secret"));
 
     const options = new RequestOptions({
       headers: headers
     });
     return this.http.post('http://localhost:8080/check', params.toString(), options)
-        .toPromise()
+      .toPromise()
   }
 
   getCurrentUser(): Promise<Response> {
@@ -63,7 +63,7 @@ export class AppService {
   }
 
   signOut(): Promise<Response> {
-    return this.http.post('http://localhost:8080/logout',{})
+    return this.http.post('http://localhost:8080/logout', {})
       .toPromise();
   }
 

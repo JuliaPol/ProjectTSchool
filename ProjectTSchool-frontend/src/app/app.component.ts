@@ -8,7 +8,5 @@ import 'clarity-icons/shapes/all-shapes';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  signOut(link: string) {
-    window.location.href = link;
-  }
+
 }

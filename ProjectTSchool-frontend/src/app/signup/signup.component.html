@@ -4,7 +4,7 @@
       <form id="signUpLog" class="login" (ngSubmit)="change()" #todoForm="ngForm">
         <label class="title">
           <h3 class="welcome">Sign up to</h3>
-          <a class="nav-link" [routerLink]="['/main-page']" >Satellite</a>
+          <a class="nav-link" [routerLink]="['/main-page']">Satellite</a>
         </label>
         <div class="login-group">
           <input class="username" type="text" id="login_username" name="login" placeholder="Username"
@@ -162,13 +162,13 @@
           <label for="selects_1">Select tariff: </label>
           <div class="select">
             <select id="selects_1" [(ngModel)]="selectedRate">
-            <option value="">Select tariff...</option>
-            <option *ngFor="let r of rates" [value]="r.name">{{r.name}}</option>
+              <!--<option value="">Select tariff...</option>-->
+              <option *ngFor="let r of rates" [value]="r.name">{{r.name}}</option>
             </select>
             <!--<select id="selects_1" [(ngModel)]="selectedRate">-->
-              <!--<option *ngFor="let t of rates; let i = index" [attr.value]="t.id" [attr.selected]="i == 0 ? true : null">-->
-                <!--{{t.name}}-->
-              <!--</option>-->
+            <!--<option *ngFor="let t of rates; let i = index" [attr.value]="t.id" [attr.selected]="i == 0 ? true : null">-->
+            <!--{{t.name}}-->
+            <!--</option>-->
             <!--</select>-->
           </div>
         </div>

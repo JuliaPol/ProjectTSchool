@@ -29,7 +29,7 @@ export class OptionsComponent implements OnInit {
   init() {
     this.options = null;
     this.appService.getAllOptions().then(data =>
-    this.options = data.json() as IOption);
+      this.options = data.json() as IOption);
   }
 
   change(id: number, link: string) {
@@ -41,6 +41,7 @@ export class OptionsComponent implements OnInit {
     this.modal.init();
     this.modal.open = true;
   }
+
   openTab(link: string) {
     this.router.navigate([link]);
   }

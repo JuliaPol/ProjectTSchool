@@ -1,7 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import "rxjs/add/operator/map";
 import {Router} from "@angular/router";
-import {ITariff} from "../../interfaces/tariff";
 import {IOption} from "../../interfaces/options";
 import {AppService} from "../../app.service";
 
@@ -13,6 +12,7 @@ import {AppService} from "../../app.service";
 export class MainOptionComponent implements OnInit {
 
   options: IOption[];
+
   constructor(private appService: AppService,
               private router: Router) {
   }

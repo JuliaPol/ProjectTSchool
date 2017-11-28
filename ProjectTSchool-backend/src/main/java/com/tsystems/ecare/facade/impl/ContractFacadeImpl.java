@@ -67,6 +67,13 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
         contractService.changeContractStatusByCustomer(number);
     }
 
+    /**
+     * The method converts Contract {@link Contract}
+     * to DTO object {@link ContractDTO}.
+     *
+     * @param entity that will be converted
+     * @return converted ContractDTO
+     */
     @Override
     public ContractDTO convertToDto(Contract entity) {
         ContractDTO contractDTO = modelMapper.map(entity, ContractDTO.class);
@@ -81,17 +88,35 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
         return contractDTO;
     }
 
+    /**
+     * The method converts ContractDTO {@link ContractDTO}
+     * to entity object {@link Contract}.
+     *
+     * @param dto that will be converted
+     * @return converted Contract
+     */
     @Override
     public Contract convertToEntity(ContractDTO dto) {
         Contract contract = modelMapper.map(dto, Contract.class);
         return contract;
     }
 
+    /**
+     * The method creates new contract for user.
+     *
+     * @param id
+     * @param contractDTO
+     */
     @Override
     public void create(Long id, ContractDTO contractDTO) {
         contractService.create(id, convertToEntity(contractDTO));
     }
 
+    /**
+     * The method changes tariff in contract for user.
+     *
+     * @param contractDTO
+     */
     @Override
     public void updateContract(ContractDTO contractDTO) throws Exception {
         Rate rate = modelMapper.map(contractDTO.getRate(), Rate.class);
@@ -102,6 +127,12 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
         contractService.updateContract(contract);
     }
 
+    /**
+     * The method changes options in contract for user.
+     *
+     * @param id
+     * @param optionDTOS
+     */
     @Override
     public void updateContractOptions(Long id, List<OptionDTO> optionDTOS) throws Exception {
         Contract contract = contractService.get(id);
@@ -115,6 +146,11 @@ public class ContractFacadeImpl extends FacadeImpl<Contract, ContractDTO> implem
         }
     }
 
+    /**
+     * The method deletes contract for user.
+     *
+     * @param id
+     */
     @Override
     public void delete(Long id) {
         contractService.delete(id);

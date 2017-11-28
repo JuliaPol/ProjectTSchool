@@ -12,7 +12,7 @@
             <input type="text" size="45" placeholder="Search..." [(ngModel)]="contratNumber">
           </div>
         </div>
-        <clr-stack-view >
+        <clr-stack-view>
           <clr-stack-block *ngFor="let customer of customers | customerContractNumberFiler: contratNumber">
             <clr-stack-label class="customers">{{customer?.firstName}} {{customer?.lastName}}</clr-stack-label>
             <clr-stack-content>
@@ -21,7 +21,8 @@
               {{customer.registrationDate}}
             </clr-stack-content>
             <clr-stack-content>
-              <button type="button" title="Add contract" class="btn btn-icon butt-right" (click)="addContract(customer.id)">
+              <button type="button" title="Add contract" class="btn btn-icon butt-right"
+                      (click)="addContract(customer.id)">
                 <clr-icon shape="plus"></clr-icon>
                 <clr-icon shape="phone-handset"></clr-icon>
               </button>
@@ -29,20 +30,23 @@
             <clr-stack-block *ngFor="let contract of customer.contractList">
               <clr-stack-label>{{contract.number}}</clr-stack-label>
               <clr-stack-content>
-                <clr-icon shape="clock"></clr-icon>{{contract.creationDate}}
+                <clr-icon shape="clock"></clr-icon>
+                {{contract.creationDate}}
               </clr-stack-content>
               <clr-stack-content>
-                <button type="button" title="Change contract" class="btn btn-icon butt-right" (click)="changeContract(contract)">
+                <button type="button" title="Change contract" class="btn btn-icon butt-right"
+                        (click)="changeContract(contract)">
                   <clr-icon shape="pencil"></clr-icon>
                 </button>
-                <button type="button" title="Delete contract" class="btn btn-icon butt-right" (click)="deleteContract(contract.id)">
+                <button type="button" title="Delete contract" class="btn btn-icon butt-right"
+                        (click)="deleteContract(contract.id)">
                   <clr-icon shape="trash"></clr-icon>
                 </button>
               </clr-stack-content>
             </clr-stack-block>
           </clr-stack-block>
         </clr-stack-view>
-    </div>
+      </div>
       <clr-wizard #wizard [(clrWizardOpen)]="open" [clrWizardSize]="'lg'"
                   [clrWizardPreventNavigation]="loading"
                   [clrWizardDisableStepnav]="readyToFinish"
@@ -213,4 +217,4 @@
     </clr-tab-content>
   </clr-tab>
 </clr-tabs>
-  <contract-form (onChanged)="init()"></contract-form>
+<contract-form (onChanged)="init()"></contract-form>

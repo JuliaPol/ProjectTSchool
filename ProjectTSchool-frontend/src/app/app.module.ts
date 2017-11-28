@@ -41,7 +41,7 @@ import {BasketComponent} from "./customer/basket/basket.component";
 import {MainPageComponent} from "./main/main-page.component";
 import {MainOptionComponent} from "./main/main-option/main-option.component";
 import {MainTariffComponent} from "./main/main-tariff/main-tariff.component";
-import { PermissionErrorComponent } from './permission-error/permission-error.component';
+import {PermissionErrorComponent} from './permission-error/permission-error.component';
 import {TariffFilter} from "./employee/tariffs/tariff-filter";
 
 @NgModule({
@@ -96,4 +96,5 @@ import {TariffFilter} from "./employee/tariffs/tariff-filter";
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

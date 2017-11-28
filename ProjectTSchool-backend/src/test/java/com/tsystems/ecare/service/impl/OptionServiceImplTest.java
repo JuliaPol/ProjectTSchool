@@ -58,6 +58,7 @@ public class OptionServiceImplTest {
     private List<Option> optionsInContract;
     private List<Option> optionsInContract2;
     private List<Option> availableOptions;
+    private List<Option> availableOptions2;
     private List<Option> allOptions;
     private Option option;
     private Option option1;
@@ -113,6 +114,9 @@ public class OptionServiceImplTest {
         List<Option> optionList1 = new ArrayList<>();
         optionList1.add(option1);
         option3.setIncOptions(optionList1);
+        List<Option> optionList3 = new ArrayList<>();
+        optionList3.add(option3);
+        option1.setIncOptions(optionList3);
         List<Option> optionList2 = new ArrayList<>();
         optionList2.add(option6);
         optionList2.add(option7);
@@ -132,6 +136,10 @@ public class OptionServiceImplTest {
         availableOptions = new ArrayList<>();
         availableOptions.add(option3);
         availableOptions.add(option5);
+
+        availableOptions2 = new ArrayList<>();
+        availableOptions2.add(option1);
+        availableOptions2.add(option5);
 
         allOptions = new ArrayList<>();
         allOptions.add(option);
@@ -166,25 +174,37 @@ public class OptionServiceImplTest {
 
     @Test
     public void checkNewOptionsTest() throws Exception {
-        boolean incompatible = optionService.checkNewOptions(availableOptions, optionsInContract2);
+        String number = "123433";
+        when(optionDao.findAllOptionsInRateForCustomer(number)).thenReturn(optionsInContract2);
+        when(optionDao.getAllOptionsForCustomer(number)).thenReturn(optionsInContract);
+        boolean incompatible = optionService.checkNewOptions(availableOptions2, number);
         Assert.assertTrue(incompatible);
     }
 
     @Test
     public void checkNewOptionsNegativeTest() throws Exception {
-        boolean incompatible = optionService.checkNewOptions(availableOptions, optionsInContract);
+        String number = "123433";
+        when(optionDao.findAllOptionsInRateForCustomer(number)).thenReturn(allOptions);
+        when(optionDao.getAllOptionsForCustomer(number)).thenReturn(optionsInContract);
+        boolean incompatible = optionService.checkNewOptions(availableOptions, number);
         Assert.assertFalse(incompatible);
     }
 
     @Test
     public void checkNewOptionsForCompatibleOptionsTest() throws Exception {
-        boolean compatible = optionService.checkOptionListForCompatible(availableOptions, optionsInContract2);
+        String number = "123433";
+        when(optionDao.findAllOptionsInRateForCustomer(number)).thenReturn(optionsInContract2);
+        when(optionDao.getAllOptionsForCustomer(number)).thenReturn(optionsInContract);
+        boolean compatible = optionService.checkOptionListForCompatible(availableOptions2, number);
         Assert.assertTrue(compatible);
     }
 
     @Test
     public void checkNewOptionsForCompatibleOptionsNegativeTest() throws Exception {
-        boolean compatible = optionService.checkOptionListForCompatible(availableOptions, optionsInContract);
+        String number = "123433";
+        when(optionDao.findAllOptionsInRateForCustomer(number)).thenReturn(allOptions);
+        when(optionDao.getAllOptionsForCustomer(number)).thenReturn(optionsInContract);
+        boolean compatible = optionService.checkOptionListForCompatible(availableOptions2, number);
         Assert.assertFalse(compatible);
     }
 

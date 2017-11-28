@@ -24,9 +24,9 @@ public interface OptionService extends Service<Option> {
 
     List<Option> getAllFreeOptions(String number);
 
-    boolean checkNewOptions(List<Option> optionList, List<Option> optionInRateAndContract);
+    boolean checkNewOptions(List<Option> optionList, String number);
 
-    boolean checkOptionListForCompatible(List<Option> optionList, List<Option> optionInRateAndContract);
+    boolean checkOptionListForCompatible(List<Option> optionList, String number);
 
     void addIncompatible(Long current, List<String> incomp, boolean isCompatible);
 

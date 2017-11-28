@@ -13,7 +13,6 @@ import {OptionListSharedService} from "../option-list/option-list-shared.service
 export class TariffInfoComponent implements OnInit {
   tariff: ITariff = {} as ITariff;
   tariffId: number;
-  result: string;
   loading: boolean = false;
   finish: boolean = false;
   errorFlag: boolean = false;
@@ -53,8 +52,8 @@ export class TariffInfoComponent implements OnInit {
         this.errorFlag = true;
       });
     } else {
-        this.init();
-        this.errorFlag = true;
+      this.init();
+      this.errorFlag = true;
     }
   }
 

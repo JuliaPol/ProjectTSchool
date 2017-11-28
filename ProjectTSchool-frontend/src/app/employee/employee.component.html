@@ -1,9 +1,3 @@
-<!--<div class="btn-group-vertical button-group col-md-4">-->
-<!--<div class="btn-group" *ngFor="let button of buttons">-->
-<!--<input type="submit" id="contactButton" class="btn btn-info button-one button-one1"-->
-<!--[ngClass]="{'active': button.isActive}" value="{{button.name}}" (click)="openTab(button)">-->
-<!--</div>-->
-<!--</div>-->
 <header class="header-6">
   <div class="branding">
     <a href="..." class="nav-link">
@@ -13,31 +7,25 @@
   </div>
   <div class="header-actions">
     <a (click)="signOut('/logout')" class="nav-link nav-text" id="logout">
-      Log Out <clr-icon id="iconLogout" shape="logout"></clr-icon>
+      Log Out
+      <clr-icon id="iconLogout" shape="logout"></clr-icon>
     </a>
   </div>
 </header>
 <div class="content-container">
-  <!--<clr-vertical-nav>-->
-    <!--<a clrVerticalNavLink (click)="openTab(button)" routerLinkActive="active" *ngFor="let button of buttons">{{button.name}}</a>-->
-  <!--</clr-vertical-nav>-->
   <div class="content-area">
     <router-outlet></router-outlet>
   </div>
   <clr-vertical-nav id="navVert">
     <a clrVerticalNavLink routerLink="./customers" routerLinkActive="active">
-      <clr-icon clrVerticalNavIcon shape="users"></clr-icon>Customers</a>
+      <clr-icon clrVerticalNavIcon shape="users"></clr-icon>
+      Customers</a>
     <a clrVerticalNavLink routerLink="./tariffs" routerLinkActive="active">
-      <clr-icon clrVerticalNavIcon shape="tags"></clr-icon>Tariffs</a>
+      <clr-icon clrVerticalNavIcon shape="tags"></clr-icon>
+      Tariffs</a>
     <a clrVerticalNavLink routerLink="./options" routerLinkActive="active">
-      <clr-icon clrVerticalNavIcon shape="view-cards"></clr-icon>Options</a>
+      <clr-icon clrVerticalNavIcon shape="view-cards"></clr-icon>
+      Options</a>
   </clr-vertical-nav>
-  <!--<nav class="sidenav">-->
-    <!--<section class="sidenav-content">-->
-      <!--<a *ngFor="let button of buttons" (click)="openTab(button)" class="nav-link" [ngClass]="{'active': button.isActive}">-->
-        <!--{{button.name}}-->
-      <!--</a>-->
-    <!--</section>-->
-  <!--</nav>-->
 </div>
 

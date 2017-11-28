@@ -41,7 +41,7 @@ export class CustomersComponent implements OnInit {
             return elem;
         });
         this.countCustomer = this.newCustomers.length;
-    }
+      }
     )
   }
 
@@ -87,7 +87,7 @@ export class CustomersComponent implements OnInit {
     this.progress = 0;
     this.errorFlag = false;
     this.untouched = true;
-    this.loading  = false;
+    this.loading = false;
   }
 
   onCommit(): void {
@@ -104,7 +104,7 @@ export class CustomersComponent implements OnInit {
           this.errorFlag = true;
           this.loading = false
         });
-    } else if(this.errorFlag) {
+    } else if (this.errorFlag) {
       this.wizard.forceFinish();
       this.resetWizard();
     } else {

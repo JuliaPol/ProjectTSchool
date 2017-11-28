@@ -18,11 +18,11 @@ export class CustomerContractNumberFiler implements PipeTransform {
     if (customer.contractList.length === 0) {
       return flag;
     }
-      customer.contractList.forEach((contract) => {
-         if (flag !== 1 && contract.number.indexOf(args) !== -1) {
-           flag = 1;
-         }
-      });
+    customer.contractList.forEach((contract) => {
+      if (flag !== 1 && contract.number.indexOf(args) !== -1) {
+        flag = 1;
+      }
+    });
     return flag;
   }
 }

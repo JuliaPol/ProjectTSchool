@@ -1,5 +1,5 @@
 <button [routerLink]="['../customers']" class="btn btn-link">
-  <clr-icon  shape="circle-arrow left" title="Back" style="width: 36px; height: 36px;"></clr-icon>
+  <clr-icon shape="circle-arrow left" title="Back" style="width: 36px; height: 36px;"></clr-icon>
 </button>
 <clr-tabs>
   <clr-tab>
@@ -45,12 +45,15 @@
             </button>
           </form>
           <div class="row">
-            <p class="col-md-12">Cost: {{selectedTariff?.cost}}<clr-icon shape="dollar"></clr-icon></p>
+            <p class="col-md-12">Cost: {{selectedTariff?.cost}}
+              <clr-icon shape="dollar"></clr-icon>
+            </p>
           </div>
           <div class="row">
-            <p class="col-md-3" >SMS: {{selectedTariff?.sms}}</p> <p class="col-md-5"> Mobile Internet: {{selectedTariff?.internet}}
-            Gb </p>
-           <p class="col-md-4"> Minutes: {{selectedTariff?.calls}}</p>
+            <p class="col-md-3">SMS: {{selectedTariff?.sms}}</p>
+            <p class="col-md-5"> Mobile Internet: {{selectedTariff?.internet}}
+              Gb </p>
+            <p class="col-md-4"> Minutes: {{selectedTariff?.calls}}</p>
           </div>
           <ul class="list-group list-group-flush option-rate-list">
             <li class="list-group-item" *ngFor="let option of selectedTariff?.optionList">
@@ -58,10 +61,12 @@
             </li>
           </ul>
         </div>
-        <div class="col-md-5 right-rate" >
+        <div class="col-md-5 right-rate">
           <p id="changedRate">{{contract?.rate?.name}}</p>
           <div class="row">
-          <p class="col-md-12">Cost: {{contract?.rate?.cost}}<clr-icon shape="dollar"></clr-icon></p>
+            <p class="col-md-12">Cost: {{contract?.rate?.cost}}
+              <clr-icon shape="dollar"></clr-icon>
+            </p>
           </div>
           <div class="row">
             <p class="col-md-3">SMS: {{contract?.rate?.sms}}</p>

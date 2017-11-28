@@ -1,15 +1,13 @@
 import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {AppService} from "../../../app.service";
-import {IOption} from "../../../interfaces/options";
 
 @Component({
   moduleId: module.id,
   selector: 'option-form',
   templateUrl: './option-form.component.html'
 })
-export class OptionFormComponent implements OnInit{
+export class OptionFormComponent implements OnInit {
   option: any = {};
-  result: string = '';
   open: boolean = false;
   loading: boolean = false;
   finish: boolean = false;

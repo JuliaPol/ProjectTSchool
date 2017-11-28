@@ -4,7 +4,7 @@ import {Injectable} from "@angular/core";
 export class ContractSharedService {
   sharingData: number = 0;
 
-  saveData(id){
+  saveData(id) {
     this.sharingData = id;
   }
 

@@ -4,9 +4,10 @@ import {Injectable} from "@angular/core";
 export class TariffSharedService {
   sharingData: number = 0;
 
-  saveData(id){
+  saveData(id) {
     this.sharingData = id;
   }
+
   getData() {
     return this.sharingData;
   }

@@ -37,7 +37,8 @@
         <label for="costOfConnectionInput" aria-haspopup="true" role="tooltip"
                [class.invalid]="costOfConnection.touched && !costOfConnection.valid"
                class="tooltip tooltip-validation tooltip-md tooltip-top-left">
-          <input type="text" id="costOfConnectionInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="option.costOfConnection"
+          <input type="text" id="costOfConnectionInput" required pattern="[1-9]\d{0,9}$"
+                 [(ngModel)]="option.costOfConnection"
                  name="costOfConnection" #costOfConnection="ngModel">
           <span class="tooltip-content">Invalid cost!</span>
         </label>
@@ -62,8 +63,9 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline" (click)="reset()">Cancel</button>
-    <button  *ngIf="finish" type="button" class="btn btn-outline" (click)="exit()">Ok</button>
-    <button  *ngIf="!finish" type="button" class="btn btn-primary" (click)="onSubmit()" [disabled]="formPage.form.invalid">Add
+    <button *ngIf="finish" type="button" class="btn btn-outline" (click)="exit()">Ok</button>
+    <button *ngIf="!finish" type="button" class="btn btn-primary" (click)="onSubmit()"
+            [disabled]="formPage.form.invalid">Add
     </button>
   </div>
 </clr-modal>

@@ -29,7 +29,7 @@ export class ContractInfoComponent implements OnInit {
 
   init() {
     this.contractId = this.sharedService.getData();
-    this.appService.getContractById(this.contractId).then(data =>  {
+    this.appService.getContractById(this.contractId).then(data => {
       this.contract = data.json() as IContract;
     }).then(() => {
       this.setTariff();
@@ -44,9 +44,11 @@ export class ContractInfoComponent implements OnInit {
     this.selectedTariffId = this.contract.rate.id;
     this.selectedStatus = this.contract.status;
   }
+
   statusSelected(status) {
     this.selectedStatus = status;
-}
+  }
+
   rateSelected(id) {
     this.selectedTariffId = parseInt(id);
     this.selectedTariff = this.rates[this.myIndexOf(this.rates

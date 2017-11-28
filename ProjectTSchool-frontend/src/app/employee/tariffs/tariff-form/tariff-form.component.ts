@@ -6,7 +6,7 @@ import {AppService} from "../../../app.service";
   selector: 'tariff-form',
   templateUrl: './tariff-form.component.html'
 })
-export class TariffFormComponent implements OnInit{
+export class TariffFormComponent implements OnInit {
 
   open: boolean = false;
   loading: boolean = false;
@@ -18,7 +18,6 @@ export class TariffFormComponent implements OnInit{
   }
 
   tariff: any = {};
-  result: string = '';
 
   ngOnInit() {
     this.init();

@@ -4,7 +4,7 @@ import {AppService} from "../../../app.service";
 import {OptionListSharedService} from "./option-list-shared.service";
 import {Util} from "../../../util/Util";
 import {CustomerContractSharedService} from "../../../customer/customer-contract-shared.service";
-import {isUndefined} from "util";
+import {isNullOrUndefined, isUndefined} from "util";
 
 
 export interface IOptionItem {
@@ -145,28 +145,30 @@ export class OptionListComponent implements OnInit {
   }
 
   addOption() {
-    this.purposeList.forEach((item) => {
-      if (!item.selected) {
-        this.anotherOptions.push(this.convertToEntity(item));
-      }
-    });
-    this.purposeList = this.purposeList.filter((item) => item.selected);
-    this.incompatibleOptions.forEach((d, i) => {
-      this.anotherOptions.push(d);
-    });
-    this.incompatibleOptions = [];
-    this.purposeList.push(this.createOptionItem(this.selectedOption));
-    this.clean(this.selectedOption);
-    this.cleanIncomp();
-    this.checkPurposeListByCompabilities();
-    this.warnings.forEach((item) => {
-      if (this.arrayContainsArray(item.optionName)) {
-        this.cleanWarnings(item);
-      }
-    });
-    this.selectedOption = null;
-    this.sharedService.saveData(this.convert());
-    this.sharedService.saveWarningsCount(this.warnings.length);
+    if (!isNullOrUndefined(this.selectedOption)) {
+      this.purposeList.forEach((item) => {
+        if (!item.selected) {
+          this.anotherOptions.push(this.convertToEntity(item));
+        }
+      });
+      this.purposeList = this.purposeList.filter((item) => item.selected);
+      this.incompatibleOptions.forEach((d, i) => {
+        this.anotherOptions.push(d);
+      });
+      this.incompatibleOptions = [];
+      this.purposeList.push(this.createOptionItem(this.selectedOption));
+      this.clean(this.selectedOption);
+      this.cleanIncomp();
+      this.checkPurposeListByCompabilities();
+      this.warnings.forEach((item) => {
+        if (this.arrayContainsArray(item.optionName)) {
+          this.cleanWarnings(item);
+        }
+      });
+      this.selectedOption = null;
+      this.sharedService.saveData(this.convert());
+      this.sharedService.saveWarningsCount(this.warnings.length);
+    }
   }
 
   private checkPurposeListByCompabilities() {
@@ -177,7 +179,7 @@ export class OptionListComponent implements OnInit {
           let desc = item.name + ' can not be added without ';
           let optName: string[] = [];
           item.compatibleOptions.forEach((d, i) => {
-            desc = desc + d + (i === item.compatibleOptions.length - 1 ? '; ': ', ');
+            desc = desc + d + (i === item.compatibleOptions.length - 1 ? '; ' : ', ');
             optName.push(d);
           });
           this.warnings.push({purposeOption: item.name, description: desc, optionName: optName});

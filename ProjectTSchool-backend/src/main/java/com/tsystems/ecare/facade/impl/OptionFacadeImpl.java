@@ -64,24 +64,47 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
     }
 
 
+    /**
+     * The method returns list options that aren't contained in tariff or contract.
+     *
+     * @param number
+     * @return list of free options
+     */
     @Override
     public List<OptionDTO> getAllFreeOption(String number) {
         return convertList(optionService.getAllFreeOptions(number));
     }
 
+    /**
+     * The method checks if options in list are incompatible
+     *
+     * @param optionList
+     * @return false if incompatible or true if not
+     */
     @Override
     public boolean checkNewOptions(List<OptionDTO> optionList, String number) {
-        List<Option> optionInRateAndContract = optionService.getAllOptionsInRateAndContract(number);
-        return optionService.checkNewOptions(convertToEntitiesList(optionList), optionInRateAndContract);
+        return optionService.checkNewOptions(convertToEntitiesList(optionList), number);
     }
 
+    /**
+     * The method checks if options in list are compatible with options in rate and contract
+     *
+     * @param optionList
+     * @return false if incompatible or true if not
+     */
     @Override
     public boolean checkNewOptionsForCompatible(List<OptionDTO> optionList, String number) {
-        List<Option> optionInRateAndContract = optionService.getAllOptionsInRateAndContract(number);
         return optionService.checkOptionListForCompatible(convertToEntitiesList(optionList),
-                optionInRateAndContract);
+                number);
     }
 
+    /**
+     * The method converts OptionDTO {@link OptionDTO}
+     * to entity object {@link Option}.
+     *
+     * @param dto that will be converted
+     * @return converted Option
+     */
     @Override
     public Option convertToEntity(OptionDTO dto) {
         Option option = modelMapper.map(dto, Option.class);
@@ -109,6 +132,11 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
         return option;
     }
 
+    /**
+     * The method creates an option and sends message.
+     *
+     * @param optionDTO
+     */
     @Override
     public void create(OptionDTO optionDTO) {
         try {
@@ -122,12 +150,22 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
         }
     }
 
+    /**
+     * The method deletes an option and sends message.
+     *
+     * @param id option
+     */
     @Override
     public void deleteOption(Long id) {
         optionService.deleteOption(id);
         jmsTemplate.send(s -> s.createTextMessage("delete: option deleted " + id));
     }
 
+    /**
+     * The method edits an option and sends message.
+     *
+     * @param optionDTO
+     */
     @Override
     public void edit(OptionDTO optionDTO) {
         try {
@@ -138,6 +176,13 @@ public class OptionFacadeImpl extends FacadeImpl<Option, OptionDTO> implements O
         }
     }
 
+    /**
+     * The method adds rules for options. They can be compatible or incompatible.
+     *
+     * @param current      option id
+     * @param incomp       list options
+     * @param isCompatible options are compatible or not
+     */
     @Override
     public void addIncompatible(Long current, List<String> incomp, boolean isCompatible) {
         optionService.addIncompatible(current, incomp, isCompatible);

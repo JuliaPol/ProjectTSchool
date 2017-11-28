@@ -36,6 +36,11 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
 
     private static Logger log = Logger.getLogger(UserFacadeImpl.class);
 
+    /**
+     * The method gets all customers.
+     *
+     * @return list customers
+     */
     @Override
     public List<CustomerDTO> getAllCustomers() {
         return userService.getAllCustomers().stream()
@@ -57,6 +62,11 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
         return userDTO;
     }
 
+    /**
+     * The method creates new customer.
+     *
+     * @param userDTO
+     */
     @Override
     public void createCustomer(UserWithPasswordDTO userDTO) {
         try {
@@ -67,6 +77,13 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
         }
     }
 
+    /**
+     * The method converts User {@link User}
+     * to DTO object {@link CustomerDTO}.
+     *
+     * @param entity that will be converted
+     * @return converted CustomerDTO
+     */
     @Override
     public CustomerDTO convertToCustomerDto(User entity) {
         CustomerDTO customerDTO = modelMapper.map(entity, CustomerDTO.class);
@@ -75,6 +92,13 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
     }
 
 
+    /**
+     * The method converts User {@link UserWithPasswordDTO}
+     * to entity object {@link User}. The methods sets password and login.
+     *
+     * @param dto that will be converted
+     * @return converted User
+     */
     private User convertToEntityWithException(UserWithPasswordDTO dto) throws ParseException {
         Address address = modelMapper.map(dto.getAddress(), Address.class);
         User user = new User();
@@ -105,11 +129,25 @@ public class UserFacadeImpl extends FacadeImpl<User, UserDTO> implements UserFac
         return user;
     }
 
+    /**
+     * The method converts User {@link UserDTO}
+     * to entity object {@link User}.
+     *
+     * @param dto that will be converted
+     * @return converted User
+     */
     @Override
     public User convertToEntity(UserDTO dto) {
         return modelMapper.map(dto, User.class);
     }
 
+    /**
+     * The method finds user by login and converts User {@link CustomerDTO}
+     * to entity object {@link User}.
+     *
+     * @param login
+     * @return converted User
+     */
     @Override
     public CustomerDTO findByLoginWithContract(String login) {
         return convertToCustomerDto(userService.findByLogin(login));

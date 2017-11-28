@@ -30,9 +30,9 @@ export class LoginComponent {
           this.router.navigate([newstr]);
       })
       .catch((response) => {
-      this.errorFlag = true;
-      }
-    )
+          this.errorFlag = true;
+        }
+      )
   }
 
   openTab(link: string) {

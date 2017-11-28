@@ -2,16 +2,16 @@
   <h3 class="modal-title">New tariff:</h3>
   <div class="modal-body">
     <form #formPage="ngForm">
-        <div class="form-group">
-          <label class="required ">Name:</label>
-          <label for="nameInput" aria-haspopup="true" role="tooltip"
-                 [class.invalid]="name.touched && !name.valid"
-                 class="tooltip tooltip-validation tooltip-sm tooltip-bottom-right">
-            <input type="text" id="nameInput" required [(ngModel)]="tariff.name"
-                   name="name" #name="ngModel">
-            <span class="tooltip-content">Name is required!</span>
-          </label>
-        </div>
+      <div class="form-group">
+        <label class="required ">Name:</label>
+        <label for="nameInput" aria-haspopup="true" role="tooltip"
+               [class.invalid]="name.touched && !name.valid"
+               class="tooltip tooltip-validation tooltip-sm tooltip-bottom-right">
+          <input type="text" id="nameInput" required [(ngModel)]="tariff.name"
+                 name="name" #name="ngModel">
+          <span class="tooltip-content">Name is required!</span>
+        </label>
+      </div>
       <div class="form-group">
         <label class="required ">Description:</label>
         <label for="descrInput" aria-haspopup="true" role="tooltip"
@@ -82,8 +82,9 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline" (click)="reset()">Cancel</button>
-    <button  *ngIf="finish" type="button" class="btn btn-outline" (click)="exit()">Ok</button>
-    <button  *ngIf="!finish" type="button" class="btn btn-primary" (click)="onSubmit()" [disabled]="formPage.form.invalid">Add
+    <button *ngIf="finish" type="button" class="btn btn-outline" (click)="exit()">Ok</button>
+    <button *ngIf="!finish" type="button" class="btn btn-primary" (click)="onSubmit()"
+            [disabled]="formPage.form.invalid">Add
     </button>
   </div>
 </clr-modal>

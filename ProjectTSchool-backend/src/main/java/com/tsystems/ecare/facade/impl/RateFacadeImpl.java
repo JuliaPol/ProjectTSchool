@@ -55,6 +55,13 @@ public class RateFacadeImpl extends FacadeImpl<Rate, RateDTO> implements RateFac
     }
 
 
+    /**
+     * The method converts Tariff {@link RateDTO}
+     * to enity object {@link Rate}.
+     *
+     * @param dto that will be converted
+     * @return converted Rate
+     */
     @Override
     public Rate convertToEntity(RateDTO dto) {
         Rate rate = modelMapper.map(dto, Rate.class);
@@ -64,18 +71,33 @@ public class RateFacadeImpl extends FacadeImpl<Rate, RateDTO> implements RateFac
         return rate;
     }
 
+    /**
+     * The method edits a tariff and sends message.
+     *
+     * @param rateDTO
+     */
     @Override
     public void editRate(RateDTO rateDTO) {
         rateService.editRate(convertToEntity(rateDTO));
         jmsTemplate.send(s -> s.createTextMessage("edit: rate changed " + rateDTO.getId()));
     }
 
+    /**
+     * The method deletes a tariff and sends message.
+     *
+     * @param id tariff
+     */
     @Override
     public void deleteRate(Long id) {
         rateService.deleteRate(id);
         jmsTemplate.send(s -> s.createTextMessage("delete: rate delete " + id));
     }
 
+    /**
+     * The method creates a tariff and sends message.
+     *
+     * @param rateDTO
+     */
     @Override
     public void create(RateDTO rateDTO) {
         try {

@@ -12,7 +12,6 @@ import {Router} from "@angular/router";
 
 export class OptionInfoComponent implements OnInit {
   option: IOption = {} as IOption;
-  result: string = '';
   optionId: number;
   loading: boolean = false;
   finish: boolean = false;

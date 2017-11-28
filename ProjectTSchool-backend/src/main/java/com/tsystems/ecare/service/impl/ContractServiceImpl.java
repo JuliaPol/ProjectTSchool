@@ -166,9 +166,15 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
     @Override
     public void delete(Long id) {
         Contract contract = contractDao.get(id);
+        Rate rate = contract.getRate();
+        User user = contract.getUser();
+        rate.getContractList().remove(contract);
+        user.getContractList().remove(contract);
         contract.setRate(null);
         contract.setOptionList(new ArrayList<>());
         contract.setUser(null);
+        rateDao.update(rate);
+        userDao.update(user);
         contractDao.delete(contract);
     }
 

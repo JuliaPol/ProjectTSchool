@@ -1,10 +1,8 @@
 import {Component, ViewChild} from "@angular/core";
-import {Http} from "@angular/http";
 import {AppService} from "../app.service";
 import {Router} from "@angular/router";
 import {Wizard} from "clarity-angular";
 import {ITariff} from "../interfaces/tariff";
-import {EmailValidator, FormBuilder, Validators} from '@angular/forms';
 import {isNullOrUndefined} from "util";
 
 @Component({
@@ -49,7 +47,7 @@ export class SignupComponent {
     this.progress = 0;
     this.errorFlag = false;
     this.untouched = true;
-    this.loading  = false;
+    this.loading = false;
   }
 
   onCommit(): void {
@@ -57,7 +55,7 @@ export class SignupComponent {
       this.untouched = false;
       this.loading = true;
       this.customer.address = this.address;
-      if(isNullOrUndefined(this.selectedRate)) {
+      if (isNullOrUndefined(this.selectedRate)) {
         this.selectedRate = this.rates[0].name;
       }
       this.customer.comment = this.selectedRate;
@@ -70,7 +68,7 @@ export class SignupComponent {
           this.errorFlag = true;
           this.loading = false
         });
-    } else if(this.errorFlag) {
+    } else if (this.errorFlag) {
       this.wizard.forceFinish();
       this.resetWizard();
     } else {

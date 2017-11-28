@@ -125,14 +125,17 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
      */
     @Override
     public boolean checkNewOptions(List<Option> optionList,
-                                   List<Option> optionInRateAndContract) {
-        log.info("Options" + optionList);
-        log.info("Options in contract and rate" + optionInRateAndContract);
+                                   String number) {
+        List<Option> optionInRate = optionDao.findAllOptionsInRateForCustomer(number);
+        List<Option> oldOptionInContract = optionDao.getAllOptionsForCustomer(number);
+        log.info("Options new" + optionList);
+        log.info("Options old" + oldOptionInContract);
+        log.info("Options in rate" + optionInRate);
         for (Option option : optionList) {
             log.info("option " + option + " incompOpt " + option.getIncOptions());
             if (option.getIncOptions() != null && option.getIncOptions().size() > 0 && (option.getIncOptions().stream()
-                    .anyMatch(optionList::contains) || option.getIncOptions().stream()
-                    .anyMatch(optionInRateAndContract::contains))) {
+                    .anyMatch(optionList::contains) || (!oldOptionInContract.contains(option) && option.getIncOptions().stream()
+                    .anyMatch(optionInRate::contains)))) {
                 log.info("error");
                 return false;
             }
@@ -148,14 +151,17 @@ public class OptionServiceImpl extends ServiceImpl<Option> implements OptionServ
      */
     @Override
     public boolean checkOptionListForCompatible(List<Option> optionList,
-                                                List<Option> optionInRateAndContract) {
+                                                String number) {
+        List<Option> optionInRate = optionDao.findAllOptionsInRateForCustomer(number);
+        List<Option> oldOptionInContract = optionDao.getAllOptionsForCustomer(number);
         log.info("Options" + optionList);
-        log.info("Options in contract and rate" + optionInRateAndContract);
+        log.info("Options old" + oldOptionInContract);
+        log.info("Options in rate" + optionInRate);
         for (Option option : optionList) {
             log.info("option " + option + " compOpt " + option.getCompOptions());
-            if (option.getCompOptions() != null && option.getCompOptions().size() > 0 && option.getCompOptions().stream()
+            if (!oldOptionInContract.contains(option) && option.getCompOptions() != null && option.getCompOptions().size() > 0 && option.getCompOptions().stream()
                     .noneMatch(optionList::contains) && option.getCompOptions().stream()
-                    .noneMatch(optionInRateAndContract::contains)) {
+                    .noneMatch(optionInRate::contains)) {
                 log.info("error");
                 return false;
             }

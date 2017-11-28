@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import "rxjs/add/operator/map";
 import {Router} from "@angular/router";
 import {AppService} from "../../app.service";
-import {IContract, ICustomer} from "../../interfaces/customers";
+import {IContract} from "../../interfaces/customers";
 import {CustomerContractSharedService} from "../customer-contract-shared.service";
 import {OptionListSharedService} from "../../employee/tariffs/option-list/option-list-shared.service";
 import {IOption} from "../../interfaces/options";

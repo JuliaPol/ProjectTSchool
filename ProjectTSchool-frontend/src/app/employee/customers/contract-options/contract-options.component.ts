@@ -26,7 +26,7 @@ export class ContractOptionsComponent implements OnInit {
 
   init() {
     this.contractId = this.sharedService.getData();
-    this.appService.getContractById(this.contractId).then(data =>  {
+    this.appService.getContractById(this.contractId).then(data => {
       this.contract = data.json() as IContract;
     })
   }
