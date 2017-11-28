@@ -1,8 +1,8 @@
 import { browser, by, element } from 'protractor';
 
-export class AppPage {
+export class MainPage {
   navigateTo() {
-    return browser.get('/#/login');
+    return browser.get('/#/main-page');
   }
 
   getEmailInput() {
@@ -23,9 +23,6 @@ export class AppPage {
     return element(by.id('logout'));
   }
   getTitle() {
-    return element(by.tagName('h3')).getText();
-  }
-  navigateToEmployee() {
-    return browser.get('/#/employee');
+    return element(by.id('weRecommend')).getText();
   }
 }

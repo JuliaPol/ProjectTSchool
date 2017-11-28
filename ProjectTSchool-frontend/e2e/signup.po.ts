@@ -1,16 +1,20 @@
 import { browser, by, element } from 'protractor';
 
-export class AppPage {
+export class SignupPage {
   navigateTo() {
-    return browser.get('/#/login');
+    return browser.get('/#/signUp');
+  }
+
+  getLoginInput() {
+    return element(by.id('login_username'));
   }
 
   getEmailInput() {
-    return element(by.css('.username'));
+    return element(by.id('login_email'));
   }
 
   getPasswordInput() {
-    return element(by.css('.password'));
+    return element(by.id('login_password'));
   }
 
   getErrorMessage() {
@@ -19,13 +23,7 @@ export class AppPage {
   getLoginButton() {
     return element(by.buttonText('NEXT'));
   }
-  getLogoutButton() {
-    return element(by.id('logout'));
-  }
   getTitle() {
     return element(by.tagName('h3')).getText();
-  }
-  navigateToEmployee() {
-    return browser.get('/#/employee');
   }
 }

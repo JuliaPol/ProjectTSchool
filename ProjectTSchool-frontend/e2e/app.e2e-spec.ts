@@ -21,6 +21,15 @@ describe('fga-frontend App', () => {
   it('should login successful', () => {
     page.getEmailInput().sendKeys('ivan_88');
     page.getPasswordInput().sendKeys('4321');
-    page.getLoginButton().click();
+    page.getLoginButton().submit();
+    page.navigateToEmployee();
+  });
+
+  it('should login successful customer', () => {
+    page.getEmailInput().clear();
+    page.getPasswordInput().clear();
+    page.getEmailInput().sendKeys('jpi287');
+    page.getPasswordInput().sendKeys('1234');
+    page.getLoginButton().submit();
   });
 });

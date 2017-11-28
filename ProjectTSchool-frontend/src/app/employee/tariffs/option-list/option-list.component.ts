@@ -215,6 +215,18 @@ export class OptionListComponent implements OnInit {
   }
 
   arrayContainsArray(subset) {
+    if (this.rateOptions) {
+      let list = [];
+      this.rateOptions.forEach((item) => {
+        list.push(this.createOptionItem(item))
+      });
+      this.purposeList.forEach((item) => {
+        list.push(item)
+      });
+      return subset.every((value) => {
+        return (this.myIndexForTariffOptions(value, list) >= 0);
+      });
+    }
     return subset.every((value) => {
       return (this.myIndexPurposeList(value) >= 0);
     });
@@ -250,6 +262,19 @@ export class OptionListComponent implements OnInit {
     } else {
       return '';
     }
+  }
+
+  private myIndexForTariffOptions(o, list) {
+    if (!o) {
+      return;
+    }
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].name === o
+        && list[i].selected) {
+        return i;
+      }
+    }
+    return -1;
   }
 
   private myIndexPurposeList(o) {
