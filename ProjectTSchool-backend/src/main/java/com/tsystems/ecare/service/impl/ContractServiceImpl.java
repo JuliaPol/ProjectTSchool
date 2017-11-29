@@ -31,9 +31,6 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
     private ContractDao contractDao;
 
     @Autowired
-    private OptionService optionService;
-
-    @Autowired
     private UserDao userDao;
 
     @Autowired
@@ -150,10 +147,10 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
             rate.setContractList(new ArrayList<>());
         }
         contract.setCreationDate(new Date());
+        contractDao.insert(contract);
         rate.getContractList().add(contract);
         rateDao.update(rate);
         userDao.update(user);
-        contractDao.insert(contract);
         log.info("Added a new contract");
     }
 
@@ -173,9 +170,9 @@ public class ContractServiceImpl extends ServiceImpl<Contract> implements Contra
         contract.setRate(null);
         contract.setOptionList(new ArrayList<>());
         contract.setUser(null);
+        contractDao.delete(contract);
         rateDao.update(rate);
         userDao.update(user);
-        contractDao.delete(contract);
     }
 
     /**

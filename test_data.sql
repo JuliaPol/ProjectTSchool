@@ -1,5 +1,5 @@
 INSERT INTO user (login, passport_number, address_id, first_name, last_name,
-                  email, password, role_id, registration_date) VALUES ('jpi287', '123456', 1, 'Julia',
+                  email, password, role_id, registration_date) VALUES ('jpi287', '123456', 1, 'Olga',
                                            'Polushina', 'jpi287@mail.ru', '$2a$04$Bc845c8WU6L2aFCyQ/sHkuCc5BMCL6pQyDnfrNXVOV4V8OUQs7d8O', 1, '2017-10-10');
 -- password:1234
 INSERT INTO user (login, passport_number, address_id, first_name, last_name,
@@ -46,16 +46,6 @@ VALUES ('Winterfell', 'Westeros', '11131');
 INSERT INTO address (country)
 VALUES ('Earth');
 
-INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405123', 'AVAILABLE', 1, 1, '2017-10-11');
-INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405124', 'BLOCKED_BY_AN_EMPLOYEE', 1, 2, '2017-10-11');
-INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405125', 'AVAILABLE', 3, 3, '2017-10-16');
-INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405126', 'AVAILABLE', 4, 1, '2017-11-16');
-INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405127', 'BLOCKED_BY_AN_EMPLOYEE', 5, 3, '2017-11-11');
-INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405128', 'AVAILABLE', 6, 6, '2017-11-14');
-INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405129', 'BLOCKED_BY_AN_EMPLOYEE', 6, 2, '2017-11-17');
-INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405140', 'AVAILABLE', 7, 5, '2017-11-19');
-INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405141', 'BLOCKED_BY_AN_EMPLOYEE', 7, 4, '2017-11-21');
-
 INSERT INTO rate (name, cost, calls, sms, internet, description, image)
 VALUES ('For ladies', 300, 1000 , 1000, 2000 , 'Simple, wonderful tariff', 'http://localhost:8080/img/star (1).png');
 INSERT INTO rate (name, cost, calls, sms, internet, description, image)
@@ -86,6 +76,18 @@ INSERT INTO `option` (name, cost, cost_of_connection, description, image) VALUES
 INSERT INTO `option` (name, cost, cost_of_connection, description, image) VALUES ('More SMS', 200, 100, 'Include 2000 SMS', 'http://localhost:8080/img/smartphone (1).png');
 INSERT INTO `option` (name, cost, cost_of_connection, description, image) VALUES ('Top calls', 300, 100, 'Include 1000 minutes for outgoing calls:', 'http://localhost:8080/img/users.png');
 INSERT INTO `option` (name, cost, cost_of_connection, description, image) VALUES ('Roaming', 100, 100, 'For traveling', 'http://localhost:8080/img/route.png');
+
+
+INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405123', 'AVAILABLE', 1, 1, '2017-10-11');
+INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405124', 'BLOCKED_BY_AN_EMPLOYEE', 1, 2, '2017-10-11');
+INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405125', 'AVAILABLE', 3, 3, '2017-10-16');
+INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405126', 'AVAILABLE', 4, 1, '2017-11-16');
+INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405127', 'BLOCKED_BY_AN_EMPLOYEE', 5, 3, '2017-11-11');
+INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405128', 'AVAILABLE', 6, 6, '2017-11-14');
+INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405129', 'BLOCKED_BY_AN_EMPLOYEE', 6, 2, '2017-11-17');
+INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405140', 'AVAILABLE', 7, 5, '2017-11-19');
+INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405141', 'BLOCKED_BY_AN_EMPLOYEE', 7, 4, '2017-11-21');
+INSERT INTO contract (number, status, customer_id, rate_id, creation_date) VALUES ('1401401405142', 'AVAILABLE', 7, 3, '2017-11-25');
 
 INSERT INTO rate_option (rate_id, option_id) VALUES (1, 1);
 INSERT INTO rate_option (rate_id, option_id) VALUES (1, 2);

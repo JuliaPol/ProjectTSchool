@@ -35,6 +35,8 @@ export class ContractFormComponent implements OnInit {
 
   reset() {
     this.customerId = 0;
+    this.selectedNumber = null;
+    this.selectedTariff = null;
     this.rates = [];
     this.numbers = [];
     this.open = false;

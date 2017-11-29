@@ -2,6 +2,8 @@ package com.tsystems.ecare.aop;
 
 import com.tsystems.ecare.dao.ContractDao;
 import com.tsystems.ecare.dao.UserDao;
+import com.tsystems.ecare.dto.ContractDTO;
+import com.tsystems.ecare.entities.Contract;
 import com.tsystems.ecare.entities.User;
 import com.tsystems.ecare.exception.ResourcePermissionException;
 import com.tsystems.ecare.util.Util;
@@ -28,13 +30,22 @@ public class CheckPermissionOfCustomer {
     @Autowired
     private Util util;
 
-    @Around("@annotation(com.tsystems.ecare.aop.annotation.CheckCustomerPermission) && args(id, principal)")
+    @Around("@annotation(com.tsystems.ecare.aop.annotation.CheckCustomerPermission) && args(contractDTO, principal)")
+    public Object checkPermission(ProceedingJoinPoint joinPoint, ContractDTO contractDTO, Principal principal) throws Throwable {
+        return getObject(joinPoint, principal, contractDao.get(contractDTO.getId()));
+    }
+
+    @Around("@annotation(com.tsystems.ecare.aop.annotation.CheckCustomerPermission) && args(id, principal,..)")
     public Object checkPermission(ProceedingJoinPoint joinPoint, Long id, Principal principal) throws Throwable {
+        return getObject(joinPoint, principal, contractDao.get(id));
+    }
+
+    private Object getObject(ProceedingJoinPoint joinPoint, Principal principal, Contract contract) throws Throwable {
         User user = userDao.findByLogin(principal.getName());
-        if (util.isManager() || (util.isCustomer()
+        if (util.isManager() || (util.isCustomer())
                 && user.getContractList() != null
-                && user.getContractList().contains(contractDao.get(id)))) {
-            return joinPoint.proceed(new Object[]{id, principal});
+                && user.getContractList().contains(contract)) {
+            return joinPoint.proceed();
         } else {
             throw new ResourcePermissionException();
         }

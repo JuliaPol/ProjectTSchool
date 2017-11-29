@@ -1,5 +1,6 @@
 package com.tsystems.ecare.controller;
 
+
 import com.tsystems.ecare.aop.annotation.CheckCustomerPermission;
 import com.tsystems.ecare.dto.ContractDTO;
 import com.tsystems.ecare.dto.OptionDTO;
@@ -25,13 +26,15 @@ public class ContractController {
         return contractFacade.get(id);
     }
 
+    @CheckCustomerPermission
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(@RequestBody ContractDTO contractDTO) throws Exception {
+    public void update(@RequestBody ContractDTO contractDTO, Principal principal) throws Exception {
         contractFacade.updateContract(contractDTO);
     }
 
+    @CheckCustomerPermission
     @RequestMapping(value = "/update/options/{id}", method = RequestMethod.POST)
-    public void updateOptions(@PathVariable("id") Long id, @RequestBody List<OptionDTO> optionDTOS) throws Exception {
+    public void updateOptions(@PathVariable("id") Long id, Principal principal, @RequestBody List<OptionDTO> optionDTOS) throws Exception {
         contractFacade.updateContractOptions(id, optionDTOS);
     }
 }

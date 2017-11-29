@@ -59,7 +59,6 @@ public class Contract {
     private Date creationDate;
 
     @ManyToOne
-    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "rate_id")
     private Rate rate;
 
@@ -76,7 +75,6 @@ public class Contract {
     private ContractStatus status;
 
     @ManyToOne
-    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "customer_id")
     private User user;
 
