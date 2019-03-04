@@ -23,6 +23,5 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.data
-    command: --disable-partition-engine-check
     ports:
       - "3306:3306"

@@ -35,6 +35,7 @@ public class DatabaseConfig implements EnvironmentAware {
     public DataSource dataSource() {
         Properties properties = new Properties();
         properties.setProperty(HIBENATE_ENABLE_LAZY_LOAD_NO_TRANS, "true");
+        properties.setProperty("hibernate.dialect", HIBERNATE_DIALECT);
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName(env.getRequiredProperty(JDBC_DRIVER_CLASS_NAME));
         driverManagerDataSource.setUsername(env.getRequiredProperty(JDBC_USER));
