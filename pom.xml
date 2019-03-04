@@ -216,8 +216,8 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <username>admin</username>
-                    <password>admin</password>
+                    <username>admin1</username>
+                    <password>admin1</password>
                     <hostname>localhost</hostname>
                     <port>9990</port>
                     <filename>${project.build.finalName}.war</filename>
