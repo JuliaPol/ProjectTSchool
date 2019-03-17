@@ -75,7 +75,7 @@
                 <label for="nameInput" aria-haspopup="true" role="tooltip"
                        [class.invalid]="firstName.touched && !firstName.valid"
                        class="tooltip tooltip-validation tooltip-md tooltip-bottom-right">
-                  <input type="text" id="nameInput" required [(ngModel)]="customer.firstName" name="firstName"
+                  <input type="text" id="nameInput" required [(ngModel)]="customer.firstName" name="firstName" maxlength="35"
                          #firstName="ngModel">
                   <span class="tooltip-content">This field cannot be empty!</span>
                 </label>
@@ -85,7 +85,7 @@
                 <label for="LastNameInput" aria-haspopup="true" role="tooltip"
                        [class.invalid]="lastName.touched && !lastName.valid"
                        class="tooltip tooltip-validation tooltip-md tooltip-top-left">
-                  <input type="text" id="LastNameInput" required [(ngModel)]="customer.lastName" name="lastName"
+                  <input type="text" id="LastNameInput" required [(ngModel)]="customer.lastName" name="lastName" maxlength="35"
                          #lastName="ngModel">
                   <span class="tooltip-content">This field cannot be empty!</span>
                 </label>
@@ -108,7 +108,7 @@
               <div class="form-group">
                 <label class="required">Passport number:</label>
                 <label for="passportNumberInput" aria-haspopup="true" role="tooltip"
-                       [class.invalid]="passportNumber.touched && !passportNumber.valid"
+                       [class.invalid]="passportNumber.touched && !passportNumber.valid" maxlength="35"
                        class="tooltip tooltip-validation tooltip-md tooltip-top-left">
                   <input type="text" id="passportNumberInput" required [(ngModel)]="customer.passportNumber"
                          name="passportNumber" #passportNumber="ngModel">
@@ -117,7 +117,7 @@
               </div>
               <div class="form-group">
                 <label>Passport issued by whom:</label>
-                <input type="text" name="passportIssuedByWhom"
+                <input type="text" name="passportIssuedByWhom" maxlength="100"
                        [(ngModel)]="customer.passportIssuedByWhom" #passportIssuedByWhom="ngModel">
               </div>
               <div class="form-group">
@@ -138,31 +138,31 @@
           <div *ngIf="untouched && !loading" class="form-group">
             <div class="form-group row">
               <label class="col-md-4"> Country: </label>
-              <input class="col-md-8" type="text" name="country" [(ngModel)]="address.country"
+              <input class="col-md-8" type="text" name="country" [(ngModel)]="address.country" maxlength="100"
                      #country="ngModel">
             </div>
             <p></p>
             <div class="form-group row">
               <label class="col-md-4">City: </label>
-              <input class="col-md-8" type="text" name="city" [(ngModel)]="address.city"
+              <input class="col-md-8" type="text" name="city" [(ngModel)]="address.city" maxlength="100"
                      #city="ngModel">
             </div>
             <p></p>
             <div class="form-group row">
               <label class="col-md-4">Street: </label>
-              <input class="col-md-8" type="text" name="street" [(ngModel)]="address.street"
+              <input class="col-md-8" type="text" name="street" [(ngModel)]="address.street" maxlength="100"
                      #street="ngModel">
             </div>
             <p></p>
             <div class="form-group row">
               <label class="col-md-4">Zipcode: </label>
-              <input class="col-md-8" type="text" name="zipcode" [(ngModel)]="address.zipcode"
+              <input class="col-md-8" type="text" name="zipcode" [(ngModel)]="address.zipcode" maxlength="10"
                      #zipcode="ngModel">
             </div>
             <p></p>
             <div class="form-group row">
               <label class="col-md-4">House number: </label>
-              <input class="col-md-8" type="text" name="houseNumber" [(ngModel)]="address.houseNumber"
+              <input class="col-md-8" type="text" name="houseNumber" [(ngModel)]="address.houseNumber" maxlength="10"
                      #houseNumber="ngModel">
             </div>
           </div>

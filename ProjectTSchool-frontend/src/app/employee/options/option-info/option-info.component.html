@@ -27,7 +27,7 @@
       <label for="nameInput" aria-haspopup="true" role="tooltip"
              [class.invalid]="name.touched && !name.valid"
              class="tooltip tooltip-validation tooltip-sm tooltip-bottom-right">
-        <input type="text" id="nameInput" required [(ngModel)]="option.name"
+        <input type="text" id="nameInput" required [(ngModel)]="option.name" maxlength="35"
                name="name" #name="ngModel" value="{{option?.name}}">
         <span class="tooltip-content">Name is required!</span>
       </label>
@@ -37,7 +37,7 @@
       <label for="descrInput" aria-haspopup="true" role="tooltip"
              [class.invalid]="description.touched && !description.valid"
              class="tooltip tooltip-validation tooltip-md tooltip-top-left">
-        <input size="45" type="text" id="descrInput" required [(ngModel)]="option.description"
+        <input size="45" type="text" id="descrInput" required [(ngModel)]="option.description" maxlength="100"
                name="description" #description="ngModel" value="{{option?.description}}">
         <span class="tooltip-content">Invalid description!</span>
       </label>
@@ -49,7 +49,7 @@
       <label for="costInput" aria-haspopup="true" role="tooltip"
              [class.invalid]="cost.touched && !cost.valid"
              class="tooltip tooltip-validation tooltip-md tooltip-top-left">
-        <input type="text" id="costInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="option.cost"
+        <input type="text" id="costInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="option.cost" maxlength="11"
                name="cost" #cost="ngModel" value="{{option?.cost}}">
         <span class="tooltip-content">Invalid cost!</span>
       </label>
@@ -59,7 +59,7 @@
       <label for="costOfConnectionInput" aria-haspopup="true" role="tooltip"
              [class.invalid]="costOfConnection.touched && !costOfConnection.valid"
              class="tooltip tooltip-validation tooltip-md tooltip-top-left">
-        <input type="text" id="costOfConnectionInput" required pattern="[1-9]\d{0,9}$"
+        <input type="text" id="costOfConnectionInput" required pattern="[1-9]\d{0,9}$" maxlength="11"
                [(ngModel)]="option.costOfConnection"
                name="costOfConnection" #costOfConnection="ngModel" value="{{option?.costOfConnection}}">
         <span class="tooltip-content">Invalid cost!</span>

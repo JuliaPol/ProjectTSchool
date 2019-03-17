@@ -27,7 +27,7 @@
       <label for="nameInput" aria-haspopup="true" role="tooltip"
              [class.invalid]="name.touched && !name.valid"
              class="tooltip tooltip-validation tooltip-sm tooltip-bottom-right">
-        <input type="text" id="nameInput" required [(ngModel)]="tariff.name"
+        <input type="text" id="nameInput" required [(ngModel)]="tariff.name" maxlength="35"
                name="name" #name="ngModel" value="{{tariff?.name}}">
         <span class="tooltip-content">Name is required!</span>
       </label>
@@ -37,7 +37,7 @@
       <label for="costInput" aria-haspopup="true" role="tooltip"
              [class.invalid]="cost.touched && !cost.valid"
              class="tooltip tooltip-validation tooltip-md tooltip-top-left">
-        <input type="text" id="costInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="tariff.cost"
+        <input type="text" id="costInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="tariff.cost" maxlength="11"
                name="cost" #cost="ngModel" value="{{tariff?.cost}}">
         <span class="tooltip-content">Invalid cost!</span>
       </label>
@@ -49,7 +49,7 @@
       <label for="descrInput" aria-haspopup="true" role="tooltip"
              [class.invalid]="description.touched && !description.valid"
              class="tooltip tooltip-validation tooltip-md tooltip-top-left">
-        <input size="45" type="text" id="descrInput" required [(ngModel)]="tariff.description"
+        <input size="45" type="text" id="descrInput" required [(ngModel)]="tariff.description" maxlength="100"
                name="description" #description="ngModel" value="{{tariff?.description}}">
         <span class="tooltip-content">Invalid description!</span>
       </label>
@@ -61,7 +61,7 @@
       <label for="smsInput" aria-haspopup="true" role="tooltip"
              [class.invalid]="sms.touched && !sms.valid"
              class="tooltip tooltip-validation tooltip-md tooltip-top-left">
-        <input type="text" id="smsInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="tariff.sms"
+        <input type="text" id="smsInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="tariff.sms" maxlength="11"
                name="sms" #sms="ngModel" value="{{tariff?.sms}}">
         <span class="tooltip-content">Invalid sms!</span>
       </label>
@@ -71,7 +71,7 @@
       <label for="callsInput" aria-haspopup="true" role="tooltip"
              [class.invalid]="calls.touched && !calls.valid"
              class="tooltip tooltip-validation tooltip-md tooltip-top-left">
-        <input type="text" id="callsInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="tariff.calls"
+        <input type="text" id="callsInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="tariff.calls" maxlength="11"
                name="calls" #calls="ngModel" value="{{tariff?.calls}}">
         <span class="tooltip-content">Invalid field!</span>
       </label>
@@ -83,7 +83,7 @@
       <label for="intInput" aria-haspopup="true" role="tooltip"
              [class.invalid]="internet.touched && !internet.valid"
              class="tooltip tooltip-validation tooltip-md tooltip-top-left">
-        <input type="text" id="intInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="tariff.internet"
+        <input type="text" id="intInput" required pattern="[1-9]\d{0,9}$" [(ngModel)]="tariff.internet" maxlength="11"
                name="internet" #internet="ngModel" value="{{tariff?.internet}}">
         <span class="tooltip-content">Invalid field!</span>
       </label>

@@ -8,9 +8,9 @@
           <h5 class="hint">Use your username to sign in or create one now</h5>
         </label>
         <div class="login-group">
-          <input class="username" type="text" placeholder="Username" name="username" #username="ngModel"
+          <input class="username" type="text" placeholder="Username" name="username" #username="ngModel" maxlength="35"
                  [(ngModel)]="model.username">
-          <input class="password" type="password" placeholder="Password" name="password" #password="ngModel"
+          <input class="password" type="password" placeholder="Password" name="password" #password="ngModel" maxlength="35"
                  [(ngModel)]="model.password"/>
           <div *ngIf="errorFlag" class="error active">
             Invalid user name or password

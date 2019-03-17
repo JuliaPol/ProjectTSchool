@@ -8,17 +8,21 @@
         </label>
         <div class="login-group">
           <input class="username" type="text" id="login_username" name="login" placeholder="Username"
-                 [(ngModel)]="customer.login" #login="ngModel" required minlength="4">
+                 [(ngModel)]="customer.login" #login="ngModel" required minlength="4" maxlength="45">
           <input class="username" type="text" id="login_email" name="anEmail"
                  placeholder="Email" [(ngModel)]="customer.email" #anEmail="ngModel" required email>
           <input class="password" type="password" id="login_password" name="password"
-                 placeholder="Password" [(ngModel)]="customer.password" #password="ngModel" required minlength="6">
+                 placeholder="Password" [(ngModel)]="customer.password" #password="ngModel" required minlength="6"
+                 maxlength="35">
           <div *ngIf="login.errors && (login.dirty || login.touched)" class="error active">
             <div [hidden]="!login.errors.required">
               Login is required!
             </div>
             <div [hidden]="!login.errors.minlength">
               Username must be at least 4 characters long.
+            </div>
+            <div [hidden]="!login.errors.maxlength">
+              Username must not be greater than 45 characters.
             </div>
           </div>
           <div *ngIf="anEmail.errors && (anEmail.dirty || anEmail.touched)" class="error active">
@@ -32,6 +36,9 @@
             </div>
             <div [hidden]="!password.errors.minlength">
               Password must be at least 6 characters long.
+            </div>
+            <div [hidden]="!password.errors.maxlength">
+              Password must not be greater than 45 characters.
             </div>
           </div>
           <button type="submit" class="btn btn-primary" [disabled]="todoForm.form.invalid">NEXT</button>
@@ -67,8 +74,9 @@
                      [class.invalid]="firstName.touched && !firstName.valid"
                      class="tooltip tooltip-validation tooltip-md tooltip-bottom-right">
                 <input type="text" id="nameInput" required [(ngModel)]="customer.firstName" name="firstName"
+                       maxlength="35"
                        #firstName="ngModel">
-                <span class="tooltip-content">This field cannot be empty!</span>
+                <span class="tooltip-content">This field cannot be empty or contain more than 35 characters!</span>
               </label>
             </div>
             <div class="form-group">
@@ -77,8 +85,9 @@
                      [class.invalid]="lastName.touched && !lastName.valid"
                      class="tooltip tooltip-validation tooltip-md tooltip-top-left">
                 <input type="text" id="LastNameInput" required [(ngModel)]="customer.lastName" name="lastName"
+                       maxlength="35"
                        #lastName="ngModel">
-                <span class="tooltip-content">This field cannot be empty!</span>
+                <span class="tooltip-content">This field cannot be empty or contain more than 35 characters!</span>
               </label>
             </div>
             <div class="form-group">
@@ -102,14 +111,20 @@
                      [class.invalid]="passportNumber.touched && !passportNumber.valid"
                      class="tooltip tooltip-validation tooltip-md tooltip-top-left">
                 <input type="text" id="passportNumberInput" required [(ngModel)]="customer.passportNumber"
+                       maxlength="35"
                        name="passportNumber" #passportNumber="ngModel">
-                <span class="tooltip-content">This field cannot be empty!</span>
+                <span class="tooltip-content">This field cannot be empty or contain more than 35 characters!</span>
               </label>
             </div>
             <div class="form-group">
               <label>Passport issued by whom:</label>
-              <input type="text" name="passportIssuedByWhom"
-                     [(ngModel)]="customer.passportIssuedByWhom" #passportIssuedByWhom="ngModel">
+              <label for="passportIssuedByWhom" aria-haspopup="true" role="tooltip"
+                     [class.invalid]="!passportIssuedByWhom.valid"
+                     class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+                <input type="text" id="passportIssuedByWhom" name="passportIssuedByWhom" maxlength="100"
+                       [(ngModel)]="customer.passportIssuedByWhom" #passportIssuedByWhom="ngModel">
+                <span class="tooltip-content">This field cannot contain more than 35 characters!</span>
+              </label>
             </div>
             <div class="form-group">
               <label>Passport issued when:</label>
@@ -123,32 +138,59 @@
         <ng-template clrPageTitle>Address</ng-template>
         <div class="form-group row">
           <label class="col-md-4"> Country: </label>
-          <input class="col-md-8" type="text" name="country" [(ngModel)]="address.country"
-                 #country="ngModel">
+          <label for="country" aria-haspopup="true" role="tooltip"
+                 [class.invalid]="!country.valid"
+                 class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+            <input class="col-md-8" type="text" id="country" name="country" [(ngModel)]="address.country"
+                   maxlength="100"
+                   #country="ngModel">
+            <span class="tooltip-content">This field cannot contain more than 100 characters!</span>
+          </label>
         </div>
         <p></p>
         <div class="form-group row">
           <label class="col-md-4">City: </label>
-          <input class="col-md-8" type="text" name="city" [(ngModel)]="address.city"
-                 #city="ngModel">
+          <label for="city" aria-haspopup="true" role="tooltip"
+                 [class.invalid]="!city.valid"
+                 class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+            <input class="col-md-8" type="text" id="city" name="city" [(ngModel)]="address.city" maxlength="100"
+                   #city="ngModel">
+            <span class="tooltip-content">This field cannot contain more than 100 characters!</span>
+          </label>
         </div>
         <p></p>
         <div class="form-group row">
           <label class="col-md-4">Street: </label>
-          <input class="col-md-8" type="text" name="street" [(ngModel)]="address.street"
-                 #street="ngModel">
+          <label for="street" aria-haspopup="true" role="tooltip"
+                 [class.invalid]="!street.valid"
+                 class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+            <input class="col-md-8" type="text" id="street" name="street" [(ngModel)]="address.street" maxlength="100"
+                   #street="ngModel">
+            <span class="tooltip-content">This field cannot contain more than 100 characters!</span>
+          </label>
         </div>
         <p></p>
         <div class="form-group row">
           <label class="col-md-4">Zipcode: </label>
-          <input class="col-md-8" type="text" name="zipcode" [(ngModel)]="address.zipcode"
-                 #zipcode="ngModel">
+          <label for="zipcode" aria-haspopup="true" role="tooltip"
+                 [class.invalid]="!zipcode.valid"
+                 class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+            <input class="col-md-8" type="text" id="zipcode" name="zipcode" [(ngModel)]="address.zipcode" maxlength="10"
+                   #zipcode="ngModel">
+            <span class="tooltip-content">This field cannot contain more than 100 characters!</span>
+          </label>
         </div>
         <p></p>
         <div class="form-group row">
           <label class="col-md-4">House number: </label>
-          <input class="col-md-8" type="text" name="houseNumber" [(ngModel)]="address.houseNumber"
-                 #houseNumber="ngModel">
+          <label for="houseNumber" aria-haspopup="true" role="tooltip"
+                 [class.invalid]="!houseNumber.valid"
+                 class="tooltip tooltip-validation tooltip-md tooltip-top-left">
+            <input class="col-md-8" type="text" id="houseNumber" name="houseNumber" [(ngModel)]="address.houseNumber"
+                   maxlength="10"
+                   #houseNumber="ngModel">
+            <span class="tooltip-content">This field cannot contain more than 100 characters!</span>
+          </label>
         </div>
       </clr-wizard-page>
       <clr-wizard-page
